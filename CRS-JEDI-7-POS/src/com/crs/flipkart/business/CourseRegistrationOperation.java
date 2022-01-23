@@ -10,27 +10,35 @@ package com.crs.flipkart.business;
 public class CourseRegistrationOperation {
 
 	public void viewRegisteredCourse(int studentId) {
-		// TODO Auto-generated method stub
+		// Display RegisteredCourse of Student
 		
 	}
 
 	public void viewCourses(int studentId) {
-		// TODO Auto-generated method stub
+		// Display all courses in catalog
 		
 	}
 
 	public void dropCourse(int studentId) {
-		// TODO Auto-generated method stub
+		// take course as input
+		// remove registration from CoursesRegisteredDB
+		// update enrolledCourses for student
 		
 	}
 
 	public void addCourse(int studentId) {
-		// TODO Auto-generated method stub
+		// take course as input
+		// add registration in CoursesReGisteredDB
+		// update enrolledCourses for student
+		
 		
 	}
 
 	public void registerCourses(int studentId) {
-		// TODO Auto-generated method stub
+		// take 6 courses as input assign 4
+		// add registration in CoursesReGisteredDB
+		// update enrolledCourses for student
+		//update isRegistered in student
 		
 	}
 

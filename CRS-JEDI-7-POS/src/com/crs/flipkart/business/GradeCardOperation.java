@@ -10,7 +10,8 @@ package com.crs.flipkart.business;
 public class GradeCardOperation {
 
 	public void viewGradeCard(int studentId) {
-		// TODO Auto-generated method stub
+		// Generate Grades 
+		// Display
 		
 	}
 

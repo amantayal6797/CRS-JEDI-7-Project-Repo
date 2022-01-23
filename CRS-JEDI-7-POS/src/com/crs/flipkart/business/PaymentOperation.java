@@ -10,7 +10,9 @@ package com.crs.flipkart.business;
 public class PaymentOperation {
 
 	public void make_payment(int studentId) {
-		// TODO Auto-generated method stub
+		// Simulate Payment completely
+		//simulate only if registered
+		//update payment status in student
 		
 	}
 
