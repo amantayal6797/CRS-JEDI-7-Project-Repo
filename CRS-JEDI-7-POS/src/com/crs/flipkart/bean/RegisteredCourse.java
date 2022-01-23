@@ -7,7 +7,7 @@ package com.crs.flipkart.bean;
  * @author Ashruth
  *
  */
-public class RegisteredCourses {
+public class RegisteredCourse {
 	private int rollNo;
 	private int courseID;
 	private String grade;

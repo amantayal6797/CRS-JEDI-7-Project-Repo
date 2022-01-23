@@ -12,11 +12,11 @@ import com.crs.flipkart.bean.Student;
  *
  */
 public class AuthorizationDB {
-	Student listOfStudents[]=new Student[2];
-	Admin listOfAdmins[]=new Admin[2];
-	Professor listOfProfessors[]=new Professor[2];
+	public Student listOfStudents[]=new Student[2];
+	public Admin listOfAdmins[]=new Admin[2];
+	public Professor listOfProfessors[]=new Professor[2];
 	
-	AuthorizationDB() {
+	public AuthorizationDB() {
 		Student student1=new Student();
 		student1.setUserId(101);
 		student1.setUserName("Student1");
@@ -98,5 +98,14 @@ public class AuthorizationDB {
 		prof2.setDepartment("ECE");
 		listOfProfessors[1]=prof2;
 	}
-	
+	public Student getStudentInfo(int id) {
+		for(Student student:listOfStudents) {
+			if(student==null)
+				continue;
+			if(student.getUserId()==id) {
+				return student;
+			}
+		}
+		return null;
+	}
 }
