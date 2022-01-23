@@ -11,7 +11,13 @@ import com.crs.flipkart.bean.Course;
  */
 public class CourseCatalogDB {
 	Course catalog[]=new Course[8];
-	CourseCatalogDB() {
+	/**
+	 * @return the catalog
+	 */
+	public Course[] getCatalog() {
+		return catalog;
+	}
+	public CourseCatalogDB() {
 		Course course1 = new Course();
 		course1.setCourseID(1);
 		course1.setCourseName("Course 1");

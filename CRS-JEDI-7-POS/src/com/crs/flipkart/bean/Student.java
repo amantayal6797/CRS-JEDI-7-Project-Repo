@@ -3,6 +3,8 @@
  */
 package com.crs.flipkart.bean;
 
+import java.util.ArrayList;
+
 /**
  * @author Ashruth
  *
@@ -10,7 +12,7 @@ package com.crs.flipkart.bean;
 public class Student extends User{
 	private int rollNo;
 	private boolean isRegistered;
-	private int enrolledCourses[] = new int[4];
+	private ArrayList<Integer> enrolledCourses = new ArrayList<Integer>();
 	private String branch;
 	private boolean paymentStatus;
 	/**
@@ -38,18 +40,6 @@ public class Student extends User{
 		this.isRegistered = isRegistered;
 	}
 	/**
-	 * @return the enrolledCourses
-	 */
-	public int[] getEnrolledCourses() {
-		return enrolledCourses;
-	}
-	/**
-	 * @param enrolledCourses the enrolledCourses to set
-	 */
-	public void setEnrolledCourses(int enrolledCourses[]) {
-		this.enrolledCourses = enrolledCourses;
-	}
-	/**
 	 * @return the branch
 	 */
 	public String getBranch() {
@@ -72,5 +62,18 @@ public class Student extends User{
 	 */
 	public void setPaymentStatus(boolean paymentStatus) {
 		this.paymentStatus = paymentStatus;
+	}
+	/**
+	 * @param enrolledCourses the enrolledCourses to set
+	 */
+	public void setEnrolledCourses(ArrayList<Integer> enrolledCourses) {
+		this.enrolledCourses = enrolledCourses;
+		System.out.println(this.enrolledCourses);
+	}
+	/**
+	 * @return the enrolledCourses
+	 */
+	public ArrayList<Integer> getEnrolledCourses() {
+		return enrolledCourses;
 	}
 }

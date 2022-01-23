@@ -7,12 +7,15 @@ import java.util.*;
 import com.crs.flipkart.business.CourseRegistrationOperation;
 import com.crs.flipkart.business.GradeCardOperation;
 import com.crs.flipkart.business.PaymentOperation;
+import com.crs.flipkart.constants.AuthorizationDB;
 
 /**
  * @author Nitish
  *
  */
-public class StudentPage {
+public class StudentPage extends MainLogin {
+
+	protected AuthorizationDB authObj = new AuthorizationDB();
 	
 	public void StudentMenu(int studentId) {
 		int choice=0;
@@ -34,10 +37,10 @@ public class StudentPage {
 			GradeCardOperation gradeCardObj=new GradeCardOperation();
 			PaymentOperation paymentObj=new PaymentOperation();
 			choice = sc.nextInt();
-
+			
 			switch (choice) {
 				case 1: 
-					courseRegistrationObj.registerCourses(studentId);
+					courseRegistrationObj.registerCourses();
 						break;
 						
 				case 2: 
@@ -50,7 +53,7 @@ public class StudentPage {
 						break;
 
 				case 4:
-					courseRegistrationObj.viewCourses(studentId);
+					courseRegistrationObj.viewCourses();
 						break;
 
 				case 5:

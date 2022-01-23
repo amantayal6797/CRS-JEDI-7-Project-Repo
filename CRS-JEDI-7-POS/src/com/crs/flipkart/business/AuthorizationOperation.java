@@ -10,6 +10,6 @@ package com.crs.flipkart.business;
 public class AuthorizationOperation {
 	public String Authorize(int id) {
 		//Authorize id and return role
-		return null;
+		return "Student";
 	}
 }

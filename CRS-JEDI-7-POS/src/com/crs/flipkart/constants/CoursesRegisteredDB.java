@@ -3,14 +3,29 @@
  */
 package com.crs.flipkart.constants;
 
-import com.crs.flipkart.bean.RegisteredCourses;
+import java.util.ArrayList;
+
+import com.crs.flipkart.bean.RegisteredCourse;
 
 /**
  * @author Ashruth
  *
  */
 public class CoursesRegisteredDB {
-	RegisteredCourses listOfRegisteredCourses[]=new RegisteredCourses[12];
-	int count=0;
+	ArrayList<RegisteredCourse> listOfRegisteredCourses = new ArrayList<RegisteredCourse>();
+	
+	/**
+	 * @return the listOfRegisteredCourses
+	 */
+	public ArrayList<RegisteredCourse> getListOfRegisteredCourses() {
+		return listOfRegisteredCourses;
+	}
+	/**
+	 * @param listOfRegisteredCourses the listOfRegisteredCourses to set
+	 */
+	public void setListOfRegisteredCourses(ArrayList<RegisteredCourse> listOfRegisteredCourses) {
+		this.listOfRegisteredCourses = listOfRegisteredCourses;
+	}
+
 	
 }

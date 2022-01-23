@@ -6,6 +6,9 @@ package com.crs.flipkart.application;
 import java.util.Scanner;
 
 import com.crs.flipkart.business.AuthorizationOperation;
+import com.crs.flipkart.constants.AuthorizationDB;
+import com.crs.flipkart.constants.CourseCatalogDB;
+import com.crs.flipkart.constants.CoursesRegisteredDB;
 
 /**
  * @author Ashruth
@@ -13,6 +16,8 @@ import com.crs.flipkart.business.AuthorizationOperation;
  */
 public class MainLogin {
 
+	protected CourseCatalogDB courseCatalogDB = new CourseCatalogDB();
+	protected CoursesRegisteredDB coursesRegisteredDB = new CoursesRegisteredDB();
 	/**
 	 * @param args
 	 */

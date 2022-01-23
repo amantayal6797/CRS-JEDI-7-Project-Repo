@@ -16,7 +16,7 @@ public class AuthorizationDB {
 	Admin listOfAdmins[]=new Admin[2];
 	Professor listOfProfessors[]=new Professor[2];
 	
-	AuthorizationDB() {
+	public AuthorizationDB() {
 		Student student1=new Student();
 		student1.setUserId(101);
 		student1.setUserName("Student1");
@@ -97,6 +97,20 @@ public class AuthorizationDB {
 		prof2.setIsApproved(true);
 		prof2.setDepartment("ECE");
 		listOfProfessors[1]=prof2;
+	}
+	
+	/**
+	 * @return the listOfStudents
+	 */
+	public Student[] getListOfStudents() {
+		return listOfStudents;
+	}
+
+	/**
+	 * @param listOfStudents the listOfStudents to set
+	 */
+	public void setListOfStudents(Student[] listOfStudents) {
+		this.listOfStudents = listOfStudents;
 	}
 	
 }
