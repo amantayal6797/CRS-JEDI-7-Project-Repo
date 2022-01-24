@@ -6,7 +6,7 @@ package com.crs.flipkart.business;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.crs.flipkart.application.StudentPage;
+import com.crs.flipkart.application.CRSStudentMenu;
 import com.crs.flipkart.bean.Course;
 import com.crs.flipkart.bean.RegisteredCourse;
 import com.crs.flipkart.bean.Student;
@@ -15,9 +15,10 @@ import com.crs.flipkart.bean.Student;
  * @author Ashruth
  *
  */
-public class CourseRegistrationOperation extends StudentPage {
+public class CourseRegistrationOperation extends CRSStudentMenu {
 
 	public void viewRegisteredCourse(int studentId) {
+		System.out.println(studentId);
 		Student[] listOfStudents = authObj.getListOfStudents();
 		for (Student stu: listOfStudents) {
 			if (stu.getUserId() == studentId) {
@@ -115,7 +116,9 @@ public class CourseRegistrationOperation extends StudentPage {
 						for (RegisteredCourse registeredCourse: registeredCourses) {
 							if (registeredCourse.getCourseID()==courseId) {
 								registeredCourse.setNumOfStudents(registeredCourse.getNumOfStudents()+1);
+								coursesRegisteredDB.setListOfRegisteredCourses(registeredCourses);
 								authObj.setListOfStudents(listOfStudents);
+								System.out.println(authObj.getListOfStudents()[0].getEnrolledCourses());
 								return;
 							}
 						}
@@ -126,6 +129,7 @@ public class CourseRegistrationOperation extends StudentPage {
 						registeredCourses.add(registeredCourse);
 						coursesRegisteredDB.setListOfRegisteredCourses(registeredCourses);
 						authObj.setListOfStudents(listOfStudents);
+						System.out.println(authObj.getListOfStudents()[0].getEnrolledCourses());
 						return;
 					}
 				}

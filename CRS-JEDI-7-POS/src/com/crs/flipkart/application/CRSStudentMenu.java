@@ -13,9 +13,7 @@ import com.crs.flipkart.constants.AuthorizationDB;
  * @author Nitish
  *
  */
-public class StudentPage extends MainLogin {
-
-	protected AuthorizationDB authObj = new AuthorizationDB();
+public class CRSStudentMenu extends CRSApplication {
 	
 	public void StudentMenu(int studentId) {
 		int choice=0;

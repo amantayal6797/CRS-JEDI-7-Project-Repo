@@ -12,13 +12,14 @@ import com.crs.flipkart.bean.Student;
  *
  */
 public class AuthorizationDB {
-	Student listOfStudents[]=new Student[2];
+	protected Student listOfStudents[]=new Student[100];
 	Admin listOfAdmins[]=new Admin[2];
 	Professor listOfProfessors[]=new Professor[2];
 	
 	public AuthorizationDB() {
 		Student student1=new Student();
 		student1.setUserId(101);
+		student1.setPassword("password");
 		student1.setUserName("Student1");
 		student1.setAddress("Address 1");
 		student1.setAge(20);
@@ -34,6 +35,7 @@ public class AuthorizationDB {
 		listOfStudents[0]=student1;
 		Student student2=new Student();
 		student2.setUserId(102);
+		student2.setPassword("password");
 		student2.setUserName("Student2");
 		student2.setAddress("Address 2");
 		student2.setAge(20);
@@ -49,6 +51,7 @@ public class AuthorizationDB {
 		listOfStudents[1]=student2;
 		Admin admin1=new Admin();
 		admin1.setUserId(201);
+		admin1.setPassword("password");
 		admin1.setUserName("Admin1");
 		admin1.setAddress("Address 3");
 		admin1.setAge(40);
@@ -60,6 +63,7 @@ public class AuthorizationDB {
 		listOfAdmins[0]=admin1;
 		Admin admin2=new Admin();
 		admin2.setUserId(202);
+		admin2.setPassword("password");
 		admin2.setUserName("Admin2");
 		admin2.setAddress("Address 4");
 		admin2.setAge(40);
@@ -72,6 +76,7 @@ public class AuthorizationDB {
 		
 		Professor prof1=new Professor();
 		prof1.setUserId(301);
+		prof1.setPassword("password");
 		prof1.setUserName("Prof1");
 		prof1.setAddress("Address 5");
 		prof1.setAge(40);
@@ -86,6 +91,7 @@ public class AuthorizationDB {
 
 		Professor prof2=new Professor();
 		prof2.setUserId(302);
+		prof2.setPassword("password");
 		prof2.setUserName("Prof2");
 		prof2.setAddress("Address 6");
 		prof2.setAge(40);

@@ -10,6 +10,7 @@ package com.crs.flipkart.bean;
 public class User {
 	private int userId;
 	private String userName;
+	private String password;
 	private String role;
 	private String email;
 	private boolean isApproved;
@@ -137,6 +138,18 @@ public class User {
 	 */
 	public void setNationality(String nationality) {
 		this.nationality = nationality;
+	}
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	
