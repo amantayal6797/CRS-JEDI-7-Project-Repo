@@ -3,29 +3,25 @@
  */
 package com.crs.flipkart.bean;
 
+import java.util.ArrayList;
+
 /**
  * @author Ashruth
  *
  */
 public class GradeCard {
-	private int rollNo;
-	private Grade listOfGrades[]= new Grade[4];
-	/**
-	 * @return the rollNo
-	 */
-	public int getRollNo() {
-		return rollNo;
+	private int userId;
+	private ArrayList<Grade> listOfGrades=new ArrayList<Grade>();
+	public int getUserId() {
+		return userId;
 	}
-	/**
-	 * @param rollNo the rollNo to set
-	 */
-	public void setRollNo(int rollNo) {
-		this.rollNo = rollNo;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	public void setListOfGrades(Grade listOfGrades[]){
-		this.listOfGrades=listOfGrades;
+	public ArrayList<Grade> getListOfGrades() {
+		return listOfGrades;
 	}
-	public Grade[] getListOfGrades() {
-		return this.listOfGrades;
+	public void setListOfGrades(ArrayList<Grade> listOfGrades) {
+		this.listOfGrades = listOfGrades;
 	}
 }

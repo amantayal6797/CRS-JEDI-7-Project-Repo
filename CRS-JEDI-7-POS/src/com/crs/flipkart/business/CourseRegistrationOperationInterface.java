@@ -13,5 +13,5 @@ public interface CourseRegistrationOperationInterface {
 	public void viewCourses();
 	public void dropCourse(int studentId);
 	public void addCourse(int studentId);
-	public void registerCourses();
+	public void registerCourses(int studentId);
 }

@@ -1,3 +1,4 @@
+
 /**
  * 
  */
@@ -13,6 +14,7 @@ import com.crs.flipkart.business.StudentOperationInterface;
 import com.crs.flipkart.constants.AuthorizationDB;
 import com.crs.flipkart.constants.CourseCatalogDB;
 import com.crs.flipkart.constants.CoursesRegisteredDB;
+import com.crs.flipkart.constants.DatabaseInitializer;
 
 /**
  * @author Ashruth
@@ -20,58 +22,58 @@ import com.crs.flipkart.constants.CoursesRegisteredDB;
  */
 public class CRSApplication {
 
-	protected AuthorizationDB authObj = new AuthorizationDB();
-	protected CourseCatalogDB courseCatalogDB = new CourseCatalogDB();
-	protected CoursesRegisteredDB coursesRegisteredDB = new CoursesRegisteredDB();
-	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		DatabaseInitializer databaseInitializerObj = new DatabaseInitializer();
+		databaseInitializerObj.initializeCourseCatalog();
+		databaseInitializerObj.initializeUsers();
 		int choice = 0;
 		while(choice!=4) {
 		System.out.println("Menu");
 		System.out.println("Enter 1 for register student");
 		System.out.println("Enter 2 for login");
-		System.out.println("Enter 3 for update password");
+		System.out.println("Enter 3 to update password");
 		System.out.println("Enter 4 to exit");
 		Scanner sc=new Scanner(System.in);
 		choice=sc.nextInt();
 		sc.nextLine();
-		//AuthorizationOperation authOperation=new AuthorizationOperation();
 		AuthorizationOperationInterface authOperation= new AuthorizationOperation();
 		StudentOperationInterface studentOperation = new StudentOperation();
 	
-		int registeredStudentCount = 1;
 		switch(choice) {
 		case 1:
 			System.out.println("Enter UserID");
 			int userId = sc.nextInt();
+			sc.nextLine();
 			System.out.println("Enter Password");
-			String password = sc.next();
+			String password = sc.nextLine();
 			System.out.println("Enter user name");
-			String userName = sc.next();
+			String userName = sc.nextLine();
 			System.out.println("Enter address");
-			String address = sc.next();
+			String address = sc.nextLine();
 			System.out.println("Enter age");
 			int age = sc.nextInt();
+			sc.nextLine();
 			System.out.println("Enter branch");
-			String branch = sc.next();
+			String branch = sc.nextLine();
 			System.out.println("Enter contact number");
-			String contact = sc.next();
+			String contact = sc.nextLine();
 			System.out.println("Enter email");
-			String email = sc.next();
+			String email = sc.nextLine();
 			System.out.println("Enter gender");
-			String gender = sc.next();
-			registeredStudentCount++;
-			studentOperation.registerStudent(userId, password, userName, address, age, branch, contact, email, gender, registeredStudentCount);
+			String gender = sc.nextLine();
+			studentOperation.registerStudent(userId, password, userName, address, age, branch, contact, email, gender);
 			break;
 		case 2:
 			studentOperation.showstudent();
 			System.out.println("Enter UserID");
 			int id=sc.nextInt();
 			sc.nextLine();
-			String role = authOperation.Authorize(id);
+			System.out.println("Enter Password");
+			password = sc.nextLine();
+			String role = authOperation.Authorize(id,password);
 			switch(role) {
 			case "Student":
 				CRSStudentMenu studentPageObj = new CRSStudentMenu(); 
@@ -92,6 +94,14 @@ public class CRSApplication {
 		case 3:
 			System.out.println("Enter UserID");
 			int nUserId = sc.nextInt();
+			sc.nextLine();
+			System.out.println("Enter Password");
+			password = sc.nextLine();
+			role=authOperation.Authorize(nUserId,password);
+			if(role.equalsIgnoreCase("Invalid")) {
+				System.out.println("Invalid Current UserId/Password");
+				break;
+			}
 			System.out.println("Enter new Password");
 			String nPassword = sc.next();
 			System.out.println("Confirm new Password");
@@ -102,7 +112,7 @@ public class CRSApplication {
 			System.out.println("Exiting");
 			break;
 		default:
-			System.out.println("Invalid Choice Exiting");
+			System.out.println("Invalid Choice");
 		}
 		
 		}

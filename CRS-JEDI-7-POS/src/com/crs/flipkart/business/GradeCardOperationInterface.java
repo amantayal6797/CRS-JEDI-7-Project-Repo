@@ -13,5 +13,5 @@ import com.crs.flipkart.bean.Student;
 public interface GradeCardOperationInterface {
 	
 	public void viewGradeCard(int studentId);
-	GradeCard generateGradeCard(Student student);
+	public GradeCard generateGradeCard(int studentId);
 }

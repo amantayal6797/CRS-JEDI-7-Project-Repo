@@ -8,7 +8,7 @@ package com.crs.flipkart.bean;
  *
  */
 public class RegisteredCourse {
-	private int rollNo;
+	private int userId;
 	private int courseID;
 	private String grade;
 	private int numOfStudents;
@@ -37,18 +37,6 @@ public class RegisteredCourse {
 		this.grade = grade;
 	}
 	/**
-	 * @return the rollNo
-	 */
-	public int getRollNo() {
-		return rollNo;
-	}
-	/**
-	 * @param rollNo the rollNo to set
-	 */
-	public void setRollNo(int rollNo) {
-		this.rollNo = rollNo;
-	}
-	/**
 	 * @return the courseID
 	 */
 	public int getCourseID() {
@@ -59,5 +47,11 @@ public class RegisteredCourse {
 	 */
 	public void setCourseID(int courseID) {
 		this.courseID = courseID;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 }

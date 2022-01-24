@@ -3,6 +3,8 @@
  */
 package com.crs.flipkart.business;
 
+import java.util.ArrayList;
+
 import com.crs.flipkart.application.CRSStudentMenu;
 import com.crs.flipkart.bean.Grade;
 import com.crs.flipkart.bean.GradeCard;
@@ -20,33 +22,28 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 	public void viewGradeCard(int studentId) {
 		// Generate Grades 
 		// Display
-		Student student=authObj.getStudentInfo(studentId);
-		GradeCard gradeCard=generateGradeCard(student);
+		GradeCard gradeCard=generateGradeCard(studentId);
 		System.out.println("Grade Card");
-		System.out.println("Name:-"+student.getUserName()+" RollNo:-"+student.getRollNo());
+		System.out.println("User ID:-"+studentId);
 		for(Grade grade:gradeCard.getListOfGrades()) {
 			System.out.println("Course ID:-"+grade.getCourseID()+" Grade:-"+grade.getGrade());
 		}
 	}
 	
-	GradeCard generateGradeCard(Student student) {
+	public GradeCard generateGradeCard(int studentId) {
 		GradeCard gradeCard=new GradeCard();
-		int rollNo=student.getRollNo();
-		Grade listOfGrades[]=new Grade[4];
-		int index=0;
-		for(int courseID:student.getEnrolledCourses()) {
-			for(RegisteredCourse regCourse: coursesRegisteredDB.getListOfRegisteredCourses()) {
-				if(regCourse.getCourseID()==courseID&&regCourse.getRollNo()==rollNo) {
-					Grade grade=new Grade();
-					grade.setCourseID(courseID);
-					grade.setGrade(regCourse.getGrade());
-					listOfGrades[index]=grade;
-					index++;
-				}
+		ArrayList<Grade> listOfGrades=new ArrayList<Grade>();
+		for(RegisteredCourse regCourse: CoursesRegisteredDB.listOfRegisteredCourses) {
+			if(regCourse.getUserId()==studentId) {
+				Grade grade=new Grade();
+				grade.setCourseID(regCourse.getCourseID());
+				grade.setGrade(regCourse.getGrade());
+				listOfGrades.add(grade);
 			}
 		}
+		
 		gradeCard.setListOfGrades(listOfGrades);
-		gradeCard.setRollNo(rollNo);
+		gradeCard.setUserId(studentId);
 		return gradeCard;
 	}
 }

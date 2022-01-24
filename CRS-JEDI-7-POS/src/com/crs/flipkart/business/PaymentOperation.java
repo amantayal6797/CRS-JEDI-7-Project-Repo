@@ -28,7 +28,7 @@ public class PaymentOperation implements PaymentOperationInterface {
 	
 	
 //	--------------------------------------------------------------------------------		
-	private void generateBill() {		// this function called from make_payment function
+	public void generateBill() {		// this function called from make_payment function
 		System.out.println("Fees Paid.");
 //		transactionID=random();			generate transID by random generator
 		

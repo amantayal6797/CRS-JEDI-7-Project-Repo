@@ -10,9 +10,9 @@ import com.crs.flipkart.constants.AuthorizationDB;
  * @author aditya
  *
  */
-public class StudentOperation extends AuthorizationDB implements StudentOperationInterface {
+public class StudentOperation implements StudentOperationInterface {
 	
-	public void registerStudent(int userId, String password, String userName, String address, int age, String branch, String contact, String email, String gender, int registeredStudentCount) {
+	public void registerStudent(int userId, String password, String userName, String address, int age, String branch, String contact, String email, String gender) {
 		
 		Student student=new Student();
 		student.setUserId(userId);
@@ -28,16 +28,29 @@ public class StudentOperation extends AuthorizationDB implements StudentOperatio
 		student.setPaymentStatus(false);
 		student.setRegistered(false);
 		student.setRole("Student");
-		student.setRollNo(registeredStudentCount+1);
+		student.setRollNo(AuthorizationDB.listOfStudents.size()+1);
 		
-		listOfStudents[registeredStudentCount] = student;
+		AuthorizationDB.listOfStudents.add(student);
 	}
 	
 	public void showstudent() {
-		for(int i=0;i<=2;i++) {
-			System.out.println(listOfStudents[i].getUserId()+ "\n");
+		for(int i=0;i<AuthorizationDB.listOfStudents.size();i++) {
+			System.out.println(AuthorizationDB.listOfStudents.get(i).getUserId());
 		}
 	}
+	
+	public void setRegistration(int studentId) {
+		for(int i=0;i<AuthorizationDB.listOfStudents.size();i++) {
+			if(AuthorizationDB.listOfStudents.get(i).getUserId()==studentId){
+				Student student=AuthorizationDB.listOfStudents.get(i);
+				AuthorizationDB.listOfStudents.remove(i);
+				student.setRegistered(true);
+				AuthorizationDB.listOfStudents.add(student);
+				break;
+			}
+		}
+	}
+	
 	
 	
 }
