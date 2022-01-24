@@ -85,7 +85,7 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		}
 		RegisteredCourse regCourse=new RegisteredCourse();
 		regCourse.setCourseID(courseId);
-		regCourse.setUserId(courseId);
+		regCourse.setUserId(studentId);
 		regCourse.setGrade("NA");
 		CoursesRegisteredDB.listOfRegisteredCourses.add(regCourse);
 		System.out.println("Course Succesfully Added\n");
@@ -99,7 +99,7 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		sc.nextLine();
 		RegisteredCourse regCourse=new RegisteredCourse();
 		regCourse.setCourseID(courseId);
-		regCourse.setUserId(courseId);
+		regCourse.setUserId(studentId);
 		regCourse.setGrade("NA");
 		CoursesRegisteredDB.listOfRegisteredCourses.add(regCourse);
 		
@@ -108,7 +108,7 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		sc.nextLine();
 		RegisteredCourse regCourse1=new RegisteredCourse();
 		regCourse1.setCourseID(courseId);
-		regCourse1.setUserId(courseId);
+		regCourse1.setUserId(studentId);
 		regCourse1.setGrade("NA");
 		CoursesRegisteredDB.listOfRegisteredCourses.add(regCourse1);
 		
@@ -117,7 +117,7 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		sc.nextLine();
 		RegisteredCourse regCourse2=new RegisteredCourse();
 		regCourse2.setCourseID(courseId);
-		regCourse2.setUserId(courseId);
+		regCourse2.setUserId(studentId);
 		regCourse2.setGrade("NA");
 		CoursesRegisteredDB.listOfRegisteredCourses.add(regCourse2);
 		
@@ -126,7 +126,7 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		sc.nextLine();
 		RegisteredCourse regCourse3=new RegisteredCourse();
 		regCourse3.setCourseID(courseId);
-		regCourse3.setUserId(courseId);
+		regCourse3.setUserId(studentId);
 		regCourse3.setGrade("NA");
 		CoursesRegisteredDB.listOfRegisteredCourses.add(regCourse3);
 		

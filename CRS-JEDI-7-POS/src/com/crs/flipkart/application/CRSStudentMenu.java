@@ -30,7 +30,7 @@ public class CRSStudentMenu {
 			System.out.println("1. Course Registration");
 			System.out.println("2. Add Course");
 			System.out.println("3. Drop Course");
-			System.out.println("4. View All Course");
+			System.out.println("4. View All Courses");
 			System.out.println("5. View Registered Courses");
 			System.out.println("6. View grade card");
 			System.out.println("7. Make Payment");
@@ -69,7 +69,7 @@ public class CRSStudentMenu {
 						break;
 
 				case 5:
-					if(!authObj.getRegistration(userId))
+					if(authObj.getRegistration(userId))
 						courseRegistrationObj.viewRegisteredCourse(userId);
 					else {
 						System.out.println("Complete Course Registration first");

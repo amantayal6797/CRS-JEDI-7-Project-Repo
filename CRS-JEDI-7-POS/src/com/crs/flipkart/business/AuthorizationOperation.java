@@ -18,25 +18,43 @@ public class AuthorizationOperation  implements AuthorizationOperationInterface 
 		for(Student student:AuthorizationDB.listOfStudents) {
 			if(student==null)
 				continue;
-			if(student.getUserId()==id&&student.getPassword().equals(password)) {
-				return student.getRole();
+			if(student.getUserId()==id) {
+				if (student.getPassword().equals(password)) {
+					return student.getRole();	
+				}
+				else {
+					return "Invalid Password"; 
+				}
 			}
 		}
+		
 		for(Admin admin:AuthorizationDB.listOfAdmins) {
 			if(admin==null)
 				continue;
-			if(admin.getUserId()==id&&admin.getPassword().equals(password)) {
-				return admin.getRole();
+			if(admin.getUserId()==id) {
+				if (admin.getPassword().equals(password)) {
+					return admin.getRole();	
+				}
+				else {
+					return "Invalid Password"; 
+				}
 			}
 		}
-		for(Professor prof:AuthorizationDB.listOfProfessors) {
-			if(prof==null)
+		
+		for(Professor professor:AuthorizationDB.listOfProfessors) {
+			if(professor==null)
 				continue;
-			if(prof.getUserId()==id&&prof.getPassword().equals(password)) {
-				return prof.getRole();
+			if(professor.getUserId()==id) {
+				if (professor.getPassword().equals(password)) {
+					return professor.getRole();	
+				}
+				else {
+					return "Invalid Password"; 
+				}
 			}
 		}
-		return "Invalid";
+		
+		return "Invalid ID";
 	}
 	
 	public boolean updatePasswordCheck(int userId, String nPassword, String cNPassword) {

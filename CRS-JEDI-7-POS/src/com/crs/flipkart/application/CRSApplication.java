@@ -88,7 +88,7 @@ public class CRSApplication {
 				professorPageObj.ProfessorMenu(id);
 				break;
 			default:
-				System.out.println("Invalid ID");
+				System.out.println(role);
 			}
 			break;
 		case 3:
