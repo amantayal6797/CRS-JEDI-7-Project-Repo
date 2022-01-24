@@ -9,7 +9,7 @@ import java.util.Scanner;
  * @author Ashruth
  *
  */
-public class OnlinePayment extends PaymentOperation{
+public class OnlinePayment extends PaymentOperation implements OnlinePaymentInterface{
 	
 	private int cardNumber, date;
 //	--------------------------------------------------------------------------------	

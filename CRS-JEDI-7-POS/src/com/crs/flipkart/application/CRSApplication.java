@@ -7,7 +7,9 @@ import java.util.Scanner;
 
 import com.crs.flipkart.bean.Student;
 import com.crs.flipkart.business.AuthorizationOperation;
+import com.crs.flipkart.business.AuthorizationOperationInterface;
 import com.crs.flipkart.business.StudentOperation;
+import com.crs.flipkart.business.StudentOperationInterface;
 import com.crs.flipkart.constants.AuthorizationDB;
 import com.crs.flipkart.constants.CourseCatalogDB;
 import com.crs.flipkart.constants.CoursesRegisteredDB;
@@ -21,19 +23,25 @@ public class CRSApplication {
 	protected AuthorizationDB authObj = new AuthorizationDB();
 	protected CourseCatalogDB courseCatalogDB = new CourseCatalogDB();
 	protected CoursesRegisteredDB coursesRegisteredDB = new CoursesRegisteredDB();
+	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		int choice = 0;
+		while(choice!=4) {
 		System.out.println("Menu");
 		System.out.println("Enter 1 for register student");
 		System.out.println("Enter 2 for login");
 		System.out.println("Enter 3 for update password");
 		System.out.println("Enter 4 to exit");
 		Scanner sc=new Scanner(System.in);
-		int choice=sc.nextInt();
+		choice=sc.nextInt();
 		sc.nextLine();
-		AuthorizationOperation authOperation=new AuthorizationOperation();
+		//AuthorizationOperation authOperation=new AuthorizationOperation();
+		AuthorizationOperationInterface authOperation= new AuthorizationOperation();
+		StudentOperationInterface studentOperation = new StudentOperation();
+	
 		int registeredStudentCount = 1;
 		switch(choice) {
 		case 1:
@@ -56,11 +64,10 @@ public class CRSApplication {
 			System.out.println("Enter gender");
 			String gender = sc.next();
 			registeredStudentCount++;
-			StudentOperation studentOperation = new StudentOperation();
 			studentOperation.registerStudent(userId, password, userName, address, age, branch, contact, email, gender, registeredStudentCount);
-			
 			break;
 		case 2:
+			studentOperation.showstudent();
 			System.out.println("Enter UserID");
 			int id=sc.nextInt();
 			sc.nextLine();
@@ -98,6 +105,7 @@ public class CRSApplication {
 			System.out.println("Invalid Choice Exiting");
 		}
 		
+		}
 	}
 
 }

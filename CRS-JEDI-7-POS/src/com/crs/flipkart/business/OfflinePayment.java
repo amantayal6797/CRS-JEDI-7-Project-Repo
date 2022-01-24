@@ -9,7 +9,7 @@ import java.util.Scanner;
  * @author Ashruth
  *
  */
-public class OfflinePayment extends PaymentOperation{
+public class OfflinePayment extends PaymentOperation implements OfflinePaymentInterface {
 	private int slipNumber;
 //	--------------------------------------------------------------------------------	
 	

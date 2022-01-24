@@ -17,6 +17,9 @@ public class AuthorizationDB {
 	protected Professor listOfProfessors[]=new Professor[2];
 	
 	public AuthorizationDB() {
+		
+		
+		
 		Student student1=new Student();
 		student1.setUserId(101);
 		student1.setPassword("password");
@@ -33,6 +36,7 @@ public class AuthorizationDB {
 		student1.setRole("Student");
 		student1.setRollNo(1);
 		listOfStudents[0]=student1;
+		
 		Student student2=new Student();
 		student2.setUserId(102);
 		student2.setPassword("password");
@@ -49,6 +53,7 @@ public class AuthorizationDB {
 		student2.setRole("Student");
 		student2.setRollNo(2);
 		listOfStudents[1]=student2;
+		
 		Admin admin1=new Admin();
 		admin1.setUserId(201);
 		admin1.setPassword("password");
@@ -61,6 +66,7 @@ public class AuthorizationDB {
 		admin1.setRole("Admin");
 		admin1.setNationality("India");
 		listOfAdmins[0]=admin1;
+		
 		Admin admin2=new Admin();
 		admin2.setUserId(202);
 		admin2.setPassword("password");

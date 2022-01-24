@@ -15,7 +15,7 @@ import com.crs.flipkart.bean.Student;
  * @author Ashruth
  *
  */
-public class CourseRegistrationOperation extends CRSStudentMenu {
+public class CourseRegistrationOperation extends CRSStudentMenu implements CourseRegistrationOperationInterface {
 
 	public void viewRegisteredCourse(int studentId) {
 		System.out.println(studentId);

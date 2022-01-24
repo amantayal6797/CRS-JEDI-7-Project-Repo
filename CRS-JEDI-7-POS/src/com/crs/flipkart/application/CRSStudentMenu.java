@@ -5,7 +5,9 @@ package com.crs.flipkart.application;
 import java.util.*;
 
 import com.crs.flipkart.business.CourseRegistrationOperation;
+import com.crs.flipkart.business.CourseRegistrationOperationInterface;
 import com.crs.flipkart.business.GradeCardOperation;
+import com.crs.flipkart.business.GradeCardOperationInterface;
 import com.crs.flipkart.business.OfflinePayment;
 import com.crs.flipkart.business.OnlinePayment;
 import com.crs.flipkart.business.PaymentOperation;
@@ -33,8 +35,8 @@ public class CRSStudentMenu extends CRSApplication {
 			System.out.println("7. Make Payment");
 			System.out.println("8. Logout");
 			System.out.println();
-			CourseRegistrationOperation courseRegistrationObj=new CourseRegistrationOperation();
-			GradeCardOperation gradeCardObj=new GradeCardOperation();
+			CourseRegistrationOperationInterface courseRegistrationObj=new CourseRegistrationOperation();
+			GradeCardOperationInterface gradeCardObj=new GradeCardOperation();
 //			PaymentOperation paymentObj=new PaymentOperation();
 			choice = sc.nextInt();
 			

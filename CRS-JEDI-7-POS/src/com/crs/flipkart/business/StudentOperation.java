@@ -10,9 +10,10 @@ import com.crs.flipkart.constants.AuthorizationDB;
  * @author aditya
  *
  */
-public class StudentOperation extends AuthorizationDB {
+public class StudentOperation extends AuthorizationDB implements StudentOperationInterface {
 	
 	public void registerStudent(int userId, String password, String userName, String address, int age, String branch, String contact, String email, String gender, int registeredStudentCount) {
+		
 		Student student=new Student();
 		student.setUserId(userId);
 		student.setPassword(password);
@@ -31,4 +32,12 @@ public class StudentOperation extends AuthorizationDB {
 		
 		listOfStudents[registeredStudentCount] = student;
 	}
+	
+	public void showstudent() {
+		for(int i=0;i<=2;i++) {
+			System.out.println(listOfStudents[i].getUserId()+ "\n");
+		}
+	}
+	
+	
 }

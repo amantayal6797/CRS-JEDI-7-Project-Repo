@@ -12,7 +12,8 @@ import com.crs.flipkart.constants.AuthorizationDB;
  * @author Ashruth
  *
  */
-public class AuthorizationOperation extends AuthorizationDB {
+public class AuthorizationOperation extends AuthorizationDB implements AuthorizationOperationInterface {
+	
 	public String Authorize(int id) {
 		for(Student student:listOfStudents) {
 			if(student==null)

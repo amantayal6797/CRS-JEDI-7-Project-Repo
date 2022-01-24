@@ -9,7 +9,7 @@ import java.util.Scanner;
  * @author Ashruth
  *
  */
-public class PaymentOperation {
+public class PaymentOperation implements PaymentOperationInterface {
 
 //--------------------------------------------------------------------------------	
 	private int transactionID;

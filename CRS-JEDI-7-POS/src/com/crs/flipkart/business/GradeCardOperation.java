@@ -15,7 +15,7 @@ import com.crs.flipkart.constants.CoursesRegisteredDB;
  * @author Ashruth
  *
  */
-public class GradeCardOperation extends CRSStudentMenu {
+public class GradeCardOperation extends CRSStudentMenu implements GradeCardOperationInterface {
 
 	public void viewGradeCard(int studentId) {
 		// Generate Grades 
