@@ -11,6 +11,19 @@ public class RegisteredCourse {
 	private int rollNo;
 	private int courseID;
 	private String grade;
+	private int numOfStudents;
+	/**
+	 * @return the numOfStudents
+	 */
+	public int getNumOfStudents() {
+		return numOfStudents;
+	}
+	/**
+	 * @param numOfStudents the numOfStudents to set
+	 */
+	public void setNumOfStudents(int numOfStudents) {
+		this.numOfStudents = numOfStudents;
+	}
 	/**
 	 * @return the grade
 	 */

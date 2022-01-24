@@ -6,6 +6,8 @@ import java.util.*;
 
 import com.crs.flipkart.business.CourseRegistrationOperation;
 import com.crs.flipkart.business.GradeCardOperation;
+import com.crs.flipkart.business.OfflinePayment;
+import com.crs.flipkart.business.OnlinePayment;
 import com.crs.flipkart.business.PaymentOperation;
 import com.crs.flipkart.constants.AuthorizationDB;
 
@@ -33,7 +35,7 @@ public class CRSStudentMenu extends CRSApplication {
 			System.out.println();
 			CourseRegistrationOperation courseRegistrationObj=new CourseRegistrationOperation();
 			GradeCardOperation gradeCardObj=new GradeCardOperation();
-			PaymentOperation paymentObj=new PaymentOperation();
+//			PaymentOperation paymentObj=new PaymentOperation();
 			choice = sc.nextInt();
 			
 			switch (choice) {
@@ -63,7 +65,20 @@ public class CRSStudentMenu extends CRSApplication {
 						break;
 						
 				case 7:
-						paymentObj.make_payment(studentId);
+						System.out.println("Please select payment mode");
+						System.out.println("1. Online Mode");
+						System.out.println("2. Offline Mode");
+						int modeChoice = sc.nextInt();
+						
+						if (modeChoice==1) {
+							OnlinePayment onlinePayment = new OnlinePayment();
+							onlinePayment.cardDetail(1, 12);
+						} else if (modeChoice==2) {
+							OfflinePayment offlinePayment = new OfflinePayment();
+							offlinePayment.slipDetail(1);
+						} else {
+							System.out.println("Invalid payment mode selected");
+						}
 						break;
 						
 				case 8: 

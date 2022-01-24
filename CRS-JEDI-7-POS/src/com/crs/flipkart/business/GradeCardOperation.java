@@ -3,6 +3,7 @@
  */
 package com.crs.flipkart.business;
 
+import com.crs.flipkart.application.CRSStudentMenu;
 import com.crs.flipkart.bean.Grade;
 import com.crs.flipkart.bean.GradeCard;
 import com.crs.flipkart.bean.RegisteredCourse;
@@ -14,13 +15,12 @@ import com.crs.flipkart.constants.CoursesRegisteredDB;
  * @author Ashruth
  *
  */
-public class GradeCardOperation {
+public class GradeCardOperation extends CRSStudentMenu {
 
 	public void viewGradeCard(int studentId) {
 		// Generate Grades 
 		// Display
-		AuthorizationDB authDBObj=new AuthorizationDB();
-		Student student=authDBObj.getStudentInfo(studentId);
+		Student student=authObj.getStudentInfo(studentId);
 		GradeCard gradeCard=generateGradeCard(student);
 		System.out.println("Grade Card");
 		System.out.println("Name:-"+student.getUserName()+" RollNo:-"+student.getRollNo());
@@ -34,9 +34,8 @@ public class GradeCardOperation {
 		int rollNo=student.getRollNo();
 		Grade listOfGrades[]=new Grade[4];
 		int index=0;
-		CoursesRegisteredDB crDBObj=new CoursesRegisteredDB();
 		for(int courseID:student.getEnrolledCourses()) {
-			for(RegisteredCourse regCourse: crDBObj.listOfRegisteredCourses) {
+			for(RegisteredCourse regCourse: coursesRegisteredDB.getListOfRegisteredCourses()) {
 				if(regCourse.getCourseID()==courseID&&regCourse.getRollNo()==rollNo) {
 					Grade grade=new Grade();
 					grade.setCourseID(courseID);
