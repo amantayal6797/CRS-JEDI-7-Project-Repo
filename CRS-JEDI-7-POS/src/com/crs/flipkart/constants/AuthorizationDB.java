@@ -13,8 +13,8 @@ import com.crs.flipkart.bean.Student;
  */
 public class AuthorizationDB {
 	protected Student listOfStudents[]=new Student[100];
-	Admin listOfAdmins[]=new Admin[2];
-	Professor listOfProfessors[]=new Professor[2];
+	protected Admin listOfAdmins[]=new Admin[2];
+	protected Professor listOfProfessors[]=new Professor[2];
 	
 	public AuthorizationDB() {
 		Student student1=new Student();
@@ -119,4 +119,14 @@ public class AuthorizationDB {
 		this.listOfStudents = listOfStudents;
 	}
 	
+	public Student getStudentInfo(int id) {
+		for(Student student:listOfStudents) {
+			if(student==null)
+				continue;
+			if(student.getUserId()==id) {
+				return student;
+			}
+		}
+		return null;
+	}
 }

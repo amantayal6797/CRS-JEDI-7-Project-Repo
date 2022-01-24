@@ -10,7 +10,6 @@ package com.crs.flipkart.bean;
 public class Grade {
 	private String grade;
 	private int courseID;
-	private int marks;
 	/**
 	 * @return the grade
 	 */
@@ -23,18 +22,7 @@ public class Grade {
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
-	/**
-	 * @return the marks
-	 */
-	public int getMarks() {
-		return marks;
-	}
-	/**
-	 * @param marks the marks to set
-	 */
-	public void setMarks(int marks) {
-		this.marks = marks;
-	}
+	
 	/**
 	 * @return the courseID
 	 */
