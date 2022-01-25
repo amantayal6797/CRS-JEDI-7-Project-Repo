@@ -38,14 +38,14 @@ public class ConnectionSetup {
 	
 		   static final String DB_URL = "jdbc:mysql://localhost/crs_db";
 		   static final String USER = "root";
-		   static final String PASS = "108062@Ma";		   
+		   static final String PASS = "root";		   
 		   
 		
 		public Connection connectionEstablish() {
 			Connection conn = null;
 				   try{
 						  // Class.forName("com.mysql.jdbc.Driver");
-					      System.out.println("Connecting to database...");
+					      //System.out.println("Connecting to database...");
 					      conn = DriverManager.getConnection(DB_URL,USER,PASS);						      
 				   }catch(SQLException se){
 				          se.printStackTrace();

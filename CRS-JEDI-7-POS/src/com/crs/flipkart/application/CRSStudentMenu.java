@@ -13,13 +13,15 @@ import com.crs.flipkart.business.OfflinePayment;
 import com.crs.flipkart.business.OnlinePayment;
 import com.crs.flipkart.business.PaymentOperation;
 import com.crs.flipkart.constants.AuthorizationDB;
+import com.crs.flipkart.dao.StudentDaoOperation;
 
 /**
  * @author Nitish
  *
  */
 public class CRSStudentMenu {
-	
+
+	StudentDaoOperation studDAOobj = new StudentDaoOperation();
 	public void StudentMenu(int userId) {
 		int choice=0;
 		Scanner sc = new Scanner(System.in);
@@ -43,14 +45,14 @@ public class CRSStudentMenu {
 			AuthorizationDB authObj=new AuthorizationDB();
 			sc.nextLine();
 			switch (choice) {
-				case 1: if(!authObj.getRegistration(userId))
+				case 1: if(!studDAOobj.isRegistered(userId))
 							courseRegistrationObj.registerCourses(userId);
 						else
 							System.out.println("Already Registered");
 						break;
 						
 				case 2: 
-					if(authObj.getRegistration(userId))
+					if(studDAOobj.isRegistered(userId))
 						courseRegistrationObj.addCourse(userId);
 					else {
 						System.out.println("Complete Course Registration first");
@@ -58,7 +60,7 @@ public class CRSStudentMenu {
 					break;
 
 				case 3:
-					if(authObj.getRegistration(userId))
+					if(studDAOobj.isRegistered(userId))
 						courseRegistrationObj.dropCourse(userId);
 					else {
 						System.out.println("Complete Course Registration first");
@@ -69,7 +71,7 @@ public class CRSStudentMenu {
 						break;
 
 				case 5:
-					if(authObj.getRegistration(userId))
+					if(studDAOobj.isRegistered(userId))
 						courseRegistrationObj.viewRegisteredCourse(userId);
 					else {
 						System.out.println("Complete Course Registration first");
@@ -77,7 +79,7 @@ public class CRSStudentMenu {
 					break;
 
 				case 6:
-					if(authObj.getRegistration(userId))
+					if(studDAOobj.isRegistered(userId))
 						gradeCardObj.viewGradeCard(userId);
 					else {
 						System.out.println("Complete Course Registration first");

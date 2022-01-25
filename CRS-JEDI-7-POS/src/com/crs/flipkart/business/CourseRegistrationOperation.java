@@ -12,23 +12,27 @@ import com.crs.flipkart.bean.RegisteredCourse;
 import com.crs.flipkart.bean.Student;
 import com.crs.flipkart.constants.CourseCatalogDB;
 import com.crs.flipkart.constants.CoursesRegisteredDB;
+import com.crs.flipkart.dao.CourseDaoOperation;
+import com.crs.flipkart.dao.StudentDaoOperation;
 
 /**
  * @author Ashruth
  *
  */
 public class CourseRegistrationOperation implements CourseRegistrationOperationInterface {
-	CourseCatalogDB coursedbObj=new CourseCatalogDB();
+	CourseDaoOperation courseDAOobj=new CourseDaoOperation();
+	StudentDaoOperation studDAOobj = new StudentDaoOperation();
 	Scanner sc=new Scanner(System.in);
-	CoursesRegisteredDB courseRegdbObj=new CoursesRegisteredDB();
 	StudentOperationInterface studOpObj = new StudentOperation();
+	
 	public void viewRegisteredCourse(int studentId) {
 		System.out.println("Register Courses for User "+studentId);
-		for(RegisteredCourse regCourse:CoursesRegisteredDB.listOfRegisteredCourses) {
-			if(regCourse.getUserId()==studentId) {
-				Course course=coursedbObj.getCourse(regCourse.getCourseID());
+		ArrayList<RegisteredCourse> listOfRegisteredCourses=new ArrayList<RegisteredCourse>();
+		listOfRegisteredCourses=courseDAOobj.getRegisteredCourses(studentId);
+		for(RegisteredCourse regCourse:listOfRegisteredCourses) {
+				Course course=courseDAOobj.getCourse(regCourse.getCourseID());
 				System.out.println("Course Id:-"+course.getCourseID()+"\tCourse Name:-"+course.getCourseName());
-			}
+			
 		}
 		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 	}
@@ -36,7 +40,9 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 	public void viewCourses() {
 		// Display all courses in catalog
 		System.out.println("Displaying All Courses");
-		for(Course course:CourseCatalogDB.catalog) {
+		ArrayList<Course> catalog=new ArrayList<Course>();
+		catalog=courseDAOobj.viewCourses();
+		for(Course course:catalog) {
 			System.out.println("Course Id:- "+course.getCourseID());
 			System.out.println("Course Name:- "+course.getCourseName());
 			System.out.println("Course Credits:- "+course.getCredits());
@@ -51,17 +57,25 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		// take course as input
 		// remove registration from CoursesRegisteredDB
 		// update enrolledCourses for student
+		ArrayList<RegisteredCourse> enrolledCourses=courseDAOobj.getRegisteredCourses(studentId);
+		if (enrolledCourses.size()==0) {
+			System.out.println("No Courses to remove.");
+			return;
+		}
 		System.out.println("Enter id of course to remove");
 		int courseId=sc.nextInt();
 		sc.nextLine();
-		for(int i=0;i<CoursesRegisteredDB.listOfRegisteredCourses.size();i++) {
-			if(CoursesRegisteredDB.listOfRegisteredCourses.get(i).getUserId()==studentId&&
-					CoursesRegisteredDB.listOfRegisteredCourses.get(i).getCourseID()==courseId) {
-				CoursesRegisteredDB.listOfRegisteredCourses.remove(i);
-				break;
-			}	
+		if(!courseDAOobj.verifyCourse(courseId)) {
+			System.out.println("Entered Course ID does not exist");
+			return;
 		}
-		System.out.println("Course Succesfully removed");
+		for(RegisteredCourse regCourse:enrolledCourses) {
+			if(regCourse.getCourseID()==courseId) {
+				courseDAOobj.dropCourse(courseId,studentId);
+				System.out.println("Course Succesfully Dropped");
+				return;}
+		}
+		System.out.println("You have not registered for the Course. Enter only registered course id");
 		
 		
 	}
@@ -70,76 +84,91 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		// take course as input
 		// add registration in CoursesReGisteredDB
 		// update enrolledCourses for student
-		
-		int numOfCourses=courseRegdbObj.getNumCourses(studentId);
-		if(numOfCourses==4) {
+		ArrayList<RegisteredCourse> enrolledCourses=courseDAOobj.getRegisteredCourses(studentId);
+		if(enrolledCourses.size()==4) {
 			System.out.println("Already Registered for 4 courses.Drop a course before adding");
 			return;
 		}
 		System.out.println("Enter id of course to add");
 		int courseId=sc.nextInt();
 		sc.nextLine();
-		if(courseRegdbObj.checkExisting(courseId,studentId)) {
-			System.out.println("Course Already Registered");
+		//System.out.println(1);
+		for(RegisteredCourse regCourse:enrolledCourses) {
+			if(regCourse.getCourseID()==courseId) {
+				System.out.println("Course Already Registered");
+				return;}
+		}
+
+		//System.out.println(2);
+		if(!courseDAOobj.verifyCourse(courseId)) {
+			System.out.println("Entered Course ID does not exist");
 			return;
 		}
-		RegisteredCourse regCourse=new RegisteredCourse();
-		regCourse.setCourseID(courseId);
-		regCourse.setUserId(studentId);
-		regCourse.setGrade("NA");
-		CoursesRegisteredDB.listOfRegisteredCourses.add(regCourse);
+
+		//System.out.println(3);
+		courseDAOobj.addCourse(studentId,courseId);
 		System.out.println("Course Succesfully Added\n");
 		
 	}
 
 	public void registerCourses(int studentId) {
-		System.out.println("Enter choices");
+		viewCourses();
+		ArrayList<Integer> choices=new ArrayList<Integer>();
+		
+		System.out.println("Enter 6 distinct choices");
 		System.out.println("Enter Course ID 1:-");
 		int courseId=sc.nextInt();
 		sc.nextLine();
-		RegisteredCourse regCourse=new RegisteredCourse();
-		regCourse.setCourseID(courseId);
-		regCourse.setUserId(studentId);
-		regCourse.setGrade("NA");
-		CoursesRegisteredDB.listOfRegisteredCourses.add(regCourse);
+		choices.add(courseId);
 		
 		System.out.println("Enter Course ID 2:-");
 		courseId=sc.nextInt();
 		sc.nextLine();
-		RegisteredCourse regCourse1=new RegisteredCourse();
-		regCourse1.setCourseID(courseId);
-		regCourse1.setUserId(studentId);
-		regCourse1.setGrade("NA");
-		CoursesRegisteredDB.listOfRegisteredCourses.add(regCourse1);
+		choices.add(courseId);
 		
 		System.out.println("Enter Course ID 3:-");
 		courseId=sc.nextInt();
 		sc.nextLine();
-		RegisteredCourse regCourse2=new RegisteredCourse();
-		regCourse2.setCourseID(courseId);
-		regCourse2.setUserId(studentId);
-		regCourse2.setGrade("NA");
-		CoursesRegisteredDB.listOfRegisteredCourses.add(regCourse2);
+		choices.add(courseId);
 		
 		System.out.println("Enter Course ID 4:-");
 		courseId=sc.nextInt();
 		sc.nextLine();
-		RegisteredCourse regCourse3=new RegisteredCourse();
-		regCourse3.setCourseID(courseId);
-		regCourse3.setUserId(studentId);
-		regCourse3.setGrade("NA");
-		CoursesRegisteredDB.listOfRegisteredCourses.add(regCourse3);
+		choices.add(courseId);
 		
 		System.out.println("Enter Course ID 5:-");
 		courseId=sc.nextInt();
 		sc.nextLine();
+		choices.add(courseId);
 		
 		System.out.println("Enter Course ID 6:-");
 		courseId=sc.nextInt();
 		sc.nextLine();
+		choices.add(courseId);
 		
+		int count=0;
+		ArrayList<Integer> enrolled=new ArrayList<Integer>();
+		for(int cId:choices) {
+			if(count==4)
+				break;
+			if(enrolled.contains(cId)) {
+				System.out.println("Course "+cId+" already registered");
+				continue;
+			}
+			if(!courseDAOobj.verifyCourse(cId)) {
+				System.out.println("Invalid Course Id "+cId);
+				continue;}
+			
+			if(courseDAOobj.getEnrolledStudents(cId).size()<10) {
+				courseDAOobj.addCourse(studentId, cId);
+				System.out.println("Registered Course ID "+cId);
+				count++;
+			}
+			else
+				System.out.println("Course "+cId+" exceeded student limit");
+		}
 		System.out.println("Course Registration Done");
-		studOpObj.setRegistration(studentId);
+		studDAOobj.setRegistration(studentId);
 	}
 
 }

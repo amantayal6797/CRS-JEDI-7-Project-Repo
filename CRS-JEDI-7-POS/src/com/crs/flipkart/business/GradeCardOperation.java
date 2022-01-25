@@ -12,6 +12,7 @@ import com.crs.flipkart.bean.RegisteredCourse;
 import com.crs.flipkart.bean.Student;
 import com.crs.flipkart.constants.AuthorizationDB;
 import com.crs.flipkart.constants.CoursesRegisteredDB;
+import com.crs.flipkart.dao.CourseDaoOperation;
 
 /**
  * @author Ashruth
@@ -33,7 +34,10 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 	public GradeCard generateGradeCard(int studentId) {
 		GradeCard gradeCard=new GradeCard();
 		ArrayList<Grade> listOfGrades=new ArrayList<Grade>();
-		for(RegisteredCourse regCourse: CoursesRegisteredDB.listOfRegisteredCourses) {
+		ArrayList<RegisteredCourse> listOfRegisteredCourses= new ArrayList<RegisteredCourse>();
+		CourseDaoOperation coursedaoObj = new CourseDaoOperation();
+		listOfRegisteredCourses = coursedaoObj.getRegisteredCourses(studentId);
+		for(RegisteredCourse regCourse: listOfRegisteredCourses) {
 			if(regCourse.getUserId()==studentId) {
 				Grade grade=new Grade();
 				grade.setCourseID(regCourse.getCourseID());
