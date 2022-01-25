@@ -4,6 +4,10 @@
  */
 package com.crs.flipkart.application;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.crs.flipkart.bean.Student;
@@ -15,6 +19,7 @@ import com.crs.flipkart.constants.AuthorizationDB;
 import com.crs.flipkart.constants.CourseCatalogDB;
 import com.crs.flipkart.constants.CoursesRegisteredDB;
 import com.crs.flipkart.constants.DatabaseInitializer;
+import com.crs.flipkart.utils.ConnectionSetup;
 
 /**
  * @author Ashruth
@@ -117,5 +122,4 @@ public class CRSApplication {
 		
 		}
 	}
-
 }
