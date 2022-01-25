@@ -40,7 +40,6 @@ public class CRSStudentMenu {
 			System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			CourseRegistrationOperationInterface courseRegistrationObj=new CourseRegistrationOperation();
 			GradeCardOperationInterface gradeCardObj=new GradeCardOperation();
-//			PaymentOperation paymentObj=new PaymentOperation();
 			choice = sc.nextInt();
 			AuthorizationDB authObj=new AuthorizationDB();
 			sc.nextLine();
@@ -87,6 +86,8 @@ public class CRSStudentMenu {
 					break;
 						
 				case 7:
+					
+					if(!studDAOobj.getPaymentStatus(userId)) {
 						System.out.println("Please select payment mode");
 						System.out.println("1. Online Mode");
 						System.out.println("2. Offline Mode");
@@ -94,14 +95,17 @@ public class CRSStudentMenu {
 						sc.nextLine();
 						if (modeChoice==1) {
 							OnlinePayment onlinePayment = new OnlinePayment();
-							onlinePayment.cardDetail(1, 12);
+							onlinePayment.payByCard(userId, 1, 12);
 						} else if (modeChoice==2) {
 							OfflinePayment offlinePayment = new OfflinePayment();
-							offlinePayment.slipDetail(1);
+							offlinePayment.payByCash(userId, 1);
 						} else {
 							System.out.println("Invalid payment mode selected");
-						}
-						break;
+						}	
+					} else {
+						System.out.println("Fees already paid");
+					}
+					break;
 						
 				case 8: 
 						break;

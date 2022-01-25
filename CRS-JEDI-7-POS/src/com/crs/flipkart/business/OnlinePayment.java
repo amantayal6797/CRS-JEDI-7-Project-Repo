@@ -14,29 +14,28 @@ public class OnlinePayment extends PaymentOperation implements OnlinePaymentInte
 	private int cardNumber, date;
 //	--------------------------------------------------------------------------------	
 	
-	
-	public void cardDetail(int cardNumber, int date) {
+	public void payByCard(int userId, int cardNumber, int date) {
 		
-		this.cardNumber=cardNumber;
+	    this.cardNumber=cardNumber;
 		this.date=date;
+
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Enter amount: ");
+		int amount=sc.nextInt();
+		sc.nextLine();
+				
+		if(makePayment(userId, amount)==false)
+			System.out.println("Sorry :(  Bank Technical Problem");
+		else {
+			System.out.println("Transcation completed :) ");
+		}	
+	}
+	
+	public boolean authenticate(int cardNumber, int date) {
+		return false;
 		
-		
-		
-			Scanner sc=new Scanner(System.in);
-			System.out.print("Enter amount: ");
-			int amount=sc.nextInt();
-			sc.nextLine();
-			
-			
-			
-			if(make_payment(amount)==false)
-				System.out.println("Sorry :(  Bank Technical Problem");
-			else {
-				System.out.println("Transcation completed :) ");
-			}
-			
-			
-			
-		}
+		//check card num & expiryDate from Bank DataBase, and return a boolean value correspond to that
 		
 	}
+		
+}

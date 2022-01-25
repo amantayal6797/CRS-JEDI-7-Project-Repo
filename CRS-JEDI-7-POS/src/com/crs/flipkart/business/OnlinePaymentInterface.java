@@ -8,8 +8,7 @@ package com.crs.flipkart.business;
  *
  */
 public interface OnlinePaymentInterface {
-
 	
-	public void cardDetail(int cardNumber, int date);
-	
+	public void payByCard(int userId, int cardNumber, int date);
+	public boolean authenticate(int cardNumber, int date);	
 }

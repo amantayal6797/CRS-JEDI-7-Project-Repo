@@ -5,6 +5,8 @@ package com.crs.flipkart.business;
 
 import java.util.Scanner;
 
+import com.crs.flipkart.dao.StudentDaoOperation;
+
 /**
  * @author Ashruth
  *
@@ -17,44 +19,23 @@ public class PaymentOperation implements PaymentOperationInterface {
 //	------------------------------------------------------------------------------
 	
 	
-	public boolean make_payment(int amount) {
-		
-			generateBill();
-			
-			return true;		//paymnet done
-		
-			
+	public boolean makePayment(int userId, int amount) {
+	    StudentDaoOperation studentDaoOperation = new StudentDaoOperation();
+    	boolean paymentSuccessful = studentDaoOperation.setPaymentStatus(userId);
+    	if (paymentSuccessful) {
+    		generateBill(amount);	
+    	}
+    	
+    	return paymentSuccessful;
 	}
 	
 	
 //	--------------------------------------------------------------------------------		
-	public void generateBill() {		// this function called from make_payment function
-		System.out.println("Fees Paid.");
+	public void generateBill(int amount) {		// this function called from makePayment function
+		System.out.println("Fees Paid - "+amount);
 //		transactionID=random();			generate transID by random generator
 		
 	}
-	
-	
-//	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	
-//				*****	FUNCTION OVERLOADING	*****
-	
-	public boolean authenticate(int cardNumber, int date) {
-		return false;
-		
-		//check card num & expiryDate from Bank DataBase, and return a boolean value correspond to that
-		
-	}
-	
-	public boolean authenticate(int slipNumber) {
-		return false;
-			
-			//check slipNumber from Bank DataBase, and return a boolean value correspond to that
-			
-	}
-	
-//	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	
 }
 
 

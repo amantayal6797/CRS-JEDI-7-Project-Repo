@@ -9,6 +9,7 @@ package com.crs.flipkart.business;
  */
 public interface OfflinePaymentInterface {
 	
-	public void slipDetail(int slipNumber);
+	public void payByCash(int userId, int slipNumber);
+	public boolean authenticate(int slipNumber);
 
 }

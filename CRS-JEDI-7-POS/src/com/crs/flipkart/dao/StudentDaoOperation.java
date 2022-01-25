@@ -10,8 +10,51 @@ import com.crs.flipkart.utils.ConnectionSetup;
 
 public class StudentDaoOperation {
 	
-	//Approval
-	//paymentstatus
+	public boolean getPaymentStatus (int studentId) {
+		ConnectionSetup connectionSetup = new ConnectionSetup();
+	    Connection conn = connectionSetup.connectionEstablish();
+		String sql = "select paymentStatus from student where userId = ?";
+		try {
+		    PreparedStatement stmt=conn.prepareStatement(sql);
+			stmt.setInt(1, studentId);
+			ResultSet rs=stmt.executeQuery(); 
+			while(rs.next()) {
+				if(rs.getInt("paymentStatus")==1) {
+					return true;
+				}
+			}
+			
+			return false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+		    e.printStackTrace();
+		    return false;
+		} finally {
+			connectionSetup.connectionClose(conn);	
+		}
+	}
+	
+	public boolean setPaymentStatus (int studentId) {
+		ConnectionSetup connectionSetup = new ConnectionSetup();
+	    Connection conn = connectionSetup.connectionEstablish();
+		String sql = "update student set paymentStatus=1 where userId = ?";
+		try {
+		    PreparedStatement stmt=conn.prepareStatement(sql);
+			stmt.setInt(1, studentId);
+			int i=stmt.executeUpdate(); 
+			if(i==0) {
+				System.out.println("Error in setting payment status for student-"+studentId);
+				return false;
+			}
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+		    e.printStackTrace();
+		    return false;
+		} finally {
+			connectionSetup.connectionClose(conn);	
+		}
+	}
 	
 	public Student showStudent(int studentId) {
 		ConnectionSetup connectObj=new ConnectionSetup();
