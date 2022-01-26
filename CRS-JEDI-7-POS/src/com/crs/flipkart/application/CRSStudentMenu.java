@@ -87,7 +87,9 @@ public class CRSStudentMenu {
 						
 				case 7:
 					
-					if(!studDAOobj.getPaymentStatus(userId)) {
+					if (!studDAOobj.isRegistered(userId)) {
+						System.out.println("Complete Course Registration first");
+					} else if(!studDAOobj.getPaymentStatus(userId)) {
 						System.out.println("Please select payment mode");
 						System.out.println("1. Online Mode");
 						System.out.println("2. Offline Mode");

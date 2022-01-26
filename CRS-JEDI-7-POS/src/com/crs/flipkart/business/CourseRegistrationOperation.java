@@ -172,9 +172,13 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 	}
 	
 	 public void registerProfessorCourse(int userId) {
-		 System.out.println("Available Courses");
 		 ArrayList<Course> courseList=new ArrayList<Course>();
 		 courseList=courseDAOobj.getUnregisteredCourses(userId);
+		 if (courseList.size()==0) {
+			 System.out.println("All registered courses have already been allotted to professors");
+			 return;
+		 }
+		 System.out.println("Available Courses");
 		 ArrayList<Integer> courseIdList=new ArrayList<Integer>();
 		 for(Course course:courseList) {
 				System.out.println("Course Id:- "+course.getCourseID());
@@ -192,7 +196,7 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 			 return;
 		 }
 		 courseDAOobj.setRegisterCourse(userId,choice);
-		 System.out.println("Course "+choice+" Succesfully Registered");
+		 System.out.println("Course - "+choice+" succesfully allotted to Professor - "+userId);
 	 }
 	 
 	 public void viewProfessorCourses(int userId) {
