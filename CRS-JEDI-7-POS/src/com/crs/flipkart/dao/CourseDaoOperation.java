@@ -164,7 +164,93 @@ public class CourseDaoOperation {
 			connectObj.connectionClose(conn2);
 		 		 
 	 }
-	 //drop course
-	
-
+	 
+	 public ArrayList<Course> getProfessorCourses(int userId){
+		 ArrayList<Course> catalog=new ArrayList<Course>();
+		 ConnectionSetup connectObj=new ConnectionSetup();
+		 Connection conn2 = connectObj.connectionEstablish();
+		 String sql = "select * from coursecatalog where professorAlloted=?";
+		 try {
+			 PreparedStatement stmt=conn2.prepareStatement(sql);
+			 stmt.setInt(1, userId);
+			 ResultSet rs = stmt.executeQuery();
+			 while(rs.next()) {
+					Course course=new Course();
+					course.setCourseID(rs.getInt("courseId"));
+					course.setCourseName(rs.getString("courseName"));
+					course.setCredits(rs.getInt("Credits"));
+					course.setPrerequisites(rs.getString("Prerequisites"));
+					course.setProfessorAllotted(rs.getInt("professorAlloted"));
+					catalog.add(course);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			connectObj.connectionClose(conn2);
+		return catalog;
+	 }
+	 public ArrayList<Course> getUnregisteredCourses(int userId){
+		 ArrayList<Course> catalog=new ArrayList<Course>();
+		 ConnectionSetup connectObj=new ConnectionSetup();
+		 Connection conn2 = connectObj.connectionEstablish();
+		 String sql = "select * from coursecatalog where professorAlloted=0";
+		 try {
+			 PreparedStatement stmt=conn2.prepareStatement(sql);
+			 ResultSet rs = stmt.executeQuery();
+			 while(rs.next()) {
+					Course course=new Course();
+					course.setCourseID(rs.getInt("courseId"));
+					course.setCourseName(rs.getString("courseName"));
+					course.setCredits(rs.getInt("Credits"));
+					course.setPrerequisites(rs.getString("Prerequisites"));
+					course.setProfessorAllotted(rs.getInt("professorAlloted"));
+					catalog.add(course);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			connectObj.connectionClose(conn2);
+		return catalog;
+	 }
+	 public void setRegisterCourse(int userID,int courseId) {
+		 
+		 ConnectionSetup connectObj=new ConnectionSetup();
+		 Connection conn2 = connectObj.connectionEstablish();
+		 String sql = "update coursecatalog set professorAlloted = ? where courseId=?";
+		 try {
+			 PreparedStatement stmt=conn2.prepareStatement(sql);
+			 stmt.setInt(2, courseId);
+			 stmt.setInt(1, userID);
+			 
+			 int i=stmt.executeUpdate(); 
+			 if(i==0)
+				 System.out.println("Error in Registering course");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			connectObj.connectionClose(conn2);
+	 }
+	 
+	 public void setGrade(int studentId,int courseId,String grade) {
+		 ConnectionSetup connectObj=new ConnectionSetup();
+		 Connection conn2 = connectObj.connectionEstablish();
+		 String sql = "update registeredcourses set Grade = ? where courseId = ? and userId = ? ";
+		 try {
+			 PreparedStatement stmt=conn2.prepareStatement(sql);
+			 stmt.setString(1, grade);
+			 stmt.setInt(2, courseId);
+			 stmt.setInt(3, studentId);
+			 
+			 int i=stmt.executeUpdate(); 
+			 if(i==0)
+				 System.out.println("Error in Assigning Grade");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			connectObj.connectionClose(conn2);
+	 }
 }

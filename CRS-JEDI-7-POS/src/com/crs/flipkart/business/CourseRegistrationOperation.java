@@ -170,5 +170,59 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		System.out.println("Course Registration Done");
 		studDAOobj.setRegistration(studentId);
 	}
+	
+	 public void registerProfessorCourse(int userId) {
+		 System.out.println("Available Courses");
+		 ArrayList<Course> courseList=new ArrayList<Course>();
+		 courseList=courseDAOobj.getUnregisteredCourses(userId);
+		 ArrayList<Integer> courseIdList=new ArrayList<Integer>();
+		 for(Course course:courseList) {
+				System.out.println("Course Id:- "+course.getCourseID());
+				System.out.println("Course Name:- "+course.getCourseName());
+				System.out.println("Course Credits:- "+course.getCredits());
+				System.out.println("Course Prerequisites:- "+course.getPrerequisites());
+				System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+				courseIdList.add(course.getCourseID());
+			}
+		 System.out.println("Enter Course ID to register");
+		 int choice=sc.nextInt();
+		 sc.nextLine();
+		 if(!courseIdList.contains(choice)) {
+			 System.out.println("Entered CourseID not present");
+			 return;
+		 }
+		 courseDAOobj.setRegisterCourse(userId,choice);
+		 System.out.println("Course "+choice+" Succesfully Registered");
+	 }
+	 
+	 public void viewProfessorCourses(int userId) {
+		 System.out.println("Registered Courses");
+		 ArrayList<Course> courseList=new ArrayList<Course>();
+		 courseList=courseDAOobj.getProfessorCourses(userId);
+		 for(Course course:courseList) {
+				System.out.println("Course Id:- "+course.getCourseID());
+				System.out.println("Course Name:- "+course.getCourseName());
+				System.out.println("Course Credits:- "+course.getCredits());
+				System.out.println("Course Prerequisites:- "+course.getPrerequisites());
+				System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+			}
+	 }
+	 
+	 public void viewEnrolledStudents(int userId) {
+		 System.out.println("Enrolled Students");
+		 ArrayList<Course> courseList=new ArrayList<Course>();
+		 courseList=courseDAOobj.getProfessorCourses(userId);
+		 for(Course course:courseList) {
+			 System.out.println("Course ID:- "+ course.getCourseID()+"\tCourse Name:- "+course.getCourseName());
+			 ArrayList <Integer> enrolledStudents = courseDAOobj.getEnrolledStudents(course.getCourseID());
+			 System.out.println("Students:-");
+			 for(int i:enrolledStudents) {
+				 System.out.println("Student ID :- "+i);
+			 }
+			 System.out.println();
+		 }
+		 
+	 }
+	
 
 }

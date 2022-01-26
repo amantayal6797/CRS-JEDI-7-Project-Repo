@@ -72,7 +72,6 @@ public class CRSApplication {
 			studentOperation.registerStudent(userId, password, userName, address, age, branch, contact, email, gender);
 			break;
 		case 2:
-			studentOperation.showstudent();
 			System.out.println("Enter UserID");
 			int id=sc.nextInt();
 			sc.nextLine();

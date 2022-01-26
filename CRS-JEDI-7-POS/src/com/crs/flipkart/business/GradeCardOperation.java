@@ -4,8 +4,10 @@
 package com.crs.flipkart.business;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import com.crs.flipkart.application.CRSStudentMenu;
+import com.crs.flipkart.bean.Course;
 import com.crs.flipkart.bean.Grade;
 import com.crs.flipkart.bean.GradeCard;
 import com.crs.flipkart.bean.RegisteredCourse;
@@ -49,5 +51,38 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 		gradeCard.setListOfGrades(listOfGrades);
 		gradeCard.setUserId(studentId);
 		return gradeCard;
+	}
+	
+	public void assignGrade(int userId) {
+		CourseDaoOperation courseDAOobj=new CourseDaoOperation();
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter CourseID");
+		int courseId=sc.nextInt();
+		sc.nextLine();
+		boolean flag=false;
+		ArrayList<Course> professorCourses=courseDAOobj.getProfessorCourses(userId);
+		for(Course course:professorCourses) {
+			if(course.getCourseID()==courseId) {
+				flag=true;
+				break;
+			}
+		}
+		if(flag==false) {
+			System.out.println("Entered Course is not taught by you.");
+			return;
+		}
+		System.out.println("Enter Student ID");
+		int studentId=sc.nextInt();
+		sc.nextLine();
+		ArrayList <Integer> enrolledStudents= courseDAOobj.getEnrolledStudents(courseId);
+		if(!enrolledStudents.contains(studentId)) {
+			System.out.println("Entered Student is not registered for the given course");
+			return;
+		}
+		System.out.println("Enter Grade");
+		String grade=sc.nextLine();
+		courseDAOobj.setGrade(studentId,courseId,grade);
+		System.out.println("Grade Assigned Succesfully");
+		
 	}
 }

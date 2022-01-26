@@ -115,7 +115,7 @@ public class DatabaseInitializer {
 		AuthorizationDB.listOfStudents.add(student2);
 		
 		Admin admin1=new Admin();
-		admin1.setUserId(201);
+		admin1.setUserId(301);
 		admin1.setPassword("password");
 		admin1.setUserName("Admin1");
 		admin1.setAddress("Address 3");
@@ -128,7 +128,7 @@ public class DatabaseInitializer {
 		AuthorizationDB.listOfAdmins.add(admin1);
 		
 		Admin admin2=new Admin();
-		admin2.setUserId(202);
+		admin2.setUserId(302);
 		admin2.setPassword("password");
 		admin2.setUserName("Admin2");
 		admin2.setAddress("Address 4");
@@ -141,7 +141,7 @@ public class DatabaseInitializer {
 		AuthorizationDB.listOfAdmins.add(admin2);
 		
 		Professor prof1=new Professor();
-		prof1.setUserId(301);
+		prof1.setUserId(201);
 		prof1.setPassword("password");
 		prof1.setUserName("Prof1");
 		prof1.setAddress("Address 5");
@@ -156,7 +156,7 @@ public class DatabaseInitializer {
 		AuthorizationDB.listOfProfessors.add(prof1);
 
 		Professor prof2=new Professor();
-		prof2.setUserId(302);
+		prof2.setUserId(202);
 		prof2.setPassword("password");
 		prof2.setUserName("Prof2");
 		prof2.setAddress("Address 6");
