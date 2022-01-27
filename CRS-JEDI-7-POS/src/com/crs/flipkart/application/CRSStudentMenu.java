@@ -17,11 +17,16 @@ import com.crs.flipkart.business.PaymentOperation;
 import com.crs.flipkart.dao.StudentDaoOperation;
 
 /**
+ * User Interactive menu for students
+ * 
  * @author Nitish
  *
  */
 public class CRSStudentMenu {
-
+	/**
+	 * Main Student Client which displays and manages all student related operations
+	 * 
+	 */
 	StudentDaoOperation studDAOobj = new StudentDaoOperation();
 	public void StudentMenu(int userId) {
 		int choice=0;
@@ -48,12 +53,13 @@ public class CRSStudentMenu {
 			choice = sc.nextInt();
 			sc.nextLine();
 			switch (choice) {
+				// Course Registration 
 				case 1: if(!studDAOobj.isRegistered(userId))
 							courseRegistrationObj.registerCourses(userId);
 						else
 							System.out.println("Already Registered");
 						break;
-						
+				// Add Course		
 				case 2: 
 					if(studDAOobj.isRegistered(userId))
 						courseRegistrationObj.addCourse(userId);
@@ -61,7 +67,7 @@ public class CRSStudentMenu {
 						System.out.println("Complete Course Registration first");
 					}
 					break;
-
+				// Drop Course
 				case 3:
 					if(studDAOobj.isRegistered(userId))
 						courseRegistrationObj.dropCourse(userId);
@@ -69,10 +75,11 @@ public class CRSStudentMenu {
 						System.out.println("Complete Course Registration first");
 					}
 					break;
+				// View All Courses
 				case 4:
 					courseRegistrationObj.viewCourses();
 						break;
-
+					// View Registered Courses
 				case 5:
 					if(studDAOobj.isRegistered(userId))
 						courseRegistrationObj.viewRegisteredCourse(userId);
@@ -80,7 +87,7 @@ public class CRSStudentMenu {
 						System.out.println("Complete Course Registration first");
 					}
 					break;
-
+				// View Grade Card
 				case 6:
 					if(studDAOobj.isRegistered(userId))
 						gradeCardObj.viewGradeCard(userId);
@@ -88,7 +95,7 @@ public class CRSStudentMenu {
 						System.out.println("Complete Course Registration first");
 					}
 					break;
-						
+				// Make Payment		
 				case 7:
 					
 					if (!studDAOobj.isRegistered(userId)) {
@@ -112,7 +119,7 @@ public class CRSStudentMenu {
 						System.out.println("Fees already paid");
 					}
 					break;
-						
+				// Logout
 				case 8: 
 						break;
 						

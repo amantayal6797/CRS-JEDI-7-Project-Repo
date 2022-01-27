@@ -13,9 +13,17 @@ import com.crs.flipkart.business.OfflinePayment;
 import com.crs.flipkart.business.OnlinePayment;
 
 /**
+ * 
+ * User Interactive menu if user logs in is a professor
+ * 
  * @author Ashruth
  *
  */
+
+
+/*
+Manages the major roles of professor based on user inputs
+*/
 public class CRSProfessorMenu extends CRSApplication {
 	public void ProfessorMenu(int userId) {
 		int choice=0;
@@ -35,17 +43,19 @@ public class CRSProfessorMenu extends CRSApplication {
 			choice = sc.nextInt();
 			sc.nextLine();
 			switch (choice) {
+				// Professor Registers Course
 				case 1:
 					courseRegistrationObj.registerProfessorCourse(userId);
 					break;
-						
+				// View Course	of Professor
 				case 2: 
 					courseRegistrationObj.viewProfessorCourses(userId);
 					break;
-
+				// View Enrolled Students in a course
 				case 3:
 					courseRegistrationObj.viewEnrolledStudents(userId);
 					break;
+				// Assign Grade
 				case 4:
 					gradeCardObj.assignGrade(userId);
 						break;						

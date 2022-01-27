@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
+ * Manages the connection with MySQL server
+ * 
  * @author Aditya
  *
  */
@@ -42,6 +44,12 @@ public class DBUtils {
 	
 		   
 		public Connection connectionEstablish() {
+			/**
+			 * Fetches and establishes a connection with MySQL server
+			 * with the mentioned database and login credentials
+			 * 
+			 * @return Connection which is used to fire queries to the connected database
+			 */
 			 Connection connection = null;
 			    try {
 	            	Properties prop = new Properties();
@@ -64,10 +72,14 @@ public class DBUtils {
 	        }
 				   
 		
-				   
+				  /**
+			 * Terminates connection with the database if instance
+			 * of connection is not null
+			 */ 
 					public  void connectionClose(Connection conn) {
 						
 					try {
+						
 					    conn.close();
 					   }catch(SQLException se){
 					          se.printStackTrace();

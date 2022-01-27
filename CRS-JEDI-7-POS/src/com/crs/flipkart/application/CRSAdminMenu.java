@@ -12,6 +12,14 @@ import com.crs.flipkart.business.CourseRegistrationOperationInterface;
 /**
  * @author aditya.gupta3
  *
+ *  The Client Side Application for displaying and going forward with
+ *  Administrator related operations and functionalities.
+ */
+
+
+ /**
+ * Main Function to display, choose and then call the respective Administrator
+ * Operations.
  */
 public class CRSAdminMenu extends CRSApplication {
 	public void AdminMenu(int userId) {
@@ -36,30 +44,31 @@ public class CRSAdminMenu extends CRSApplication {
 			AdminOperation adminOperation = new AdminOperation();
 			
 			switch(choice) {
+				// View Course case
 			case 1:
 				courseRegistrationObj.viewCourses();
 				break;
-				
+				// Add Course case
 			case 2:
 				adminOperation.addCourse();
 				break;
-				
+				// Drop Course case
 			case 3:
 				adminOperation.dropCourse();
 				break;
-				
+				// Approve Course case
 			case 4:
 				adminOperation.approveUser();
 				break;
-	
+			// Add Professor case
 			case 5:
 				adminOperation.addProfessor();
 				break;
-			
+			// Assign Course to Professor Case
 			case 6:
 				adminOperation.assignCourseToProfessor();
 				break;
-
+			// View Grade Card Case
 			case 7:
 				adminOperation.viewGradeCard();
 				break;

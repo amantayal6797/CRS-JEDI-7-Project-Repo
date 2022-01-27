@@ -4,6 +4,7 @@
 package com.crs.flipkart.constants;
 
 /**
+ * SQL Constants used for DAO Operations
  * @author aditya.gupta3
  *
  */

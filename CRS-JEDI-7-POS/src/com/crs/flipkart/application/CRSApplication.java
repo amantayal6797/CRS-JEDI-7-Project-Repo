@@ -12,9 +12,17 @@ import com.crs.flipkart.business.StudentOperation;
 import com.crs.flipkart.business.StudentOperationInterface;
 
 /**
+ * The Main Entry Point of our application and shows choices for Registration or
+ * Login
+ * 
  * @author Ashruth
- *
  */
+
+
+ /**
+	 * The Main method for MainCRSApplication
+	 * 
+**/
 public class CRSApplication {
 
 	/**
@@ -23,6 +31,7 @@ public class CRSApplication {
 	public static void main(String[] args) {
 		int choice = 0;
 		while(choice!=4) {
+			// Main menu
 		System.out.println("Menu");
 		System.out.println("Enter 1 for register student");
 		System.out.println("Enter 2 for login");
@@ -35,9 +44,11 @@ public class CRSApplication {
 		StudentOperationInterface studentOperation = new StudentOperation();
 	
 		switch(choice) {
+		// New Student Register Case
 		case 1:
 			studentOperation.registerStudent();
 			break;
+		// Login Case
 		case 2:
 			System.out.println("Enter UserID");
 			int id=sc.nextInt();
@@ -46,14 +57,17 @@ public class CRSApplication {
 			String password = sc.nextLine();
 			String role = authOperation.Authorize(id,password);
 			switch(role) {
+			// Student Login
 			case "Student":
 				CRSStudentMenu studentPageObj = new CRSStudentMenu(); 
 				studentPageObj.StudentMenu(id);
 				break;
+			// Admin Login
 			case "Admin":
 				CRSAdminMenu adminPageObj=new CRSAdminMenu();
 				adminPageObj.AdminMenu(id);
 				break;
+			// Professor Login
 			case "Professor":
 				CRSProfessorMenu professorPageObj=new CRSProfessorMenu();
 				professorPageObj.ProfessorMenu(id);
@@ -79,6 +93,7 @@ public class CRSApplication {
 			String cNPassword = sc.next();
 			authOperation.updatePasswordCheck(nUserId, nPassword, cNPassword);
 			break;
+		// Logout Case
 		case 4:
 			System.out.println("Exiting");
 			break;
