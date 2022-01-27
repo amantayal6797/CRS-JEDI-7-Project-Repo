@@ -99,13 +99,13 @@ public class CRSApplication {
 			System.out.println("Enter UserID");
 			int nUserId = sc.nextInt();
 			sc.nextLine();
-			System.out.println("Enter Password");
-			password = sc.nextLine();
-			role=authOperation.Authorize(nUserId,password);
-			if(role.equalsIgnoreCase("Invalid")) {
-				System.out.println("Invalid Current UserId/Password");
-				break;
-			}
+//			System.out.println("Enter Password");
+//			password = sc.nextLine();
+//			role=authOperation.Authorize(nUserId,password);
+//			if(role.equalsIgnoreCase("Invalid")) {
+//				System.out.println("Invalid Current UserId/Password");
+//				break;
+//			}
 			System.out.println("Enter new Password");
 			String nPassword = sc.next();
 			System.out.println("Confirm new Password");

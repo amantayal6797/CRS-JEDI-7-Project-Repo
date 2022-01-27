@@ -7,6 +7,7 @@ import com.crs.flipkart.bean.Admin;
 import com.crs.flipkart.bean.Professor;
 import com.crs.flipkart.bean.Student;
 import com.crs.flipkart.constants.AuthorizationDB;
+import com.crs.flipkart.dao.UserDaoOperation;
 
 /**
  * @author Ashruth
@@ -14,70 +15,33 @@ import com.crs.flipkart.constants.AuthorizationDB;
  */
 public class AuthorizationOperation  implements AuthorizationOperationInterface {
 	
-	public String Authorize(int id,String password) {
-		for(Student student:AuthorizationDB.listOfStudents) {
-			if(student==null)
-				continue;
-			if(student.getUserId()==id) {
-				if (student.getPassword().equals(password)) {
-					return student.getRole();	
-				}
-				else {
-					return "Invalid Password"; 
-				}
-			}
-		}
+public String Authorize(int id,String password) {
 		
-		for(Admin admin:AuthorizationDB.listOfAdmins) {
-			if(admin==null)
-				continue;
-			if(admin.getUserId()==id) {
-				if (admin.getPassword().equals(password)) {
-					return admin.getRole();	
-				}
-				else {
-					return "Invalid Password"; 
-				}
-			}
-		}
-		
-		for(Professor professor:AuthorizationDB.listOfProfessors) {
-			if(professor==null)
-				continue;
-			if(professor.getUserId()==id) {
-				if (professor.getPassword().equals(password)) {
-					return professor.getRole();	
-				}
-				else {
-					return "Invalid Password"; 
-				}
-			}
-		}
-		
-		return "Invalid ID";
+		UserDaoOperation userDaoOperation = new UserDaoOperation();
+		return userDaoOperation.Authorize(id, password);
 	}
 	
 	public boolean updatePasswordCheck(int userId, String nPassword, String cNPassword) {
-		// check whether userId is present in DB or not
-		// if user present in DB, then check nPassword and cNPassword is same or not
-		// if both are same, then update in DB
-
-		if (nPassword==cNPassword) {
-			// update in DB
-			for (Student student: AuthorizationDB.listOfStudents) {
-				if (student.getUserId()==userId) {
-					student.setPassword(nPassword);
-					System.out.println("Password updated successfully");
-					return true;
-				}
-			}
 			
+		if (nPassword.equals(cNPassword)) {	
+			UserDaoOperation userDaoOperation = new UserDaoOperation();
+			int status = userDaoOperation.updatePasswordCheck(userId, nPassword);
+			
+			if(status==1) {
+				System.out.println("Password updated successfully");
+				return true;
+			}else if(status==2){
+				System.out.println("Error");
+				return false;
+			}else if(status==3) {
 			System.out.println("Student id not found");
 			return false;
+			}
 			
 		} else {
 			System.out.println("Both passwords don't match");
 			return false;
 		}
+		return true;
 	}
 }
