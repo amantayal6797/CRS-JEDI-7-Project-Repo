@@ -3,28 +3,24 @@
  */
 package com.crs.flipkart.business;
 
-import com.crs.flipkart.bean.Admin;
-import com.crs.flipkart.bean.Professor;
-import com.crs.flipkart.bean.Student;
-import com.crs.flipkart.constants.AuthorizationDB;
 import com.crs.flipkart.dao.UserDaoOperation;
 
 /**
- * @author Ashruth
+ * @author aditya.gupta3
  *
  */
-public class AuthorizationOperation  implements AuthorizationOperationInterface {
+public class AuthorizationOperation implements AuthorizationOperationInterface {
+
+	UserDaoOperation userDaoOperation = new UserDaoOperation();
 	
-public String Authorize(int id,String password) {
-		
-		UserDaoOperation userDaoOperation = new UserDaoOperation();
+	@Override
+	public String Authorize(int id, String password) {
 		return userDaoOperation.Authorize(id, password);
 	}
-	
+
+	@Override
 	public boolean updatePasswordCheck(int userId, String nPassword, String cNPassword) {
-			
 		if (nPassword.equals(cNPassword)) {	
-			UserDaoOperation userDaoOperation = new UserDaoOperation();
 			int status = userDaoOperation.updatePasswordCheck(userId, nPassword);
 			
 			if(status==1) {
@@ -44,4 +40,5 @@ public String Authorize(int id,String password) {
 		}
 		return true;
 	}
+
 }

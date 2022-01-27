@@ -77,31 +77,35 @@ public class UserDaoOperation {
 			}
 		}
 		
-		public String Authorize(int id,String password) {
+		public String Authorize(int userId,String password) {
 			
-			 ConnectionSetup connectionSetup = new ConnectionSetup();
-			 Connection conn = connectionSetup.connectionEstablish();
-			 String sql = "select * from user";
-			 PreparedStatement stmt;
-			 ResultSet rs = null;
+			ConnectionSetup connectionSetup = new ConnectionSetup();
+			Connection conn = connectionSetup.connectionEstablish();
 			 
-				try {
-					stmt = conn.prepareStatement(sql);
-					rs = stmt.executeQuery(sql);
-					while(rs.next()){	
-					     if(rs.getInt("userId")==id) {
-					    	 if( rs.getString("Password").equals(password)){
-					    		 return rs.getString("Role");
-					    	 }
-					    	 else {
-					    		 return "Invalid Password"; 
-					    	 }
-					     }	
-					 }
-				} catch (SQLException e) {
-					e.printStackTrace();
-					return "Error";
+			try {
+				String sql = "select * from user";
+				PreparedStatement stmt = conn.prepareStatement(sql);
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()){	
+				    if(rs.getInt("userId")==userId) {
+				    	if(rs.getString("password").equals(password)) {
+				    		sql = "select role from role where userid=?";
+				    		stmt = conn.prepareStatement(sql);
+				    		stmt.setInt(1, userId);
+				    		ResultSet rs2 = stmt.executeQuery();
+				    		while (rs2.next()) {
+				    			return rs2.getString("role");	
+				    		}
+				    	}
+				    	else {
+				    		return "Invalid Password"; 
+				    	}
+				    }	
 				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return "Error";
+			}
 				
 			return "Invalid ID";
 		}
