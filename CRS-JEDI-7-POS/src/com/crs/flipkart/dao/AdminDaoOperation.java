@@ -57,8 +57,8 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
 	    try {
-	    	String sql = "delete from course where courseid = ?";
-	    	PreparedStatement stmt = conn.prepareStatement(sql);
+//	    	String sql = "delete from course where courseid = ?";
+	    	PreparedStatement stmt = conn.prepareStatement(SQLQueryConstant.DELETE_COURSE_QUERY);
 		    stmt.setInt(1, courseId);
 		    int i = stmt.executeUpdate();
 		    if(i==0) {

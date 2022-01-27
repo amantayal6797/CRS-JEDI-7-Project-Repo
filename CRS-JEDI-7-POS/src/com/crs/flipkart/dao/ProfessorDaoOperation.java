@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import com.crs.flipkart.bean.Professor;
+import com.crs.flipkart.constants.SQLQueryConstant;
 import com.crs.flipkart.utils.DBUtils;
 
 /**
@@ -23,8 +24,8 @@ public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 	    Connection conn = connectionSetup.connectionEstablish();
 	    try {
 	    	userDaoOperation.registerUser(professor.getUserId(), professor.getPassword(), professor.getIsApproved());
-	    	String sql = "insert into professor values (?,?,?,?,?,?,?,?)";
-	    	PreparedStatement stmt = conn.prepareStatement(sql);
+//	    	String sql = "insert into professor values (?,?,?,?,?,?,?,?)";
+	    	PreparedStatement stmt = conn.prepareStatement(SQLQueryConstant.ADD_PROFESSOR_DETAIL);
 		    stmt.setInt(1, professor.getUserId());
 		    stmt.setString(2, professor.getUserName());
 		    stmt.setString(3, professor.getEmail());

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.crs.flipkart.bean.Student;
+import com.crs.flipkart.constants.SQLQueryConstant;
 import com.crs.flipkart.utils.DBUtils;
 
 public class StudentDaoOperation implements StudentDaoOperationInterface {
@@ -16,8 +17,8 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 	    Connection conn = connectionSetup.connectionEstablish();
 	    try {
 	    	userDaoOperation.registerUser(student.getUserId(), student.getPassword(), student.getIsApproved());
-	    	String sql = "insert into student values (?,?,?,?,?,?,?,?,?,?)";
-	    	PreparedStatement stmt = conn.prepareStatement(sql);
+//	    	String sql = "insert into student values (?,?,?,?,?,?,?,?,?,?)";
+	    	PreparedStatement stmt = conn.prepareStatement(SQLQueryConstant.ADD_COURSE_QUERY);
 		    stmt.setInt(1, student.getUserId());
 		    stmt.setString(2, student.getUserName());
 		    stmt.setString(3, student.getEmail());
@@ -32,8 +33,8 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 		    if(i==0) {
 				System.out.println("Error in registering student");
 			}
-		    sql="insert into role values(?,'Student')";
-		    stmt=conn.prepareStatement(sql);
+//		    sql="insert into role values(?,'Student')";
+		    stmt=conn.prepareStatement(SQLQueryConstant.ADD_STUDENT_ROLE);
 		    stmt.setInt(1, student.getUserId());
 		    i = stmt.executeUpdate();
 		    if(i==0) {
@@ -54,9 +55,9 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 	public boolean getPaymentStatus (int studentId) {
 		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
-		String sql = "select paymentstatus from student where userid = ?";
+//		String sql = "select paymentstatus from student where userid = ?";
 		try {
-		    PreparedStatement stmt=conn.prepareStatement(sql);
+		    PreparedStatement stmt=conn.prepareStatement(SQLQueryConstant.GET_PAYMENT_STATUS);
 			stmt.setInt(1, studentId);
 			ResultSet rs=stmt.executeQuery(); 
 			while(rs.next()) {
@@ -78,9 +79,9 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 	public boolean setPaymentStatus (int studentId) {
 		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
-		String sql = "update student set paymentstatus=1 where userid = ?";
+//		String sql = "update student set paymentstatus=1 where userid = ?";
 		try {
-		    PreparedStatement stmt=conn.prepareStatement(sql);
+		    PreparedStatement stmt=conn.prepareStatement(SQLQueryConstant.SET_PAYMENT_STATUS);
 			stmt.setInt(1, studentId);
 			int i=stmt.executeUpdate(); 
 			if(i==0) {
@@ -100,31 +101,23 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 	public Student showStudent(int studentId) {
 		DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-		 String sql1 = "select * from user where userid = ?";
-		 String sql2 = "select * from student where userid = ?";
+//		 String sql1 = "select * from user where userid = ?";
+//		 String sql2 = "select * from student where userid = ?";
 		 Student student=new Student();
 		 try {
-			 PreparedStatement stmt=conn2.prepareStatement(sql1);
+			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.GET_USER_DETAIL);
 			 stmt.setInt(1, studentId);
 			 ResultSet rs=stmt.executeQuery(); 
 			 while(rs.next()) {
 				student.setUserId(rs.getInt("userID"));
-				student.setUserName(rs.getString("userName"));
 				student.setPassword(rs.getString("Password"));
-				student.setEmail(rs.getString("Email"));
-				//student.setIsApproved(boolean(rs.getInt("isApproved")));
-				student.setAddress(rs.getString("Address"));
-				student.setAge(rs.getInt("Age"));
-				student.setGender(rs.getString("Gender"));
-				student.setContact(rs.getString("Contact"));
-				student.setRole("Student");
 				if(rs.getInt("isApproved")==1)
 					student.setIsApproved(true);
 				else
 					student.setIsApproved(false);
 				
 			 }
-			 PreparedStatement stmt2=conn2.prepareStatement(sql2);
+			 PreparedStatement stmt2=conn2.prepareStatement(SQLQueryConstant.GET_STUDENT_DETAIL);
 			 stmt.setInt(1, studentId);
 			 ResultSet rs2=stmt2.executeQuery(); 
 			 while(rs2.next()) {
@@ -155,9 +148,9 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 	public void setRegistration(int studentId) {
 		DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-		 String sql = "update student set isregistered=1 where userid = ?";
+//		 String sql = "update student set isregistered=1 where userid = ?";
 		 try {
-			 PreparedStatement stmt=conn2.prepareStatement(sql);
+			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.SET_REGISTERED);
 			 stmt.setInt(1, studentId);
 			 int i=stmt.executeUpdate(); 
 			 if(i==0)
@@ -172,9 +165,9 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 	public boolean isRegistered(int studentId) {
 		DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-		 String sql = "select isregistered from student where userid = ?";
+//		 String sql = "select isregistered from student where userid = ?";
 		 try {
-			 PreparedStatement stmt=conn2.prepareStatement(sql);
+			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.IS_REGISTERED);
 			 stmt.setInt(1, studentId);
 			 ResultSet rs=stmt.executeQuery(); 
 			 while(rs.next()) {

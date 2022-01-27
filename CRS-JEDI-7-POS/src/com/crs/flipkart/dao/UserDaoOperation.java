@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.crs.flipkart.bean.User;
+import com.crs.flipkart.constants.SQLQueryConstant;
 import com.crs.flipkart.utils.DBUtils;
 
 /**
@@ -21,9 +22,9 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 		public User getUser (int userId) {
 			DBUtils DBUtils = new DBUtils();
 		    Connection conn = DBUtils.connectionEstablish();
-			String sql = "select * from user where userId = ?";
+//			String sql = "select * from user where userId = ?";
 			try {
-			    PreparedStatement stmt=conn.prepareStatement(sql);
+			    PreparedStatement stmt=conn.prepareStatement(SQLQueryConstant.GET_USER_DETAIL);
 				stmt.setInt(1, userId);
 				ResultSet rs = stmt.executeQuery(); 
 				
@@ -33,10 +34,6 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 						user.setUserId(userId);
 						user.setPassword(rs.getString("Password"));
 						user.setIsApproved((rs.getInt("isApproved")==1)? true: false);
-						user.setAddress(rs.getString("Address"));
-						user.setAge(rs.getInt("Age"));
-						user.setGender(rs.getString("Gender"));
-						user.setContact(rs.getString("Contact"));
 						return user;
 					}
 				}
@@ -59,9 +56,9 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 			}
 			DBUtils DBUtils = new DBUtils();
 		    Connection conn = DBUtils.connectionEstablish();
-			String sql = "update user set isApproved=1 where userId = ?";
+//			String sql = "update user set isApproved=1 where userId = ?";
 			try {
-			    PreparedStatement stmt=conn.prepareStatement(sql);
+			    PreparedStatement stmt=conn.prepareStatement(SQLQueryConstant.APPROVE_USER);
 				stmt.setInt(1, userId);
 				int i=stmt.executeUpdate(); 
 				if(i==0) {
@@ -83,14 +80,14 @@ public String Authorize(int userId,String password) {
 			Connection conn = DBUtils.connectionEstablish();
 			 
 			try {
-				String sql = "select * from user";
-				PreparedStatement stmt = conn.prepareStatement(sql);
+//				String sql = "select * from user";
+				PreparedStatement stmt = conn.prepareStatement(SQLQueryConstant.GET_ALL_USERS);
 				ResultSet rs = stmt.executeQuery();
 				while(rs.next()){	
 				    if(rs.getInt("userId")==userId) {
 				    	if(rs.getString("password").equals(password)) {
-				    		sql = "select role from role where userid=?";
-				    		stmt = conn.prepareStatement(sql);
+//				    		sql = "select role from role where userid=?";
+				    		stmt = conn.prepareStatement(SQLQueryConstant.GET_USER_ROLE);
 				    		stmt.setInt(1, userId);
 				    		ResultSet rs2 = stmt.executeQuery();
 				    		while (rs2.next()) {
@@ -115,7 +112,7 @@ public String Authorize(int userId,String password) {
 			
 			 DBUtils DBUtils = new DBUtils();
 			 Connection conn = DBUtils.connectionEstablish();
-			 String sql = "select * from user";
+//			 String sql = "select * from user";
 			 PreparedStatement stmt;
 			 ResultSet rs;
 				 
@@ -123,12 +120,12 @@ public String Authorize(int userId,String password) {
 			 //2: DB Error
 			 //3: Student id not found
 				try {
-					stmt = conn.prepareStatement(sql);
-					rs = stmt.executeQuery(sql);
+					stmt = conn.prepareStatement(SQLQueryConstant.GET_ALL_USERS);
+					rs = stmt.executeQuery();
 					while(rs.next()){	
 					     if( rs.getInt("userid")==userId) {
-					    	 String sql1 = "update user set password=? where userid=?";
-							 PreparedStatement stmt1= conn.prepareStatement(sql1);
+//					    	 String sql1 = "update user set password=? where userid=?";
+							 PreparedStatement stmt1= conn.prepareStatement(SQLQueryConstant.UPDATE_PASSWORD);
 							 stmt1.setString(1,Password);
 							 stmt1.setInt(2,userId);  
 							 int i = stmt1.executeUpdate();  			  
@@ -145,9 +142,9 @@ public String Authorize(int userId,String password) {
 		public void registerUser(int userId, String password, boolean isApproved) {
 			DBUtils DBUtils = new DBUtils();
 		    Connection conn = DBUtils.connectionEstablish();
-			String sql = "insert into user values (?,?,?)";
+//			String sql = "insert into user values (?,?,?)";
 			try {
-			    PreparedStatement stmt=conn.prepareStatement(sql);
+			    PreparedStatement stmt=conn.prepareStatement(SQLQueryConstant.ADD_USER_QUERY);
 				stmt.setInt(1, userId);
 				stmt.setString(2, password);
 				stmt.setInt(3, (isApproved)? 1: 0);
@@ -168,9 +165,9 @@ public String Authorize(int userId,String password) {
 			ArrayList<Integer> unapprovedStudents=new ArrayList<Integer>();
 			DBUtils DBUtils = new DBUtils();
 		    Connection conn = DBUtils.connectionEstablish();
-			String sql = "select * from user where isapproved=0";
+//			String sql = "select * from user where isapproved=0";
 			try {
-			    PreparedStatement stmt=conn.prepareStatement(sql);
+			    PreparedStatement stmt=conn.prepareStatement(SQLQueryConstant.UNAPPROVED_USERS);
 				ResultSet rs = stmt.executeQuery(); 
 				
 				while (rs.next()) {

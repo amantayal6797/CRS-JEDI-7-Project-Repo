@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.crs.flipkart.bean.Course;
 import com.crs.flipkart.bean.RegisteredCourse;
+import com.crs.flipkart.constants.SQLQueryConstant;
 import com.crs.flipkart.utils.DBUtils;
 public class CourseDaoOperation implements CourseDaoOperationInterface {
 	
@@ -15,10 +16,10 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 		ArrayList<Integer> studentList=new ArrayList<Integer>();
 		DBUtils connectObj=new DBUtils();
 		Connection conn = connectObj.connectionEstablish();
-		String sql = "select * from registeredcourse";
+//		String sql = "select * from registeredcourse";
 		try {
-			PreparedStatement stmt=conn.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery(sql);
+			PreparedStatement stmt=conn.prepareStatement(SQLQueryConstant.GET_ALL_REGISTERED_COURSES);
+			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
 				if(rs.getInt("courseid")==courseId)
 					studentList.add(rs.getInt("userid"));
@@ -35,10 +36,10 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 		 Course course=new Course();
 		 DBUtils connectObj=new DBUtils();
 		 Connection conn1 = connectObj.connectionEstablish();
-		 String sql = "select * from course";
+//		 String sql = "select * from course";
 		 try {
-			 PreparedStatement stmt=conn1.prepareStatement(sql);
-				ResultSet rs = stmt.executeQuery(sql);
+			 PreparedStatement stmt=conn1.prepareStatement(SQLQueryConstant.GET_ALL_COURSES);
+				ResultSet rs = stmt.executeQuery();
 				while(rs.next()) {
 					if(rs.getInt("courseid")==courseId) {
 					course.setCourseID(rs.getInt("courseid"));
@@ -61,10 +62,10 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 		 ArrayList<Course> catalog=new ArrayList<Course>();
 		 DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-		 String sql = "select * from course";
+//		 String sql = "select * from course";
 		 try {
-			 PreparedStatement stmt=conn2.prepareStatement(sql);
-				ResultSet rs = stmt.executeQuery(sql);
+			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.GET_ALL_COURSES);
+				ResultSet rs = stmt.executeQuery();
 				while(rs.next()) {
 					Course course=new Course();
 					course.setCourseID(rs.getInt("courseid"));
@@ -88,10 +89,10 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 		 ArrayList<RegisteredCourse> listOfRegisteredCourses= new ArrayList<RegisteredCourse>();
 		 DBUtils connectObj=new DBUtils();
 			Connection conn = connectObj.connectionEstablish();
-			String sql = "select * from registeredcourse";
+//			String sql = "select * from registeredcourse";
 			try {
-				PreparedStatement stmt=conn.prepareStatement(sql);
-				ResultSet rs = stmt.executeQuery(sql);
+				PreparedStatement stmt=conn.prepareStatement(SQLQueryConstant.GET_ALL_REGISTERED_COURSES);
+				ResultSet rs = stmt.executeQuery();
 				while(rs.next()) {
 					if(rs.getInt("userid")==studentId) {
 						RegisteredCourse regCourse=new RegisteredCourse();
@@ -112,9 +113,9 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 	 public boolean verifyCourse(int courseId) {
 		 DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-		 String sql = "select * from course";
+//		 String sql = "select * from course";
 		 try {
-			 PreparedStatement stmt=conn2.prepareStatement(sql);
+			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.GET_ALL_COURSES);
 				ResultSet rs = stmt.executeQuery();
 				while(rs.next()) {
 					if(rs.getInt("courseid")== courseId)
@@ -131,9 +132,9 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 	 public void addCourse(int studentId,int courseId) {
 		 DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-		 String sql = "insert into registeredcourse values(?,?,'NA')";
+//		 String sql = "insert into registeredcourse values(?,?,'NA')";
 		 try {
-			 PreparedStatement stmt=conn2.prepareStatement(sql);
+			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.ADD_REGISTERED_COURSE);
 			 stmt.setInt(2, courseId);
 			 stmt.setInt(1, studentId);
 			 
@@ -151,9 +152,9 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 		 
 		 DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-		 String sql = "delete from registeredcourse where courseId=? and userId=?";
+//		 String sql = "delete from registeredcourse where courseId=? and userId=?";
 		 try {
-			 PreparedStatement stmt=conn2.prepareStatement(sql);
+			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.DELETE_REGISTERED_COURSE);
 			 stmt.setInt(1, courseId);
 			 stmt.setInt(2, studentId);
 			 int i=stmt.executeUpdate(); 
@@ -171,9 +172,9 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 		 ArrayList<Course> catalog=new ArrayList<Course>();
 		 DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-		 String sql = "select * from course where professoralloted=?";
+//		 String sql = "select * from course where professoralloted=?";
 		 try {
-			 PreparedStatement stmt=conn2.prepareStatement(sql);
+			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.GET_PROFESSOR_COURSES);
 			 stmt.setInt(1, userId);
 			 ResultSet rs = stmt.executeQuery();
 			 while(rs.next()) {
@@ -196,9 +197,9 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 		 ArrayList<Course> catalog=new ArrayList<Course>();
 		 DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-		 String sql = "select * from course where professoralloted=0";
+//		 String sql = "select * from course where professoralloted=0";
 		 try {
-			 PreparedStatement stmt=conn2.prepareStatement(sql);
+			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.GET_UNALLOTED_COURSES);
 			 ResultSet rs = stmt.executeQuery();
 			 while(rs.next()) {
 					Course course=new Course();
@@ -220,9 +221,9 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 		 
 		 DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-		 String sql = "update course set professoralloted = ? where courseId=?";
+//		 String sql = "update course set professoralloted = ? where courseId=?";
 		 try {
-			 PreparedStatement stmt=conn2.prepareStatement(sql);
+			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.ALLOT_COURSE);
 			 stmt.setInt(2, courseId);
 			 stmt.setInt(1, userID);
 			 
@@ -241,7 +242,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 		 Connection conn2 = connectObj.connectionEstablish();
 		 String sql = "update registeredcourse set grade = ? where courseid = ? and userid = ? ";
 		 try {
-			 PreparedStatement stmt=conn2.prepareStatement(sql);
+			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.ASSIGN_GRADE);
 			 stmt.setString(1, grade);
 			 stmt.setInt(2, courseId);
 			 stmt.setInt(3, studentId);
