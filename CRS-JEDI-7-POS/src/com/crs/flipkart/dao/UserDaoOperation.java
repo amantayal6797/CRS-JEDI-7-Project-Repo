@@ -19,8 +19,8 @@ import com.crs.flipkart.utils.DBUtils;
 public class UserDaoOperation implements UserDaoOperationInterface {
 		
 		public User getUser (int userId) {
-			DBUtils connectionSetup = new DBUtils();
-		    Connection conn = connectionSetup.connectionEstablish();
+			DBUtils DBUtils = new DBUtils();
+		    Connection conn = DBUtils.connectionEstablish();
 			String sql = "select * from user where userId = ?";
 			try {
 			    PreparedStatement stmt=conn.prepareStatement(sql);
@@ -47,7 +47,7 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 			    e.printStackTrace();
 			    return null;
 			} finally {
-				connectionSetup.connectionClose(conn);	
+				DBUtils.connectionClose(conn);	
 			}
 		}
 		
@@ -57,8 +57,8 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 				System.out.println("User does not exists with this userId");
 				return;
 			}
-			DBUtils connectionSetup = new DBUtils();
-		    Connection conn = connectionSetup.connectionEstablish();
+			DBUtils DBUtils = new DBUtils();
+		    Connection conn = DBUtils.connectionEstablish();
 			String sql = "update user set isApproved=1 where userId = ?";
 			try {
 			    PreparedStatement stmt=conn.prepareStatement(sql);
@@ -73,14 +73,14 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 				// TODO Auto-generated catch block
 			    e.printStackTrace();
 			} finally {
-				connectionSetup.connectionClose(conn);	
+				DBUtils.connectionClose(conn);	
 			}
 		}
 		
-		public String Authorize(int userId,String password) {
+public String Authorize(int userId,String password) {
 			
-			ConnectionSetup connectionSetup = new ConnectionSetup();
-			Connection conn = connectionSetup.connectionEstablish();
+			DBUtils DBUtils = new DBUtils();
+			Connection conn = DBUtils.connectionEstablish();
 			 
 			try {
 				String sql = "select * from user";
@@ -107,14 +107,14 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 				return "Error";
 			}
 				
-			return role;
+			return "Invalid ID";
 		}
 		
 		//done
 		public int updatePasswordCheck(int userId, String Password) {
 			
-			 DBUtils connectionSetup = new DBUtils();
-			 Connection conn = connectionSetup.connectionEstablish();
+			 DBUtils DBUtils = new DBUtils();
+			 Connection conn = DBUtils.connectionEstablish();
 			 String sql = "select * from user";
 			 PreparedStatement stmt;
 			 ResultSet rs;
@@ -143,8 +143,8 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 		}
 		
 		public void registerUser(int userId, String password, boolean isApproved) {
-			ConnectionSetup connectionSetup = new ConnectionSetup();
-		    Connection conn = connectionSetup.connectionEstablish();
+			DBUtils DBUtils = new DBUtils();
+		    Connection conn = DBUtils.connectionEstablish();
 			String sql = "insert into user values (?,?,?)";
 			try {
 			    PreparedStatement stmt=conn.prepareStatement(sql);
@@ -161,13 +161,13 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 				// TODO Auto-generated catch block
 			    e.printStackTrace();
 			} finally {
-				connectionSetup.connectionClose(conn);	
+				DBUtils.connectionClose(conn);	
 			}
 		}
 		public ArrayList<Integer> getUnapprovedStudents(){
 			ArrayList<Integer> unapprovedStudents=new ArrayList<Integer>();
-			DBUtils connectionSetup = new DBUtils();
-		    Connection conn = connectionSetup.connectionEstablish();
+			DBUtils DBUtils = new DBUtils();
+		    Connection conn = DBUtils.connectionEstablish();
 			String sql = "select * from user where isapproved=0";
 			try {
 			    PreparedStatement stmt=conn.prepareStatement(sql);
@@ -182,7 +182,7 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 			    e.printStackTrace();
 			    return null;
 			} 
-				connectionSetup.connectionClose(conn);	
+				DBUtils.connectionClose(conn);	
 				return unapprovedStudents;
 			
 			

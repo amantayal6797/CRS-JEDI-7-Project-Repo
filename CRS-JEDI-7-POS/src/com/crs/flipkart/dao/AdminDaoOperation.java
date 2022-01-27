@@ -9,7 +9,6 @@ import java.sql.SQLException;
 
 import com.crs.flipkart.bean.Course;
 import com.crs.flipkart.constants.SQLQueryConstant;
-import com.crs.flipkart.utils.ConnectionSetup;
 import com.crs.flipkart.utils.DBUtils;
 
 /**

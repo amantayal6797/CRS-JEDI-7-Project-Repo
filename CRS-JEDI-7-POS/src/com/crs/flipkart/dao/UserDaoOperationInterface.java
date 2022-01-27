@@ -13,7 +13,6 @@ public interface UserDaoOperationInterface {
 
     public int updatePasswordCheck(int userId, String Password) ;
 
-    public void registerStudent(int userId, String password, String userName, String address, int age, String branch, String contact, String email, String gender) ;
     public ArrayList<Integer> getUnapprovedStudents();
 
     public void registerUser(int userId, String password, boolean isApproved);

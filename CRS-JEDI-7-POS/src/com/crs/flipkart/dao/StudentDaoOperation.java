@@ -27,7 +27,7 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 		    stmt.setString(7, student.getContact());
 		    stmt.setInt(8, (student.isRegistered())? 1: 0);
 		    stmt.setString(9, student.getBranch());
-		    stmt.setInt(10, (student.isPaymentStatus())? 1: 0);
+		    stmt.setInt(10, (student.getPaymentStatus())? 1: 0);
 		    int i = stmt.executeUpdate();
 		    if(i==0) {
 				System.out.println("Error in registering student");
@@ -49,38 +49,7 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 		}
 	}
 	
-	UserDaoOperation userDaoOperation = new UserDaoOperation();
 	
-	public void registerStudent (Student student) {
-		ConnectionSetup connectionSetup = new ConnectionSetup();
-	    Connection conn = connectionSetup.connectionEstablish();
-	    try {
-	    	userDaoOperation.registerUser(student.getUserId(), student.getPassword(), student.getIsApproved());
-	    	String sql = "insert into student values (?,?,?,?,?,?,?,?,?,?)";
-	    	PreparedStatement stmt = conn.prepareStatement(sql);
-		    stmt.setInt(1, student.getUserId());
-		    stmt.setString(2, student.getUserName());
-		    stmt.setString(3, student.getEmail());
-		    stmt.setString(4, student.getAddress());
-		    stmt.setInt(5, student.getAge());
-		    stmt.setString(6, student.getGender());
-		    stmt.setString(7, student.getContact());
-		    stmt.setInt(8, (student.isRegistered())? 1: 0);
-		    stmt.setString(9, student.getBranch());
-		    stmt.setInt(10, (student.getPaymentStatus())? 1: 0);
-		    int i = stmt.executeUpdate();
-		    if(i==0) {
-				System.out.println("Error in registering student");
-			} else {
-				System.out.println("student - "+student.getUserId()+" registered successfully");
-			}
-	    }catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			connectionSetup.connectionClose(conn);	
-		}
-	}
 	
 	public boolean getPaymentStatus (int studentId) {
 		DBUtils connectionSetup = new DBUtils();
