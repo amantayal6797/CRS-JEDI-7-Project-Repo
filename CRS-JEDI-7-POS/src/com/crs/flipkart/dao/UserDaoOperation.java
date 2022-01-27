@@ -7,21 +7,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.crs.flipkart.bean.User;
-import com.crs.flipkart.utils.ConnectionSetup;
+import com.crs.flipkart.utils.DBUtils;
 
 /**
  * @author aditya.gupta3
  *
  */
-public class UserDaoOperation {
-		// Register User
-		// Verify Credentials
-		// Update Password
+public class UserDaoOperation implements UserDaoOperationInterface {
 		
 		public User getUser (int userId) {
-			ConnectionSetup connectionSetup = new ConnectionSetup();
+			DBUtils connectionSetup = new DBUtils();
 		    Connection conn = connectionSetup.connectionEstablish();
 			String sql = "select * from user where userId = ?";
 			try {
@@ -33,10 +31,7 @@ public class UserDaoOperation {
 					if (rs.getInt("userId")==userId) {
 						User user = new User();
 						user.setUserId(userId);
-						user.setUserName(rs.getString("userName"));
 						user.setPassword(rs.getString("Password"));
-						user.setRole(rs.getString("Role"));
-						user.setEmail(rs.getString("Email"));
 						user.setIsApproved((rs.getInt("isApproved")==1)? true: false);
 						user.setAddress(rs.getString("Address"));
 						user.setAge(rs.getInt("Age"));
@@ -56,8 +51,13 @@ public class UserDaoOperation {
 			}
 		}
 		
+		//done
 		public void approveUser (int userId) {
-			ConnectionSetup connectionSetup = new ConnectionSetup();
+			if (getUser(userId)==null) {
+				System.out.println("User does not exists with this userId");
+				return;
+			}
+			DBUtils connectionSetup = new DBUtils();
 		    Connection conn = connectionSetup.connectionEstablish();
 			String sql = "update user set isApproved=1 where userId = ?";
 			try {
@@ -107,13 +107,13 @@ public class UserDaoOperation {
 				return "Error";
 			}
 				
-			return "Invalid ID";
+			return role;
 		}
 		
-		
+		//done
 		public int updatePasswordCheck(int userId, String Password) {
 			
-			 ConnectionSetup connectionSetup = new ConnectionSetup();
+			 DBUtils connectionSetup = new DBUtils();
 			 Connection conn = connectionSetup.connectionEstablish();
 			 String sql = "select * from user";
 			 PreparedStatement stmt;
@@ -126,8 +126,8 @@ public class UserDaoOperation {
 					stmt = conn.prepareStatement(sql);
 					rs = stmt.executeQuery(sql);
 					while(rs.next()){	
-					     if( rs.getInt("userId")==userId) {
-					    	 String sql1 = "update user set password=? where userId=?";
+					     if( rs.getInt("userid")==userId) {
+					    	 String sql1 = "update user set password=? where userid=?";
 							 PreparedStatement stmt1= conn.prepareStatement(sql1);
 							 stmt1.setString(1,Password);
 							 stmt1.setInt(2,userId);  
@@ -164,5 +164,30 @@ public class UserDaoOperation {
 				connectionSetup.connectionClose(conn);	
 			}
 		}
+		public ArrayList<Integer> getUnapprovedStudents(){
+			ArrayList<Integer> unapprovedStudents=new ArrayList<Integer>();
+			DBUtils connectionSetup = new DBUtils();
+		    Connection conn = connectionSetup.connectionEstablish();
+			String sql = "select * from user where isapproved=0";
+			try {
+			    PreparedStatement stmt=conn.prepareStatement(sql);
+				ResultSet rs = stmt.executeQuery(); 
+				
+				while (rs.next()) {
+						unapprovedStudents.add(rs.getInt("userid"));
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+			    e.printStackTrace();
+			    return null;
+			} 
+				connectionSetup.connectionClose(conn);	
+				return unapprovedStudents;
+			
+			
 		
+		}
+
 }
+

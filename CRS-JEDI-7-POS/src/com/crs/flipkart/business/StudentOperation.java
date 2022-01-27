@@ -7,7 +7,9 @@ import java.util.Scanner;
 
 import com.crs.flipkart.bean.Student;
 import com.crs.flipkart.dao.StudentDaoOperation;
+import com.crs.flipkart.dao.StudentDaoOperationInterface;
 import com.crs.flipkart.dao.UserDaoOperation;
+import com.crs.flipkart.dao.UserDaoOperationInterface;
 
 /**
  * @author aditya.gupta3
@@ -15,8 +17,8 @@ import com.crs.flipkart.dao.UserDaoOperation;
  */
 public class StudentOperation implements StudentOperationInterface {
 
-	UserDaoOperation userDaoOperation = new UserDaoOperation();
-	StudentDaoOperation studentDaoOperation = new StudentDaoOperation();
+	UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
+	StudentDaoOperationInterface studentDaoOperation = new StudentDaoOperation();
 	
 	@Override
 	public void registerStudent() {

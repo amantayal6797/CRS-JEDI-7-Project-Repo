@@ -4,6 +4,7 @@
 package com.crs.flipkart.business;
 
 import com.crs.flipkart.dao.UserDaoOperation;
+import com.crs.flipkart.dao.UserDaoOperationInterface;
 
 /**
  * @author aditya.gupta3
@@ -11,7 +12,7 @@ import com.crs.flipkart.dao.UserDaoOperation;
  */
 public class AuthorizationOperation implements AuthorizationOperationInterface {
 
-	UserDaoOperation userDaoOperation = new UserDaoOperation();
+	UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
 	
 	@Override
 	public String Authorize(int id, String password) {

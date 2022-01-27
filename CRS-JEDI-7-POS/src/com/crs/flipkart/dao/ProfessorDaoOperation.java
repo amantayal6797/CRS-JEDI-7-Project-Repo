@@ -8,18 +8,18 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import com.crs.flipkart.bean.Professor;
-import com.crs.flipkart.utils.ConnectionSetup;
+import com.crs.flipkart.utils.DBUtils;
 
 /**
  * @author aditya.gupta3
  *
  */
-public class ProfessorDaoOperation {
+public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 	
-	UserDaoOperation userDaoOperation = new UserDaoOperation();
+	UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
 	
 	public void addProfessor(Professor professor) {
-		ConnectionSetup connectionSetup = new ConnectionSetup();
+		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
 	    try {
 	    	userDaoOperation.registerUser(professor.getUserId(), professor.getPassword(), professor.getIsApproved());

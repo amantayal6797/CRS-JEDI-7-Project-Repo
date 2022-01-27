@@ -10,18 +10,18 @@ import com.crs.flipkart.application.CRSStudentMenu;
 import com.crs.flipkart.bean.Course;
 import com.crs.flipkart.bean.RegisteredCourse;
 import com.crs.flipkart.bean.Student;
-import com.crs.flipkart.constants.CourseCatalogDB;
-import com.crs.flipkart.constants.CoursesRegisteredDB;
 import com.crs.flipkart.dao.CourseDaoOperation;
+import com.crs.flipkart.dao.CourseDaoOperationInterface;
 import com.crs.flipkart.dao.StudentDaoOperation;
+import com.crs.flipkart.dao.StudentDaoOperationInterface;
 
 /**
  * @author Ashruth
  *
  */
 public class CourseRegistrationOperation implements CourseRegistrationOperationInterface {
-	CourseDaoOperation courseDAOobj=new CourseDaoOperation();
-	StudentDaoOperation studDAOobj = new StudentDaoOperation();
+	CourseDaoOperationInterface courseDAOobj=new CourseDaoOperation();
+	StudentDaoOperationInterface studDAOobj = new StudentDaoOperation();
 	Scanner sc=new Scanner(System.in);
 	StudentOperationInterface studOpObj = new StudentOperation();
 	
@@ -161,6 +161,7 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 			
 			if(courseDAOobj.getEnrolledStudents(cId).size()<10) {
 				courseDAOobj.addCourse(studentId, cId);
+				enrolled.add(cId);
 				System.out.println("Registered Course ID "+cId);
 				count++;
 			}
@@ -168,6 +169,7 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 				System.out.println("Course "+cId+" exceeded student limit");
 		}
 		System.out.println("Course Registration Done");
+		System.out.println("Pay Fees Now.");
 		studDAOobj.setRegistration(studentId);
 	}
 	

@@ -10,12 +10,13 @@ import java.sql.SQLException;
 import com.crs.flipkart.bean.Course;
 import com.crs.flipkart.constants.SQLQueryConstant;
 import com.crs.flipkart.utils.ConnectionSetup;
+import com.crs.flipkart.utils.DBUtils;
 
 /**
  * @author aditya.gupta3
  *
  */
-public class AdminDaoOperation {
+public class AdminDaoOperation implements AdminDaoOperationInterface {
 	
 	CourseDaoOperation courseDaoOperation = new CourseDaoOperation();
 	
@@ -25,15 +26,15 @@ public class AdminDaoOperation {
 			return;
 		}
 		
-		ConnectionSetup connectionSetup = new ConnectionSetup();
+		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
 	    try {
 //	    	String sql = "insert into coursecatalog values (?,?,?,?,'NA')";
 		    PreparedStatement stmt = conn.prepareStatement(SQLQueryConstant.ADD_COURSE_QUERY);
 	    	stmt.setInt(1, course.getCourseID());
 		    stmt.setString(2, course.getCourseName());
-		    stmt.setInt(3, course.getProfessorAllotted());
-		    stmt.setInt(4, course.getCredits());
+		    stmt.setInt(4, course.getProfessorAllotted());
+		    stmt.setInt(3, course.getCredits());
 		    int i=stmt.executeUpdate(); 
 			if(i==0) {
 				System.out.println("Error in adding course in course catalog");
@@ -54,10 +55,10 @@ public class AdminDaoOperation {
 			return;
 		}
 		
-		ConnectionSetup connectionSetup = new ConnectionSetup();
+		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
 	    try {
-	    	String sql = "delete from courseCatalog where courseid = ?";
+	    	String sql = "delete from course where courseid = ?";
 	    	PreparedStatement stmt = conn.prepareStatement(sql);
 		    stmt.setInt(1, courseId);
 		    int i = stmt.executeUpdate();

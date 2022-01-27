@@ -12,19 +12,23 @@ import com.crs.flipkart.bean.Grade;
 import com.crs.flipkart.bean.GradeCard;
 import com.crs.flipkart.bean.RegisteredCourse;
 import com.crs.flipkart.bean.Student;
-import com.crs.flipkart.constants.AuthorizationDB;
-import com.crs.flipkart.constants.CoursesRegisteredDB;
 import com.crs.flipkart.dao.CourseDaoOperation;
+import com.crs.flipkart.dao.CourseDaoOperationInterface;
+import com.crs.flipkart.dao.UserDaoOperation;
+import com.crs.flipkart.dao.UserDaoOperationInterface;
 
 /**
  * @author Ashruth
  *
  */
 public class GradeCardOperation extends CRSStudentMenu implements GradeCardOperationInterface {
-
+	UserDaoOperationInterface userDaoOperation =new UserDaoOperation();
 	public void viewGradeCard(int studentId) {
 		// Generate Grades 
 		// Display
+		if (userDaoOperation.getUser(studentId)==null) {
+			System.out.println("Student does not exists with this userId");
+			return;}
 		GradeCard gradeCard=generateGradeCard(studentId);
 		System.out.println("Grade Card");
 		System.out.println("User ID:-"+studentId);
@@ -37,7 +41,7 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 		GradeCard gradeCard=new GradeCard();
 		ArrayList<Grade> listOfGrades=new ArrayList<Grade>();
 		ArrayList<RegisteredCourse> listOfRegisteredCourses= new ArrayList<RegisteredCourse>();
-		CourseDaoOperation coursedaoObj = new CourseDaoOperation();
+		CourseDaoOperationInterface coursedaoObj = new CourseDaoOperation();
 		listOfRegisteredCourses = coursedaoObj.getRegisteredCourses(studentId);
 		for(RegisteredCourse regCourse: listOfRegisteredCourses) {
 			if(regCourse.getUserId()==studentId) {
@@ -54,7 +58,7 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 	}
 	
 	public void assignGrade(int userId) {
-		CourseDaoOperation courseDAOobj=new CourseDaoOperation();
+		CourseDaoOperationInterface courseDAOobj=new CourseDaoOperation();
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter CourseID");
 		int courseId=sc.nextInt();
