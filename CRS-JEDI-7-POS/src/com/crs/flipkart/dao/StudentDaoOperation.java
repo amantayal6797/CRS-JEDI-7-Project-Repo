@@ -40,7 +40,9 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 		    if(i==0) {
 				System.out.println("Error in registering student");
 			} else {
-				System.out.println("student - "+student.getUserId()+" registered successfully");
+				System.out.println("student - "+student.getUserId()+" registered successfully & your approval is pending by admin");
+				NotificationDaoOperationInterface notificationOper = new NotificationDaoOperation();
+				notificationOper.insertStatus(student.getUserId());
 			}
 	    }catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -9,6 +9,8 @@ import com.crs.flipkart.business.CourseRegistrationOperation;
 import com.crs.flipkart.business.CourseRegistrationOperationInterface;
 import com.crs.flipkart.business.GradeCardOperation;
 import com.crs.flipkart.business.GradeCardOperationInterface;
+import com.crs.flipkart.business.NotificationOperation;
+import com.crs.flipkart.business.NotificationOperationInterface;
 import com.crs.flipkart.business.OfflinePayment;
 import com.crs.flipkart.business.OnlinePayment;
 import com.crs.flipkart.business.PaymentOperation;
@@ -24,6 +26,10 @@ public class CRSStudentMenu {
 	public void StudentMenu(int userId) {
 		int choice=0;
 		Scanner sc = new Scanner(System.in);
+		
+		NotificationOperationInterface notificationOperation = new NotificationOperation();
+		notificationOperation.Notify(userId);
+		
 		while (choice!=8) 
 		{
 			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");

@@ -43,4 +43,13 @@ public class SQLQueryConstant {
 	public static final String UPDATE_PASSWORD = "update user set password=? where userid=?";
 	public static final String ADD_USER_QUERY = "insert into user values (?,?,?)";
 	public static final String UNAPPROVED_USERS = "select * from user where isapproved=0";
+	
+	//NotificationOperation
+	public static final String GET_STATUS = "select * from notification where userid=?";
+	public static final String SET_STATUS = "update notification set status=? where userid=?";
+	public static final String INSERT_STATUS = "insert into notification values (?,?)";
+	
+	//PaymentOperation
+	public static final String SAVE_PAYMENT = "insert into payment values (?,?,?)";
+	
 }

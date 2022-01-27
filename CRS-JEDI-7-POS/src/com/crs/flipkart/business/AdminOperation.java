@@ -10,6 +10,8 @@ import com.crs.flipkart.bean.Course;
 import com.crs.flipkart.bean.Professor;
 import com.crs.flipkart.dao.AdminDaoOperation;
 import com.crs.flipkart.dao.AdminDaoOperationInterface;
+import com.crs.flipkart.dao.NotificationDaoOperation;
+import com.crs.flipkart.dao.NotificationDaoOperationInterface;
 import com.crs.flipkart.dao.ProfessorDaoOperation;
 import com.crs.flipkart.dao.ProfessorDaoOperationInterface;
 import com.crs.flipkart.dao.UserDaoOperation;
@@ -61,6 +63,9 @@ public class AdminOperation implements AdminOperationInterface {
 		System.out.println("Enter User ID to approve: ");
 		int userId = sc.nextInt();
 		userDaoOperation.approveUser(userId);
+		
+		NotificationDaoOperationInterface notificationObj = new NotificationDaoOperation();
+		notificationObj.updateStatus(userId, 1);
 	}
 	
 	public void addProfessor() {

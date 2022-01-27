@@ -5,6 +5,8 @@ package com.crs.flipkart.business;
 
 import java.util.Scanner;
 
+import com.crs.flipkart.dao.PaymentDaoOperation;
+import com.crs.flipkart.dao.PaymentDaoOperationInterface;
 import com.crs.flipkart.dao.StudentDaoOperation;
 
 /**
@@ -23,7 +25,7 @@ public class PaymentOperation implements PaymentOperationInterface {
 	    StudentDaoOperation studentDaoOperation = new StudentDaoOperation();
     	boolean paymentSuccessful = studentDaoOperation.setPaymentStatus(userId);
     	if (paymentSuccessful) {
-    		generateBill(amount);	
+    		generateBill(userId,amount);	
     	}
     	
     	return paymentSuccessful;
@@ -31,11 +33,14 @@ public class PaymentOperation implements PaymentOperationInterface {
 	
 	
 //	--------------------------------------------------------------------------------		
-	public void generateBill(int amount) {		// this function called from makePayment function
+	public void generateBill(int userId, int amount) {		// this function called from makePayment function
 		System.out.println("Fees Paid - "+amount);
-//		transactionID=random();			generate transID by random generator
 		
+		String transactionId = Integer.toString(userId) + Integer.toString((int) Math.random());
+		PaymentDaoOperationInterface paymentObj = new PaymentDaoOperation();
+		paymentObj.savePayment(userId, amount, transactionId);
 	}
+	
 }
 
 

@@ -307,5 +307,13 @@ CREATE TABLE `crs_db`.`registeredcourse` (
 
 
 
-
+CREATE TABLE `crs_db`.`notification` (
+  `status` INT NULL,
+  `userid` INT NOT NULL,
+  PRIMARY KEY (`userid`),
+  CONSTRAINT `notificationfk`
+    FOREIGN KEY (`userid`)
+    REFERENCES `crs_db`.`user` (`userid`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
 
