@@ -6,20 +6,20 @@ package com.crs.flipkart.business;
 import java.util.Scanner;
 
 import com.crs.flipkart.bean.Student;
-import com.crs.flipkart.constants.AuthorizationDB;
 import com.crs.flipkart.dao.StudentDaoOperation;
 import com.crs.flipkart.dao.UserDaoOperation;
 
 /**
- * @author aditya
+ * @author aditya.gupta3
  *
  */
 public class StudentOperation implements StudentOperationInterface {
+
 	UserDaoOperation userDaoOperation = new UserDaoOperation();
 	StudentDaoOperation studentDaoOperation = new StudentDaoOperation();
 	
+	@Override
 	public void registerStudent() {
-		
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("Enter User ID: ");
@@ -64,22 +64,5 @@ public class StudentOperation implements StudentOperationInterface {
 		
 		studentDaoOperation.registerStudent(student);
 	}
-	
-	//	public void showstudent() {
-	//		for(int i=0;i<AuthorizationDB.listOfStudents.size();i++) {
-	//			System.out.println(AuthorizationDB.listOfStudents.get(i).getUserId());
-	//		}
-	//	}
-	//	
-	//	public void setRegistration(int studentId) {
-	//		for(int i=0;i<AuthorizationDB.listOfStudents.size();i++) {
-	//			if(AuthorizationDB.listOfStudents.get(i).getUserId()==studentId){
-	//				Student student=AuthorizationDB.listOfStudents.get(i);
-	//				AuthorizationDB.listOfStudents.remove(i);
-	//				student.setRegistered(true);
-	//				AuthorizationDB.listOfStudents.add(student);
-	//				break;
-	//			}
-	//		}
-	//	}
+
 }
