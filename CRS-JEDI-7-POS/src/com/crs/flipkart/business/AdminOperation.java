@@ -92,9 +92,6 @@ public class AdminOperation implements AdminOperationInterface {
 		System.out.println("Enter Contact: ");
 		String contact = sc.next();
 		professor.setContact(contact);
-		System.out.println("Enter Nationality: ");
-		String nationality = sc.next();
-		professor.setNationality(nationality);
 		System.out.println("Enter Department: ");
 		String dep = sc.next();
 		professor.setDepartment(dep);

@@ -124,7 +124,6 @@ public class DatabaseInitializer {
 		admin1.setGender("F");
 		admin1.setIsApproved(true);
 		admin1.setRole("Admin");
-		admin1.setNationality("India");
 		AuthorizationDB.listOfAdmins.add(admin1);
 		
 		Admin admin2=new Admin();
@@ -137,7 +136,6 @@ public class DatabaseInitializer {
 		admin2.setGender("F");
 		admin2.setIsApproved(true);
 		admin2.setRole("Admin");
-		admin2.setNationality("India");
 		AuthorizationDB.listOfAdmins.add(admin2);
 		
 		Professor prof1=new Professor();
@@ -150,7 +148,6 @@ public class DatabaseInitializer {
 		prof1.setGender("F");
 		prof1.setIsApproved(true);
 		prof1.setRole("Professor");
-		prof1.setNationality("India");
 		prof1.setIsApproved(true);
 		prof1.setDepartment("CS");
 		AuthorizationDB.listOfProfessors.add(prof1);
@@ -165,7 +162,6 @@ public class DatabaseInitializer {
 		prof2.setGender("F");
 		prof2.setIsApproved(true);
 		prof2.setRole("Professor");
-		prof2.setNationality("India");
 		prof2.setIsApproved(true);
 		prof2.setDepartment("ECE");
 		AuthorizationDB.listOfProfessors.add(prof2);

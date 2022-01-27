@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.crs.flipkart.bean.Professor;
 import com.crs.flipkart.bean.User;
 import com.crs.flipkart.utils.ConnectionSetup;
 
@@ -43,7 +42,6 @@ public class UserDaoOperation {
 						user.setAge(rs.getInt("Age"));
 						user.setGender(rs.getString("Gender"));
 						user.setContact(rs.getString("Contact"));
-						user.setNationality(rs.getString("Nationality"));
 						return user;
 					}
 				}
@@ -140,49 +138,27 @@ public class UserDaoOperation {
 				}
 		}
 		
-		public void registerStudent(int userId, String password, String userName, String address, int age, String branch, String contact, String email, String gender) {
-			
-			 ConnectionSetup connectionSetup = new ConnectionSetup();
-			 Connection conn = connectionSetup.connectionEstablish();
-			 PreparedStatement stmt;
-			 ResultSet rs;
-			 String sql;
-			 
-			 try {
-				 sql = "insert into user values(?,?,?,?,?,?,?,?,?,?)";;
-				 stmt = conn.prepareStatement(sql);
-				 stmt.setInt(1,userId);
-				 stmt.setString(2,userName);  
-				 stmt.setString(3,password);  
-				 stmt.setString(4,"Student");  
-				 stmt.setString(5,email); 
-				 stmt.setInt(6,0);
-				 stmt.setString(7,address);  
-				 stmt.setInt(8,age);
-				 stmt.setString(9,gender);  
-				 stmt.setString(10,contact); 
-				 
-				 int i=stmt.executeUpdate();   
+		public void registerUser(int userId, String password, boolean isApproved) {
+			ConnectionSetup connectionSetup = new ConnectionSetup();
+		    Connection conn = connectionSetup.connectionEstablish();
+			String sql = "insert into user values (?,?,?)";
+			try {
+			    PreparedStatement stmt=conn.prepareStatement(sql);
+				stmt.setInt(1, userId);
+				stmt.setString(2, password);
+				stmt.setInt(3, (isApproved)? 1: 0);
+				int i=stmt.executeUpdate(); 
+				if(i==0) {
+					System.out.println("Error in registering user");
+				} else {
+					System.out.println("User - "+userId+" registered successfully");
+				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				// TODO Auto-generated catch block
+			    e.printStackTrace();
+			} finally {
+				connectionSetup.connectionClose(conn);	
 			}
-			
-			 try {
-				 sql = "insert into student values(?,?,?,?)";
-				 stmt = conn.prepareStatement(sql);
-				 stmt.setInt(1,userId);
-				 stmt.setInt(2,0);  
-				 stmt.setString(3,branch);  
-				 stmt.setInt(4,0);  	 
-				 int i=stmt.executeUpdate();   
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} 
-		}
-
-		public void registerUser(Professor professor) {
-			// TODO Auto-generated method stub
-			
 		}
 		
 }

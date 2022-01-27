@@ -54,7 +54,7 @@ public class Student extends User{
 	/**
 	 * @return the paymentStatus
 	 */
-	public boolean isPaymentStatus() {
+	public boolean getPaymentStatus() {
 		return paymentStatus;
 	}
 	/**

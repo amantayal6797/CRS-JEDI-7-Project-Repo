@@ -18,7 +18,6 @@ public class User {
 	private int age;
 	private String gender;
 	private String contact;
-	private String nationality;
 	/**
 	 * @return the userId
 	 */
@@ -126,18 +125,6 @@ public class User {
 	 */
 	public void setContact(String contact) {
 		this.contact = contact;
-	}
-	/**
-	 * @return the nationality
-	 */
-	public String getNationality() {
-		return nationality;
-	}
-	/**
-	 * @param nationality the nationality to set
-	 */
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
 	}
 	/**
 	 * @return the password

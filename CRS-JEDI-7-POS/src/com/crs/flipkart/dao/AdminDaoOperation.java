@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import com.crs.flipkart.bean.Course;
+import com.crs.flipkart.constants.SQLQueryConstant;
 import com.crs.flipkart.utils.ConnectionSetup;
 
 /**
@@ -27,8 +28,8 @@ public class AdminDaoOperation {
 		ConnectionSetup connectionSetup = new ConnectionSetup();
 	    Connection conn = connectionSetup.connectionEstablish();
 	    try {
-	    	String sql = "insert into coursecatalog values (?,?,?,?,'NA')";
-		    PreparedStatement stmt = conn.prepareStatement(sql);
+//	    	String sql = "insert into coursecatalog values (?,?,?,?,'NA')";
+		    PreparedStatement stmt = conn.prepareStatement(SQLQueryConstant.ADD_COURSE_QUERY);
 	    	stmt.setInt(1, course.getCourseID());
 		    stmt.setString(2, course.getCourseName());
 		    stmt.setInt(3, course.getProfessorAllotted());
