@@ -317,3 +317,5 @@ CREATE TABLE `crs_db`.`notification` (
     ON DELETE CASCADE
     ON UPDATE CASCADE);
 
+insert into notification values (2,101);
+insert into notification values (2,102);
