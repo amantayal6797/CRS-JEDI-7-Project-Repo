@@ -3,11 +3,15 @@
  */
 package com.crs.flipkart.utils;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * @author Aditya
@@ -34,26 +38,31 @@ import java.sql.SQLException;
  */
 
 
-public class ConnectionSetup {
+public class DBUtils {
 	
-		   static final String DB_URL = "jdbc:mysql://localhost/crs_db";
-		   static final String USER = "root";
-		   static final String PASS = "root";		   
 		   
-		
 		public Connection connectionEstablish() {
-			Connection conn = null;
-				   try{
-						  // Class.forName("com.mysql.jdbc.Driver");
-					      //System.out.println("Connecting to database...");
-					      conn = DriverManager.getConnection(DB_URL,USER,PASS);						      
-				   }catch(SQLException se){
-				          se.printStackTrace();
-				   }catch(Exception e){
-				      e.printStackTrace();
-				   }
-				   return conn;
-				   }
+			 Connection connection = null;
+			    try {
+	            	Properties prop = new Properties();
+	                InputStream inputStream = DBUtils.class.getClassLoader().getResourceAsStream("./config.properties");
+	                prop.load(inputStream);
+	                String driver = prop.getProperty("driver");
+	                String url = prop.getProperty("url");
+	                String user = prop.getProperty("user");
+	                String password = prop.getProperty("password");
+//	                Class.forName(driver);
+	                connection = DriverManager.getConnection(url, user, password);
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            } catch (FileNotFoundException e) {
+	                e.printStackTrace();
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	            return connection;
+	        }
+				   
 		
 				   
 					public  void connectionClose(Connection conn) {

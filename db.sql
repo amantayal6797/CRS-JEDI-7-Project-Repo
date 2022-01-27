@@ -1,170 +1,311 @@
 CREATE DATABASE  IF NOT EXISTS `crs_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `crs_db`;
--- MySQL dump 10.13  Distrib 8.0.28, for macos11 (x86_64)
 --
--- Host: localhost    Database: crs_db
--- ------------------------------------------------------
--- Server version	8.0.28
+-- Table structure for table `admin`
+--
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE `admin` (
+  `userid` int NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `Address` varchar(45) NOT NULL,
+  `Age` int NOT NULL,
+  `Gender` varchar(45) NOT NULL,
+  `Contact` varchar(45) NOT NULL,
+  PRIMARY KEY (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
+-- Table structure for table `course`
+--
+
+DROP TABLE IF EXISTS `course`;
+CREATE TABLE `course` (
+  `courseid` int NOT NULL,
+  `coursename` varchar(45) NOT NULL,
+  `credit` int NOT NULL,
+  `professoralloted` int NOT NULL,
+  `prerequisites` varchar(45) NOT NULL,
+  PRIMARY KEY (`courseid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 -- Table structure for table `coursecatalog`
---
 
 DROP TABLE IF EXISTS `coursecatalog`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `coursecatalog` (
-  `courseId` int NOT NULL,
-  `courseName` varchar(45) NOT NULL,
-  `professorAlloted` int NOT NULL DEFAULT '0',
-  `Credits` int NOT NULL,
-  `Prerequisites` varchar(45) NOT NULL,
-  PRIMARY KEY (`courseId`),
-  KEY `coursecatalogFk_idx` (`professorAlloted`),
-  CONSTRAINT `coursecatalogFk` FOREIGN KEY (`professorAlloted`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+  `coursecatalogid` int NOT NULL,
+  `courseid` int NOT NULL,
+  PRIMARY KEY (`coursecatalogid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `coursecatalog`
+-- Table structure for table `payment`
 --
 
-LOCK TABLES `coursecatalog` WRITE;
-/*!40000 ALTER TABLE `coursecatalog` DISABLE KEYS */;
-INSERT INTO `coursecatalog` VALUES (401,'DS',201,5,'NA'),(402,'CN',202,5,'NA'),(403,'Algo',201,5,'NA'),(404,'DM',202,5,'NA'),(405,'TOC',203,5,'NA'),(406,'Compiler',204,5,'NA'),(407,'OS',203,5,'NA'),(408,'Automata',202,5,'NA');
-/*!40000 ALTER TABLE `coursecatalog` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `payment`;
+CREATE TABLE `payment` (
+  `userid` int NOT NULL,
+  `amount` varchar(45) NOT NULL,
+  `transactionid` varchar(45) NOT NULL,
+  PRIMARY KEY (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Table structure for table `professor`
---
+
 
 DROP TABLE IF EXISTS `professor`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `professor` (
-  `Department` varchar(45) NOT NULL,
-  `userId` int NOT NULL,
-  PRIMARY KEY (`userId`),
-  CONSTRAINT `professorfk` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+  `userid` int NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `Address` varchar(45) NOT NULL,
+  `Age` int NOT NULL,
+  `Gender` varchar(45) NOT NULL,
+  `Contact` varchar(45) NOT NULL,
+  `department` varchar(45) NOT NULL,
+  PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `professor`
+-- Table structure for table `role`
 --
 
-LOCK TABLES `professor` WRITE;
-/*!40000 ALTER TABLE `professor` DISABLE KEYS */;
-INSERT INTO `professor` VALUES ('CS',201),('CS',202),('CS',203),('CS',204);
-/*!40000 ALTER TABLE `professor` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `registeredcourses`
---
-
-DROP TABLE IF EXISTS `registeredcourses`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `registeredcourses` (
-  `courseId` int NOT NULL,
-  `userId` int NOT NULL,
-  `Grade` varchar(45) NOT NULL,
-  PRIMARY KEY (`courseId`,`userId`),
-  KEY `registeredcourseFk2_idx` (`userId`),
-  CONSTRAINT `registeredcourseFk1` FOREIGN KEY (`courseId`) REFERENCES `coursecatalog` (`courseId`),
-  CONSTRAINT `registeredcourseFk2` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role` (
+  `userid` int NOT NULL,
+  `role` varchar(45) NOT NULL,
+  PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `registeredcourses`
---
-
-LOCK TABLES `registeredcourses` WRITE;
-/*!40000 ALTER TABLE `registeredcourses` DISABLE KEYS */;
-/*!40000 ALTER TABLE `registeredcourses` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `student`
 --
 
 DROP TABLE IF EXISTS `student`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `student` (
-  `userId` int NOT NULL,
-  `isRegistered` int NOT NULL,
-  `Branch` varchar(45) NOT NULL,
-  `paymentStatus` int NOT NULL,
-  PRIMARY KEY (`userId`),
-  CONSTRAINT `studentFk` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+  `userid` int NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `Address` varchar(45) NOT NULL,
+  `Age` int NOT NULL,
+  `Gender` varchar(45) NOT NULL,
+  `Contact` varchar(45) NOT NULL,
+  `isregistered` int NOT NULL,
+  `branch` varchar(45) NOT NULL,
+  `paymentstatus` int NOT NULL,
+  PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `student`
---
-
-LOCK TABLES `student` WRITE;
-/*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (101,0,'CS',0),(102,0,'CS',0);
-/*!40000 ALTER TABLE `student` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `user`
 --
 
 DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-  `userId` int NOT NULL,
-  `userName` varchar(45) NOT NULL,
-  `Password` varchar(45) NOT NULL,
-  `Role` varchar(45) NOT NULL,
-  `Email` varchar(45) NOT NULL,
-  `isApproved` int NOT NULL,
-  `Address` varchar(45) NOT NULL,
-  `Age` int NOT NULL,
-  `Gender` varchar(45) NOT NULL,
-  `Contact` varchar(45) NOT NULL,
-  `Nationality` varchar(45) NOT NULL,
-  PRIMARY KEY (`userId`)
+  `userid` int NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `isapproved` int NOT NULL,
+  PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `user`
---
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (0,'dummy','password','Professor','email@dummy.com',1,'Address',23,'Male','2222222222','Indian'),(101,'userName','password','Student','Email',1,'Address',23,'Male','7983105686','Indian'),(102,'userName2','password','Student','Email2',0,'Address2',23,'Male','7983105686','Indian2'),(201,'userName3','password','Professor','Email3',1,'Address3',23,'Male','7983105686','Indian3'),(202,'userName4','password','Professor','Email4',1,'Address4',23,'Male','7983105686','Indian4'),(203,'userName4','password','Professor','Email4',1,'Address4',23,'Female','7983105686','Indian4'),(204,'userName4','password','Professor','Email4',1,'Address4',23,'Female','7983105686','Indian4'),(301,'userName5','password','Admin','Email5',1,'Address',23,'Male','7983105686','Indian5');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-26 20:20:56
+ALTER TABLE `crs_db`.`admin` 
+ADD CONSTRAINT `adminfk`
+  FOREIGN KEY (`userid`)
+  REFERENCES `crs_db`.`user` (`userid`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+
+ALTER TABLE `crs_db`.`professor` 
+ADD CONSTRAINT `professorfk`
+  FOREIGN KEY (`userid`)
+  REFERENCES `crs_db`.`user` (`userid`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+ALTER TABLE `crs_db`.`student` 
+ADD CONSTRAINT `studentfk`
+  FOREIGN KEY (`userid`)
+  REFERENCES `crs_db`.`user` (`userid`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+ALTER TABLE `crs_db`.`role` 
+ADD CONSTRAINT `rolefk`
+  FOREIGN KEY (`userid`)
+  REFERENCES `crs_db`.`user` (`userid`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+ALTER TABLE `crs_db`.`payment` 
+ADD CONSTRAINT `paymentfk`
+  FOREIGN KEY (`userid`)
+  REFERENCES `crs_db`.`user` (`userid`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+
+
+ALTER TABLE `crs_db`.`course` 
+ADD INDEX `coursefk_idx` (`professoralloted` ASC) VISIBLE;
+;
+ALTER TABLE `crs_db`.`course` 
+ADD CONSTRAINT `coursefk`
+  FOREIGN KEY (`professoralloted`)
+  REFERENCES `crs_db`.`user` (`userid`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+
+
+ALTER TABLE `crs_db`.`coursecatalog` 
+ADD INDEX `coursecatalogfk_idx` (`courseid` ASC) VISIBLE;
+;
+ALTER TABLE `crs_db`.`coursecatalog` 
+ADD CONSTRAINT `coursecatalogfk`
+  FOREIGN KEY (`courseid`)
+  REFERENCES `crs_db`.`course` (`courseid`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+
+INSERT INTO user
+VALUES (0, "Password2", 1);
+
+INSERT INTO user
+VALUES (101, "Password2", 1);
+
+INSERT INTO user
+VALUES (102, "Password2", 0);
+
+INSERT INTO user
+VALUES (201, "Password2", 1);
+
+INSERT INTO user
+VALUES (202, "Password2", 1);
+
+INSERT INTO user
+VALUES (301, "Password2", 1);
+
+INSERT INTO user
+VALUES (302, "Password2", 1);
+
+SELECT * FROM crs_db.user;
+
+
+INSERT INTO admin
+VALUES (301, "userName1", "Email1", "Address1" ,23, "Male","7983105686");
+
+INSERT INTO admin
+VALUES (302, "userName2", "Email2", "Address2" ,24, "Female","7983105686");
+
+SELECT * FROM crs_db.admin;
+
+
+INSERT INTO student
+VALUES (101, "userName1", "Email1", "Address1" ,23, "Male","7983105686",0,"CS",0);
+
+INSERT INTO student
+VALUES (102, "userName2", "Email2", "Address2" ,24, "Fenale","7983105686",0,"EC",0);
+
+SELECT * FROM crs_db.student;
+
+
+INSERT INTO professor
+VALUES (201, "userName1", "Email1", "Address1" ,23, "Male","7983105686","CS");
+
+INSERT INTO professor
+VALUES (202, "userName2", "Email2", "Address2" ,24, "Fenale","7983105686","EC");
+
+SELECT * FROM crs_db.professor;
+
+
+INSERT INTO role
+VALUES (101, "Student");
+
+INSERT INTO role
+VALUES (102, "Student");
+
+INSERT INTO role
+VALUES (201, "Professor");
+
+INSERT INTO role
+VALUES (202, "Professor");
+
+INSERT INTO role
+VALUES (301, "Admin");
+
+INSERT INTO role
+VALUES (302, "Admin");
+
+SELECT * FROM crs_db.role;
+
+
+INSERT INTO course
+VALUES (401, "Programming Basic", 5, 201, "Basic Maths");
+
+INSERT INTO course
+VALUES (402, "DS", 5, 201, "Programming Basic");
+
+INSERT INTO course
+VALUES (403, "Algo", 5, 201, "DS");
+
+INSERT INTO course
+VALUES (404, "Digital Electronis", 5, 202, "NA");
+
+INSERT INTO course
+VALUES (405, "Signal and systems", 5, 202, "NA");
+
+INSERT INTO course
+VALUES (406, "Communication", 5, 202, "NA");
+
+INSERT INTO course
+VALUES (407, "DM", 5, 0, "Basic Maths");
+
+INSERT INTO course
+VALUES (408, "CN", 5, 0, "Basic Maths");
+
+SELECT * FROM crs_db.course;
+
+ALTER TABLE `crs_db`.`coursecatalog` 
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`coursecatalogid`, `courseid`);
+;
+
+
+INSERT INTO `crs_db`.`coursecatalog` (`coursecatalogid`, `courseid`) VALUES ('501', '401');
+INSERT INTO `crs_db`.`coursecatalog` (`coursecatalogid`, `courseid`) VALUES ('501', '402');
+INSERT INTO `crs_db`.`coursecatalog` (`coursecatalogid`, `courseid`) VALUES ('501', '403');
+INSERT INTO `crs_db`.`coursecatalog` (`coursecatalogid`, `courseid`) VALUES ('501', '407');
+INSERT INTO `crs_db`.`coursecatalog` (`coursecatalogid`, `courseid`) VALUES ('501', '408');
+INSERT INTO `crs_db`.`coursecatalog` (`coursecatalogid`, `courseid`) VALUES ('502', '404');
+INSERT INTO `crs_db`.`coursecatalog` (`coursecatalogid`, `courseid`) VALUES ('502', '405');
+INSERT INTO `crs_db`.`coursecatalog` (`coursecatalogid`, `courseid`) VALUES ('502', '406');
+
+SELECT * FROM crs_db.coursecatalog;
+
+
+CREATE TABLE `crs_db`.`registeredcourse` (
+  `userid` INT NOT NULL,
+  `courseid` INT NOT NULL,
+  `grade` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`userid`, `courseid`),
+  INDEX `registeredcoursefk2_idx` (`courseid` ASC) VISIBLE,
+  CONSTRAINT `registeredcoursefk1`
+    FOREIGN KEY (`userid`)
+    REFERENCES `crs_db`.`user` (`userid`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `registeredcoursefk2`
+    FOREIGN KEY (`courseid`)
+    REFERENCES `crs_db`.`course` (`courseid`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
+
+
+
+
+

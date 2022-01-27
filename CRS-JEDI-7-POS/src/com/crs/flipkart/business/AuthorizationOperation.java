@@ -6,8 +6,8 @@ package com.crs.flipkart.business;
 import com.crs.flipkart.bean.Admin;
 import com.crs.flipkart.bean.Professor;
 import com.crs.flipkart.bean.Student;
-import com.crs.flipkart.constants.AuthorizationDB;
 import com.crs.flipkart.dao.UserDaoOperation;
+import com.crs.flipkart.dao.UserDaoOperationInterface;
 
 /**
  * @author Ashruth
@@ -17,14 +17,14 @@ public class AuthorizationOperation  implements AuthorizationOperationInterface 
 	
 public String Authorize(int id,String password) {
 		
-		UserDaoOperation userDaoOperation = new UserDaoOperation();
+		UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
 		return userDaoOperation.Authorize(id, password);
 	}
 	
 	public boolean updatePasswordCheck(int userId, String nPassword, String cNPassword) {
 			
 		if (nPassword.equals(cNPassword)) {	
-			UserDaoOperation userDaoOperation = new UserDaoOperation();
+			UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
 			int status = userDaoOperation.updatePasswordCheck(userId, nPassword);
 			
 			if(status==1) {

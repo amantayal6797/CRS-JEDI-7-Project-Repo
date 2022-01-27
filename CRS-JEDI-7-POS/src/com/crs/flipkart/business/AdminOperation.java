@@ -3,13 +3,17 @@
  */
 package com.crs.flipkart.business;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.crs.flipkart.bean.Course;
 import com.crs.flipkart.bean.Professor;
 import com.crs.flipkart.dao.AdminDaoOperation;
+import com.crs.flipkart.dao.AdminDaoOperationInterface;
 import com.crs.flipkart.dao.ProfessorDaoOperation;
+import com.crs.flipkart.dao.ProfessorDaoOperationInterface;
 import com.crs.flipkart.dao.UserDaoOperation;
+import com.crs.flipkart.dao.UserDaoOperationInterface;
 
 /**
  * @author aditya.gupta3
@@ -17,9 +21,9 @@ import com.crs.flipkart.dao.UserDaoOperation;
  */
 public class AdminOperation implements AdminOperationInterface {
 	
-	UserDaoOperation userDaoOperation = new UserDaoOperation();
-	AdminDaoOperation adminDaoOperation = new AdminDaoOperation();
-	ProfessorDaoOperation professorDaoOperation = new ProfessorDaoOperation();
+	UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
+	AdminDaoOperationInterface adminDaoOperation = new AdminDaoOperation();
+	ProfessorDaoOperationInterface professorDaoOperation = new ProfessorDaoOperation();
 	
 	public void addCourse() {
 		Scanner sc = new Scanner(System.in);
@@ -48,10 +52,14 @@ public class AdminOperation implements AdminOperationInterface {
 	}
 	
 	public void approveUser() {
+		ArrayList<Integer> unapprovedStudents=userDaoOperation.getUnapprovedStudents();
+		System.out.println("List of Unapproved Students");
+		for(int i:unapprovedStudents) {
+			System.out.println(i);
+		}
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter User ID to approve: ");
 		int userId = sc.nextInt();
-		
 		userDaoOperation.approveUser(userId);
 	}
 	
@@ -106,6 +114,9 @@ public class AdminOperation implements AdminOperationInterface {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter User ID of professor: ");
 		int userId = sc.nextInt();
+		if (userDaoOperation.getUser(userId)==null) {
+			System.out.println("Professor does not exists with this userId");
+			return;}
 		CourseRegistrationOperation courseRegistrationOperation = new CourseRegistrationOperation();
 		courseRegistrationOperation.registerProfessorCourse(userId);
 	}

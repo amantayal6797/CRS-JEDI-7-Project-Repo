@@ -6,20 +6,59 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.crs.flipkart.bean.Student;
-import com.crs.flipkart.utils.ConnectionSetup;
+import com.crs.flipkart.utils.DBUtils;
 
-public class StudentDaoOperation {
+public class StudentDaoOperation implements StudentDaoOperationInterface {
+	UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
+	
+	public void registerStudent (Student student) {
+		DBUtils connectionSetup = new DBUtils();
+	    Connection conn = connectionSetup.connectionEstablish();
+	    try {
+	    	userDaoOperation.registerUser(student.getUserId(), student.getPassword(), student.getIsApproved());
+	    	String sql = "insert into student values (?,?,?,?,?,?,?,?,?,?)";
+	    	PreparedStatement stmt = conn.prepareStatement(sql);
+		    stmt.setInt(1, student.getUserId());
+		    stmt.setString(2, student.getUserName());
+		    stmt.setString(3, student.getEmail());
+		    stmt.setString(4, student.getAddress());
+		    stmt.setInt(5, student.getAge());
+		    stmt.setString(6, student.getGender());
+		    stmt.setString(7, student.getContact());
+		    stmt.setInt(8, (student.isRegistered())? 1: 0);
+		    stmt.setString(9, student.getBranch());
+		    stmt.setInt(10, (student.isPaymentStatus())? 1: 0);
+		    int i = stmt.executeUpdate();
+		    if(i==0) {
+				System.out.println("Error in registering student");
+			}
+		    sql="insert into role values(?,'Student')";
+		    stmt=conn.prepareStatement(sql);
+		    stmt.setInt(1, student.getUserId());
+		    i = stmt.executeUpdate();
+		    if(i==0) {
+				System.out.println("Error in registering student");
+			} else {
+				System.out.println("student - "+student.getUserId()+" registered successfully");
+			}
+	    }catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			connectionSetup.connectionClose(conn);	
+		}
+	}
 	
 	public boolean getPaymentStatus (int studentId) {
-		ConnectionSetup connectionSetup = new ConnectionSetup();
+		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
-		String sql = "select paymentStatus from student where userId = ?";
+		String sql = "select paymentstatus from student where userid = ?";
 		try {
 		    PreparedStatement stmt=conn.prepareStatement(sql);
 			stmt.setInt(1, studentId);
 			ResultSet rs=stmt.executeQuery(); 
 			while(rs.next()) {
-				if(rs.getInt("paymentStatus")==1) {
+				if(rs.getInt("paymentstatus")==1) {
 					return true;
 				}
 			}
@@ -35,9 +74,9 @@ public class StudentDaoOperation {
 	}
 	
 	public boolean setPaymentStatus (int studentId) {
-		ConnectionSetup connectionSetup = new ConnectionSetup();
+		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
-		String sql = "update student set paymentStatus=1 where userId = ?";
+		String sql = "update student set paymentstatus=1 where userid = ?";
 		try {
 		    PreparedStatement stmt=conn.prepareStatement(sql);
 			stmt.setInt(1, studentId);
@@ -57,27 +96,19 @@ public class StudentDaoOperation {
 	}
 	
 	public Student showStudent(int studentId) {
-		ConnectionSetup connectObj=new ConnectionSetup();
+		DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-		 String sql1 = "select * from user where userId = ?";
-		 String sql2 = "select * from student where userId = ?";
+		 String sql1 = "select * from user where userid = ?";
+		 String sql2 = "select * from student where userid = ?";
 		 Student student=new Student();
 		 try {
 			 PreparedStatement stmt=conn2.prepareStatement(sql1);
 			 stmt.setInt(1, studentId);
 			 ResultSet rs=stmt.executeQuery(); 
 			 while(rs.next()) {
-				student.setUserId(rs.getInt("userID"));
-				student.setUserName(rs.getString("userName"));
-				student.setPassword(rs.getString("Password"));
-				student.setRole(rs.getString("Role"));
-				student.setEmail(rs.getString("Email"));
-				//student.setIsApproved(boolean(rs.getInt("isApproved")));
-				student.setAddress(rs.getString("Address"));
-				student.setAge(rs.getInt("Age"));
-				student.setGender(rs.getString("Gender"));
-				student.setContact(rs.getString("Contact"));
-				student.setNationality(rs.getString("Nationality"));
+				student.setUserId(rs.getInt("userid"));
+				student.setPassword(rs.getString("password"));
+				student.setRole("Student");
 				if(rs.getInt("isApproved")==1)
 					student.setIsApproved(true);
 				else
@@ -88,12 +119,17 @@ public class StudentDaoOperation {
 			 stmt.setInt(1, studentId);
 			 ResultSet rs2=stmt2.executeQuery(); 
 			 while(rs2.next()) {
-				 if(rs.getInt("isRegistered")==1)
+				 student.setUserName(rs.getString("username"));
+				 student.setEmail(rs.getString("email"));
+				student.setAddress(rs.getString("address"));
+				student.setAge(rs.getInt("age"));
+				student.setGender(rs.getString("gender"));
+				student.setContact(rs.getString("contact"));
+				 if(rs.getInt("isregistered")==1)
 					 student.setRegistered(true);
 					else
 						student.setRegistered(false);
-				
-				student.setBranch(sql2);
+				student.setBranch(rs.getString("branch"));
 				 if(rs.getInt("paymentStatus")==1)
 					 student.setPaymentStatus(true);
 					else
@@ -108,9 +144,9 @@ public class StudentDaoOperation {
 	}
 	
 	public void setRegistration(int studentId) {
-		ConnectionSetup connectObj=new ConnectionSetup();
+		DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-		 String sql = "update student set isRegistered=1 where userId = ?";
+		 String sql = "update student set isregistered=1 where userid = ?";
 		 try {
 			 PreparedStatement stmt=conn2.prepareStatement(sql);
 			 stmt.setInt(1, studentId);
@@ -125,15 +161,15 @@ public class StudentDaoOperation {
 		
 	}
 	public boolean isRegistered(int studentId) {
-		ConnectionSetup connectObj=new ConnectionSetup();
+		DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-		 String sql = "select isRegistered from student where userId = ?";
+		 String sql = "select isregistered from student where userid = ?";
 		 try {
 			 PreparedStatement stmt=conn2.prepareStatement(sql);
 			 stmt.setInt(1, studentId);
 			 ResultSet rs=stmt.executeQuery(); 
 			 while(rs.next()) {
-				if(rs.getInt("isRegistered")==1)
+				if(rs.getInt("isregistered")==1)
 					return true;
 				else
 					return false;

@@ -3,9 +3,13 @@
  */
 package com.crs.flipkart.business;
 
+import java.util.Scanner;
+
 import com.crs.flipkart.bean.Student;
-import com.crs.flipkart.constants.AuthorizationDB;
+import com.crs.flipkart.dao.StudentDaoOperation;
+import com.crs.flipkart.dao.StudentDaoOperationInterface;
 import com.crs.flipkart.dao.UserDaoOperation;
+import com.crs.flipkart.dao.UserDaoOperationInterface;
 
 /**
  * @author aditya
@@ -13,30 +17,53 @@ import com.crs.flipkart.dao.UserDaoOperation;
  */
 public class StudentOperation implements StudentOperationInterface {
 	
-public void registerStudent(int userId, String password, String userName, String address, int age, String branch, String contact, String email, String gender) {
+	UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
+	StudentDaoOperationInterface studentDaoOperation = new StudentDaoOperation();
+	
+	public void registerStudent() {
+		Scanner sc = new Scanner(System.in);
 		
-		
-		UserDaoOperation userDaoOperation = new UserDaoOperation();
-		userDaoOperation.registerStudent(userId, password, userName, address, age, branch, contact, email, gender);
-		
-	/*	Student student=new Student();
+		System.out.println("Enter User ID: ");
+		int userId = sc.nextInt();
+
+		Student student = new Student();
 		student.setUserId(userId);
-		student.setPassword(password);
+		
+		if (userDaoOperation.getUser(student.getUserId())!=null) {
+			System.out.println("User already exists with this userId");
+			return;
+		}
+		
+		System.out.println("Enter Username: ");
+		String userName = sc.next();
 		student.setUserName(userName);
-		student.setAddress(address);
-		student.setAge(age);
-		student.setBranch(branch);
-		student.setContact(contact);
-		student.setEmail(email);
-		student.setGender(gender);
-		student.setIsApproved(true);
-		student.setPaymentStatus(false);
-		student.setRegistered(false);
+		System.out.println("Enter Password: ");
+		String password = sc.next();
+		student.setPassword(password);
 		student.setRole("Student");
-		student.setRollNo(AuthorizationDB.listOfStudents.size()+1);
-		AuthorizationDB.listOfStudents.add(student); */
+		System.out.println("Enter Email: ");
+		String email = sc.next();
+		student.setEmail(email);
+		student.setIsApproved(false);
+		System.out.println("Enter Address: ");
+		String address = sc.next();
+		student.setAddress(address);
+		System.out.println("Enter Age: ");
+		int age = sc.nextInt();
+		student.setAge(age);
+		System.out.println("Enter Gender: ");
+		String gender = sc.next();
+		student.setGender(gender);
+		System.out.println("Enter Contact: ");
+		String contact = sc.next();
+		student.setContact(contact);
+		student.setRegistered(false);
+		System.out.println("Enter Branch: ");
+		String branch = sc.next();
+		student.setBranch(branch);
+		student.setPaymentStatus(false);
 		
-		
+		studentDaoOperation.registerStudent(student);
 	}
 	
 //	public void showstudent() {

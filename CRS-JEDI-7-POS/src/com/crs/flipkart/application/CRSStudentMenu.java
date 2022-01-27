@@ -12,7 +12,6 @@ import com.crs.flipkart.business.GradeCardOperationInterface;
 import com.crs.flipkart.business.OfflinePayment;
 import com.crs.flipkart.business.OnlinePayment;
 import com.crs.flipkart.business.PaymentOperation;
-import com.crs.flipkart.constants.AuthorizationDB;
 import com.crs.flipkart.dao.StudentDaoOperation;
 
 /**
@@ -41,7 +40,6 @@ public class CRSStudentMenu {
 			CourseRegistrationOperationInterface courseRegistrationObj=new CourseRegistrationOperation();
 			GradeCardOperationInterface gradeCardObj=new GradeCardOperation();
 			choice = sc.nextInt();
-			AuthorizationDB authObj=new AuthorizationDB();
 			sc.nextLine();
 			switch (choice) {
 				case 1: if(!studDAOobj.isRegistered(userId))
