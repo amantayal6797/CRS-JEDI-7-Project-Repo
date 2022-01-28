@@ -8,6 +8,9 @@ package com.crs.flipkart.business;
  *
  */
 public interface StudentOperationInterface {
+	/**
+	 * Method to register a student
+	 */
 	public void registerStudent();
 
 }
