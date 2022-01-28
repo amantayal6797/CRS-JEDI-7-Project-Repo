@@ -17,6 +17,7 @@ import com.crs.flipkart.dao.ProfessorDaoOperationInterface;
 import com.crs.flipkart.dao.UserDaoOperation;
 import com.crs.flipkart.dao.UserDaoOperationInterface;
 import com.crs.flipkart.exception.UserAlreadyExistsException;
+import com.crs.flipkart.exception.UserDoesNotExistException;
 
 /**
  * @author aditya.gupta3
@@ -119,11 +120,16 @@ public class AdminOperation implements AdminOperationInterface {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter User ID of professor: ");
 		int userId = sc.nextInt();
+		try {
 		if (userDaoOperation.getUser(userId)==null) {
-			System.out.println("Professor does not exists with this userId");
-			return;}
+			throw new UserDoesNotExistException(userId);
+		}
 		CourseRegistrationOperation courseRegistrationOperation = new CourseRegistrationOperation();
 		courseRegistrationOperation.registerProfessorCourse(userId);
+		}
+		catch(UserDoesNotExistException e){
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public void viewGradeCard() {

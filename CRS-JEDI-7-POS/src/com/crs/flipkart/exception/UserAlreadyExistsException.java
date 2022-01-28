@@ -14,6 +14,6 @@ public class UserAlreadyExistsException extends Exception {
 		this.userId=userId;
 	}
 	public String getMessage() {
-		return "User with ID "+userId+ " already Exists";
+		return "User with ID "+Integer.toString(userId)+ " already Exists";
 		}
 }
