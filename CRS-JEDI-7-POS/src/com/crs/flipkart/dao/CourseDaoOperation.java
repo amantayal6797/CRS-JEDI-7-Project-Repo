@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 import com.crs.flipkart.bean.Course;
 import com.crs.flipkart.bean.RegisteredCourse;
 import com.crs.flipkart.constants.SQLQueryConstant;
@@ -15,7 +17,7 @@ import com.crs.flipkart.exception.ErrorInDropingCourseException;
 import com.crs.flipkart.exception.ErrorInRegisteringCourseException;
 import com.crs.flipkart.utils.DBUtils;
 public class CourseDaoOperation implements CourseDaoOperationInterface {
-	
+	private static Logger logger = Logger.getLogger(CourseDaoOperation.class);
 	 public ArrayList <Integer>  getEnrolledStudents(int courseId){
 		ArrayList<Integer> studentList=new ArrayList<Integer>();
 		DBUtils connectObj=new DBUtils();
@@ -30,7 +32,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.debug("Exception raised: "+e.getMessage());
 		}
 		connectObj.connectionClose(conn);
 		return studentList;
@@ -56,7 +58,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn1);
 		 return course;
@@ -82,7 +84,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
 		return catalog;
@@ -108,7 +110,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn);
 		 return listOfRegisteredCourses;
@@ -127,7 +129,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
 		 return false;
@@ -157,7 +159,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			    }
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
 		 
@@ -186,7 +188,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
 		 		 
@@ -212,7 +214,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
 		return catalog;
@@ -236,7 +238,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
 		return catalog;
@@ -268,7 +270,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
 	 }
@@ -297,7 +299,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			 }
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
 	 }

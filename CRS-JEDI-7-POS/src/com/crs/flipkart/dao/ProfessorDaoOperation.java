@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
 import com.crs.flipkart.bean.Professor;
 import com.crs.flipkart.constants.SQLQueryConstant;
 import com.crs.flipkart.exception.ErrorInAddingProfessorException;
@@ -19,6 +21,7 @@ import com.crs.flipkart.utils.DBUtils;
 public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 	
 	UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
+	private static Logger logger = Logger.getLogger(ProfessorDaoOperation.class);
 	
 	public void addProfessor(Professor professor) {
 		DBUtils connectionSetup = new DBUtils();
@@ -36,15 +39,7 @@ public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 		    stmt.setString(7, professor.getContact());
 		    stmt.setString(8, professor.getDepartment());
 		    int i = stmt.executeUpdate();
-		    
-		    /*
-		      if(i==0) {
-				System.out.println("Error in adding professor");
-			} else {
-				System.out.println("Professor - "+professor.getUserId()+" added successfully");
-			}
-		     */
-		    
+			
 		    try {
 		    	if(i==0)
 		    		throw new ErrorInAddingProfessorException();
@@ -56,7 +51,7 @@ public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 		  
 	    }catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.debug("Exception raised: "+e.getMessage());
 		} finally {
 			connectionSetup.connectionClose(conn);	
 		}

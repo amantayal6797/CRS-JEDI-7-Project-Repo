@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 import com.crs.flipkart.bean.User;
 import com.crs.flipkart.constants.SQLQueryConstant;
 import com.crs.flipkart.exception.ErrorInApprovingUserException;
@@ -21,7 +23,7 @@ import com.crs.flipkart.utils.DBUtils;
  *
  */
 public class UserDaoOperation implements UserDaoOperationInterface {
-		
+		private static Logger logger = Logger.getLogger(UserDaoOperation.class);
 		public User getUser (int userId) {
 			DBUtils DBUtils = new DBUtils();
 		    Connection conn = DBUtils.connectionEstablish();
@@ -44,7 +46,7 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 				return null;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-			    e.printStackTrace();
+			    logger.debug("Exception raised: "+e.getMessage());
 			    return null;
 			} finally {
 				DBUtils.connectionClose(conn);	
@@ -55,7 +57,7 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 		public void approveUser (int userId) {
 			/*
 			if (getUser(userId)==null) {
-				System.out.println("User does not exists with this userId");
+				logger.error("User does not exists with this userId");
 				return;
 			}
 			*/
@@ -78,9 +80,9 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 				
 				/*
 				if(i==0) {
-					System.out.println("Error in approving user-"+userId);
+					logger.error("Error in approving user-"+userId);
 				} else {
-					System.out.println("User - "+userId+" approved successfully");
+					logger.info("User - "+userId+" approved successfully");
 				}
 				*/
 				
@@ -96,7 +98,7 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-			    e.printStackTrace();
+			    logger.debug("Exception raised: "+e.getMessage());
 			} finally {
 				DBUtils.connectionClose(conn);	
 			}
@@ -128,7 +130,7 @@ public String Authorize(int userId,String password) {
 				    }	
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 				return "Error";
 			}
 				
@@ -162,7 +164,7 @@ public String Authorize(int userId,String password) {
 					 }
 					return 3;
 				} catch (SQLException e) {
-					e.printStackTrace();
+					logger.debug("Exception raised: "+e.getMessage());
 					return 2;
 				}
 		}
@@ -179,9 +181,9 @@ public String Authorize(int userId,String password) {
 				int i=stmt.executeUpdate(); 
 				/*
 				if(i==0) {
-					System.out.println("Error in registering user");
+					logger.error("Error in registering user");
 				} else {
-					System.out.println("User - "+userId+" registered successfully");
+					logger.info("User - "+userId+" registered successfully");
 				}
 				*/
 				try {
@@ -195,7 +197,7 @@ public String Authorize(int userId,String password) {
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-			    e.printStackTrace();
+			    logger.debug("Exception raised: "+e.getMessage());
 			} finally {
 				DBUtils.connectionClose(conn);	
 			}
@@ -215,7 +217,7 @@ public String Authorize(int userId,String password) {
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-			    e.printStackTrace();
+			    logger.debug("Exception raised: "+e.getMessage());
 			    return null;
 			} 
 				DBUtils.connectionClose(conn);	

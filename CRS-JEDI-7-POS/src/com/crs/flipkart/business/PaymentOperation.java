@@ -34,7 +34,7 @@ public class PaymentOperation implements PaymentOperationInterface {
 	
 //	--------------------------------------------------------------------------------		
 	public void generateBill(int userId, int amount) {		// this function called from makePayment function
-		System.out.println("Fees Paid - "+amount);
+		logger.info("Fees Paid - "+amount);
 		
 		String transactionId = Integer.toString(userId) + Integer.toString((int) Math.random());
 		PaymentDaoOperationInterface paymentObj = new PaymentDaoOperation();

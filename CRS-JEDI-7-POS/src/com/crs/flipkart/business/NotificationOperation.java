@@ -20,7 +20,7 @@ public class NotificationOperation implements NotificationOperationInterface {
 		int status = notificationObj.geStatus(userId);
 		
 		if(status==1) {
-			System.out.println("You are approved by Admin. Now you can enroll for courses");
+			logger.info("You are approved by Admin. Now you can enroll for courses");
 			notificationObj.updateStatus(userId,2);
 		}
 	}

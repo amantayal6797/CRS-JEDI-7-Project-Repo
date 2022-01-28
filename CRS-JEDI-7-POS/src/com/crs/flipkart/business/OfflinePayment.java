@@ -21,9 +21,9 @@ public class OfflinePayment extends PaymentOperation implements OfflinePaymentIn
 		
 		Scanner sc=new Scanner(System.in);
 	
-		System.out.println("You have to pay: 2,50,000");
+		logger.info("You have to pay: 2,50,000");
 		
-		System.out.println("Enter 1. to pay fees or 2. for exit");	
+		logger.info("Enter 1. to pay fees or 2. for exit");	
 		
 		int choice = sc.nextInt();
 		sc.nextLine();
@@ -35,10 +35,11 @@ public class OfflinePayment extends PaymentOperation implements OfflinePaymentIn
 		if(makePayment(userId, 250000)==false)
 			throw new BankTechinicalException();
 		else {
-			System.out.println("Transcation completed :) ");
+			logger.info("Transaction completed :) ");
 		}	
 		}catch (BankTechinicalException e) {
-			e.getMessage();		}
+			logger.error(e.getMessage());
+		}
 	}
 	
 	public boolean authenticate(int slipNumber) {
