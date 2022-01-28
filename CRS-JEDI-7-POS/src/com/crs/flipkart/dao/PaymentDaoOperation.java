@@ -16,7 +16,7 @@ import com.crs.flipkart.utils.DBUtils;
  */
 public class PaymentDaoOperation implements PaymentDaoOperationInterface{
 	
-	
+	private static Logger logger = Logger.getLogger(PaymentDaoOperation.class);
 	public void savePayment(int userId, int amount, String trasactionId) {
 		
 		DBUtils DBUtils = new DBUtils();
@@ -30,7 +30,7 @@ public class PaymentDaoOperation implements PaymentDaoOperationInterface{
 			stmt.setString(3,trasactionId);
 			 int i = stmt.executeUpdate();  	
 		} catch (SQLException e) {
-		    e.printStackTrace();
+		    logger.debug("Exception raised: "+e.getMessage());
 		} finally {
 			DBUtils.connectionClose(conn);	
 		}

@@ -18,10 +18,10 @@ import com.crs.flipkart.utils.DBUtils;
 public class AdminDaoOperation implements AdminDaoOperationInterface {
 	
 	CourseDaoOperation courseDaoOperation = new CourseDaoOperation();
-	
+	private static Logger logger = Logger.getLogger(AdminDaoOperation.class);
 	public void addCourse (Course course) {
 		if(courseDaoOperation.verifyCourse(course.getCourseID())) {
-			System.out.println("Course ID already exist");
+			logger.error("Course ID already exist");
 			return;
 		}
 		
@@ -36,13 +36,13 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 		    stmt.setInt(3, course.getCredits());
 		    int i=stmt.executeUpdate(); 
 			if(i==0) {
-				System.out.println("Error in adding course in course catalog");
+				logger.error("Error in adding course in course catalog");
 			} else {
 				System.out.println("Course - "+course.getCourseID()+" added successfully");
 			}
 	    }catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.debug("Exception raised: "+e.getMessage());
 		} finally {
 			connectionSetup.connectionClose(conn);	
 		}
@@ -50,7 +50,7 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 	
 	public void dropCourse(int courseId) {
 		if(!courseDaoOperation.verifyCourse(courseId)) {
-			System.out.println("Course ID does not exist");
+			logger.error("Course ID does not exist");
 			return;
 		}
 		
@@ -62,13 +62,13 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 		    stmt.setInt(1, courseId);
 		    int i = stmt.executeUpdate();
 		    if(i==0) {
-				 System.out.println("Error in dropping course - "+courseId);
+				 logger.error("Error in dropping course - "+courseId);
 			} else {
 				System.out.println("Course - "+courseId+" dropped successfully");
 			}
 	    }catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.debug("Exception raised: "+e.getMessage());
 		} finally {
 			connectionSetup.connectionClose(conn);
 		}

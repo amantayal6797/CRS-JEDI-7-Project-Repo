@@ -18,7 +18,7 @@ import com.crs.flipkart.utils.DBUtils;
  */
 public class NotificationDaoOperation implements NotificationDaoOperationInterface {
 	
-	
+	private static Logger logger = Logger.getLogger(NotificationDaoOperation.class);
 	public int geStatus(int userId) {
 		
 		DBUtils DBUtils = new DBUtils();
@@ -35,7 +35,7 @@ public class NotificationDaoOperation implements NotificationDaoOperationInterfa
 			return status;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-		    e.printStackTrace();
+		    logger.debug("Exception raised: "+e.getMessage());
 		} finally {
 			DBUtils.connectionClose(conn);	
 		}
@@ -55,7 +55,7 @@ public class NotificationDaoOperation implements NotificationDaoOperationInterfa
 			 int i = stmt.executeUpdate();  	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-		    e.printStackTrace();
+		   logger.debug("Exception raised: "+e.getMessage());
 		} finally {
 			DBUtils.connectionClose(conn);	
 		}
@@ -75,7 +75,7 @@ public void insertStatus(int userId) {
 			 int i = stmt.executeUpdate();  	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-		    e.printStackTrace();
+		    logger.debug("Exception raised: "+e.getMessage());
 		} finally {
 			DBUtils.connectionClose(conn);	
 		}

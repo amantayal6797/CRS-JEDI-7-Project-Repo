@@ -26,7 +26,8 @@ public class AdminOperation implements AdminOperationInterface {
 	UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
 	AdminDaoOperationInterface adminDaoOperation = new AdminDaoOperation();
 	ProfessorDaoOperationInterface professorDaoOperation = new ProfessorDaoOperation();
-	
+	private static Logger logger = Logger.getLogger(AdminOperation.class);
+
 	public void addCourse() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Course ID to add: ");
@@ -78,7 +79,7 @@ public class AdminOperation implements AdminOperationInterface {
 		professor.setUserId(userId);
 		
 		if (userDaoOperation.getUser(professor.getUserId())!=null) {
-			System.out.println("User already exists with this userId");
+			logger.error("User already exists with this userId");
 			return;
 		}
 		
@@ -117,7 +118,7 @@ public class AdminOperation implements AdminOperationInterface {
 		System.out.println("Enter User ID of professor: ");
 		int userId = sc.nextInt();
 		if (userDaoOperation.getUser(userId)==null) {
-			System.out.println("Professor does not exists with this userId");
+			logger.error("Professor does not exists with this userId");
 			return;}
 		CourseRegistrationOperation courseRegistrationOperation = new CourseRegistrationOperation();
 		courseRegistrationOperation.registerProfessorCourse(userId);

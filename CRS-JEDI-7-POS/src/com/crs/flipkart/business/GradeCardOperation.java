@@ -23,11 +23,12 @@ import com.crs.flipkart.dao.UserDaoOperationInterface;
  */
 public class GradeCardOperation extends CRSStudentMenu implements GradeCardOperationInterface {
 	UserDaoOperationInterface userDaoOperation =new UserDaoOperation();
+	private static Logger logger = Logger.getLogger(GradeCardOperation.class);
 	public void viewGradeCard(int studentId) {
 		// Generate Grades 
 		// Display
 		if (userDaoOperation.getUser(studentId)==null) {
-			System.out.println("Student does not exists with this userId");
+			logger.error("Student does not exists with this userId");
 			return;}
 		GradeCard gradeCard=generateGradeCard(studentId);
 		System.out.println("Grade Card");
@@ -72,7 +73,7 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 			}
 		}
 		if(flag==false) {
-			System.out.println("Entered Course is not taught by you.");
+			logger.error("Entered Course is not taught by you.");
 			return;
 		}
 		System.out.println("Enter Student ID");
@@ -80,13 +81,13 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 		sc.nextLine();
 		ArrayList <Integer> enrolledStudents= courseDAOobj.getEnrolledStudents(courseId);
 		if(!enrolledStudents.contains(studentId)) {
-			System.out.println("Entered Student is not registered for the given course");
+			logger.error("Entered Student is not registered for the given course");
 			return;
 		}
 		System.out.println("Enter Grade");
 		String grade=sc.nextLine();
 		courseDAOobj.setGrade(studentId,courseId,grade);
-		System.out.println("Grade Assigned Succesfully");
+		System.out.println("Grade Assigned Successfully");
 		
 	}
 }

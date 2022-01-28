@@ -33,7 +33,7 @@ public class OfflinePayment extends PaymentOperation implements OfflinePaymentIn
 		if(makePayment(userId, 250000)==false)
 			System.out.println("Sorry :(  Bank Technical Problem");
 		else {
-			System.out.println("Transcation completed :) ");
+			System.out.println("Transaction completed :) ");
 		}
 	}
 	

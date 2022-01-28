@@ -19,7 +19,7 @@ public class StudentOperation implements StudentOperationInterface {
 
 	UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
 	StudentDaoOperationInterface studentDaoOperation = new StudentDaoOperation();
-	
+	private static Logger logger = Logger.getLogger(StudentOperation.class);
 	@Override
 	public void registerStudent() {
 		Scanner sc = new Scanner(System.in);
@@ -31,7 +31,7 @@ public class StudentOperation implements StudentOperationInterface {
 		student.setUserId(userId);
 		
 		if (userDaoOperation.getUser(student.getUserId())!=null) {
-			System.out.println("User already exists with this userId");
+			logger.error("User already exists with this userId");
 			return;
 		}
 		

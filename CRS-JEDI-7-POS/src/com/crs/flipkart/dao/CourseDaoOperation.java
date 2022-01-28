@@ -11,7 +11,7 @@ import com.crs.flipkart.bean.RegisteredCourse;
 import com.crs.flipkart.constants.SQLQueryConstant;
 import com.crs.flipkart.utils.DBUtils;
 public class CourseDaoOperation implements CourseDaoOperationInterface {
-	
+	private static Logger logger = Logger.getLogger(CourseDaoOperation.class);
 	 public ArrayList <Integer>  getEnrolledStudents(int courseId){
 		ArrayList<Integer> studentList=new ArrayList<Integer>();
 		DBUtils connectObj=new DBUtils();
@@ -26,7 +26,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.debug("Exception raised: "+e.getMessage());
 		}
 		connectObj.connectionClose(conn);
 		return studentList;
@@ -52,7 +52,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn1);
 		 return course;
@@ -78,7 +78,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
 		return catalog;
@@ -104,7 +104,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn);
 		 return listOfRegisteredCourses;
@@ -123,7 +123,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
 		 return false;
@@ -140,10 +140,10 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			 
 			 int i=stmt.executeUpdate(); 
 			 if(i==0)
-				 System.out.println("Error in adding course");
+				 logger.error("Error in adding course");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
 		 
@@ -159,10 +159,10 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			 stmt.setInt(2, studentId);
 			 int i=stmt.executeUpdate(); 
 			 if(i==0)
-				 System.out.println("Error in dropping course");
+				 logger.error("Error in dropping course");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
 		 		 
@@ -188,7 +188,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
 		return catalog;
@@ -212,7 +212,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
 		return catalog;
@@ -229,10 +229,10 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			 
 			 int i=stmt.executeUpdate(); 
 			 if(i==0)
-				 System.out.println("Error in Registering course");
+				 logger.error("Error in Registering course");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
 	 }
@@ -249,10 +249,10 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			 
 			 int i=stmt.executeUpdate(); 
 			 if(i==0)
-				 System.out.println("Error in Assigning Grade");
+				 logger.error("Error in Assigning Grade");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
 	 }
