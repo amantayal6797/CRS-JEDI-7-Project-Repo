@@ -10,6 +10,7 @@ import com.crs.flipkart.dao.StudentDaoOperation;
 import com.crs.flipkart.dao.StudentDaoOperationInterface;
 import com.crs.flipkart.dao.UserDaoOperation;
 import com.crs.flipkart.dao.UserDaoOperationInterface;
+import com.crs.flipkart.exception.UserAlreadyExistsException;
 
 /**
  * @author aditya.gupta3
@@ -22,6 +23,7 @@ public class StudentOperation implements StudentOperationInterface {
 	
 	@Override
 	public void registerStudent() {
+		try {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("Enter User ID: ");
@@ -31,8 +33,7 @@ public class StudentOperation implements StudentOperationInterface {
 		student.setUserId(userId);
 		
 		if (userDaoOperation.getUser(student.getUserId())!=null) {
-			System.out.println("User already exists with this userId");
-			return;
+			throw new UserAlreadyExistsException(userId);
 		}
 		
 		System.out.println("Enter Username: ");
@@ -65,6 +66,9 @@ public class StudentOperation implements StudentOperationInterface {
 		student.setPaymentStatus(false);
 		
 		studentDaoOperation.registerStudent(student);
+		}catch(UserAlreadyExistsException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 }

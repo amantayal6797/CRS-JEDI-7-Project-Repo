@@ -14,6 +14,12 @@ import com.crs.flipkart.dao.CourseDaoOperation;
 import com.crs.flipkart.dao.CourseDaoOperationInterface;
 import com.crs.flipkart.dao.StudentDaoOperation;
 import com.crs.flipkart.dao.StudentDaoOperationInterface;
+import com.crs.flipkart.exception.CourseAlreadyRegisteredException;
+import com.crs.flipkart.exception.CourseDoesNotExistException;
+import com.crs.flipkart.exception.CourseNotRegisteredToDropException;
+import com.crs.flipkart.exception.MaxRegistrationDoneException;
+import com.crs.flipkart.exception.NoCourseToDropException;
+import com.crs.flipkart.exception.NoUnallottedCourseException;
 
 /**
  * @author Ashruth
@@ -57,17 +63,16 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		// take course as input
 		// remove registration from CoursesRegisteredDB
 		// update enrolledCourses for student
+		try {
 		ArrayList<RegisteredCourse> enrolledCourses=courseDAOobj.getRegisteredCourses(studentId);
 		if (enrolledCourses.size()==0) {
-			System.out.println("No Courses to remove.");
-			return;
+			throw new NoCourseToDropException();
 		}
 		System.out.println("Enter id of course to remove");
 		int courseId=sc.nextInt();
 		sc.nextLine();
 		if(!courseDAOobj.verifyCourse(courseId)) {
-			System.out.println("Entered Course ID does not exist");
-			return;
+			throw new CourseDoesNotExistException(courseId);
 		}
 		for(RegisteredCourse regCourse:enrolledCourses) {
 			if(regCourse.getCourseID()==courseId) {
@@ -75,8 +80,11 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 				System.out.println("Course Succesfully Dropped");
 				return;}
 		}
-		System.out.println("You have not registered for the Course. Enter only registered course id");
-		
+		throw new CourseNotRegisteredToDropException();
+		}
+		catch(NoCourseToDropException | CourseDoesNotExistException |  CourseNotRegisteredToDropException e) {
+			System.out.println(e.getMessage());
+		}
 		
 	}
 
@@ -84,10 +92,10 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		// take course as input
 		// add registration in CoursesReGisteredDB
 		// update enrolledCourses for student
+		try {
 		ArrayList<RegisteredCourse> enrolledCourses=courseDAOobj.getRegisteredCourses(studentId);
 		if(enrolledCourses.size()==4) {
-			System.out.println("Already Registered for 4 courses.Drop a course before adding");
-			return;
+			throw new MaxRegistrationDoneException();
 		}
 		System.out.println("Enter id of course to add");
 		int courseId=sc.nextInt();
@@ -95,19 +103,21 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		//System.out.println(1);
 		for(RegisteredCourse regCourse:enrolledCourses) {
 			if(regCourse.getCourseID()==courseId) {
-				System.out.println("Course Already Registered");
-				return;}
+				throw new CourseAlreadyRegisteredException(courseId);
+				}
 		}
 
 		//System.out.println(2);
 		if(!courseDAOobj.verifyCourse(courseId)) {
-			System.out.println("Entered Course ID does not exist");
-			return;
+			throw new CourseDoesNotExistException(courseId);
 		}
 
 		//System.out.println(3);
 		courseDAOobj.addCourse(studentId,courseId);
 		System.out.println("Course Succesfully Added\n");
+		}catch(MaxRegistrationDoneException | CourseAlreadyRegisteredException | CourseDoesNotExistException e) {
+			System.out.println(e.getMessage());
+		}
 		
 	}
 
@@ -174,11 +184,11 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 	}
 	
 	 public void registerProfessorCourse(int userId) {
+		 try {
 		 ArrayList<Course> courseList=new ArrayList<Course>();
 		 courseList=courseDAOobj.getUnregisteredCourses(userId);
 		 if (courseList.size()==0) {
-			 System.out.println("All registered courses have already been allotted to professors");
-			 return;
+			 throw new NoUnallottedCourseException();
 		 }
 		 System.out.println("Available Courses");
 		 ArrayList<Integer> courseIdList=new ArrayList<Integer>();
@@ -194,11 +204,14 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		 int choice=sc.nextInt();
 		 sc.nextLine();
 		 if(!courseIdList.contains(choice)) {
-			 System.out.println("Entered CourseID not present");
-			 return;
+			 throw new CourseDoesNotExistException(choice);
 		 }
 		 courseDAOobj.setRegisterCourse(userId,choice);
 		 System.out.println("Course - "+choice+" succesfully allotted to Professor - "+userId);
+	 
+		 }catch(NoUnallottedCourseException | CourseDoesNotExistException e) {
+			 System.out.println(e.getMessage());
+		 }
 	 }
 	 
 	 public void viewProfessorCourses(int userId) {

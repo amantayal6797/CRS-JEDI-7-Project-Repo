@@ -16,6 +16,9 @@ import com.crs.flipkart.dao.CourseDaoOperation;
 import com.crs.flipkart.dao.CourseDaoOperationInterface;
 import com.crs.flipkart.dao.UserDaoOperation;
 import com.crs.flipkart.dao.UserDaoOperationInterface;
+import com.crs.flipkart.exception.CourseNotTaughtByProfessorException;
+import com.crs.flipkart.exception.StudentNotRegisteredForCourseException;
+import com.crs.flipkart.exception.UserDoesNotExistException;
 
 /**
  * @author Ashruth
@@ -26,15 +29,20 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 	public void viewGradeCard(int studentId) {
 		// Generate Grades 
 		// Display
+		try {
 		if (userDaoOperation.getUser(studentId)==null) {
-			System.out.println("Student does not exists with this userId");
-			return;}
+			throw new UserDoesNotExistException(studentId);
+			}
 		GradeCard gradeCard=generateGradeCard(studentId);
 		System.out.println("Grade Card");
 		System.out.println("User ID:-"+studentId);
 		for(Grade grade:gradeCard.getListOfGrades()) {
 			System.out.println("Course ID:-"+grade.getCourseID()+" Grade:-"+grade.getGrade());
 		}
+		}catch(UserDoesNotExistException e) {
+			System.out.println(e.getMessage());
+		}
+		
 	}
 	
 	public GradeCard generateGradeCard(int studentId) {
@@ -58,6 +66,7 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 	}
 	
 	public void assignGrade(int userId) {
+		try {
 		CourseDaoOperationInterface courseDAOobj=new CourseDaoOperation();
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter CourseID");
@@ -72,21 +81,21 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 			}
 		}
 		if(flag==false) {
-			System.out.println("Entered Course is not taught by you.");
-			return;
+			throw new CourseNotTaughtByProfessorException(courseId);
 		}
 		System.out.println("Enter Student ID");
 		int studentId=sc.nextInt();
 		sc.nextLine();
 		ArrayList <Integer> enrolledStudents= courseDAOobj.getEnrolledStudents(courseId);
 		if(!enrolledStudents.contains(studentId)) {
-			System.out.println("Entered Student is not registered for the given course");
-			return;
+			throw new StudentNotRegisteredForCourseException(courseId,studentId);
 		}
 		System.out.println("Enter Grade");
 		String grade=sc.nextLine();
 		courseDAOobj.setGrade(studentId,courseId,grade);
 		System.out.println("Grade Assigned Succesfully");
-		
+		}catch(CourseNotTaughtByProfessorException | StudentNotRegisteredForCourseException e ) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

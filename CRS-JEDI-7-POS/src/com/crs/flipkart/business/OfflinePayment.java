@@ -5,6 +5,8 @@ package com.crs.flipkart.business;
 
 import java.util.Scanner;
 
+import com.crs.flipkart.exception.BankTechinicalException;
+
 /**
  * @author Ashruth
  *
@@ -14,7 +16,7 @@ public class OfflinePayment extends PaymentOperation implements OfflinePaymentIn
 //	--------------------------------------------------------------------------------	
 
 	public void payByCash(int userId, int slipNumber) {
-		
+		try {
 	    this.slipNumber = slipNumber;
 		
 		Scanner sc=new Scanner(System.in);
@@ -31,10 +33,12 @@ public class OfflinePayment extends PaymentOperation implements OfflinePaymentIn
 		
 		
 		if(makePayment(userId, 250000)==false)
-			System.out.println("Sorry :(  Bank Technical Problem");
+			throw new BankTechinicalException();
 		else {
 			System.out.println("Transcation completed :) ");
-		}
+		}	
+		}catch (BankTechinicalException e) {
+			e.getMessage();		}
 	}
 	
 	public boolean authenticate(int slipNumber) {

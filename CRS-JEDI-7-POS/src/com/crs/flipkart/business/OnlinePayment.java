@@ -5,6 +5,8 @@ package com.crs.flipkart.business;
 
 import java.util.Scanner;
 
+import com.crs.flipkart.exception.BankTechinicalException;
+
 /**
  * @author Ashruth
  *
@@ -15,7 +17,7 @@ public class OnlinePayment extends PaymentOperation implements OnlinePaymentInte
 //	--------------------------------------------------------------------------------	
 	
 	public void payByCard(int userId, int cardNumber, int date) {
-		
+		try {
 	    this.cardNumber=cardNumber;
 		this.date=date;
 
@@ -34,10 +36,12 @@ public class OnlinePayment extends PaymentOperation implements OnlinePaymentInte
 		sc.nextLine();*/
 				
 		if(makePayment(userId, 250000)==false)
-			System.out.println("Sorry :(  Bank Technical Problem");
+			throw new BankTechinicalException();
 		else {
 			System.out.println("Transcation completed :) ");
 		}	
+		}catch (BankTechinicalException e) {
+			e.getMessage();		}
 	}
 	
 	public boolean authenticate(int cardNumber, int date) {
