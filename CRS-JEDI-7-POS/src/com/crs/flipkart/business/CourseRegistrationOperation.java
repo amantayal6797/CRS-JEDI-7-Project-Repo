@@ -6,6 +6,8 @@ package com.crs.flipkart.business;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 import com.crs.flipkart.application.CRSStudentMenu;
 import com.crs.flipkart.bean.Course;
 import com.crs.flipkart.bean.RegisteredCourse;
@@ -27,29 +29,29 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 	private static Logger logger = Logger.getLogger(CourseRegistrationOperation.class);
 
 	public void viewRegisteredCourse(int studentId) {
-		System.out.println("Register Courses for User "+studentId);
+		logger.info("Register Courses for User "+studentId);
 		ArrayList<RegisteredCourse> listOfRegisteredCourses=new ArrayList<RegisteredCourse>();
 		listOfRegisteredCourses=courseDAOobj.getRegisteredCourses(studentId);
 		for(RegisteredCourse regCourse:listOfRegisteredCourses) {
 				Course course=courseDAOobj.getCourse(regCourse.getCourseID());
-				System.out.println("Course Id:-"+course.getCourseID()+"\tCourse Name:-"+course.getCourseName());
+				logger.info("Course Id:-"+course.getCourseID()+"\tCourse Name:-"+course.getCourseName());
 			
 		}
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		logger.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 	}
 
 	public void viewCourses() {
 		// Display all courses in catalog
-		System.out.println("Displaying All Courses");
+		logger.info("Displaying All Courses");
 		ArrayList<Course> catalog=new ArrayList<Course>();
 		catalog=courseDAOobj.viewCourses();
 		for(Course course:catalog) {
-			System.out.println("Course Id:- "+course.getCourseID());
-			System.out.println("Course Name:- "+course.getCourseName());
-			System.out.println("Course Credits:- "+course.getCredits());
-			System.out.println("Course Prerequisites:- "+course.getPrerequisites());
-			System.out.println("Course Professor Id:- "+course.getProfessorAllotted());
-			System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+			logger.info("Course Id:- "+course.getCourseID());
+			logger.info("Course Name:- "+course.getCourseName());
+			logger.info("Course Credits:- "+course.getCredits());
+			logger.info("Course Prerequisites:- "+course.getPrerequisites());
+			logger.info("Course Professor Id:- "+course.getProfessorAllotted());
+			logger.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			
 		}
 	}
@@ -60,10 +62,10 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		// update enrolledCourses for student
 		ArrayList<RegisteredCourse> enrolledCourses=courseDAOobj.getRegisteredCourses(studentId);
 		if (enrolledCourses.size()==0) {
-			System.out.println("No Courses to remove.");
+			logger.info("No Courses to remove.");
 			return;
 		}
-		System.out.println("Enter id of course to remove");
+		logger.info("Enter id of course to remove");
 		int courseId=sc.nextInt();
 		sc.nextLine();
 		if(!courseDAOobj.verifyCourse(courseId)) {
@@ -73,10 +75,10 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		for(RegisteredCourse regCourse:enrolledCourses) {
 			if(regCourse.getCourseID()==courseId) {
 				courseDAOobj.dropCourse(courseId,studentId);
-				System.out.println("Course Successfully Dropped");
+				logger.info("Course Successfully Dropped");
 				return;}
 		}
-		System.out.println("You have not registered for the Course. Enter only registered course id");
+		logger.info("You have not registered for the Course. Enter only registered course id");
 		
 		
 	}
@@ -87,28 +89,28 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		// update enrolledCourses for student
 		ArrayList<RegisteredCourse> enrolledCourses=courseDAOobj.getRegisteredCourses(studentId);
 		if(enrolledCourses.size()==4) {
-			System.out.println("Already Registered for 4 courses.Drop a course before adding");
+			logger.info("Already Registered for 4 courses.Drop a course before adding");
 			return;
 		}
-		System.out.println("Enter id of course to add");
+		logger.info("Enter id of course to add");
 		int courseId=sc.nextInt();
 		sc.nextLine();
-		//System.out.println(1);
+		//logger.info(1);
 		for(RegisteredCourse regCourse:enrolledCourses) {
 			if(regCourse.getCourseID()==courseId) {
 				logger.error("Course Already Registered");
 				return;}
 		}
 
-		//System.out.println(2);
+		//logger.info(2);
 		if(!courseDAOobj.verifyCourse(courseId)) {
 			logger.error("Entered Course ID does not exist");
 			return;
 		}
 
-		//System.out.println(3);
+		//logger.info(3);
 		courseDAOobj.addCourse(studentId,courseId);
-		System.out.println("Course Successfully Added\n");
+		logger.info("Course Successfully Added\n");
 		
 	}
 
@@ -116,33 +118,33 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		viewCourses();
 		ArrayList<Integer> choices=new ArrayList<Integer>();
 		
-		System.out.println("Enter 6 distinct choices");
-		System.out.println("Enter Course ID 1:-");
+		logger.info("Enter 6 distinct choices");
+		logger.info("Enter Course ID 1:-");
 		int courseId=sc.nextInt();
 		sc.nextLine();
 		choices.add(courseId);
 		
-		System.out.println("Enter Course ID 2:-");
+		logger.info("Enter Course ID 2:-");
 		courseId=sc.nextInt();
 		sc.nextLine();
 		choices.add(courseId);
 		
-		System.out.println("Enter Course ID 3:-");
+		logger.info("Enter Course ID 3:-");
 		courseId=sc.nextInt();
 		sc.nextLine();
 		choices.add(courseId);
 		
-		System.out.println("Enter Course ID 4:-");
+		logger.info("Enter Course ID 4:-");
 		courseId=sc.nextInt();
 		sc.nextLine();
 		choices.add(courseId);
 		
-		System.out.println("Enter Course ID 5:-");
+		logger.info("Enter Course ID 5:-");
 		courseId=sc.nextInt();
 		sc.nextLine();
 		choices.add(courseId);
 		
-		System.out.println("Enter Course ID 6:-");
+		logger.info("Enter Course ID 6:-");
 		courseId=sc.nextInt();
 		sc.nextLine();
 		choices.add(courseId);
@@ -153,7 +155,7 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 			if(count==4)
 				break;
 			if(enrolled.contains(cId)) {
-				System.out.println("Course "+cId+" already registered");
+				logger.info("Course "+cId+" already registered");
 				continue;
 			}
 			if(!courseDAOobj.verifyCourse(cId)) {
@@ -163,14 +165,14 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 			if(courseDAOobj.getEnrolledStudents(cId).size()<10) {
 				courseDAOobj.addCourse(studentId, cId);
 				enrolled.add(cId);
-				System.out.println("Registered Course ID "+cId);
+				logger.info("Registered Course ID "+cId);
 				count++;
 			}
 			else
 				logger.error("Course "+cId+" exceeded student limit");
 		}
-		System.out.println("Course Registration Done");
-		System.out.println("Pay Fees Now.");
+		logger.info("Course Registration Done");
+		logger.info("Pay Fees Now.");
 		studDAOobj.setRegistration(studentId);
 	}
 	
@@ -181,17 +183,17 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 			 logger.error("All registered courses have already been allotted to professors");
 			 return;
 		 }
-		 System.out.println("Available Courses");
+		 logger.info("Available Courses");
 		 ArrayList<Integer> courseIdList=new ArrayList<Integer>();
 		 for(Course course:courseList) {
-				System.out.println("Course Id:- "+course.getCourseID());
-				System.out.println("Course Name:- "+course.getCourseName());
-				System.out.println("Course Credits:- "+course.getCredits());
-				System.out.println("Course Prerequisites:- "+course.getPrerequisites());
-				System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+				logger.info("Course Id:- "+course.getCourseID());
+				logger.info("Course Name:- "+course.getCourseName());
+				logger.info("Course Credits:- "+course.getCredits());
+				logger.info("Course Prerequisites:- "+course.getPrerequisites());
+				logger.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 				courseIdList.add(course.getCourseID());
 			}
-		 System.out.println("Enter Course ID to register");
+		 logger.info("Enter Course ID to register");
 		 int choice=sc.nextInt();
 		 sc.nextLine();
 		 if(!courseIdList.contains(choice)) {
@@ -199,34 +201,34 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 			 return;
 		 }
 		 courseDAOobj.setRegisterCourse(userId,choice);
-		 System.out.println("Course - "+choice+" successfully allotted to Professor - "+userId);
+		 logger.info("Course - "+choice+" successfully allotted to Professor - "+userId);
 	 }
 	 
 	 public void viewProfessorCourses(int userId) {
-		 System.out.println("Registered Courses");
+		 logger.info("Registered Courses");
 		 ArrayList<Course> courseList=new ArrayList<Course>();
 		 courseList=courseDAOobj.getProfessorCourses(userId);
 		 for(Course course:courseList) {
-				System.out.println("Course Id:- "+course.getCourseID());
-				System.out.println("Course Name:- "+course.getCourseName());
-				System.out.println("Course Credits:- "+course.getCredits());
-				System.out.println("Course Prerequisites:- "+course.getPrerequisites());
-				System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+				logger.info("Course Id:- "+course.getCourseID());
+				logger.info("Course Name:- "+course.getCourseName());
+				logger.info("Course Credits:- "+course.getCredits());
+				logger.info("Course Prerequisites:- "+course.getPrerequisites());
+				logger.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			}
 	 }
 	 
 	 public void viewEnrolledStudents(int userId) {
-		 System.out.println("Enrolled Students");
+		 logger.info("Enrolled Students");
 		 ArrayList<Course> courseList=new ArrayList<Course>();
 		 courseList=courseDAOobj.getProfessorCourses(userId);
 		 for(Course course:courseList) {
-			 System.out.println("Course ID:- "+ course.getCourseID()+"\tCourse Name:- "+course.getCourseName());
+			 logger.info("Course ID:- "+ course.getCourseID()+"\tCourse Name:- "+course.getCourseName());
 			 ArrayList <Integer> enrolledStudents = courseDAOobj.getEnrolledStudents(course.getCourseID());
-			 System.out.println("Students:-");
+			 logger.info("Students:-");
 			 for(int i:enrolledStudents) {
-				 System.out.println("Student ID :- "+i);
+				 logger.info("Student ID :- "+i);
 			 }
-			 System.out.println();
+			 logger.info();
 		 }
 		 
 	 }

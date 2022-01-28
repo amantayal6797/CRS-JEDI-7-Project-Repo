@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
 import com.crs.flipkart.bean.Course;
 import com.crs.flipkart.constants.SQLQueryConstant;
 import com.crs.flipkart.utils.DBUtils;
@@ -38,7 +40,7 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 			if(i==0) {
 				logger.error("Error in adding course in course catalog");
 			} else {
-				System.out.println("Course - "+course.getCourseID()+" added successfully");
+				logger.info("Course - "+course.getCourseID()+" added successfully");
 			}
 	    }catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -64,7 +66,7 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 		    if(i==0) {
 				 logger.error("Error in dropping course - "+courseId);
 			} else {
-				System.out.println("Course - "+courseId+" dropped successfully");
+				logger.info("Course - "+courseId+" dropped successfully");
 			}
 	    }catch (SQLException e) {
 			// TODO Auto-generated catch block

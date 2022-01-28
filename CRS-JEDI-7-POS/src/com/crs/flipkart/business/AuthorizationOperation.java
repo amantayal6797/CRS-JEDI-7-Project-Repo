@@ -3,6 +3,8 @@
  */
 package com.crs.flipkart.business;
 
+import org.apache.log4j.Logger;
+
 import com.crs.flipkart.dao.UserDaoOperation;
 import com.crs.flipkart.dao.UserDaoOperationInterface;
 
@@ -26,7 +28,7 @@ public class AuthorizationOperation implements AuthorizationOperationInterface {
 			int status = userDaoOperation.updatePasswordCheck(userId, nPassword);
 			
 			if(status==1) {
-				System.out.println("Password updated successfully");
+				logger.info("Password updated successfully");
 				return true;
 			}else if(status==2){
 				logger.error("Error");
@@ -37,7 +39,7 @@ public class AuthorizationOperation implements AuthorizationOperationInterface {
 			}
 			
 		} else {
-			System.out.println("Both passwords don't match");
+			logger.info("Both passwords don't match");
 			return false;
 		}
 		return true;

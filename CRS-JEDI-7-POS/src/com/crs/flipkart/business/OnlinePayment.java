@@ -20,9 +20,9 @@ public class OnlinePayment extends PaymentOperation implements OnlinePaymentInte
 		this.date=date;
 
 		Scanner sc=new Scanner(System.in);
-		System.out.println("You have to pay: 2,50,000");
+		logger.info("You have to pay: 2,50,000");
 		
-		System.out.println("Enter 1. to pay fees or 2. for exit");		
+		logger.info("Enter 1. to pay fees or 2. for exit");		
 		int choice = sc.nextInt();
 		sc.nextLine();
 		
@@ -34,9 +34,9 @@ public class OnlinePayment extends PaymentOperation implements OnlinePaymentInte
 		sc.nextLine();*/
 				
 		if(makePayment(userId, 250000)==false)
-			System.out.println("Sorry :(  Bank Technical Problem");
+			logger.info("Sorry :(  Bank Technical Problem");
 		else {
-			System.out.println("Transaction completed :) ");
+			logger.info("Transaction completed :) ");
 		}	
 	}
 	

@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
 import com.crs.flipkart.bean.Student;
 import com.crs.flipkart.constants.SQLQueryConstant;
 import com.crs.flipkart.utils.DBUtils;
@@ -41,7 +43,7 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 		    if(i==0) {
 				logger.error("Error in registering student"); 
 			} else {
-				System.out.println("student - "+student.getUserId()+" registered successfully & your approval is pending by admin");
+				logger.info("student - "+student.getUserId()+" registered successfully & your approval is pending by admin");
 				NotificationDaoOperationInterface notificationOper = new NotificationDaoOperation();
 				notificationOper.insertStatus(student.getUserId());
 			}

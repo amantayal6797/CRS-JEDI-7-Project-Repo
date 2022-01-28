@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 import com.crs.flipkart.bean.User;
 import com.crs.flipkart.constants.SQLQueryConstant;
 import com.crs.flipkart.utils.DBUtils;
@@ -64,7 +66,7 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 				if(i==0) {
 					logger.error("Error in approving user-"+userId);
 				} else {
-					System.out.println("User - "+userId+" approved successfully");
+					logger.info("User - "+userId+" approved successfully");
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -152,7 +154,7 @@ public String Authorize(int userId,String password) {
 				if(i==0) {
 					logger.error("Error in registering user");
 				} else {
-					System.out.println("User - "+userId+" registered successfully");
+					logger.info("User - "+userId+" registered successfully");
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

@@ -5,6 +5,8 @@ package com.crs.flipkart.business;
 
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 import com.crs.flipkart.bean.Student;
 import com.crs.flipkart.dao.StudentDaoOperation;
 import com.crs.flipkart.dao.StudentDaoOperationInterface;
@@ -24,7 +26,7 @@ public class StudentOperation implements StudentOperationInterface {
 	public void registerStudent() {
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Enter User ID: ");
+		logger.info("Enter User ID: ");
 		int userId = sc.nextInt();
 
 		Student student = new Student();
@@ -35,31 +37,31 @@ public class StudentOperation implements StudentOperationInterface {
 			return;
 		}
 		
-		System.out.println("Enter Username: ");
+		logger.info("Enter Username: ");
 		String userName = sc.next();
 		student.setUserName(userName);
-		System.out.println("Enter Password: ");
+		logger.info("Enter Password: ");
 		String password = sc.next();
 		student.setPassword(password);
 		student.setRole("Student");
-		System.out.println("Enter Email: ");
+		logger.info("Enter Email: ");
 		String email = sc.next();
 		student.setEmail(email);
 		student.setIsApproved(false);
-		System.out.println("Enter Address: ");
+		logger.info("Enter Address: ");
 		String address = sc.next();
 		student.setAddress(address);
-		System.out.println("Enter Age: ");
+		logger.info("Enter Age: ");
 		int age = sc.nextInt();
 		student.setAge(age);
-		System.out.println("Enter Gender: ");
+		logger.info("Enter Gender: ");
 		String gender = sc.next();
 		student.setGender(gender);
-		System.out.println("Enter Contact: ");
+		logger.info("Enter Contact: ");
 		String contact = sc.next();
 		student.setContact(contact);
 		student.setRegistered(false);
-		System.out.println("Enter Branch: ");
+		logger.info("Enter Branch: ");
 		String branch = sc.next();
 		student.setBranch(branch);
 		student.setPaymentStatus(false);

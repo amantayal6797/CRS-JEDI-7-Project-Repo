@@ -6,6 +6,8 @@ package com.crs.flipkart.business;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 import com.crs.flipkart.application.CRSStudentMenu;
 import com.crs.flipkart.bean.Course;
 import com.crs.flipkart.bean.Grade;
@@ -31,10 +33,10 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 			logger.error("Student does not exists with this userId");
 			return;}
 		GradeCard gradeCard=generateGradeCard(studentId);
-		System.out.println("Grade Card");
-		System.out.println("User ID:-"+studentId);
+		logger.info("Grade Card");
+		logger.info("User ID:-"+studentId);
 		for(Grade grade:gradeCard.getListOfGrades()) {
-			System.out.println("Course ID:-"+grade.getCourseID()+" Grade:-"+grade.getGrade());
+			logger.info("Course ID:-"+grade.getCourseID()+" Grade:-"+grade.getGrade());
 		}
 	}
 	
@@ -61,7 +63,7 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 	public void assignGrade(int userId) {
 		CourseDaoOperationInterface courseDAOobj=new CourseDaoOperation();
 		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter CourseID");
+		logger.info("Enter CourseID");
 		int courseId=sc.nextInt();
 		sc.nextLine();
 		boolean flag=false;
@@ -76,7 +78,7 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 			logger.error("Entered Course is not taught by you.");
 			return;
 		}
-		System.out.println("Enter Student ID");
+		logger.info("Enter Student ID");
 		int studentId=sc.nextInt();
 		sc.nextLine();
 		ArrayList <Integer> enrolledStudents= courseDAOobj.getEnrolledStudents(courseId);
@@ -84,10 +86,10 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 			logger.error("Entered Student is not registered for the given course");
 			return;
 		}
-		System.out.println("Enter Grade");
+		logger.info("Enter Grade");
 		String grade=sc.nextLine();
 		courseDAOobj.setGrade(studentId,courseId,grade);
-		System.out.println("Grade Assigned Successfully");
+		logger.info("Grade Assigned Successfully");
 		
 	}
 }
