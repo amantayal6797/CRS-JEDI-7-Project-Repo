@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import com.crs.flipkart.bean.Course;
 import com.crs.flipkart.bean.RegisteredCourse;
 import com.crs.flipkart.constants.SQLQueryConstant;
+import com.crs.flipkart.exception.ErrorInAddingCourseException;
+import com.crs.flipkart.exception.ErrorInAssigningCourseException;
+import com.crs.flipkart.exception.ErrorInDropingCourseException;
+import com.crs.flipkart.exception.ErrorInRegisteringCourseException;
 import com.crs.flipkart.utils.DBUtils;
 public class CourseDaoOperation implements CourseDaoOperationInterface {
 	
@@ -139,8 +143,18 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			 stmt.setInt(1, studentId);
 			 
 			 int i=stmt.executeUpdate(); 
+			 /*
 			 if(i==0)
 				 System.out.println("Error in adding course");
+			 */
+			 
+			  try {
+			    	if(i==0) 
+			    		throw new ErrorInAddingCourseException(2);
+			    }
+			    catch(ErrorInAddingCourseException e){
+			    	System.out.println(e.getMessage());
+			    }
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -158,8 +172,18 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			 stmt.setInt(1, courseId);
 			 stmt.setInt(2, studentId);
 			 int i=stmt.executeUpdate(); 
+			 /*
 			 if(i==0)
 				 System.out.println("Error in dropping course");
+			 */
+			  try {
+			    	if(i==0) 
+			    		throw new ErrorInDropingCourseException(2);
+			    }
+			    catch(ErrorInDropingCourseException e){
+			    	System.out.println(e.getMessage());
+			    } 
+			 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -228,8 +252,20 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			 stmt.setInt(1, userID);
 			 
 			 int i=stmt.executeUpdate(); 
+			 
+			 /*
 			 if(i==0)
 				 System.out.println("Error in Registering course");
+			*/
+			 try{
+			  	if(i==0) 
+			    	throw new ErrorInRegisteringCourseException();
+			 }
+			 catch(ErrorInRegisteringCourseException e){
+			    System.out.println(e.getMessage());
+			 } 
+			  
+			
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -248,8 +284,17 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			 stmt.setInt(3, studentId);
 			 
 			 int i=stmt.executeUpdate(); 
+			 /*
 			 if(i==0)
 				 System.out.println("Error in Assigning Grade");
+			*/
+			 try{
+				if(i==0) 
+				   	throw new ErrorInAssigningCourseException();
+				 }
+			 catch(ErrorInAssigningCourseException e){
+			    System.out.println(e.getMessage());
+			 }
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

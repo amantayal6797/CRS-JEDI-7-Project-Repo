@@ -7,6 +7,9 @@ import java.sql.SQLException;
 
 import com.crs.flipkart.bean.Student;
 import com.crs.flipkart.constants.SQLQueryConstant;
+import com.crs.flipkart.exception.ErrorInRegisteringStudentException;
+import com.crs.flipkart.exception.ErrorInSettingPaymentStatusException;
+import com.crs.flipkart.exception.ErrorInSettingRegistrationStatusException;
 import com.crs.flipkart.utils.DBUtils;
 
 public class StudentDaoOperation implements StudentDaoOperationInterface {
@@ -30,13 +33,23 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 		    stmt.setString(9, student.getBranch());
 		    stmt.setInt(10, (student.getPaymentStatus())? 1: 0);
 		    int i = stmt.executeUpdate();
+		    /*
 		    if(i==0) {
 				System.out.println("Error in registering student");
 			}
+			*/
+		    try{
+		    	if(i==0) 
+		    		throw new ErrorInRegisteringStudentException();
+		    }catch(ErrorInRegisteringStudentException e){
+		    	System.out.println(e.getMessage());
+		    }
+		    
 //		    sql="insert into role values(?,'Student')";
 		    stmt=conn.prepareStatement(SQLQueryConstant.ADD_STUDENT_ROLE);
 		    stmt.setInt(1, student.getUserId());
 		    i = stmt.executeUpdate();
+		    /*
 		    if(i==0) {
 				System.out.println("Error in registering student");
 			} else {
@@ -44,6 +57,20 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 				NotificationDaoOperationInterface notificationOper = new NotificationDaoOperation();
 				notificationOper.insertStatus(student.getUserId());
 			}
+			*/
+		    
+		    try{
+		    	if(i==0) 
+		    		throw new ErrorInRegisteringStudentException();
+				else {
+					System.out.println("student - "+student.getUserId()+" registered successfully & your approval is pending by admin");
+					NotificationDaoOperationInterface notificationOper = new NotificationDaoOperation();
+					notificationOper.insertStatus(student.getUserId());
+				}	
+		    }catch(ErrorInRegisteringStudentException e){
+		    	System.out.println(e.getMessage());
+		    }
+		    
 	    }catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -86,10 +113,21 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 		    PreparedStatement stmt=conn.prepareStatement(SQLQueryConstant.SET_PAYMENT_STATUS);
 			stmt.setInt(1, studentId);
 			int i=stmt.executeUpdate(); 
+			/*
 			if(i==0) {
 				System.out.println("Error in setting payment status for student-"+studentId);
 				return false;
 			}
+			*/
+			try {
+				if(i==0) 
+					throw new ErrorInSettingPaymentStatusException(studentId);
+			}
+			catch(ErrorInSettingPaymentStatusException e){
+				System.out.println(e.getMessage());
+				return false;
+			}
+			
 			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -155,8 +193,18 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.SET_REGISTERED);
 			 stmt.setInt(1, studentId);
 			 int i=stmt.executeUpdate(); 
+			 /*
 			 if(i==0)
 				 System.out.println("Error in setting registration status");
+			*/
+			 
+			try {
+				if(i==0)
+					throw new ErrorInSettingRegistrationStatusException();
+			}catch(ErrorInSettingRegistrationStatusException e) {
+				System.out.println(e.getMessage());
+			}
+			 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

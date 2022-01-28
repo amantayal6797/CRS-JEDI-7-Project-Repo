@@ -11,6 +11,9 @@ import java.util.ArrayList;
 
 import com.crs.flipkart.bean.User;
 import com.crs.flipkart.constants.SQLQueryConstant;
+import com.crs.flipkart.exception.ErrorInApprovingUserException;
+import com.crs.flipkart.exception.ErrorInRegisteringUserException;
+import com.crs.flipkart.exception.UserDoNotExistException;
 import com.crs.flipkart.utils.DBUtils;
 
 /**
@@ -50,22 +53,47 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 		
 		//done
 		public void approveUser (int userId) {
+			/*
 			if (getUser(userId)==null) {
 				System.out.println("User does not exists with this userId");
 				return;
 			}
+			*/
+			try {
+				if (getUser(userId)==null) {
+					throw new UserDoNotExistException();
+				}
+			}catch(UserDoNotExistException e) {
+				System.out.println(e.getMessage());
+				return;
+			}
+			
 			DBUtils DBUtils = new DBUtils();
 		    Connection conn = DBUtils.connectionEstablish();
 //			String sql = "update user set isApproved=1 where userId = ?";
 			try {
 			    PreparedStatement stmt=conn.prepareStatement(SQLQueryConstant.APPROVE_USER);
 				stmt.setInt(1, userId);
-				int i=stmt.executeUpdate(); 
+				int i=stmt.executeUpdate();
+				
+				/*
 				if(i==0) {
 					System.out.println("Error in approving user-"+userId);
 				} else {
 					System.out.println("User - "+userId+" approved successfully");
 				}
+				*/
+				
+				try {
+					if(i==0)
+						throw new ErrorInApprovingUserException();
+					else
+						System.out.println("User - "+userId+" approved successfully");	
+				}catch (ErrorInApprovingUserException e){
+					System.out.println(e.getMessage(userId));
+				}
+				
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 			    e.printStackTrace();
@@ -149,11 +177,22 @@ public String Authorize(int userId,String password) {
 				stmt.setString(2, password);
 				stmt.setInt(3, (isApproved)? 1: 0);
 				int i=stmt.executeUpdate(); 
+				/*
 				if(i==0) {
 					System.out.println("Error in registering user");
 				} else {
 					System.out.println("User - "+userId+" registered successfully");
 				}
+				*/
+				try {
+					if(i==0)
+						throw new ErrorInRegisteringUserException();
+					else
+						System.out.println("User - "+userId+" registered successfully");	
+				}catch(ErrorInRegisteringUserException e) {
+					System.out.println(e.getMessage());
+				}
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 			    e.printStackTrace();

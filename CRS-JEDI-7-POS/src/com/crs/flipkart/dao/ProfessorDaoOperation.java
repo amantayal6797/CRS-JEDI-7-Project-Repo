@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 import com.crs.flipkart.bean.Professor;
 import com.crs.flipkart.constants.SQLQueryConstant;
+import com.crs.flipkart.exception.ErrorInAddingProfessorException;
 import com.crs.flipkart.utils.DBUtils;
 
 /**
@@ -35,11 +36,24 @@ public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 		    stmt.setString(7, professor.getContact());
 		    stmt.setString(8, professor.getDepartment());
 		    int i = stmt.executeUpdate();
-		    if(i==0) {
+		    
+		    /*
+		      if(i==0) {
 				System.out.println("Error in adding professor");
 			} else {
 				System.out.println("Professor - "+professor.getUserId()+" added successfully");
 			}
+		     */
+		    
+		    try {
+		    	if(i==0)
+		    		throw new ErrorInAddingProfessorException();
+		    	else
+		    		System.out.println("Professor - "+professor.getUserId()+" added successfully");
+		    }catch(ErrorInAddingProfessorException e) {
+		    	System.out.println(e.getMessage());
+		    }
+		  
 	    }catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
