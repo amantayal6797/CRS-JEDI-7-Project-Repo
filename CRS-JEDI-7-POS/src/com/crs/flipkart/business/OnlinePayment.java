@@ -5,6 +5,8 @@ package com.crs.flipkart.business;
 
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 import com.crs.flipkart.exception.BankTechinicalException;
 
 /**
@@ -12,7 +14,7 @@ import com.crs.flipkart.exception.BankTechinicalException;
  *
  */
 public class OnlinePayment extends PaymentOperation implements OnlinePaymentInterface{
-	
+	private static Logger logger = Logger.getLogger(CourseRegistrationOperation.class);
 	private int cardNumber, date;
 //	--------------------------------------------------------------------------------	
 	

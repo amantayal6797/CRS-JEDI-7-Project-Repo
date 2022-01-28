@@ -3,6 +3,8 @@
  */
 package com.crs.flipkart.business;
 
+import org.apache.log4j.Logger;
+
 import com.crs.flipkart.dao.NotificationDaoOperation;
 import com.crs.flipkart.dao.NotificationDaoOperationInterface;
 
@@ -12,7 +14,7 @@ import com.crs.flipkart.dao.NotificationDaoOperationInterface;
  */
 public class NotificationOperation implements NotificationOperationInterface {
 
-	
+	private static Logger logger = Logger.getLogger(CourseRegistrationOperation.class);
 	public void Notify(int userId){
 		
 		NotificationDaoOperationInterface notificationObj = new NotificationDaoOperation();

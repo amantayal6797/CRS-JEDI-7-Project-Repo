@@ -5,6 +5,8 @@ package com.crs.flipkart.business;
 
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 import com.crs.flipkart.dao.PaymentDaoOperation;
 import com.crs.flipkart.dao.PaymentDaoOperationInterface;
 import com.crs.flipkart.dao.StudentDaoOperation;
@@ -14,7 +16,7 @@ import com.crs.flipkart.dao.StudentDaoOperation;
  *
  */
 public class PaymentOperation implements PaymentOperationInterface {
-
+	private static Logger logger = Logger.getLogger(CourseRegistrationOperation.class);
 //--------------------------------------------------------------------------------	
 	private int transactionID;
 	int amount;

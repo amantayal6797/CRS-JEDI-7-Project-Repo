@@ -241,7 +241,6 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 			 for(int i:enrolledStudents) {
 				 logger.info("Student ID :- "+i);
 			 }
-			 logger.info();
 		 }
 		 
 	 }
