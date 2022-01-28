@@ -116,6 +116,8 @@ public String Authorize(int userId,String password) {
 				while(rs.next()){	
 				    if(rs.getInt("userId")==userId) {
 				    	if(rs.getString("password").equals(password)) {
+				    		if(rs.getInt("isapproved")==0)
+				    			return "You are not approved by Admin";
 //				    		sql = "select role from role where userid=?";
 				    		stmt = conn.prepareStatement(SQLQueryConstant.GET_USER_ROLE);
 				    		stmt.setInt(1, userId);

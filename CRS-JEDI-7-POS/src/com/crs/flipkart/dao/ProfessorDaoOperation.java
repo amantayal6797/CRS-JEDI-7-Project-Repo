@@ -39,7 +39,11 @@ public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 		    stmt.setString(7, professor.getContact());
 		    stmt.setString(8, professor.getDepartment());
 		    int i = stmt.executeUpdate();
-			
+		    
+		    stmt = conn.prepareStatement(SQLQueryConstant.ADD_PROFESSOR_ROLE);
+		    stmt.setInt(1, professor.getUserId());
+		    i = stmt.executeUpdate();
+		    
 		    try {
 		    	if(i==0)
 		    		throw new ErrorInAddingProfessorException();
@@ -48,6 +52,9 @@ public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 		    }catch(ErrorInAddingProfessorException e) {
 		    	System.out.println(e.getMessage());
 		    }
+		    
+	    	
+		     
 		  
 	    }catch (SQLException e) {
 			// TODO Auto-generated catch block

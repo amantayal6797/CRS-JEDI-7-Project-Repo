@@ -26,6 +26,7 @@ public class SQLQueryConstant {
 	
 	//	ProfessorDaoOperation
 	public static final String ADD_PROFESSOR_DETAIL ="insert into professor values (?,?,?,?,?,?,?,?)";
+	public static final String ADD_PROFESSOR_ROLE = "insert into role values(?,'Professor')";
 
 	//	StudentDaoOperation
 	public static final String ADD_STUDENT_QUERY = "insert into student values (?,?,?,?,?,?,?,?,?,?)";

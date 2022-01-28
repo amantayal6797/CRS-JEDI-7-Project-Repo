@@ -24,7 +24,7 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 	    try {
 	    	userDaoOperation.registerUser(student.getUserId(), student.getPassword(), student.getIsApproved());
 //	    	String sql = "insert into student values (?,?,?,?,?,?,?,?,?,?)";
-	    	PreparedStatement stmt = conn.prepareStatement(SQLQueryConstant.ADD_COURSE_QUERY);
+	    	PreparedStatement stmt = conn.prepareStatement(SQLQueryConstant.ADD_STUDENT_QUERY);
 		    stmt.setInt(1, student.getUserId());
 		    stmt.setString(2, student.getUserName());
 		    stmt.setString(3, student.getEmail());
