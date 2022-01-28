@@ -5,11 +5,14 @@ package com.crs.flipkart.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
+import com.crs.flipkart.bean.Admin;
 import com.crs.flipkart.bean.Course;
+import com.crs.flipkart.bean.Student;
 import com.crs.flipkart.constants.SQLQueryConstant;
 import com.crs.flipkart.exception.CourseIDAlreadyExistException;
 import com.crs.flipkart.exception.ErrorInAddingCourseException;
@@ -24,6 +27,45 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 	
 	CourseDaoOperation courseDaoOperation = new CourseDaoOperation();
 	private static Logger logger = Logger.getLogger(AdminDaoOperation.class);
+	
+	public Admin getAdmin(int userID) {
+		DBUtils connectObj=new DBUtils();
+		 Connection conn2 = connectObj.connectionEstablish();
+//		 String sql1 = "select * from user where userid = ?";
+//		 String sql2 = "select * from student where userid = ?";
+		 Admin admin=new Admin();
+		 try {
+			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.GET_USER_DETAIL);
+			 stmt.setInt(1, userID);
+			 ResultSet rs=stmt.executeQuery(); 
+			 while(rs.next()) {
+				admin.setUserId(rs.getInt("userID"));
+				admin.setPassword(rs.getString("Password"));
+				if(rs.getInt("isApproved")==1)
+					admin.setIsApproved(true);
+				else
+					admin.setIsApproved(false);
+				
+			 }
+			 PreparedStatement stmt2=conn2.prepareStatement(SQLQueryConstant.GET_ADMIN_DETAIL);
+			 stmt2.setInt(1, userID);
+			rs=stmt2.executeQuery(); 
+			 while(rs.next()) {
+				 admin.setUserName(rs.getString("username"));
+				 admin.setEmail(rs.getString("email"));
+				admin.setAddress(rs.getString("address"));
+				admin.setAge(rs.getInt("age"));
+				admin.setGender(rs.getString("gender"));
+				admin.setContact(rs.getString("contact"));
+			 }
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				logger.debug("Exception raised: "+e.getMessage());
+			}
+			connectObj.connectionClose(conn2);
+			return admin;
+	}
+	
 	public void addCourse (Course course) {
 			try {
 				if(courseDaoOperation.verifyCourse(course.getCourseID()))

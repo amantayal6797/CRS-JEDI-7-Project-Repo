@@ -3,6 +3,7 @@
  */
 package com.crs.flipkart.dao;
 
+import com.crs.flipkart.bean.Admin;
 /**
  * @author Ashruth
  *
@@ -26,4 +27,8 @@ package com.crs.flipkart.dao;
 			delete a course from course catalog
 		*/
 	    public void dropCourse(int courseId);
+	    /*
+	     * Get Details of Admin from database
+	     */
+	    public Admin getAdmin(int userID);
 	}

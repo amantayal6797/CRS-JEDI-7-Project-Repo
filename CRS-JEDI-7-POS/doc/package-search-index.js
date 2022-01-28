@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.crs.flipkart.application"},{"l":"com.crs.flipkart.bean"},{"l":"com.crs.flipkart.business"},{"l":"com.crs.flipkart.constants"},{"l":"com.crs.flipkart.dao"},{"l":"com.crs.flipkart.exception"},{"l":"com.crs.flipkart.utils"}];updateSearchResults();

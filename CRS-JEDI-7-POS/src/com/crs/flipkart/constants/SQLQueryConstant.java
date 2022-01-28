@@ -13,7 +13,7 @@ public class SQLQueryConstant {
 	//	AdminDaoOperation
 	public static final String ADD_COURSE_QUERY = "insert into course values (?,?,?,?,'NA')";
 	public static final String DELETE_COURSE_QUERY = "delete from course where courseid = ?";
-
+	public static final String GET_ADMIN_DETAIL = "select * from admin where userid = ?";
 	//	CourseDaoOperation
 	public static final String GET_ALL_REGISTERED_COURSES = "select * from registeredcourse";
 	public static final String GET_ALL_COURSES = "select * from course";
@@ -27,7 +27,7 @@ public class SQLQueryConstant {
 	//	ProfessorDaoOperation
 	public static final String ADD_PROFESSOR_DETAIL ="insert into professor values (?,?,?,?,?,?,?,?)";
 	public static final String ADD_PROFESSOR_ROLE = "insert into role values(?,'Professor')";
-
+	public static final String GET_PROFESSOR_DETAIL= "select * from professor where userid = ?";
 	//	StudentDaoOperation
 	public static final String ADD_STUDENT_QUERY = "insert into student values (?,?,?,?,?,?,?,?,?,?)";
 	public static final String ADD_STUDENT_ROLE = "insert into role values(?,'Student')";

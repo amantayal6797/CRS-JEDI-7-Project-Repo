@@ -15,6 +15,11 @@ import com.crs.flipkart.business.OfflinePayment;
 import com.crs.flipkart.business.OnlinePayment;
 import com.crs.flipkart.business.PaymentOperation;
 import com.crs.flipkart.dao.StudentDaoOperation;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Date;
+
 
 /**
  * User Interactive menu for students
@@ -29,6 +34,14 @@ public class CRSStudentMenu {
 	 */
 	StudentDaoOperation studDAOobj = new StudentDaoOperation();
 	public void StudentMenu(int userId) {
+		
+		Student student=studDAOobj.showStudent(userId);
+		System.out.println("\nWelcome "+student.getUserName());
+		LocalTime localTime = LocalTime.now();
+		System.out.println("Login Time:- " + localTime);
+		
+		LocalDate localDate = LocalDate.now();
+		System.out.println("Login Date:- "+ localDate.getDayOfMonth()+" "+localDate.getMonth()+", "+localDate.getYear());
 		int choice=0;
 		Scanner sc = new Scanner(System.in);
 		

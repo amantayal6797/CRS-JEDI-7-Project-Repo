@@ -161,9 +161,9 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 				
 			 }
 			 PreparedStatement stmt2=conn2.prepareStatement(SQLQueryConstant.GET_STUDENT_DETAIL);
-			 stmt.setInt(1, studentId);
-			 ResultSet rs2=stmt2.executeQuery(); 
-			 while(rs2.next()) {
+			 stmt2.setInt(1, studentId);
+			rs=stmt2.executeQuery(); 
+			 while(rs.next()) {
 				 student.setUserName(rs.getString("username"));
 				 student.setEmail(rs.getString("email"));
 				student.setAddress(rs.getString("address"));

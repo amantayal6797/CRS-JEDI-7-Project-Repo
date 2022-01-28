@@ -353,3 +353,5 @@
 15:30:34,807  INFO GradeCardOperation,main:43 - Course ID:-402 Grade:-NA
 15:30:34,807  INFO GradeCardOperation,main:43 - Course ID:-403 Grade:-NA
 15:30:34,807  INFO GradeCardOperation,main:43 - Course ID:-404 Grade:-NA
+15:55:03,858 DEBUG StudentDaoOperation,main:185 - Exception raised: No value specified for parameter 1
+15:57:18,209 DEBUG StudentDaoOperation,main:185 - Exception raised: Column 'username' not found.

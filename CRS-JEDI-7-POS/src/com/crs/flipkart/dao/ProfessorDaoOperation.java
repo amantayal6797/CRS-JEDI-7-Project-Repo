@@ -5,10 +5,12 @@ package com.crs.flipkart.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
+import com.crs.flipkart.bean.Admin;
 import com.crs.flipkart.bean.Professor;
 import com.crs.flipkart.constants.SQLQueryConstant;
 import com.crs.flipkart.exception.ErrorInAddingProfessorException;
@@ -62,5 +64,44 @@ public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 		} finally {
 			connectionSetup.connectionClose(conn);	
 		}
+	}
+
+	@Override
+	public Professor getProfessor(int userId) {
+		DBUtils connectObj=new DBUtils();
+		 Connection conn2 = connectObj.connectionEstablish();
+//		 String sql1 = "select * from user where userid = ?";
+//		 String sql2 = "select * from student where userid = ?";
+		 Professor professor=new Professor();
+		 try {
+			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.GET_USER_DETAIL);
+			 stmt.setInt(1, userId);
+			 ResultSet rs=stmt.executeQuery(); 
+			 while(rs.next()) {
+				professor.setUserId(rs.getInt("userID"));
+				professor.setPassword(rs.getString("Password"));
+				if(rs.getInt("isApproved")==1)
+					professor.setIsApproved(true);
+				else
+					professor.setIsApproved(false);
+				
+			 }
+			 PreparedStatement stmt2=conn2.prepareStatement(SQLQueryConstant.GET_PROFESSOR_DETAIL);
+			 stmt2.setInt(1, userId);
+			rs=stmt2.executeQuery(); 
+			 while(rs.next()) {
+				 professor.setUserName(rs.getString("username"));
+				 professor.setEmail(rs.getString("email"));
+				professor.setAddress(rs.getString("address"));
+				professor.setAge(rs.getInt("age"));
+				professor.setGender(rs.getString("gender"));
+				professor.setContact(rs.getString("contact"));
+			 }
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				logger.debug("Exception raised: "+e.getMessage());
+			}
+			connectObj.connectionClose(conn2);
+	return professor;
 	}
 }

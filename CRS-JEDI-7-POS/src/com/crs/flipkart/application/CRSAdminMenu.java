@@ -3,11 +3,17 @@
  */
 package com.crs.flipkart.application;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
 
+import com.crs.flipkart.bean.Admin;
+import com.crs.flipkart.bean.Student;
 import com.crs.flipkart.business.AdminOperation;
 import com.crs.flipkart.business.CourseRegistrationOperation;
 import com.crs.flipkart.business.CourseRegistrationOperationInterface;
+import com.crs.flipkart.dao.AdminDaoOperation;
+import com.crs.flipkart.dao.AdminDaoOperationInterface;
 
 /**
  * @author aditya.gupta3
@@ -22,7 +28,20 @@ import com.crs.flipkart.business.CourseRegistrationOperationInterface;
  * Operations.
  */
 public class CRSAdminMenu extends CRSApplication {
+	
+	AdminDaoOperationInterface adminDaoObj=new AdminDaoOperation();
 	public void AdminMenu(int userId) {
+		
+		Admin admin=adminDaoObj.getAdmin(userId);
+		System.out.println("\nWelcome "+admin.getUserName());
+		
+		LocalTime localTime = LocalTime.now();
+		System.out.println("Login Time:- " + localTime);
+		
+		LocalDate localDate = LocalDate.now();
+		System.out.println("Login Date:- "+ localDate.getDayOfMonth()+" "+localDate.getMonth()+", "+localDate.getYear());
+		
+		
 		int choice = 0;
 		Scanner sc = new Scanner(System.in);
 		while(choice!=8) {
