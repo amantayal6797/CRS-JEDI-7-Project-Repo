@@ -61,9 +61,12 @@ public class AdminOperation implements AdminOperationInterface {
 	public void approveUser() {
 		ArrayList<Integer> unapprovedStudents=userDaoOperation.getUnapprovedStudents();
 		logger.info("List of Unapproved Students");
-		for(int i:unapprovedStudents) {
-			logger.info(i);
-		}
+		unapprovedStudents.forEach(System.out::println);
+		
+		//for(int i:unapprovedStudents) {
+			//logger.info(i);
+		//}
+		
 		Scanner sc = new Scanner(System.in);
 		logger.info("Enter User ID to approve: ");
 		int userId = sc.nextInt();
