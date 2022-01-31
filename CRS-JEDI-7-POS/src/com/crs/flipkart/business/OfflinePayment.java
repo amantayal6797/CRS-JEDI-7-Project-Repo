@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
-import com.crs.flipkart.exception.BankTechinicalException;
+import com.crs.flipkart.exception.PaymentException;
 
 /**
  * @author Ashruth
@@ -36,11 +36,11 @@ public class OfflinePayment extends PaymentOperation implements OfflinePaymentIn
 		
 		
 		if(makePayment(userId, 250000)==false)
-			throw new BankTechinicalException();
+			throw new PaymentException();
 		else {
 			logger.info("Transaction completed :) ");
 		}	
-		}catch (BankTechinicalException e) {
+		}catch (PaymentException e) {
 			logger.error(e.getMessage());
 		}
 	}

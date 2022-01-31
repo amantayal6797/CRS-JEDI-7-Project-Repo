@@ -355,3 +355,39 @@
 15:30:34,807  INFO GradeCardOperation,main:43 - Course ID:-404 Grade:-NA
 15:55:03,858 DEBUG StudentDaoOperation,main:185 - Exception raised: No value specified for parameter 1
 15:57:18,209 DEBUG StudentDaoOperation,main:185 - Exception raised: Column 'username' not found.
+10:26:58,645  INFO CourseRegistrationOperation,main:215 - Registered Courses
+10:26:58,935  INFO CourseRegistrationOperation,main:219 - Course Id:- 401
+10:26:58,953  INFO CourseRegistrationOperation,main:220 - Course Name:- Programming Basic
+10:26:58,955  INFO CourseRegistrationOperation,main:221 - Course Credits:- 5
+10:26:58,957  INFO CourseRegistrationOperation,main:222 - Course Prerequisites:- Basic Maths
+10:26:58,958  INFO CourseRegistrationOperation,main:223 - +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+10:26:58,959  INFO CourseRegistrationOperation,main:219 - Course Id:- 402
+10:26:58,961  INFO CourseRegistrationOperation,main:220 - Course Name:- DS
+10:26:58,966  INFO CourseRegistrationOperation,main:221 - Course Credits:- 5
+10:26:58,967  INFO CourseRegistrationOperation,main:222 - Course Prerequisites:- Programming Basic
+10:26:58,968  INFO CourseRegistrationOperation,main:223 - +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+10:26:58,970  INFO CourseRegistrationOperation,main:219 - Course Id:- 403
+10:26:58,970  INFO CourseRegistrationOperation,main:220 - Course Name:- Algo
+10:26:58,971  INFO CourseRegistrationOperation,main:221 - Course Credits:- 5
+10:26:58,973  INFO CourseRegistrationOperation,main:222 - Course Prerequisites:- DS
+10:26:58,974  INFO CourseRegistrationOperation,main:223 - +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+10:26:58,975  INFO CourseRegistrationOperation,main:219 - Course Id:- 407
+10:26:58,976  INFO CourseRegistrationOperation,main:220 - Course Name:- DM
+10:26:58,981  INFO CourseRegistrationOperation,main:221 - Course Credits:- 5
+10:26:58,983  INFO CourseRegistrationOperation,main:222 - Course Prerequisites:- Basic Maths
+10:26:58,984  INFO CourseRegistrationOperation,main:223 - +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+10:27:37,865  INFO CourseRegistrationOperation,main:228 - Enrolled Students
+10:27:38,063  INFO CourseRegistrationOperation,main:232 - Course ID:- 401	Course Name:- Programming Basic
+10:27:38,309  INFO CourseRegistrationOperation,main:234 - Students:-
+10:27:38,313  INFO CourseRegistrationOperation,main:236 - Student ID :- 101
+10:27:38,315  INFO CourseRegistrationOperation,main:232 - Course ID:- 402	Course Name:- DS
+10:27:38,537  INFO CourseRegistrationOperation,main:234 - Students:-
+10:27:38,539  INFO CourseRegistrationOperation,main:236 - Student ID :- 101
+10:27:38,539  INFO CourseRegistrationOperation,main:232 - Course ID:- 403	Course Name:- Algo
+10:27:38,899  INFO CourseRegistrationOperation,main:234 - Students:-
+10:27:38,900  INFO CourseRegistrationOperation,main:236 - Student ID :- 101
+10:27:38,901  INFO CourseRegistrationOperation,main:232 - Course ID:- 407	Course Name:- DM
+10:27:39,154  INFO CourseRegistrationOperation,main:234 - Students:-
+10:28:18,992  INFO GradeCardOperation,main:75 - Enter CourseID
+10:28:27,775  INFO GradeCardOperation,main:89 - Enter Student ID
+10:28:31,114  INFO GradeCardOperation,main:96 - Enter Grade

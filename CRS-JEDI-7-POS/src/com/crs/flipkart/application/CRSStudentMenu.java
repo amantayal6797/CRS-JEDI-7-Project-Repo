@@ -18,7 +18,6 @@ import com.crs.flipkart.dao.StudentDaoOperation;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
 
 
 /**
@@ -67,24 +66,64 @@ public class CRSStudentMenu {
 			sc.nextLine();
 			switch (choice) {
 				// Course Registration 
-				case 1: if(!studDAOobj.isRegistered(userId))
-							courseRegistrationObj.registerCourses(userId);
+				case 1: if(!studDAOobj.isRegistered(userId)) {
+					ArrayList<Integer> choices=new ArrayList<Integer>();
+					
+					System.out.println("Enter 6 choices");
+					System.out.println("Enter Course ID 1:-");
+					int courseId=sc.nextInt();
+					sc.nextLine();
+					choices.add(courseId);
+					
+					System.out.println("Enter Course ID 2:-");
+					courseId=sc.nextInt();
+					sc.nextLine();
+					choices.add(courseId);
+					
+					System.out.println("Enter Course ID 3:-");
+					courseId=sc.nextInt();
+					sc.nextLine();
+					choices.add(courseId);
+					
+					System.out.println("Enter Course ID 4:-");
+					courseId=sc.nextInt();
+					sc.nextLine();
+					choices.add(courseId);
+					
+					System.out.println("Enter Course ID 5:-");
+					courseId=sc.nextInt();
+					sc.nextLine();
+					choices.add(courseId);
+					
+					System.out.println("Enter Course ID 6:-");
+					courseId=sc.nextInt();
+					sc.nextLine();
+					choices.add(courseId);
+						
+					courseRegistrationObj.registerCourses(userId,choices);
+				}
 						else
 							System.out.println("Already Registered");
 						break;
 				// Add Course		
 				case 2: 
-					if(studDAOobj.isRegistered(userId))
-						courseRegistrationObj.addCourse(userId);
-					else {
+					if(studDAOobj.isRegistered(userId)) {
+						System.out.println("Enter id of course to add");
+						int courseId=sc.nextInt();
+						sc.nextLine();
+						courseRegistrationObj.addCourse(userId,courseId);
+					}else {
 						System.out.println("Complete Course Registration first");
 					}
 					break;
 				// Drop Course
 				case 3:
-					if(studDAOobj.isRegistered(userId))
-						courseRegistrationObj.dropCourse(userId);
-					else {
+					if(studDAOobj.isRegistered(userId)) {
+						System.out.println("Enter id of course to remove");
+						int courseId=sc.nextInt();
+						sc.nextLine();
+						courseRegistrationObj.dropCourse(userId,courseId);
+					}else {
 						System.out.println("Complete Course Registration first");
 					}
 					break;

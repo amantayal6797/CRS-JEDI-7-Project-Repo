@@ -20,24 +20,6 @@ import java.util.Properties;
  *
  */
 
-/*
- ConnectionSetup connectionSetup = new ConnectionSetup();
-		Connection conn = connectionSetup.connectionEstablish();
-		String sql = "select * from professor";
-		PreparedStatement stmt;
-		try {
-			stmt = conn.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery(sql);
-
-		      while(rs.next()){
-		         int id  = rs.getInt("userId");
-		         System.out.print("ID: " + id);
-		      }
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		connectionSetup.connectionClose(conn);
- */
 
 
 public class DBUtils {

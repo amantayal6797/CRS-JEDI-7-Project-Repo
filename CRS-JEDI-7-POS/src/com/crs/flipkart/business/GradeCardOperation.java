@@ -68,13 +68,10 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 		return gradeCard;
 	}
 	
-	public void assignGrade(int userId) {
+	public void assignGrade(int userId, int courseId,int studentId,String grade) {
 		try {
 		CourseDaoOperationInterface courseDAOobj=new CourseDaoOperation();
 		Scanner sc=new Scanner(System.in);
-		logger.info("Enter CourseID");
-		int courseId=sc.nextInt();
-		sc.nextLine();
 		boolean flag=false;
 		ArrayList<Course> professorCourses=courseDAOobj.getProfessorCourses(userId);
 		for(Course course:professorCourses) {
@@ -86,16 +83,10 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 		if(flag==false) {
 			throw new CourseNotTaughtByProfessorException(courseId);
 		}
-		logger.info("Enter Student ID");
-		int studentId=sc.nextInt();
-		sc.nextLine();
 		ArrayList <Integer> enrolledStudents= courseDAOobj.getEnrolledStudents(courseId);
 		if(!enrolledStudents.contains(studentId)) {
 			throw new StudentNotRegisteredForCourseException(courseId,studentId);
 		}
-		logger.info("Enter Grade");
-		String grade=sc.nextLine();
-		courseDAOobj.setGrade(studentId,courseId,grade);
 		System.out.println("Grade Assigned Succesfully");
 		}catch(CourseNotTaughtByProfessorException | StudentNotRegisteredForCourseException e ) {
 			System.out.println(e.getMessage());

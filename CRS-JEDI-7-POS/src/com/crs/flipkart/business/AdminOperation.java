@@ -32,14 +32,8 @@ public class AdminOperation implements AdminOperationInterface {
 	ProfessorDaoOperationInterface professorDaoOperation = new ProfessorDaoOperation();
 	private static Logger logger = Logger.getLogger(AdminOperation.class);
 
-	public void addCourse() {
+	public void addCourse(int courseID,String courseName, int credits) {
 		Scanner sc = new Scanner(System.in);
-		logger.info("Enter Course ID to add: ");
-		int courseID = sc.nextInt();
-		logger.info("Enter Course Name to add: ");
-		String courseName = sc.next();
-		logger.info("Enter Course Credits: ");
-		int credits = sc.nextInt();
 		
 		Course course = new Course();
 		course.setCourseID(courseID);
@@ -50,10 +44,9 @@ public class AdminOperation implements AdminOperationInterface {
 		adminDaoOperation.addCourse(course);
 	}
 	
-	public void dropCourse() {
+	public void dropCourse(int courseID) {
 		Scanner sc = new Scanner(System.in);
-		logger.info("Enter Course ID to drop: ");
-		int courseID = sc.nextInt();
+		
 		
 		adminDaoOperation.dropCourse(courseID);
 	}
@@ -85,10 +78,7 @@ public class AdminOperation implements AdminOperationInterface {
 		Professor professor = new Professor();
 		professor.setUserId(userId);
 		
-		if (userDaoOperation.getUser(professor.getUserId())!=null) {
-			logger.error("User already exists with this userId");
-			return;
-		}
+		
 		try {
 		if (userDaoOperation.getUser(professor.getUserId())!=null) 
 			throw new UserAlreadyExistsException(userId);
@@ -127,27 +117,21 @@ public class AdminOperation implements AdminOperationInterface {
 		professorDaoOperation.addProfessor(professor);
 	}
 	
-	public void assignCourseToProfessor() {
-		Scanner sc = new Scanner(System.in);
-		logger.info("Enter User ID of professor: ");
-		int userId = sc.nextInt();
+	public void assignCourseToProfessor(int profId,ArrayList<Integer>CourseIdList,int ch) {
 		try {
-		if (userDaoOperation.getUser(userId)==null) {
-			throw new UserDoesNotExistException(userId);
+		if (userDaoOperation.getUser(profId)==null) {
+			throw new UserDoesNotExistException(profId);
 		}
+		
 		CourseRegistrationOperation courseRegistrationOperation = new CourseRegistrationOperation();
-		courseRegistrationOperation.registerProfessorCourse(userId);
+		courseRegistrationOperation.registerProfessorCourse(profId,CourseIdList,ch);
 		}
 		catch(UserDoesNotExistException e){
 			System.out.println(e.getMessage());
 		}
 	}
 	
-	public void viewGradeCard() {
-		Scanner sc = new Scanner(System.in);
-		logger.info("Enter User ID of student: ");
-		
-		int userId = sc.nextInt();
+	public void viewGradeCard(int userId) {
 		GradeCardOperation gradeCardOperation = new GradeCardOperation();
 		gradeCardOperation.viewGradeCard(userId);
 	}

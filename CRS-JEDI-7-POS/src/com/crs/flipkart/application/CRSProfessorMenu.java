@@ -5,8 +5,10 @@ package com.crs.flipkart.application;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.crs.flipkart.bean.Course;
 import com.crs.flipkart.bean.Professor;
 import com.crs.flipkart.bean.Student;
 import com.crs.flipkart.business.CourseRegistrationOperation;
@@ -15,8 +17,11 @@ import com.crs.flipkart.business.GradeCardOperation;
 import com.crs.flipkart.business.GradeCardOperationInterface;
 import com.crs.flipkart.business.OfflinePayment;
 import com.crs.flipkart.business.OnlinePayment;
+import com.crs.flipkart.dao.CourseDaoOperation;
+import com.crs.flipkart.dao.CourseDaoOperationInterface;
 import com.crs.flipkart.dao.ProfessorDaoOperation;
 import com.crs.flipkart.dao.ProfessorDaoOperationInterface;
+import com.crs.flipkart.exception.NoUnallottedCourseException;
 
 /**
  * 
@@ -34,6 +39,8 @@ public class CRSProfessorMenu extends CRSApplication {
 	
 	ProfessorDaoOperationInterface profDaoObj=new ProfessorDaoOperation(); 
 	public void ProfessorMenu(int userId) {
+		
+		CourseDaoOperationInterface courseDAOobj = new CourseDaoOperation();
 		
 		Professor professor=profDaoObj.getProfessor(userId);
 		System.out.println("\nWelcome "+professor.getUserName());
@@ -63,8 +70,32 @@ public class CRSProfessorMenu extends CRSApplication {
 			switch (choice) {
 				// Professor Registers Course
 				case 1:
-					courseRegistrationObj.registerProfessorCourse(userId);
-					break;
+					try {
+						 ArrayList<Course> courseList=new ArrayList<Course>();
+						 courseList=courseDAOobj.getUnregisteredCourses(userId);
+						 if (courseList.size()==0) {
+							 throw new NoUnallottedCourseException();
+						 }
+						 System.out.println("Available Courses");
+						 ArrayList<Integer> courseIdList=new ArrayList<Integer>();
+						 for(Course course:courseList) {
+								System.out.println("Course Id:- "+course.getCourseID());
+								System.out.println("Course Name:- "+course.getCourseName());
+								System.out.println("Course Credits:- "+course.getCredits());
+								System.out.println("Course Prerequisites:- "+course.getPrerequisites());
+								System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+								courseIdList.add(course.getCourseID());
+							}
+						 System.out.println("Enter Course ID to register");
+						 choice=sc.nextInt();
+						 sc.nextLine();
+						 courseRegistrationObj.registerProfessorCourse(userId,courseIdList,choice);
+							break;
+					}
+					catch(Exception e) {
+						System.out.println(e.getMessage());
+					}
+					
 				// View Course	of Professor
 				case 2: 
 					courseRegistrationObj.viewProfessorCourses(userId);
@@ -75,7 +106,15 @@ public class CRSProfessorMenu extends CRSApplication {
 					break;
 				// Assign Grade
 				case 4:
-					gradeCardObj.assignGrade(userId);
+					System.out.println("Enter CourseID");
+					int courseId=sc.nextInt();
+					sc.nextLine();
+					System.out.println("Enter Student ID");
+					int studentId=sc.nextInt();
+					sc.nextLine();
+					System.out.println("Enter Grade");
+					String grade=sc.nextLine();
+					gradeCardObj.assignGrade(userId,courseId,studentId,grade);
 						break;						
 				case 5: 
 						break;
