@@ -4,9 +4,6 @@
 package com.crs.flipkart.business;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-
-import org.apache.log4j.Logger;
 
 import com.crs.flipkart.bean.Course;
 import com.crs.flipkart.bean.Professor;
@@ -30,11 +27,8 @@ public class AdminOperation implements AdminOperationInterface {
 	UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
 	AdminDaoOperationInterface adminDaoOperation = new AdminDaoOperation();
 	ProfessorDaoOperationInterface professorDaoOperation = new ProfessorDaoOperation();
-	private static Logger logger = Logger.getLogger(AdminOperation.class);
 
 	public void addCourse(int courseID,String courseName, int credits) {
-		Scanner sc = new Scanner(System.in);
-		
 		Course course = new Course();
 		course.setCourseID(courseID);
 		course.setCourseName(courseName);
@@ -45,75 +39,24 @@ public class AdminOperation implements AdminOperationInterface {
 	}
 	
 	public void dropCourse(int courseID) {
-		Scanner sc = new Scanner(System.in);
-		
-		
 		adminDaoOperation.dropCourse(courseID);
 	}
 	
-	public void approveUser() {
-		ArrayList<Integer> unapprovedStudents=userDaoOperation.getUnapprovedStudents();
-		logger.info("List of Unapproved Students");
-		unapprovedStudents.forEach(System.out::println);
-		
-		//for(int i:unapprovedStudents) {
-			//logger.info(i);
-		//}
-		
-		Scanner sc = new Scanner(System.in);
-		logger.info("Enter User ID to approve: ");
-		int userId = sc.nextInt();
+	public void approveUser(int userId) {
 		userDaoOperation.approveUser(userId);
 		
 		NotificationDaoOperationInterface notificationObj = new NotificationDaoOperation();
 		notificationObj.updateStatus(userId, 1);
 	}
 	
-	public void addProfessor() {
-		Scanner sc = new Scanner(System.in);
-		
-		logger.info("Enter User ID: ");
-		int userId = sc.nextInt();
-
-		Professor professor = new Professor();
-		professor.setUserId(userId);
-		
-		
+	public void addProfessor(Professor professor) {
 		try {
 		if (userDaoOperation.getUser(professor.getUserId())!=null) 
-			throw new UserAlreadyExistsException(userId);
+			throw new UserAlreadyExistsException(professor.getUserId());
 		}
 		catch(UserAlreadyExistsException e) {
-			logger.info(e.getMessage());
+			System.out.println(e.getMessage());
 			}
-		
-		logger.info("Enter Username: ");
-		String userName = sc.next();
-		professor.setUserName(userName);
-		logger.info("Enter Password: ");
-		String password = sc.next();
-		professor.setPassword(password);
-		professor.setRole("Professor");
-		logger.info("Enter Email: ");
-		String email = sc.next();
-		professor.setEmail(email);
-		professor.setIsApproved(true);
-		logger.info("Enter Address: ");
-		String address = sc.next();
-		professor.setAddress(address);
-		logger.info("Enter Age: ");
-		int age = sc.nextInt();
-		professor.setAge(age);
-		logger.info("Enter Gender: ");
-		String gender = sc.next();
-		professor.setGender(gender);
-		logger.info("Enter Contact: ");
-		String contact = sc.next();
-		professor.setContact(contact);
-		logger.info("Enter Department: ");
-		String dep = sc.next();
-		professor.setDepartment(dep);
-		
 		professorDaoOperation.addProfessor(professor);
 	}
 	

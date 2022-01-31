@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import com.crs.flipkart.bean.Admin;
 import com.crs.flipkart.bean.Course;
+import com.crs.flipkart.bean.Professor;
 import com.crs.flipkart.bean.Student;
 import com.crs.flipkart.business.AdminOperation;
 import com.crs.flipkart.business.CourseRegistrationOperation;
@@ -18,7 +19,10 @@ import com.crs.flipkart.dao.AdminDaoOperation;
 import com.crs.flipkart.dao.AdminDaoOperationInterface;
 import com.crs.flipkart.dao.CourseDaoOperation;
 import com.crs.flipkart.dao.CourseDaoOperationInterface;
+import com.crs.flipkart.dao.UserDaoOperation;
+import com.crs.flipkart.dao.UserDaoOperationInterface;
 import com.crs.flipkart.exception.NoUnallottedCourseException;
+import com.crs.flipkart.exception.UserAlreadyExistsException;
 import com.crs.flipkart.exception.UserDoesNotExistException;
 
 /**
@@ -39,6 +43,7 @@ public class CRSAdminMenu extends CRSApplication {
 	public void AdminMenu(int userId) {
 		
 		CourseDaoOperationInterface courseDAOobj=new CourseDaoOperation();
+		UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
 		
 		Admin admin=adminDaoObj.getAdmin(userId);
 		System.out.println("\nWelcome "+admin.getUserName());
@@ -94,11 +99,53 @@ public class CRSAdminMenu extends CRSApplication {
 				break;
 				// Approve Course case
 			case 4:
-				adminOperation.approveUser();
+				ArrayList<Integer> unapprovedStudents=userDaoOperation.getUnapprovedStudents();
+				System.out.println("List of Unapproved Students");
+				unapprovedStudents.forEach(System.out::println);
+				
+				//for(int i:unapprovedStudents) {
+					//logger.info(i);
+				//}
+				
+				System.out.println("Enter User ID to approve: ");
+				int userIdToApprove = sc.nextInt();
+				adminOperation.approveUser(userIdToApprove);
 				break;
 			// Add Professor case
 			case 5:
-				adminOperation.addProfessor();
+				System.out.println("Enter User ID: ");
+				int professorUserId = sc.nextInt();
+
+				Professor professor = new Professor();
+				professor.setUserId(professorUserId);
+				
+				System.out.println("Enter Username: ");
+				String userName = sc.next();
+				professor.setUserName(userName);
+				System.out.println("Enter Password: ");
+				String password = sc.next();
+				professor.setPassword(password);
+				professor.setRole("Professor");
+				System.out.println("Enter Email: ");
+				String email = sc.next();
+				professor.setEmail(email);
+				professor.setIsApproved(true);
+				System.out.println("Enter Address: ");
+				String address = sc.next();
+				professor.setAddress(address);
+				System.out.println("Enter Age: ");
+				int age = sc.nextInt();
+				professor.setAge(age);
+				System.out.println("Enter Gender: ");
+				String gender = sc.next();
+				professor.setGender(gender);
+				System.out.println("Enter Contact: ");
+				String contact = sc.next();
+				professor.setContact(contact);
+				System.out.println("Enter Department: ");
+				String dep = sc.next();
+				professor.setDepartment(dep);
+				adminOperation.addProfessor(professor);
 				break;
 			// Assign Course to Professor Case
 			case 6:
