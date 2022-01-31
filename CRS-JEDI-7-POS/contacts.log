@@ -391,3 +391,74 @@
 10:28:18,992  INFO GradeCardOperation,main:75 - Enter CourseID
 10:28:27,775  INFO GradeCardOperation,main:89 - Enter Student ID
 10:28:31,114  INFO GradeCardOperation,main:96 - Enter Grade
+18:28:44,941  INFO CourseRegistrationOperation,main:235 - Grade Card
+18:28:44,951  INFO CourseRegistrationOperation,main:236 - User ID:-101
+18:28:44,953  INFO CourseRegistrationOperation,main:238 - Course ID:-401 Grade:-A
+18:28:44,954  INFO CourseRegistrationOperation,main:238 - Course ID:-402 Grade:-A
+18:28:44,955  INFO CourseRegistrationOperation,main:238 - Course ID:-403 Grade:-NA
+18:28:44,956  INFO CourseRegistrationOperation,main:238 - Course ID:-404 Grade:-NA
+18:29:06,220  INFO CourseRegistrationOperation,main:25 - You are approved by Admin. Now you can enroll for courses
+18:29:26,661  INFO CourseRegistrationOperation,main:116 - Registered Course ID 401
+18:29:27,016  INFO CourseRegistrationOperation,main:116 - Registered Course ID 402
+18:29:27,325  INFO CourseRegistrationOperation,main:116 - Registered Course ID 403
+18:29:27,692  INFO CourseRegistrationOperation,main:116 - Registered Course ID 404
+18:29:27,871  INFO CourseRegistrationOperation,main:158 - Course Registration Done
+18:29:27,872  INFO CourseRegistrationOperation,main:159 - Pay Fees Now.
+18:29:40,366  INFO CourseRegistrationOperation,main:47 - Displaying All Courses
+18:29:40,457  INFO CourseRegistrationOperation,main:207 - Course Id:- 401
+18:29:40,458  INFO CourseRegistrationOperation,main:208 - Course Name:- Programming Basic
+18:29:40,459  INFO CourseRegistrationOperation,main:209 - Course Credits:- 5
+18:29:40,460  INFO CourseRegistrationOperation,main:210 - Course Prerequisites:- Basic Maths
+18:29:40,461  INFO CourseRegistrationOperation,main:211 - Course Professor Id:- 201
+18:29:40,461  INFO CourseRegistrationOperation,main:212 - +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+18:29:40,462  INFO CourseRegistrationOperation,main:207 - Course Id:- 402
+18:29:40,463  INFO CourseRegistrationOperation,main:208 - Course Name:- DS
+18:29:40,464  INFO CourseRegistrationOperation,main:209 - Course Credits:- 5
+18:29:40,465  INFO CourseRegistrationOperation,main:210 - Course Prerequisites:- Programming Basic
+18:29:40,465  INFO CourseRegistrationOperation,main:211 - Course Professor Id:- 201
+18:29:40,466  INFO CourseRegistrationOperation,main:212 - +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+18:29:40,466  INFO CourseRegistrationOperation,main:207 - Course Id:- 403
+18:29:40,467  INFO CourseRegistrationOperation,main:208 - Course Name:- Algo
+18:29:40,468  INFO CourseRegistrationOperation,main:209 - Course Credits:- 5
+18:29:40,470  INFO CourseRegistrationOperation,main:210 - Course Prerequisites:- DS
+18:29:40,471  INFO CourseRegistrationOperation,main:211 - Course Professor Id:- 201
+18:29:40,472  INFO CourseRegistrationOperation,main:212 - +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+18:29:40,472  INFO CourseRegistrationOperation,main:207 - Course Id:- 404
+18:29:40,473  INFO CourseRegistrationOperation,main:208 - Course Name:- Digital Electronis
+18:29:40,474  INFO CourseRegistrationOperation,main:209 - Course Credits:- 5
+18:29:40,475  INFO CourseRegistrationOperation,main:210 - Course Prerequisites:- NA
+18:29:40,476  INFO CourseRegistrationOperation,main:211 - Course Professor Id:- 202
+18:29:40,477  INFO CourseRegistrationOperation,main:212 - +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+18:29:40,478  INFO CourseRegistrationOperation,main:207 - Course Id:- 405
+18:29:40,479  INFO CourseRegistrationOperation,main:208 - Course Name:- Signal and systems
+18:29:40,482  INFO CourseRegistrationOperation,main:209 - Course Credits:- 5
+18:29:40,483  INFO CourseRegistrationOperation,main:210 - Course Prerequisites:- NA
+18:29:40,484  INFO CourseRegistrationOperation,main:211 - Course Professor Id:- 202
+18:29:40,485  INFO CourseRegistrationOperation,main:212 - +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+18:29:40,486  INFO CourseRegistrationOperation,main:207 - Course Id:- 406
+18:29:40,487  INFO CourseRegistrationOperation,main:208 - Course Name:- Communication
+18:29:40,488  INFO CourseRegistrationOperation,main:209 - Course Credits:- 5
+18:29:40,489  INFO CourseRegistrationOperation,main:210 - Course Prerequisites:- NA
+18:29:40,490  INFO CourseRegistrationOperation,main:211 - Course Professor Id:- 202
+18:29:40,490  INFO CourseRegistrationOperation,main:212 - +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+18:29:40,491  INFO CourseRegistrationOperation,main:207 - Course Id:- 407
+18:29:40,492  INFO CourseRegistrationOperation,main:208 - Course Name:- DM
+18:29:40,493  INFO CourseRegistrationOperation,main:209 - Course Credits:- 5
+18:29:40,493  INFO CourseRegistrationOperation,main:210 - Course Prerequisites:- Basic Maths
+18:29:40,494  INFO CourseRegistrationOperation,main:211 - Course Professor Id:- 201
+18:29:40,494  INFO CourseRegistrationOperation,main:212 - +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+18:29:44,130  INFO CourseRegistrationOperation,main:219 - Registered Courses
+18:29:44,131  INFO CourseRegistrationOperation,main:38 - Register Courses for User 104
+18:29:44,310  INFO CourseRegistrationOperation,main:223 - Course Id:-401	Course Name:-Programming Basic
+18:29:44,394  INFO CourseRegistrationOperation,main:223 - Course Id:-402	Course Name:-DS
+18:29:44,496  INFO CourseRegistrationOperation,main:223 - Course Id:-403	Course Name:-Algo
+18:29:44,577  INFO CourseRegistrationOperation,main:223 - Course Id:-404	Course Name:-Digital Electronis
+18:29:49,713  INFO CourseRegistrationOperation,main:235 - Grade Card
+18:29:49,714  INFO CourseRegistrationOperation,main:236 - User ID:-104
+18:29:49,715  INFO CourseRegistrationOperation,main:238 - Course ID:-401 Grade:-NA
+18:29:49,715  INFO CourseRegistrationOperation,main:238 - Course ID:-402 Grade:-NA
+18:29:49,716  INFO CourseRegistrationOperation,main:238 - Course ID:-403 Grade:-NA
+18:29:49,716  INFO CourseRegistrationOperation,main:238 - Course ID:-404 Grade:-NA
+18:29:56,407  INFO CourseRegistrationOperation,main:39 - Fees Paid - 250000
+18:29:56,617  INFO CourseRegistrationOperation,main:269 - Transaction completed
+Fees Paid 

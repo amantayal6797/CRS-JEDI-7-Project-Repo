@@ -66,15 +66,7 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 			return admin;
 	}
 	
-	public void addCourse (Course course) {
-			try {
-				if(courseDaoOperation.verifyCourse(course.getCourseID()))
-					throw new CourseIDAlreadyExistException();
-			}
-			catch(CourseIDAlreadyExistException e){
-				System.out.println(e.getMessage());
-				return;	
-			}
+	public boolean addCourse (Course course) {
 		
 		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
@@ -99,7 +91,8 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 		    	if(i==0) 
 		    		throw new ErrorInAddingCourseException(1);
 				 else 
-					System.out.println("Course - "+course.getCourseID()+" added successfully");
+					 return true;
+					
 		    }
 		    catch(ErrorInAddingCourseException e){
 		    	System.out.println(e.getMessage());
@@ -108,16 +101,12 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 	    }catch (SQLException e) {
 			// TODO Auto-generated catch block
 			logger.debug("Exception raised: "+e.getMessage());
-		} finally {
-			connectionSetup.connectionClose(conn);	
-		}
+		} return false;
+		
 	}
 	
-	public void dropCourse(int courseId) {
-		if(!courseDaoOperation.verifyCourse(courseId)) {
-			logger.error("Course ID does not exist");
-			return;
-		}
+	public boolean dropCourse(int courseId) {
+		
 		
 		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
@@ -127,19 +116,11 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 		    stmt.setInt(1, courseId);
 		    int i = stmt.executeUpdate();
 		    
-		    /*
-		    if(i==0) {
-				 logger.error("Error in dropping course - "+courseId);
-			} else {
-				logger.info("Course - "+courseId+" dropped successfully");
-			}
-		    */
-		    
 		    try {
 		    	if(i==0) 
 		    		throw new ErrorInDropingCourseException(1);
 				 else 
-					 System.out.println("Course - "+courseId+" dropped successfully");
+					 return true;
 		    }
 		    catch(ErrorInDropingCourseException e){
 		    	System.out.println(e.getMessage());
@@ -149,8 +130,9 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 	    }catch (SQLException e) {
 			// TODO Auto-generated catch block
 			logger.debug("Exception raised: "+e.getMessage());
-		} finally {
+		} 
 			connectionSetup.connectionClose(conn);
-		}
+			
+		return false;
 	}
 }

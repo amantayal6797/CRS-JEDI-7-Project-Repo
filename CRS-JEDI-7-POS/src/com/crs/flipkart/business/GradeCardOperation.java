@@ -26,26 +26,16 @@ import com.crs.flipkart.exception.UserDoesNotExistException;
  * @author Ashruth
  *
  */
-public class GradeCardOperation extends CRSStudentMenu implements GradeCardOperationInterface {
+public class GradeCardOperation implements GradeCardOperationInterface {
 	UserDaoOperationInterface userDaoOperation =new UserDaoOperation();
 	private static Logger logger = Logger.getLogger(GradeCardOperation.class);
-	public void viewGradeCard(int studentId) {
-		// Generate Grades 
-		// Display
-		try {
+	
+	public GradeCard viewGradeCard(int studentId) throws UserDoesNotExistException {
 		if (userDaoOperation.getUser(studentId)==null) {
 			throw new UserDoesNotExistException(studentId);
 			}
 		GradeCard gradeCard=generateGradeCard(studentId);
-		logger.info("Grade Card");
-		logger.info("User ID:-"+studentId);
-		for(Grade grade:gradeCard.getListOfGrades()) {
-			logger.info("Course ID:-"+grade.getCourseID()+" Grade:-"+grade.getGrade());
-		}
-		}catch(UserDoesNotExistException e) {
-			System.out.println(e.getMessage());
-		}
-		
+		return gradeCard;	
 	}
 	
 	public GradeCard generateGradeCard(int studentId) {
@@ -68,8 +58,8 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 		return gradeCard;
 	}
 	
-	public void assignGrade(int userId, int courseId,int studentId,String grade) {
-		try {
+	public boolean assignGrade(int userId, int courseId,int studentId,String grade) throws CourseNotTaughtByProfessorException,StudentNotRegisteredForCourseException {
+		
 		CourseDaoOperationInterface courseDAOobj=new CourseDaoOperation();
 		Scanner sc=new Scanner(System.in);
 		boolean flag=false;
@@ -87,9 +77,7 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 		if(!enrolledStudents.contains(studentId)) {
 			throw new StudentNotRegisteredForCourseException(courseId,studentId);
 		}
-		System.out.println("Grade Assigned Succesfully");
-		}catch(CourseNotTaughtByProfessorException | StudentNotRegisteredForCourseException e ) {
-			System.out.println(e.getMessage());
-		}
+		return true;
+		
 	}
 }

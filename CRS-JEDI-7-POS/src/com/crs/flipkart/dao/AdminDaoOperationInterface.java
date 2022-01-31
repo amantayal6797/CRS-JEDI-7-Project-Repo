@@ -20,13 +20,13 @@ import com.crs.flipkart.bean.Admin;
 			*ProfessorAlloated to that course
 			*credits assigned to that
 		*/
-	    public void addCourse (Course course) ;
+	    public boolean addCourse (Course course) ;
 
 
 		/*
 			delete a course from course catalog
 		*/
-	    public void dropCourse(int courseId);
+	    public boolean dropCourse(int courseId);
 	    /*
 	     * Get Details of Admin from database
 	     */

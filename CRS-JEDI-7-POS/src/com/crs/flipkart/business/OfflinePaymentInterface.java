@@ -12,8 +12,9 @@ public interface OfflinePaymentInterface {
 	 * Method to pay by cash
 	 * @param userId: identification number of user making the payment
 	 * @param slipNumber:
+	 * @return 
 	 */
-	public void payByCash(int userId, int slipNumber);
+	public boolean payByCash(int userId, int slipNumber);
 	/**
 	 * Method to check slipNumber from Bank DataBase@
 	 * @param slipNumber: slip number to verified from db

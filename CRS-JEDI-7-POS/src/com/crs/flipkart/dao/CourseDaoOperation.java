@@ -79,8 +79,7 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 					course.setCredits(rs.getInt("credit"));
 					course.setPrerequisites(rs.getString("prerequisites"));
 					course.setProfessorAllotted(rs.getInt("professoralloted"));
-					if(getEnrolledStudents(course.getCourseID()).size() < 10)
-						catalog.add(course);
+					catalog.add(course);
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

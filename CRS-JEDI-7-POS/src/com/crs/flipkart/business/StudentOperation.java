@@ -19,16 +19,13 @@ public class StudentOperation implements StudentOperationInterface {
 	UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
 	StudentDaoOperationInterface studentDaoOperation = new StudentDaoOperation();
 	@Override
-	public void registerStudent(Student student) {
-		try {
+	public boolean registerStudent(Student student) throws UserAlreadyExistsException {
 		if (userDaoOperation.getUser(student.getUserId())!=null) {
 			throw new UserAlreadyExistsException(student.getUserId());
 		}
 		
 		studentDaoOperation.registerStudent(student);
-		}catch(UserAlreadyExistsException e) {
-			System.out.println(e.getMessage());
-		}
+		return true;
 	}
 
 }

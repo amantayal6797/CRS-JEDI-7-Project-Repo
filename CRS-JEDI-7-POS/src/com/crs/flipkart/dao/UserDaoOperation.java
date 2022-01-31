@@ -54,22 +54,10 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 		}
 		
 		//done
-		public void approveUser (int userId) {
-			/*
-			if (getUser(userId)==null) {
-				logger.error("User does not exists with this userId");
-				return;
-			}
-			*/
-			try {
+		public boolean approveUser (int userId) throws UserDoNotExistException {
 				if (getUser(userId)==null) {
 					throw new UserDoNotExistException();
 				}
-			}catch(UserDoNotExistException e) {
-				System.out.println(e.getMessage());
-				return;
-			}
-			
 			DBUtils DBUtils = new DBUtils();
 		    Connection conn = DBUtils.connectionEstablish();
 //			String sql = "update user set isApproved=1 where userId = ?";
@@ -90,7 +78,7 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 					if(i==0)
 						throw new ErrorInApprovingUserException();
 					else
-						System.out.println("User - "+userId+" approved successfully");	
+						return true;
 				}catch (ErrorInApprovingUserException e){
 					System.out.println(e.getMessage(userId));
 				}
@@ -99,9 +87,9 @@ public class UserDaoOperation implements UserDaoOperationInterface {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 			    logger.debug("Exception raised: "+e.getMessage());
-			} finally {
-				DBUtils.connectionClose(conn);	
-			}
+			} DBUtils.connectionClose(conn);	
+			return false;
+			
 		}
 		
 public String Authorize(int userId,String password) {

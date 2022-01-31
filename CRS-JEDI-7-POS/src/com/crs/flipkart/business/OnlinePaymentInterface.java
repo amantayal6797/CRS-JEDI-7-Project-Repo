@@ -13,8 +13,9 @@ public interface OnlinePaymentInterface {
 	 * @param userId: identification number
 	 * @param cardNumber: card number
 	 * @param date: expiry date card
+	 * @return 
 	 */
-	public void payByCard(int userId, int cardNumber, int date);
+	public boolean payByCard(int userId, int cardNumber, int date);
 	/**
 	 * Method toc heck card num & expiryDate from Bank DataBase
 	 * @param cardNumber: card number

@@ -18,31 +18,23 @@ public class OfflinePayment extends PaymentOperation implements OfflinePaymentIn
 	private int slipNumber;
 //	--------------------------------------------------------------------------------	
 
-	public void payByCash(int userId, int slipNumber) {
+	public boolean payByCash(int userId, int slipNumber) {
 		try {
 	    this.slipNumber = slipNumber;
 		
 		Scanner sc=new Scanner(System.in);
 	
-		logger.info("You have to pay: 2,50,000");
-		
-		logger.info("Enter 1. to pay fees or 2. for exit");	
-		
-		int choice = sc.nextInt();
-		sc.nextLine();
-		
-		if(choice!=1)
-			return;
 		
 		
 		if(makePayment(userId, 250000)==false)
 			throw new PaymentException();
 		else {
-			logger.info("Transaction completed :) ");
+			return true;
 		}	
 		}catch (PaymentException e) {
 			logger.error(e.getMessage());
 		}
+		return false;
 	}
 	
 	public boolean authenticate(int slipNumber) {

@@ -25,7 +25,7 @@ public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 	UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
 	private static Logger logger = Logger.getLogger(ProfessorDaoOperation.class);
 	
-	public void addProfessor(Professor professor) {
+	public boolean addProfessor(Professor professor) {
 		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
 	    try {
@@ -50,20 +50,16 @@ public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 		    	if(i==0)
 		    		throw new ErrorInAddingProfessorException();
 		    	else
-		    		System.out.println("Professor - "+professor.getUserId()+" added successfully");
+		    		return true;
 		    }catch(ErrorInAddingProfessorException e) {
 		    	System.out.println(e.getMessage());
 		    }
-		    
-	    	
-		     
-		  
 	    }catch (SQLException e) {
 			// TODO Auto-generated catch block
 			logger.debug("Exception raised: "+e.getMessage());
-		} finally {
-			connectionSetup.connectionClose(conn);	
-		}
+		} 
+			connectionSetup.connectionClose(conn);
+			return false;
 	}
 
 	@Override

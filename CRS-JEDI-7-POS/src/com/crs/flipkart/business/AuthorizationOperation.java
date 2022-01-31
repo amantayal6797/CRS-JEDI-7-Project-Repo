@@ -26,16 +26,14 @@ public class AuthorizationOperation implements AuthorizationOperationInterface {
 
 	@SuppressWarnings("finally")
 	@Override
-	public boolean updatePasswordCheck(int userId, String nPassword, String cNPassword) {
-		try {
+	public boolean updatePasswordCheck(int userId, String nPassword, String cNPassword) throws UserDoesNotExistException,PasswordNotMatchingException {
 		if (nPassword.equals(cNPassword)) {	
 			int status = userDaoOperation.updatePasswordCheck(userId, nPassword);
 			
 			if(status==1) {
-				logger.info("Password updated successfully");
+				
 				return true;
 			}else if(status==2){
-				logger.error("Error");
 				return false;
 			}else if(status==3) {
 			throw new UserDoesNotExistException(userId);
@@ -44,13 +42,8 @@ public class AuthorizationOperation implements AuthorizationOperationInterface {
 		} else {
 			throw new PasswordNotMatchingException();
 		}
-		}
-		catch(UserDoesNotExistException | PasswordNotMatchingException e ) {
-			System.out.println(e.getMessage());
-		}
-		finally {
 		return false;
-		}
+		
 	}
 
 }

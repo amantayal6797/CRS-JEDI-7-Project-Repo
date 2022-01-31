@@ -34,36 +34,24 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 	StudentOperationInterface studOpObj = new StudentOperation();
 	private static Logger logger = Logger.getLogger(CourseRegistrationOperation.class);
 
-	public void viewRegisteredCourse(int studentId) {
+	public ArrayList<RegisteredCourse> viewRegisteredCourse(int studentId) {
 		logger.info("Register Courses for User "+studentId);
 		ArrayList<RegisteredCourse> listOfRegisteredCourses=new ArrayList<RegisteredCourse>();
 		listOfRegisteredCourses=courseDAOobj.getRegisteredCourses(studentId);
-		for(RegisteredCourse regCourse:listOfRegisteredCourses) {
-				Course course=courseDAOobj.getCourse(regCourse.getCourseID());
-				logger.info("Course Id:-"+course.getCourseID()+"\tCourse Name:-"+course.getCourseName());
-			
-		}
-		logger.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		return listOfRegisteredCourses;
+		
 	}
 
-	public void viewCourses() {
+	public ArrayList<Course> viewCourses() {
 		// Display all courses in catalog
 		logger.info("Displaying All Courses");
 		ArrayList<Course> catalog=new ArrayList<Course>();
 		catalog=courseDAOobj.viewCourses();
-		for(Course course:catalog) {
-			logger.info("Course Id:- "+course.getCourseID());
-			logger.info("Course Name:- "+course.getCourseName());
-			logger.info("Course Credits:- "+course.getCredits());
-			logger.info("Course Prerequisites:- "+course.getPrerequisites());
-			logger.info("Course Professor Id:- "+course.getProfessorAllotted());
-			logger.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			
-		}
+		return catalog;
 	}
 
-	public void dropCourse(int studentId,int courseId) {
-		try {
+	public boolean dropCourse(int studentId,int courseId) throws NoCourseToDropException,CourseDoesNotExistException,CourseNotRegisteredToDropException {
+		
 		ArrayList<RegisteredCourse> enrolledCourses=courseDAOobj.getRegisteredCourses(studentId);
 		if (enrolledCourses.size()==0) {
 			throw new NoCourseToDropException();
@@ -74,19 +62,16 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		for(RegisteredCourse regCourse:enrolledCourses) {
 			if(regCourse.getCourseID()==courseId) {
 				courseDAOobj.dropCourse(courseId,studentId);
-				logger.info("Course Successfully Dropped");
-				return;}
+				return true;}
 		}
 		throw new CourseNotRegisteredToDropException();
-		}
-		catch(NoCourseToDropException | CourseDoesNotExistException |  CourseNotRegisteredToDropException e) {
-			System.out.println(e.getMessage());
-		}
+		
+		
 		
 	}
 
-	public void addCourse(int studentId,int courseId) {
-		try {
+	public boolean addCourse(int studentId,int courseId) throws RegistrationCompletedException,CourseDoesNotExistException,CourseAlreadyRegisteredException {
+		
 		ArrayList<RegisteredCourse> enrolledCourses=courseDAOobj.getRegisteredCourses(studentId);
 		if(enrolledCourses.size()==4) {
 			throw new RegistrationCompletedException();
@@ -105,14 +90,12 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 
 		//logger.info(3);
 		courseDAOobj.addCourse(studentId,courseId);
-		System.out.println("Course Succesfully Added\n");
-		}catch(RegistrationCompletedException | CourseAlreadyRegisteredException | CourseDoesNotExistException e) {
-			System.out.println(e.getMessage());
-		}
+		return true;
+		
 		
 	}
 
-	public void registerCourses(int studentId,ArrayList<Integer> choices) {
+	public boolean registerCourses(int studentId,ArrayList<Integer> choices) {
 		
 		int count=0;
 		ArrayList<Integer> enrolled=new ArrayList<Integer>();
@@ -136,51 +119,33 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 			else
 				logger.error("Course "+cId+" exceeded student limit");
 		}
-		logger.info("Course Registration Done");
-		logger.info("Pay Fees Now.");
 		studDAOobj.setRegistration(studentId);
+		return true;
 	}
 	
-	 public void registerProfessorCourse(int userId,ArrayList<Integer> courseIdList,int choice) {
-		 try{
+	 public boolean registerProfessorCourse(int userId,ArrayList<Integer> courseIdList,int choice) throws CourseDoesNotExistException {
+		 
 			 if(!courseIdList.contains(choice)) {
 			 throw new CourseDoesNotExistException(choice);
 		 }
 		 courseDAOobj.setRegisterCourse(userId,choice);
-		 System.out.println("Course - "+choice+" succesfully allotted to Professor - "+userId);
-	 
-		 }catch( CourseDoesNotExistException e) {
-			 System.out.println(e.getMessage());
-		 }
+		 return true;
+		 
 	 }
 	 
-	 public void viewProfessorCourses(int userId) {
-		 logger.info("Registered Courses");
+	 public ArrayList<Course> viewProfessorCourses(int userId) {
 		 ArrayList<Course> courseList=new ArrayList<Course>();
 		 courseList=courseDAOobj.getProfessorCourses(userId);
-		 for(Course course:courseList) {
-				logger.info("Course Id:- "+course.getCourseID());
-				logger.info("Course Name:- "+course.getCourseName());
-				logger.info("Course Credits:- "+course.getCredits());
-				logger.info("Course Prerequisites:- "+course.getPrerequisites());
-				logger.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			}
+		 return courseList;
+		 
 	 }
 	 
-	 public void viewEnrolledStudents(int userId) {
-		 logger.info("Enrolled Students");
-		 ArrayList<Course> courseList=new ArrayList<Course>();
-		 courseList=courseDAOobj.getProfessorCourses(userId);
-		 for(Course course:courseList) {
-			 logger.info("Course ID:- "+ course.getCourseID()+"\tCourse Name:- "+course.getCourseName());
-			 ArrayList <Integer> enrolledStudents = courseDAOobj.getEnrolledStudents(course.getCourseID());
-			 logger.info("Students:-");
-			 for(int i:enrolledStudents) {
-				 logger.info("Student ID :- "+i);
-			 }
+	 public ArrayList<Integer> viewEnrolledStudents(int courseId) {
+		 ArrayList <Integer> enrolledStudents = courseDAOobj.getEnrolledStudents(courseId);
+		 return enrolledStudents;
 		 }
 		 
 	 }
 	
 
-}
+

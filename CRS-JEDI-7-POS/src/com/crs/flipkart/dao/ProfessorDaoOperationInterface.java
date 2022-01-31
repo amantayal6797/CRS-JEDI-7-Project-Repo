@@ -11,7 +11,7 @@ import com.crs.flipkart.bean.Professor;
 public interface ProfessorDaoOperationInterface {
 
 
-    public void addProfessor(Professor professor);  //add the new professor details into DB
+    public boolean addProfessor(Professor professor);  //add the new professor details into DB
 
 	public Professor getProfessor(int userId); //Get Details of Professor from the Database
 }

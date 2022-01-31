@@ -66,7 +66,6 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 		    	if(i==0) 
 		    		throw new ErrorInRegisteringStudentException();
 				else {
-					System.out.println("student - "+student.getUserId()+" registered successfully & your approval is pending by admin");
 					NotificationDaoOperationInterface notificationOper = new NotificationDaoOperation();
 					notificationOper.insertStatus(student.getUserId());
 				}	

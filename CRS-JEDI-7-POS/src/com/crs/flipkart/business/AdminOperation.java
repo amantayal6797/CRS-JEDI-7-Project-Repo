@@ -6,16 +6,23 @@ package com.crs.flipkart.business;
 import java.util.ArrayList;
 
 import com.crs.flipkart.bean.Course;
+import com.crs.flipkart.bean.Grade;
+import com.crs.flipkart.bean.GradeCard;
 import com.crs.flipkart.bean.Professor;
 import com.crs.flipkart.dao.AdminDaoOperation;
 import com.crs.flipkart.dao.AdminDaoOperationInterface;
+import com.crs.flipkart.dao.CourseDaoOperation;
+import com.crs.flipkart.dao.CourseDaoOperationInterface;
 import com.crs.flipkart.dao.NotificationDaoOperation;
 import com.crs.flipkart.dao.NotificationDaoOperationInterface;
 import com.crs.flipkart.dao.ProfessorDaoOperation;
 import com.crs.flipkart.dao.ProfessorDaoOperationInterface;
 import com.crs.flipkart.dao.UserDaoOperation;
 import com.crs.flipkart.dao.UserDaoOperationInterface;
+import com.crs.flipkart.exception.CourseDoesNotExistException;
+import com.crs.flipkart.exception.CourseIDAlreadyExistException;
 import com.crs.flipkart.exception.UserAlreadyExistsException;
+import com.crs.flipkart.exception.UserDoNotExistException;
 import com.crs.flipkart.exception.UserDoesNotExistException;
 
 /**
@@ -27,55 +34,59 @@ public class AdminOperation implements AdminOperationInterface {
 	UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
 	AdminDaoOperationInterface adminDaoOperation = new AdminDaoOperation();
 	ProfessorDaoOperationInterface professorDaoOperation = new ProfessorDaoOperation();
-
-	public void addCourse(int courseID,String courseName, int credits) {
+	CourseDaoOperationInterface courseDaoOperation = new CourseDaoOperation();
+	
+	public boolean addCourse(int courseID,String courseName, int credits) throws CourseIDAlreadyExistException {
 		Course course = new Course();
 		course.setCourseID(courseID);
 		course.setCourseName(courseName);
 		course.setProfessorAllotted(0);
 		course.setCredits(credits);
+			if(courseDaoOperation.verifyCourse(course.getCourseID()))
+				throw new CourseIDAlreadyExistException();
+			
+		return adminDaoOperation.addCourse(course);
 		
-		adminDaoOperation.addCourse(course);
 	}
 	
-	public void dropCourse(int courseID) {
-		adminDaoOperation.dropCourse(courseID);
+	public boolean dropCourse(int courseID) throws CourseDoesNotExistException {
+		if(!courseDaoOperation.verifyCourse(courseID)) {
+			throw new CourseDoesNotExistException(courseID);
+		}
+		return adminDaoOperation.dropCourse(courseID);
 	}
 	
-	public void approveUser(int userId) {
-		userDaoOperation.approveUser(userId);
+	public boolean approveUser(int userId) throws UserDoNotExistException {
+		boolean flag=userDaoOperation.approveUser(userId);
 		
 		NotificationDaoOperationInterface notificationObj = new NotificationDaoOperation();
 		notificationObj.updateStatus(userId, 1);
+		return flag;
 	}
 	
-	public void addProfessor(Professor professor) {
-		try {
+	public boolean addProfessor(Professor professor) throws UserAlreadyExistsException {
 		if (userDaoOperation.getUser(professor.getUserId())!=null) 
 			throw new UserAlreadyExistsException(professor.getUserId());
-		}
-		catch(UserAlreadyExistsException e) {
-			System.out.println(e.getMessage());
-			}
-		professorDaoOperation.addProfessor(professor);
+		
+		return professorDaoOperation.addProfessor(professor);
 	}
 	
-	public void assignCourseToProfessor(int profId,ArrayList<Integer>CourseIdList,int ch) {
-		try {
+	public boolean assignCourseToProfessor(int profId,ArrayList<Integer>CourseIdList,int ch) throws CourseDoesNotExistException,UserDoesNotExistException {
 		if (userDaoOperation.getUser(profId)==null) {
 			throw new UserDoesNotExistException(profId);
 		}
 		
 		CourseRegistrationOperation courseRegistrationOperation = new CourseRegistrationOperation();
-		courseRegistrationOperation.registerProfessorCourse(profId,CourseIdList,ch);
+		return courseRegistrationOperation.registerProfessorCourse(profId,CourseIdList,ch);
 		}
-		catch(UserDoesNotExistException e){
-			System.out.println(e.getMessage());
-		}
-	}
+		
 	
-	public void viewGradeCard(int userId) {
-		GradeCardOperation gradeCardOperation = new GradeCardOperation();
-		gradeCardOperation.viewGradeCard(userId);
-	}
+	
+	public GradeCard viewGradeCard(int userId) throws UserDoesNotExistException {
+		GradeCardOperationInterface gradeCardObj = new GradeCardOperation();
+		GradeCard gradeCard=gradeCardObj.viewGradeCard(userId);	
+		return gradeCard;
+		}
+		
+	
 }
