@@ -169,7 +169,7 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 
 		 for(Course course:courseList) {
 			 logger.info(String.format("|%-20d | %-20s | %-20d | %-20s|\n",course.getCourseID(),course.getCourseName(),course.getCredits(),course.getPrerequisites());
-			 logger.info("---------------------------------------------------------------------------------------------------");
+			 logger.info("---------------------------------------------------------------------------------------------------\n");
 
 		 }
 	 }
