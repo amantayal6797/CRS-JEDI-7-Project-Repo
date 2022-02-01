@@ -4,13 +4,16 @@
 package com.crs.flipkart.bean;
 
 /**
- * @author aditya
+ * @author Nitish
  *
  */
+
 public class Customer {
+	
 	private int id;
 	private String name;
 	private String address;
+	
 	/**
 	 * @return the id
 	 */
@@ -47,16 +50,5 @@ public class Customer {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
-    // Creating toString
-    @Override
-    public String toString()
-    {
-        return "Organisation [organisation_name="
-            + name
-            + ", description="
-            + id
-            + ", Employees="
-            + address + "]";
-    }
+
 }
