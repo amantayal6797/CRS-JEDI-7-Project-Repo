@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
@@ -60,22 +61,19 @@ import com.crs.flipkart.exception.UserDoesNotExistException;
 @Path("/admin")
 public class AdminRestAPI  {
 	
-	/*
-	AdminDaoOperationInterface adminDaoObj=new AdminDaoOperation();
-	Scanner sc = new Scanner(System.in);
-	CourseDaoOperationInterface courseDAOobj=new CourseDaoOperation();
-	UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
-	CourseRegistrationOperationInterface courseRegistrationObj=new CourseRegistrationOperation();
-	//private static Logger logger = Logger.getLogger(CourseRegistrationOperation.class);
-	
-	*/	
+	/**
+	 * /admin/addProfessor
+	 * REST-service for adding professor
+	 * @param Professor
+	 * @return
+	 */
 	
 	@POST
 	@Path("/addProfessor")
 	@Consumes("application/json")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addProfessor(Professor professor){
-		//Logger logger = Logger.getLogger(AdminRestAPI.class);
+		Logger logger = Logger.getLogger(AdminRestAPI.class);
 		try {
 			
 		AdminOperationInterface adminOperation = new AdminOperation();
@@ -112,51 +110,73 @@ public class AdminRestAPI  {
 		String dep = professor.getDepartment();
 		profObj.setDepartment(dep);
 			
-		if(adminOperation.addProfessor(profObj)==true);
-		return Response.status(201).entity("Professor added successfully").build();
+		if(adminOperation.addProfessor(profObj)==true)
+		{
+			logger.info("Professor added successfully");
+			return Response.status(201).entity("Professor added successfully").build();
+		}
 		}catch(UserAlreadyExistsException e) {	
+			logger.debug(e.getMessage());
 		return Response.status(400).entity(e.getMessage()).build();
 	}
 	}
 	
+	
+	/**
+	 * /admin/viewGradeCard
+	 * REST-service for viewing grade card
+	 * @param studId
+	 * @return
+	 */
+	
 	@GET
 	@Path("/viewGradeCard")
 	@Produces(MediaType.APPLICATION_JSON)
-	public GradeCard viewGradeCard(@QueryParam("studId") int studId) {
+	
+	
+	
+	public GradeCard viewGradeCard(
+			@NotNull
+			@QueryParam("studId") int studId) {
 		AdminOperationInterface adminOperation = new AdminOperation();
 		
 		try {
-		//int studId = student.getUserId();
+		
 		GradeCard gradeCard=adminOperation.viewGradeCard(studId);
-		/*
-		logger.info("Grade Card");
-		logger.info("User ID:-"+userId);
-		for(Grade grade:gradeCard.getListOfGrades()) {
-			logger.info("Course ID:-"+grade.getCourseID()+" Grade:-"+grade.getGrade());
-			}
-		*/
+		
 
 		return gradeCard;
 		}catch(UserDoesNotExistException e) {
-			//System.out.println(e.getMessage());
+			logger.debug(e.getMessage());
 			return null;
 		}
 	}
 	
 	
+	
+	/**
+	 * /admin/assignProfessorCourse
+	 * REST-service for assigning course to professor
+	 * @param courseId
+	 * @param profId
+	 * @return
+	 */
+	
 	@POST
 	@Path("/assignProfessorCourse")
 	@Consumes("application/json")
 	@Produces(MediaType.APPLICATION_JSON)
+	
 	public Response assignProfessorCourse(
+			@NotNull
 			@QueryParam("profId") int profId,
+			@NotNull
 			@QueryParam("courseId") int ch
 			) {
 		
 		try {
 			ArrayList<Course> courseList=new ArrayList<Course>();
-			//System.out.println("Enter User ID of professor: ");
-			//int profId = professor.getUserId();
+			
 			CourseDaoOperationInterface courseDAOobj=new CourseDaoOperation();
 			courseList=courseDAOobj.getUnregisteredCourses();
 			 
@@ -164,40 +184,34 @@ public class AdminRestAPI  {
 			 if (courseList.size()==0) {
 				 throw new NoUnallottedCourseException();
 			 }
-			 /*
-			 System.out.println("Available Courses");
-			 ArrayList<Integer> courseIdList=new ArrayList<Integer>();
-			 for(Course course:courseList) {
-					System.out.println("Course Id:- "+course.getCourseID());
-					System.out.println("Course Name:- "+course.getCourseName());
-					System.out.println("Course Credits:- "+course.getCredits());
-					System.out.println("Course Prerequisites:- "+course.getPrerequisites());
-					System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-					courseIdList.add(course.getCourseID());
-				}
-			 */
+			
 			 
 			 ArrayList<Integer> courseIdList=new ArrayList<Integer>();
 			 for(Course course:courseList)
 					courseIdList.add(course.getCourseID());
 			 
-			 /*
-			 System.out.println("Enter Course ID to register");
-			 int ch=sc.nextInt();
-			 sc.nextLine();
-			 */
+			
 			AdminOperationInterface adminOperation = new AdminOperation();
 			adminOperation.assignCourseToProfessor(profId,courseIdList,ch);
 			}catch(UserDoesNotExistException e){
-				//System.out.println(e.getMessage());
+				logger.debug(e.getMessage());
 				return Response.status(400).entity(e.getMessage()).build();
 			}catch(NoUnallottedCourseException | CourseDoesNotExistException e){
+				logger.debug(e.getMessage());
 				return Response.status(201).entity(e.getMessage()).build();
 			}
+		logger.info("Professor successfully assigned to course");
 		return Response.status(201).entity("Professor successfully assigned to course").build();
 	}
 	
 
+	
+	/**
+	 * /admin/viewUnapprovedUsers
+	 * REST-service for viewing unaproved users
+	 * @return
+	 */
+	
 	@GET
 	@Path("/viewUnapprovedUsers")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -205,113 +219,139 @@ public class AdminRestAPI  {
 		UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
 		ArrayList<Integer> unapprovedStudents=userDaoOperation.getUnapprovedStudents();
 		if(unapprovedStudents.size()==0) {
-			//System.out.println("All users Approved");
+			logger.info("All users Approved");
 			return null;
 		}
 		return unapprovedStudents;
-		/*
-		System.out.println("List of Unapproved Students");
-		unapprovedStudents.forEach(System.out::println);
-		*/
+		
 		
 	}
 	
+	
+
+	/**
+	 * /admin/ApproveUser
+	 * REST-service for approve user
+	 * @param userIdToApprove
+	 * @return
+	 */
 
 	@POST
 	@Path("/ApproveUser")
 	@Consumes("application/json")
 	@Produces(MediaType.APPLICATION_JSON)
+	
 	public Response ApproveUser(
+			@NotNull
 			@QueryParam("userIdToApprove") int userIdToApprove) {
 		try {
 		UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
 		ArrayList<Integer> unapprovedStudents=userDaoOperation.getUnapprovedStudents();
 		if(unapprovedStudents.size()==0) {
-			//System.out.println("All users Approved");
-			//return;
+			logger.info("All users Approved");
+			
 			return Response.status(201).entity("All users Approved").build();
 		}
 		
-		/*System.out.println("Enter User ID to approve: ");
-		int userIdToApprove = sc.nextInt();*/
+		
 		AdminOperationInterface adminOperation = new AdminOperation();
 		boolean flag=adminOperation.approveUser(userIdToApprove);
 		if (flag) {
-			//System.out.println("User - "+userId+" approved successfully");	
+			
 			String msg = "User -" + Integer.toString(userIdToApprove) +" approved successfully";
+			logger.info(msg);
 			return Response.status(201).entity(msg).build();
 		}
 	
 		}catch(UserDoNotExistException e) {
-			/*System.out.println(e.getMessage());
-			return;*/
+			logger.debug(e.getMessage());
 			return Response.status(400).entity(e.getMessage()).build();
 		}
 		return null;
 	}
 	
+	
+	/**
+	 * /admin/dropCourse
+	 * REST-service for drop course
+	 * @param courseId
+	 * @return
+	 */
 	
 	@POST
 	@Path("/dropCourse")
 	@Consumes("application/json")
 	@Produces(MediaType.APPLICATION_JSON)
+	
 	public Response dropCourse(
+			@NotNull
 			@QueryParam("courseID") int courseID) {
 		try {
-		/*System.out.println("Enter Course ID to drop: ");
-		int courseID = sc.nextInt();
-		sc.nextLine();*/
+		
 		AdminOperationInterface adminOperation = new AdminOperation();
 		boolean flag=adminOperation.dropCourse(courseID);
 		if (flag) {
-		//System.out.println("Course - "+courseID+" dropped successfully");
+
 			String msg = "Course -" + Integer.toString(courseID) +" dropped successfully";
+			logger.info(msg);
 			return Response.status(201).entity(msg).build();	
 		}
 			
 		}catch(CourseDoesNotExistException e) {
-			//System.out.println(e.getMessage());
+			logger.debug(e.getMessage());
 			return Response.status(400).entity(e.getMessage()).build();
 		}
 		return null;
 	}
 	
+	
+	/**
+	 * /admin/addCourse
+	 * REST-service for add course
+	 * @param courseId
+	 * @param courseName
+	  * @param credits
+	 * @return
+	 */
 	
 	@POST
 	@Path("/addCourse")
 	@Consumes("application/json")
 	@Produces(MediaType.APPLICATION_JSON)
+	
 	public Response addCourse(
+			@NotNull
 			@QueryParam("courseID") int courseID,
+			@NotNull
 			@QueryParam("courseName") String courseName,
+			@NotNull
 			@QueryParam("credits") int credits
 			) {
 		try {
-		/*
-		System.out.println("Enter Course ID to add: ");
-		int courseID = sc.nextInt();
-		System.out.println("Enter Course Name to add: ");
-		String courseName = sc.next();
-		System.out.println("Enter Course Credits: ");
-		int credits = sc.nextInt();
-		*/
+		
 			
 		AdminOperationInterface adminOperation = new AdminOperation();
 		boolean flag=adminOperation.addCourse(courseID,courseName,credits);
 		if(flag) {
-			//System.out.println("Course - "+courseID+" added successfully");
+
 			String msg = "Course -" + Integer.toString(courseID) +" added successfully";
+			logger.info(msg);
 			return Response.status(201).entity(msg).build();	
 		}
 			
 		}
 		catch(CourseIDAlreadyExistException e){
-			//System.out.println(e.getMessage());
-			//return;
+			logger.debug(e.getMessage());
 			return Response.status(400).entity(e.getMessage()).build();
 		}
 		return null;
 	}
+	
+	/**
+	 * /admin/viewAllCourses
+	 * REST-service for viewing all courses
+	 * @return
+	 */
 	
 	@GET
 	@Path("/viewAllCourses")
@@ -319,14 +359,7 @@ public class AdminRestAPI  {
 	public ArrayList<Course> viewAllCourses() {
 		CourseRegistrationOperationInterface courseRegistrationObj=new CourseRegistrationOperation();
 		ArrayList<Course> catalog = courseRegistrationObj.viewCourses();
-		/*for(Course course:catalog) {
-			logger.info("Course Id:- "+course.getCourseID());
-			logger.info("Course Name:- "+course.getCourseName());
-			logger.info("Course Credits:- "+course.getCredits());
-			logger.info("Course Prerequisites:- "+course.getPrerequisites());
-			logger.info("Course Professor Id:- "+course.getProfessorAllotted());
-			logger.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		}*/
+		
 		return catalog;
 	}
 }

@@ -3,6 +3,7 @@
  */
 package com.crs.flipkart.restController;
 import java.util.*;
+import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -56,27 +57,40 @@ public class StudentRestAPI {
 	 * Main Student Client which displays and manages all student related operations
 	 * 
 	 */
-	/*
-	StudentDaoOperation studDAOobj = new StudentDaoOperation();
-	CourseRegistrationOperationInterface courseRegistrationObj=new CourseRegistrationOperation();
-	GradeCardOperationInterface gradeCardObj=new GradeCardOperation();
-	CourseDaoOperationInterface courseDAOobj=new CourseDaoOperation();
-	private static Logger logger = Logger.getLogger(CourseRegistrationOperation.class);
-	Scanner sc = new Scanner(System.in);
-	int userId;
-	*/
+	private static Logger logger = Logger.getLogger(StudentRestAPI.class);
+	
+	
+
+	/**
+	 * Method to handle API request for course registration
+	 * @param userId
+	 * @param courseId1
+	 * @param courseId2
+	 * @param courseId3
+	 * @param courseId4
+	 * @param courseId5
+	 * @param courseId6
+	 * @return
+	 */
 	
 	@POST
 	@Path("/courseRegistration")
 	@Consumes("application/json")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response courseRegistration(
+			@NotNull
 			@QueryParam("userId") int userId,
+			@NotNull
 			@QueryParam("courseId1") int courseId1,
+			@NotNull
 			@QueryParam("courseId2") int courseId2,
+			@NotNull
 			@QueryParam("courseId3") int courseId3,
+			@NotNull
 			@QueryParam("courseId4") int courseId4,
+			@NotNull
 			@QueryParam("courseId5") int courseId5,
+			@NotNull
 			@QueryParam("courseId6") int courseId6
 			) {
 		
@@ -86,38 +100,7 @@ public class StudentRestAPI {
 		if(!studDAOobj.isRegistered(userId)) {
 			ArrayList<Integer> choices=new ArrayList<Integer>();
 			
-			/*
-			System.out.println("Enter 6 choices");
-			System.out.println("Enter Course ID 1:-");
-			int courseId=sc.nextInt();
-			sc.nextLine();
-			choices.add(courseId);
 			
-			System.out.println("Enter Course ID 2:-");
-			courseId=sc.nextInt();
-			sc.nextLine();
-			choices.add(courseId);
-			
-			System.out.println("Enter Course ID 3:-");
-			courseId=sc.nextInt();
-			sc.nextLine();
-			choices.add(courseId);
-			
-			System.out.println("Enter Course ID 4:-");
-			courseId=sc.nextInt();
-			sc.nextLine();
-			choices.add(courseId);
-			
-			System.out.println("Enter Course ID 5:-");
-			courseId=sc.nextInt();
-			sc.nextLine();
-			choices.add(courseId);
-			
-			System.out.println("Enter Course ID 6:-");
-			courseId=sc.nextInt();
-			sc.nextLine();
-			choices.add(courseId);
-			*/
 			choices.add(courseId1);
 			choices.add(courseId2);
 			choices.add(courseId3);
@@ -127,25 +110,35 @@ public class StudentRestAPI {
 			
 			boolean flag=courseRegistrationObj.registerCourses(userId,choices);
 			if (flag) {
-				//logger.info("Course Registration Done");
-				//logger.info("Pay Fees Now.");
+				logger.info("Course Registration Done");
+				logger.info("Pay Fees Now.");
 				return Response.status(200).entity("Course Registration Done. Pay Fees Now.").build();	
 				
 			}
 				
 		}
 				else
-					//System.out.println("Already Registered");
+					logger.info("Already Registered");
 					return Response.status(400).entity("Already Registered").build();
 		return null;
 	}
+	
+	
+	/**
+	 * Handles api request to add a course
+	 * @param courseId
+	 * @param userId
+	 * @return
+	 */
 	
 	@POST
 	@Path("/addCourse")
 	@Consumes("application/json")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addCourse(
+			@NotNull
 			@QueryParam("userId") int userId,
+			@NotNull
 			@QueryParam("courseId") int courseId
 			
 			) {
@@ -155,29 +148,32 @@ public class StudentRestAPI {
 		
 			if(studDAOobj.isRegistered(userId)) {
 		
-			/*
-			System.out.println("Enter id of course to add");
-			int courseId=sc.nextInt();
-			sc.nextLine();
-			*/
 				
 			boolean flag=courseRegistrationObj.addCourse(userId,courseId);
 			if(flag)
-				//System.out.println("Course Succesfully Added\n");
+				logger.info("Course Succesfully Added\n");
 				return Response.status(400).entity("Course Succesfully Added").build();
 			
 		}else {
-			//System.out.println("Complete Course Registration first");
+			logger.error("Complete Course Registration first");
 			return Response.status(400).entity("Complete Course Registration first").build();
 			
 		}
 		}
 		catch(RegistrationCompletedException | CourseAlreadyRegisteredException | CourseDoesNotExistException e) {
-			//System.out.println(e.getMessage());
+			logger.debug(e.getMessage());
 			return Response.status(400).entity(e.getMessage()).build();
 		}
 		return null;
 	}
+	
+	
+	/**
+	 * Handles api request to drop a course
+	 * @param courseId
+	 * @param userId
+	 * @return
+	 */
 	
 	
 	@POST
@@ -185,7 +181,9 @@ public class StudentRestAPI {
 	@Consumes("application/json")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response dropCourse(
+			@NotNull
 			@QueryParam("userId") int userId,
+			@NotNull
 			@QueryParam("courseId") int courseId
 			) {
 		try {
@@ -193,26 +191,28 @@ public class StudentRestAPI {
 			CourseRegistrationOperationInterface courseRegistrationObj=new CourseRegistrationOperation();
 			
 		if(studDAOobj.isRegistered(userId)) {
-			/*
-			System.out.println("Enter id of course to remove");
-			int courseId=sc.nextInt();
-			sc.nextLine();
-			*/
+			
 			boolean flag = courseRegistrationObj.dropCourse(userId,courseId);
 			if (flag) {
-				//logger.info("Course Successfully Dropped");
+				logger.info("Course Successfully Dropped");
 				return Response.status(200).entity("Course Successfully Dropped").build();
 			}
 		}else {
-			//System.out.println("Complete Course Registration first");
+			logger.error("Complete Course Registration first");
 			return Response.status(200).entity("Complete Course Registration first").build();
 		}
 		}catch(NoCourseToDropException | CourseDoesNotExistException |  CourseNotRegisteredToDropException e) {
-			//System.out.println(e.getMessage());
+			logger.debug(e.getMessage());
 			return Response.status(400).entity(e.getMessage()).build();
 		}
 		return null;
 	}
+	
+	
+	/**
+	 * Handles api request to view courses
+	 * @return
+	 */
 	
 	
 	@GET
@@ -222,24 +222,23 @@ public class StudentRestAPI {
 		CourseRegistrationOperationInterface courseRegistrationObj=new CourseRegistrationOperation();
 		
 		ArrayList<Course> catalog = courseRegistrationObj.viewCourses();
-		/*
-		for(Course course:catalog) {
-			logger.info("Course Id:- "+course.getCourseID());
-			logger.info("Course Name:- "+course.getCourseName());
-			logger.info("Course Credits:- "+course.getCredits());
-			logger.info("Course Prerequisites:- "+course.getPrerequisites());
-			logger.info("Course Professor Id:- "+course.getProfessorAllotted());
-			logger.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		}
-		*/
+		
 		return catalog;
 	}
+	
+	
+	/**
+	 * Handles api request to view registered courses
+	 * @param userId
+	 * @return
+	 */
 	
 	
 	@GET
 	@Path("/viewRegisteredCourses")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<RegisteredCourse> viewRegisteredCourses(
+			@NotNull
 			@QueryParam("userId") int userId) {
 		
 		StudentDaoOperation studDAOobj = new StudentDaoOperation();
@@ -247,27 +246,29 @@ public class StudentRestAPI {
 		
 		if(studDAOobj.isRegistered(userId)) {
 			
-			/*logger.info("Registered Courses");
-			ArrayList<RegisteredCourse> listOfRegisteredCourses=courseRegistrationObj.viewRegisteredCourse(userId);
-			for(RegisteredCourse regCourse:listOfRegisteredCourses) {
-				Course course=courseDAOobj.getCourse(regCourse.getCourseID());
-				logger.info("Course Id:-"+course.getCourseID()+"\tCourse Name:-"+course.getCourseName());
-				}*/
-			ArrayList<RegisteredCourse> listOfRegisteredCourses=courseRegistrationObj.viewRegisteredCourse(userId);
+						ArrayList<RegisteredCourse> listOfRegisteredCourses=courseRegistrationObj.viewRegisteredCourse(userId);
 			return listOfRegisteredCourses;
 		}
 		else {
-			//System.out.println("Complete Course Registration first");
+			logger.error("Complete Course Registration first");
 			return null;
 		}
 		
 	}
 	
 	
+	/**
+	 * Handles api request to view GradeCard
+	 * @param userId
+	 * @return
+	 */
+	
+	
 	@GET
 	@Path("/viewGradeCard")
 	@Produces(MediaType.APPLICATION_JSON)
 	public GradeCard viewGradeCard(
+			@NotNull
 			@QueryParam("userId") int userId) {
 		
 		StudentDaoOperation studDAOobj = new StudentDaoOperation();
@@ -276,31 +277,36 @@ public class StudentRestAPI {
 		try {
 		if(studDAOobj.isRegistered(userId)) {
 			GradeCard gradeCard=gradeCardObj.viewGradeCard(userId);
-			/*
-			logger.info("Grade Card");
-			logger.info("User ID:-"+userId);
-			for(Grade grade:gradeCard.getListOfGrades()) {
-				logger.info("Course ID:-"+grade.getCourseID()+" Grade:-"+grade.getGrade());
-				}
-			*/
+			
 			return gradeCard;
 			}
 		else {
-			//System.out.println("Complete Course Registration first");
+			logger.error("Complete Course Registration first");
 			return null;
 		}
 		}catch(UserDoesNotExistException e) {
-			//System.out.println(e.getMessage());
+			logger.debug(e.getMessage());
 			return null;
 		}
 	}
+	
+	
+	/**
+	 * Handles api request make a Payment
+	 * @param userId
+	 * @param modeChoice
+	 * @return
+	 * @throws ValidationException
+	 */
 	
 	@POST
 	@Path("/makePayment")
 	@Consumes("application/json")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response makePayment(
+			@NotNull
 			@QueryParam("userId") int userId,
+			@NotNull
 			@QueryParam("modeChoice") int modeChoice
 			) {
 		
@@ -310,17 +316,10 @@ public class StudentRestAPI {
 		CourseDaoOperationInterface courseDAOobj=new CourseDaoOperation();
 		
 		if (!studDAOobj.isRegistered(userId)) {
-			//System.out.println("Complete Course Registration first");
+			logger.error("Complete Course Registration first");
 			return Response.status(400).entity("Complete Course Registration first").build();
 		} else if(!studDAOobj.getPaymentStatus(userId)) {
-			/*
-			System.out.println("Please select payment mode");
-			System.out.println("1. Online Mode");
-			System.out.println("2. Offline Mode");
-			int modeChoice = sc.nextInt();
-			sc.nextLine();
-			boolean flag=false;
-			*/
+			
 			
 			boolean flag=false;
 			if (modeChoice==1) {
@@ -330,15 +329,15 @@ public class StudentRestAPI {
 				OfflinePayment offlinePayment = new OfflinePayment();
 				flag = offlinePayment.payByCash(userId, 1);
 			} else {
-				//System.out.println("Invalid payment mode selected");
+				logger.error("Invalid payment mode selected");
 				return Response.status(400).entity("Invalid payment mode selected").build();
 			}
 
 			if(flag)
-				//logger.info("Transaction completed\nFees Paid ");
+				logger.info("Transaction completed\nFees Paid ");
 				return Response.status(200).entity("Transaction completed\nFees Paid").build();
 		} else {
-			//System.out.println("Fees already paid");
+			logger.error("Fees already paid");
 			return Response.status(400).entity("Fees already paid").build();
 		}
 		return null;

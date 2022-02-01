@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -55,36 +56,23 @@ Manages the major roles of professor based on user inputs
 @Path("/professor")
 public class ProfessorRestAPI {
 	
-	/*
-	ProfessorDaoOperationInterface profDaoObj=new ProfessorDaoOperation(); 
-	CourseDaoOperationInterface courseDAOobj = new CourseDaoOperation();
-	CourseRegistrationOperationInterface courseRegistrationObj=new CourseRegistrationOperation();
-	GradeCardOperationInterface gradeCardObj= new GradeCardOperation();
-	*/
-	//int userId;
-	//Scanner sc = new Scanner(System.in);
-	//private static Logger logger = Logger.getLogger(CourseRegistrationOperation.class);
+
+	private static Logger logger = Logger.getLogger(ProfessorRestAPI.class);
 
 	
 	@GET
 	@Path("/viewEnrolledStudents")
 	@Produces(MediaType.APPLICATION_JSON)
+	
 	public ArrayList<Integer> viewEnrolledStudents(
+			@NotNull
 			@QueryParam("courseId") int courseId
 			
 			) {
 		
 		CourseRegistrationOperationInterface courseRegistrationObj=new CourseRegistrationOperation();
 		
-		/*
-		ArrayList<Course> courseList=courseRegistrationObj.viewProfessorCourses(userId);
-		for(Course course:courseList) {
-			ArrayList<Integer> enrolledStudents=courseRegistrationObj.viewEnrolledStudents(course.getCourseID());
-			logger.info("Course ID:- "+ course.getCourseID()+"\tCourse Name:- "+course.getCourseName());
-			logger.info("Student ID");
-			enrolledStudents.forEach(System.out::println);
-		}	 
-		*/
+		
 		ArrayList<Integer> enrolledStudents=courseRegistrationObj.viewEnrolledStudents(courseId);
 		return enrolledStudents;
 		
@@ -100,26 +88,11 @@ public class ProfessorRestAPI {
 		ArrayList<Course> courseList=new ArrayList<Course>();
 		 courseList=courseDAOobj.getUnregisteredCourses();
 		 if (courseList.size()==0) {
-			 //throw new NoUnallottedCourseException();
+			logger.info("No UnregisteredCourses");
 			 return null;
 		 }
 		 
-		 /*
-		 System.out.println("Available Courses");
-		 ArrayList<Integer> courseIdList=new ArrayList<Integer>();
-		 for(Course course:courseList) {
-				System.out.println("Course Id:- "+course.getCourseID());
-				System.out.println("Course Name:- "+course.getCourseName());
-				System.out.println("Course Credits:- "+course.getCredits());
-				System.out.println("Course Prerequisites:- "+course.getPrerequisites());
-				System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-				courseIdList.add(course.getCourseID());
-			}
-		 ArrayList<Integer> courseIdList=new ArrayList<Integer>();
-		 for(Course course:courseList) {
-				courseIdList.add(course.getCourseID());
-			}
-		 */
+		
 		 return courseList;
 	}
 	
@@ -130,16 +103,19 @@ public class ProfessorRestAPI {
 	@Path("/registerCourse")
 	@Consumes("application/json")
 	@Produces(MediaType.APPLICATION_JSON)	
+	
 	public Response registerCourse(
+			@NotNull
 			@QueryParam("courseId") int choice,
+			@NotNull
 			@QueryParam("userId") int userId
 			) {
 		try {
 			CourseDaoOperationInterface courseDAOobj = new CourseDaoOperation();
 			CourseRegistrationOperationInterface courseRegistrationObj=new CourseRegistrationOperation();
 			UserDaoOperationInterface userDao= new UserDaoOperation();
-//			viewUnregisteredCourses();
 			if(userDao.getUser(userId)==null) {
+				logger.error("User with ID "+userId+" does not exist");
 				return Response.status(400).entity("User with ID "+userId+" does not exist").build();
 			}
 			ArrayList<Course> courseList=new ArrayList<Course>();
@@ -152,13 +128,12 @@ public class ProfessorRestAPI {
 			 for(Course course:courseList) {
 					courseIdList.add(course.getCourseID());
 				}
-			 //System.out.println("Enter Course ID to register");
-			 //int choice=sc.nextInt();
-			 //sc.nextLine();
+			 
 			 boolean flag=courseRegistrationObj.registerProfessorCourse(userId,courseIdList,choice);
 			 if(flag) {
-				 //System.out.println("Course - "+choice+" succesfully allotted to Professor - "+userId);
+				
 				 String msg = "Course - " + Integer.toString(choice) + " succesfully allotted to Professor - "+ Integer.toString(userId);
+				 logger.info(msg);
 				 return Response.status(201).entity(msg).build();
 			 }
 			 
@@ -166,7 +141,7 @@ public class ProfessorRestAPI {
 		}
 		catch(NoUnallottedCourseException | CourseDoesNotExistException e) {
 		
-			//System.out.println(e.getMessage());
+			logger.debug(e.getMessage());
 			return Response.status(400).entity(e.getMessage()).build();
 		}
 		return null;
@@ -176,20 +151,14 @@ public class ProfessorRestAPI {
 	@GET
 	@Path("/viewProfessorCourse")
 	@Produces(MediaType.APPLICATION_JSON)
+	
 	public ArrayList<Course> viewProfessorCourse(
+			@NotNull
 			@QueryParam("userId") int userId) {
 	
 		CourseRegistrationOperationInterface courseRegistrationObj=new CourseRegistrationOperation();
 		ArrayList<Course> courseList =courseRegistrationObj.viewProfessorCourses(userId);
-		/*
-		for(Course course:courseList) {
-			logger.info("Course Id:- "+course.getCourseID());
-			logger.info("Course Name:- "+course.getCourseName());
-			logger.info("Course Credits:- "+course.getCredits());
-			logger.info("Course Prerequisites:- "+course.getPrerequisites());
-			logger.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		}
-		*/
+		
 		return courseList;
 	}
 	
@@ -198,32 +167,27 @@ public class ProfessorRestAPI {
 	@Path("/assignGrade")
 	@Consumes("application/json")
 	@Produces(MediaType.APPLICATION_JSON)	
+	
 	public Response assignGrade(
+			@NotNull
 			@QueryParam("courseId") int courseId,
+			@NotNull
 			@QueryParam("studentId") int studentId,
+			@NotNull
 			@QueryParam("userId") int userId,
+			@NotNull
 			@QueryParam("grade") String grade
 			) {
 		try {
-		/*
-		System.out.println("Enter CourseID");
-		int courseId=sc.nextInt();
-		sc.nextLine();
-		System.out.println("Enter Student ID");
-		int studentId=sc.nextInt();
-		sc.nextLine();
-		System.out.println("Enter Grade");
-		String grade=sc.nextLine();
-		*/
 		
 		GradeCardOperationInterface gradeCardObj= new GradeCardOperation();
 		boolean flag=gradeCardObj.assignGrade(userId,courseId,studentId,grade);
 		if(flag) {
-			//System.out.println("Grade Assigned Succesfully");	
+			logger.info("Grade Assigned Succesfully");	
 			return Response.status(201).entity("Grade Assigned Succesfully").build();	
 		}
 		}catch(StudentNotRegisteredForCourseException | CourseNotTaughtByProfessorException e) {
-			//System.out.println(e.getMessage());
+			logger.debug(e.getMessage());
 			return Response.status(400).entity(e.getMessage()).build();	
 		}
 		return null;
