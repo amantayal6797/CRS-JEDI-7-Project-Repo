@@ -38,12 +38,17 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		logger.info("Register Courses for User "+studentId);
 		ArrayList<RegisteredCourse> listOfRegisteredCourses=new ArrayList<RegisteredCourse>();
 		listOfRegisteredCourses=courseDAOobj.getRegisteredCourses(studentId);
+		System.out.println("---------------------------------------------------------------------------------------------------");
+		System.out.printf("|%-20s | %-20s |\n","Course Id","Course Name");
+		System.out.println("---------------------------------------------------------------------------------------------------");
+
 		for(RegisteredCourse regCourse:listOfRegisteredCourses) {
 				Course course=courseDAOobj.getCourse(regCourse.getCourseID());
-				logger.info("Course Id:-"+course.getCourseID()+"\tCourse Name:-"+course.getCourseName());
+				logger.info(String.format("|%20d|%20s|\n", course.getCourseID(), course.getCourseName());
+
 			
 		}
-		logger.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		logger.info("-------------------------------------------------------------------------------------------");
 	}
 
 	public void viewCourses() {
@@ -51,14 +56,14 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		logger.info("Displaying All Courses");
 		ArrayList<Course> catalog=new ArrayList<Course>();
 		catalog=courseDAOobj.viewCourses();
+		logger.info("---------------------------------------------------------------------------------------------------\n");
+		logger.info(String.format("|%-20s | %-20s | %-20s | %-20s|%20s|\n","Course Id","Course Name","Course Credits","Course Prerequisites","Course Professor Id"));
+		logger.info("---------------------------------------------------------------------------------------------------\n");
+
 		for(Course course:catalog) {
-			logger.info("Course Id:- "+course.getCourseID());
-			logger.info("Course Name:- "+course.getCourseName());
-			logger.info("Course Credits:- "+course.getCredits());
-			logger.info("Course Prerequisites:- "+course.getPrerequisites());
-			logger.info("Course Professor Id:- "+course.getProfessorAllotted());
-			logger.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			
+			logger.info(String.format("|%-20d | %-20s | %-20d | %-20s|%20d|\n",course.getCourseID(),course.getCourseName(),course.getCredits(),course.getPrerequisites(),course.getProfessorAllotted()));
+			logger.info("---------------------------------------------------------------------------------------------------");
+
 		}
 	}
 
@@ -158,13 +163,15 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		 logger.info("Registered Courses");
 		 ArrayList<Course> courseList=new ArrayList<Course>();
 		 courseList=courseDAOobj.getProfessorCourses(userId);
+		 logger.info("---------------------------------------------------------------------------------------------------\n");
+		 logger.info(String.format("|%-20s | %-20s | %-20s | %-20s|\n","Course Id","Course Name","Course Credits","Course Prerequisites"));
+		 logger.info("---------------------------------------------------------------------------------------------------\n");
+
 		 for(Course course:courseList) {
-				logger.info("Course Id:- "+course.getCourseID());
-				logger.info("Course Name:- "+course.getCourseName());
-				logger.info("Course Credits:- "+course.getCredits());
-				logger.info("Course Prerequisites:- "+course.getPrerequisites());
-				logger.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			}
+			 logger.info(String.format("|%-20d | %-20s | %-20d | %-20s|\n",course.getCourseID(),course.getCourseName(),course.getCredits(),course.getPrerequisites());
+			 logger.info("---------------------------------------------------------------------------------------------------");
+
+		 }
 	 }
 	 
 	 public void viewEnrolledStudents(int userId) {

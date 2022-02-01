@@ -43,20 +43,23 @@ public class CRSProfessorMenu extends CRSApplication {
 		CourseDaoOperationInterface courseDAOobj = new CourseDaoOperation();
 		
 		Professor professor=profDaoObj.getProfessor(userId);
-		System.out.println("\nWelcome "+professor.getUserName());
+		System.out.println("***********************************************************************");
+		System.out.printf("%100s\n","Welcome "+professor.getUserName());
+
 		
 		LocalTime localTime = LocalTime.now();
-		System.out.println("Login Time:- " + localTime);
+		System.out.print("Login Time:- " + localTime+"  ");
 		
 		LocalDate localDate = LocalDate.now();
 		System.out.println("Login Date:- "+ localDate.getDayOfMonth()+" "+localDate.getMonth()+", "+localDate.getYear());
-		
+		System.out.println("***********************************************************************")
 		int choice=0;
 		Scanner sc = new Scanner(System.in);
 		while (choice!=5) 
 		{
 			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			System.out.println("Professor Menu");
+			System.out.println("%100s\n",""Professor Menu");
+			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			System.out.println("1. Register for Course");
 			System.out.println("2. View Registered Courses");
 			System.out.println("3. View Enrolled Students");
@@ -78,13 +81,14 @@ public class CRSProfessorMenu extends CRSApplication {
 						 }
 						 System.out.println("Available Courses");
 						 ArrayList<Integer> courseIdList=new ArrayList<Integer>();
-						 for(Course course:courseList) {
-								System.out.println("Course Id:- "+course.getCourseID());
-								System.out.println("Course Name:- "+course.getCourseName());
-								System.out.println("Course Credits:- "+course.getCredits());
-								System.out.println("Course Prerequisites:- "+course.getPrerequisites());
-								System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-								courseIdList.add(course.getCourseID());
+						System.out.println("---------------------------------------------------------------------------------------------------");
+						System.out.printf("|%-20s | %-20s | %-20s | %-20s|\n","Course Id","Course Name","Course Credits","Course Prerequisites");
+						System.out.println("---------------------------------------------------------------------------------------------------");
+
+						for(Course course:courseList) {
+							System.out.printf("|%-20d | %-20d | %-20s|  %-20d|\n",course.getCourseID(),course.getCourseName(),course.getCredits(),course.getPrerequisites())
+
+							courseIdList.add(course.getCourseID());
 							}
 						 System.out.println("Enter Course ID to register");
 						 choice=sc.nextInt();

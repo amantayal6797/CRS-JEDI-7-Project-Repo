@@ -39,8 +39,13 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 		GradeCard gradeCard=generateGradeCard(studentId);
 		logger.info("Grade Card");
 		logger.info("User ID:-"+studentId);
+		logger.info("---------------------------------------------------------------------------------------------------\n");
+		logger.info(String.format("|%-20s | %-20s|\n","Course Id","Grade"));
+		logger.info("---------------------------------------------------------------------------------------------------\n");
+
 		for(Grade grade:gradeCard.getListOfGrades()) {
-			logger.info("Course ID:-"+grade.getCourseID()+" Grade:-"+grade.getGrade());
+			logger.info(String.format("|%-20d | %-20d|\n",grade.getCourseID(),grade.getGrade()));
+
 		}
 		}catch(UserDoesNotExistException e) {
 			System.out.println(e.getMessage());

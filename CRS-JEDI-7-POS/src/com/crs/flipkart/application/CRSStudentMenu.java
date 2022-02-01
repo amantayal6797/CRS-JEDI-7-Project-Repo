@@ -35,12 +35,14 @@ public class CRSStudentMenu {
 	public void StudentMenu(int userId) {
 		
 		Student student=studDAOobj.showStudent(userId);
-		System.out.println("\nWelcome "+student.getUserName());
+		System.out.println("***********************************************************************");
+		System.out.printf("%100s\n","Welcome "+student.getUserName());
 		LocalTime localTime = LocalTime.now();
-		System.out.println("Login Time:- " + localTime);
+		System.out.print("Login Time:- " + localTime+"  ");
 		
 		LocalDate localDate = LocalDate.now();
-		System.out.println("Login Date:- "+ localDate.getDayOfMonth()+" "+localDate.getMonth()+", "+localDate.getYear());
+		System.out.print("Login Date:- "+ localDate.getDayOfMonth()+" "+localDate.getMonth()+", "+localDate.getYear());
+		System.out.println("***********************************************************************");
 		int choice=0;
 		Scanner sc = new Scanner(System.in);
 		
@@ -50,7 +52,8 @@ public class CRSStudentMenu {
 		while (choice!=8) 
 		{
 			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			System.out.println("Student Menu");
+			System.out.printf("%100s\n","Student Menu");
+			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			System.out.println("1. Course Registration");
 			System.out.println("2. Add Course");
 			System.out.println("3. Drop Course");
@@ -153,9 +156,12 @@ public class CRSStudentMenu {
 					if (!studDAOobj.isRegistered(userId)) {
 						System.out.println("Complete Course Registration first");
 					} else if(!studDAOobj.getPaymentStatus(userId)) {
-						System.out.println("Please select payment mode");
+						System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+						System.out.printf("%100s\n","Please select payment mode");
+						System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 						System.out.println("1. Online Mode");
 						System.out.println("2. Offline Mode");
+						System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 						int modeChoice = sc.nextInt();
 						sc.nextLine();
 						if (modeChoice==1) {

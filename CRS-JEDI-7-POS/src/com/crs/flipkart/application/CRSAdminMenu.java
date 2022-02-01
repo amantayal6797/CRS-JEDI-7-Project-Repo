@@ -59,7 +59,8 @@ public class CRSAdminMenu extends CRSApplication {
 		Scanner sc = new Scanner(System.in);
 		while(choice!=8) {
 			System.out.println("+++++++++++++++++++++++++++++++++++");
-			System.out.println("Admin Menu");
+			System.out.printf("%100s\n", "Admin Menu");
+			System.out.println("++++++++++++++++++++++++++++++++++++");
 			System.out.println("1. View all courses");
 			System.out.println("2. Add Course to catalog");
 			System.out.println("3. Drop Course from catalog");
@@ -161,12 +162,11 @@ public class CRSAdminMenu extends CRSApplication {
 				 }
 				 System.out.println("Available Courses");
 				 ArrayList<Integer> courseIdList=new ArrayList<Integer>();
+				 System.out.println("---------------------------------------------------------------------------------------------------");
+				 System.out.printf("|%-20s | %-20s | %-20s | %-20s|\n","Course Id","Course Name","Course Credits","Course Prerequisites");
+				 System.out.println("---------------------------------------------------------------------------------------------------");
 				 for(Course course:courseList) {
-						System.out.println("Course Id:- "+course.getCourseID());
-						System.out.println("Course Name:- "+course.getCourseName());
-						System.out.println("Course Credits:- "+course.getCredits());
-						System.out.println("Course Prerequisites:- "+course.getPrerequisites());
-						System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+					   System.out.printf("|%-20d | %-20d | %-20s|  %-20d|\n",course.getCourseID(),course.getCourseName(),course.getCredits(),course.getPrerequisites())
 						courseIdList.add(course.getCourseID());
 					}
 				 System.out.println("Enter Course ID to register");
