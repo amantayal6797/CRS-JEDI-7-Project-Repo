@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.crs.flipkart.restcontroller;
+package com.crs.flipkart.restController;
 import java.util.*;
 
 import javax.ws.rs.Consumes;

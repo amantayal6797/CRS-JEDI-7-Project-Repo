@@ -1,0 +1,782 @@
+{
+	"variables": [],
+	"info": {
+		"name": "CRS-JEDI-7-REST-JERSEY",
+		"_postman_id": "3a566213-8b59-d92e-3dfb-a729370990b8",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AddProfessor",
+			"request": {
+				"url": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/admin/addProfessor",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userId\":111,\n\t\"userName\":\"Nitish\",\n\t\"password\":\"Nitish\",\n\t\"email\":\"email\",\n\t\"address\":\"address\",\n\t\"age\":24,\n\t\"gender\":\"M\",\n\t\"contact\":\"798310565\",\n\t\"department\":\"CS\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ViewGradeCard",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/admin/viewGradeCard?studId=1111",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CRS-JEDI-7-REST-Jersey",
+						"rest",
+						"admin",
+						"viewGradeCard"
+					],
+					"query": [
+						{
+							"key": "studId",
+							"value": "1111",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ViewUnapprovedUsers",
+			"request": {
+				"url": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/admin/viewUnapprovedUsers",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ApproveUser",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/admin/ApproveUser?userIdToApprove=110",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CRS-JEDI-7-REST-Jersey",
+						"rest",
+						"admin",
+						"ApproveUser"
+					],
+					"query": [
+						{
+							"key": "userIdToApprove",
+							"value": "110",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DropCourse",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/admin/dropCourse?courseID=408",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CRS-JEDI-7-REST-Jersey",
+						"rest",
+						"admin",
+						"dropCourse"
+					],
+					"query": [
+						{
+							"key": "courseID",
+							"value": "408",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AddCourse",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/admin/addCourse?courseID=408&courseName=\"XYZ\"&credits=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CRS-JEDI-7-REST-Jersey",
+						"rest",
+						"admin",
+						"addCourse"
+					],
+					"query": [
+						{
+							"key": "courseID",
+							"value": "408",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseName",
+							"value": "\"XYZ\"",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "credits",
+							"value": "5",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ViewAllCourses",
+			"request": {
+				"url": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/admin/viewAllCourses",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AssignProfessorToCourse",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/admin/assignProfessorCourse?profId=203&courseId=408",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CRS-JEDI-7-REST-Jersey",
+						"rest",
+						"admin",
+						"assignProfessorCourse"
+					],
+					"query": [
+						{
+							"key": "profId",
+							"value": "203",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseId",
+							"value": "408",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "RegisterStudent",
+			"request": {
+				"url": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/user/registerStudent",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userId\":112,\n\t\"userName\":\"Nitish\",\n\t\"password\":\"Nitish\",\n\t\"email\":\"email\",\n\t\"address\":\"address\",\n\t\"age\":24,\n\t\"gender\":\"M\",\n\t\"contact\":\"798310565\",\n\t\"branch\":\"CS\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/user/login?id=101&password=Password2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CRS-JEDI-7-REST-Jersey",
+						"rest",
+						"user",
+						"login"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "101",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "password",
+							"value": "Password2",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ResetPassword",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/user/resetPassword?userId=101&nPassword=pswd&cNPassword=psfd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CRS-JEDI-7-REST-Jersey",
+						"rest",
+						"user",
+						"resetPassword"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "101",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "nPassword",
+							"value": "pswd",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "cNPassword",
+							"value": "psfd",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ViewEnrolledStudents",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/professor/viewEnrolledStudents?courseId=402",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CRS-JEDI-7-REST-Jersey",
+						"rest",
+						"professor",
+						"viewEnrolledStudents"
+					],
+					"query": [
+						{
+							"key": "courseId",
+							"value": "402",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ViewUnregisteredCourses",
+			"request": {
+				"url": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/professor/viewUnregisteredCourses",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "RegisterCourse",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/professor/registerCourse?courseId=407&userId=201",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CRS-JEDI-7-REST-Jersey",
+						"rest",
+						"professor",
+						"registerCourse"
+					],
+					"query": [
+						{
+							"key": "courseId",
+							"value": "407",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "userId",
+							"value": "201",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ViewProfessorCourse",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/professor/viewProfessorCourse?userId=201",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CRS-JEDI-7-REST-Jersey",
+						"rest",
+						"professor",
+						"viewProfessorCourse"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "201",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AssignGrade",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/professor/assignGrade?courseId=402&studentId=110&userId=2222&grade=A",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CRS-JEDI-7-REST-Jersey",
+						"rest",
+						"professor",
+						"assignGrade"
+					],
+					"query": [
+						{
+							"key": "courseId",
+							"value": "402",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "studentId",
+							"value": "110",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "userId",
+							"value": "2222",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "grade",
+							"value": "A",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "CourseRegistration",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/student/courseRegistration?userId=110&courseId1=401&courseId2=402&courseId3=403&courseId4=404&courseId5=405&courseId6=406",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CRS-JEDI-7-REST-Jersey",
+						"rest",
+						"student",
+						"courseRegistration"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "110",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseId1",
+							"value": "401",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseId2",
+							"value": "402",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseId3",
+							"value": "403",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseId4",
+							"value": "404",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseId5",
+							"value": "405",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseId6",
+							"value": "406",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AddCourse",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/student/addCourse?userId=102&courseId=4549",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CRS-JEDI-7-REST-Jersey",
+						"rest",
+						"student",
+						"addCourse"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "102",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseId",
+							"value": "4549",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DropCourse",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/student/dropCourse?userId=102&courseId=402",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CRS-JEDI-7-REST-Jersey",
+						"rest",
+						"student",
+						"dropCourse"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "102",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseId",
+							"value": "402",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "StudentViewCourses",
+			"request": {
+				"url": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/student/viewCourses",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ViewRegisteredCourses",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/student/viewRegisteredCourses?userId=445",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CRS-JEDI-7-REST-Jersey",
+						"rest",
+						"student",
+						"viewRegisteredCourses"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "445",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "StudentviewGradeCard",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/student/viewGradeCard?userId=101",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CRS-JEDI-7-REST-Jersey",
+						"rest",
+						"student",
+						"viewGradeCard"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "101",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "MakePayment",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/CRS-JEDI-7-REST-Jersey/rest/student/makePayment?userId=110&modeChoice=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CRS-JEDI-7-REST-Jersey",
+						"rest",
+						"student",
+						"makePayment"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "110",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "modeChoice",
+							"value": "2",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

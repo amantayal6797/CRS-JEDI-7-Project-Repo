@@ -1,13 +1,14 @@
 /**
  * 
  */
-package com.crs.flipkart.restcontroller;
+package com.crs.flipkart.restController;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -77,10 +78,6 @@ public class AdminRestAPI  {
 		//Logger logger = Logger.getLogger(AdminRestAPI.class);
 		try {
 			
-		if(professor==null)
-			return Response.status(400).entity("Fail").build();		
-		
-		
 		AdminOperationInterface adminOperation = new AdminOperation();
 		Professor profObj = new Professor();
 		
@@ -114,9 +111,7 @@ public class AdminRestAPI  {
 		
 		String dep = professor.getDepartment();
 		profObj.setDepartment(dep);
-		
-		System.out.println(professorUserId + userName + password + email + address + age + gender + contact + dep);
-		
+			
 		if(adminOperation.addProfessor(profObj)==true);
 		return Response.status(201).entity("Professor added successfully").build();
 		}catch(UserAlreadyExistsException e) {	
@@ -199,7 +194,7 @@ public class AdminRestAPI  {
 			}catch(NoUnallottedCourseException | CourseDoesNotExistException e){
 				return Response.status(201).entity(e.getMessage()).build();
 			}
-		return null;
+		return Response.status(201).entity("Professor successfully assigned to course").build();
 	}
 	
 
@@ -236,6 +231,7 @@ public class AdminRestAPI  {
 			//return;
 			return Response.status(201).entity("All users Approved").build();
 		}
+		
 		/*System.out.println("Enter User ID to approve: ");
 		int userIdToApprove = sc.nextInt();*/
 		AdminOperationInterface adminOperation = new AdminOperation();
@@ -245,7 +241,7 @@ public class AdminRestAPI  {
 			String msg = "User -" + Integer.toString(userIdToApprove) +" approved successfully";
 			return Response.status(201).entity(msg).build();
 		}
-			
+	
 		}catch(UserDoNotExistException e) {
 			/*System.out.println(e.getMessage());
 			return;*/
@@ -285,7 +281,11 @@ public class AdminRestAPI  {
 	@Path("/addCourse")
 	@Consumes("application/json")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addCourse(Course Course) {
+	public Response addCourse(
+			@QueryParam("courseID") int courseID,
+			@QueryParam("courseName") String courseName,
+			@QueryParam("credits") int credits
+			) {
 		try {
 		/*
 		System.out.println("Enter Course ID to add: ");
@@ -295,10 +295,6 @@ public class AdminRestAPI  {
 		System.out.println("Enter Course Credits: ");
 		int credits = sc.nextInt();
 		*/
-		
-		int courseID = Course.getCourseID();
-		String courseName = Course.getCourseName();
-		int credits = Course.getCredits();
 			
 		AdminOperationInterface adminOperation = new AdminOperation();
 		boolean flag=adminOperation.addCourse(courseID,courseName,credits);

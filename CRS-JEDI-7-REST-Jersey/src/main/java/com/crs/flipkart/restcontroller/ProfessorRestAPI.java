@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.crs.flipkart.restcontroller;
+package com.crs.flipkart.restController;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -121,6 +121,9 @@ public class ProfessorRestAPI {
 		 return courseList;
 	}
 	
+	
+	
+	// Wrong userId & right course id case has to be handled.
 	@POST
 	@Path("/registerCourse")
 	@Consumes("application/json")
@@ -153,9 +156,11 @@ public class ProfessorRestAPI {
 				 String msg = "Course - " + Integer.toString(choice) + " succesfully allotted to Professor - "+ Integer.toString(userId);
 				 return Response.status(201).entity(msg).build();
 			 }
+			 
 				 
 		}
 		catch(NoUnallottedCourseException | CourseDoesNotExistException e) {
+		
 			//System.out.println(e.getMessage());
 			return Response.status(400).entity(e.getMessage()).build();
 		}
