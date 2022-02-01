@@ -33,6 +33,8 @@ import com.crs.flipkart.dao.CourseDaoOperation;
 import com.crs.flipkart.dao.CourseDaoOperationInterface;
 import com.crs.flipkart.dao.ProfessorDaoOperation;
 import com.crs.flipkart.dao.ProfessorDaoOperationInterface;
+import com.crs.flipkart.dao.UserDaoOperation;
+import com.crs.flipkart.dao.UserDaoOperationInterface;
 import com.crs.flipkart.exception.CourseDoesNotExistException;
 import com.crs.flipkart.exception.CourseNotTaughtByProfessorException;
 import com.crs.flipkart.exception.NoUnallottedCourseException;
@@ -135,9 +137,12 @@ public class ProfessorRestAPI {
 		try {
 			CourseDaoOperationInterface courseDAOobj = new CourseDaoOperation();
 			CourseRegistrationOperationInterface courseRegistrationObj=new CourseRegistrationOperation();
-			
-			viewUnregisteredCourses();
-			 ArrayList<Course> courseList=new ArrayList<Course>();
+			UserDaoOperationInterface userDao= new UserDaoOperation();
+//			viewUnregisteredCourses();
+			if(userDao.getUser(userId)==null) {
+				return Response.status(400).entity("User with ID "+userId+" does not exist").build();
+			}
+			ArrayList<Course> courseList=new ArrayList<Course>();
 			 courseList=courseDAOobj.getUnregisteredCourses();
 			 
 			 if (courseList.size()==0) {
