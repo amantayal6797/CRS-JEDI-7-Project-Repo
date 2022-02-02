@@ -44,7 +44,7 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 
 		for(RegisteredCourse regCourse:listOfRegisteredCourses) {
 				Course course=courseDAOobj.getCourse(regCourse.getCourseID());
-				logger.info(String.format("|%20d|%20s|\n", course.getCourseID(), course.getCourseName());
+				logger.info(String.format("|%20d|%20s|\n", course.getCourseID(), course.getCourseName()));
 
 			
 		}
@@ -168,7 +168,7 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		 logger.info("---------------------------------------------------------------------------------------------------\n");
 
 		 for(Course course:courseList) {
-			 logger.info(String.format("|%-20d | %-20s | %-20d | %-20s|\n",course.getCourseID(),course.getCourseName(),course.getCredits(),course.getPrerequisites());
+			 logger.info(String.format("|%-20d | %-20s | %-20d | %-20s|\n",course.getCourseID(),course.getCourseName(),course.getCredits(),course.getPrerequisites()));
 			 logger.info("---------------------------------------------------------------------------------------------------\n");
 
 		 }

@@ -52,13 +52,13 @@ public class CRSProfessorMenu extends CRSApplication {
 		
 		LocalDate localDate = LocalDate.now();
 		System.out.println("Login Date:- "+ localDate.getDayOfMonth()+" "+localDate.getMonth()+", "+localDate.getYear());
-		System.out.println("***********************************************************************")
+		System.out.println("***********************************************************************");
 		int choice=0;
 		Scanner sc = new Scanner(System.in);
 		while (choice!=5) 
 		{
 			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			System.out.println("%100s\n",""Professor Menu");
+			System.out.println("%100s\n" + "Professor Menu");
 			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			System.out.println("1. Register for Course");
 			System.out.println("2. View Registered Courses");
@@ -86,7 +86,7 @@ public class CRSProfessorMenu extends CRSApplication {
 						System.out.println("---------------------------------------------------------------------------------------------------");
 
 						for(Course course:courseList) {
-							System.out.printf("|%-20d | %-20d | %-20s|  %-20d|\n",course.getCourseID(),course.getCourseName(),course.getCredits(),course.getPrerequisites())
+							System.out.printf("|%-20d | %-20d | %-20s|  %-20d|\n",course.getCourseID(),course.getCourseName(),course.getCredits(),course.getPrerequisites());
 
 							courseIdList.add(course.getCourseID());
 							}
