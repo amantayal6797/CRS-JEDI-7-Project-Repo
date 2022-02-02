@@ -52,7 +52,7 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 	public boolean dropCourse(int studentId,int courseId) throws NoCourseToDropException,CourseDoesNotExistException,CourseNotRegisteredToDropException {
 		
 		ArrayList<RegisteredCourse> enrolledCourses=courseDAOobj.getRegisteredCourses(studentId);
-		if (!studentValidator.hasCompletedRegistration(studentId)) {
+		if (!studentValidator.hasEnrolledCourses(studentId)) {
 			throw new NoCourseToDropException();
 		}
 		if(!courseValidator.isVerified(courseId)) {

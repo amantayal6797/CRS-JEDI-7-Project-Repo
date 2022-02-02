@@ -23,14 +23,12 @@ import com.crs.flipkart.utils.DBUtils;
 public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 	
 	UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
-	//private static Logger logger = Logger.getLogger(ProfessorDaoOperation.class);
 	
 	public boolean addProfessor(Professor professor) {
 		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
 	    try {
 	    	userDaoOperation.registerUser(professor.getUserId(), professor.getPassword(), professor.getIsApproved());
-//	    	String sql = "insert into professor values (?,?,?,?,?,?,?,?)";
 	    	PreparedStatement stmt = conn.prepareStatement(SQLQueryConstant.ADD_PROFESSOR_DETAIL);
 		    stmt.setInt(1, professor.getUserId());
 		    stmt.setString(2, professor.getUserName());
@@ -55,7 +53,6 @@ public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 		    	System.out.println(e.getMessage());
 		    }
 	    }catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Exception raised: "+e.getMessage());
 		} 
 			connectionSetup.connectionClose(conn);
@@ -66,8 +63,6 @@ public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 	public Professor getProfessor(int userId) {
 		DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-//		 String sql1 = "select * from user where userid = ?";
-//		 String sql2 = "select * from student where userid = ?";
 		 Professor professor=new Professor();
 		 try {
 			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.GET_USER_DETAIL);
@@ -94,7 +89,6 @@ public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 				professor.setContact(rs.getString("contact"));
 			 }
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);

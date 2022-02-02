@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-//import org.apache.log4j.Logger;
 
 import com.crs.flipkart.constants.SQLQueryConstant;
 import com.crs.flipkart.utils.DBUtils;
@@ -18,7 +17,6 @@ import com.crs.flipkart.utils.DBUtils;
  */
 public class PaymentDaoOperation implements PaymentDaoOperationInterface{
 	
-	//private static Logger logger = Logger.getLogger(PaymentDaoOperation.class);
 	public void savePayment(int userId, int amount, String trasactionId,int modeofpayment) {
 		
 		DBUtils DBUtils = new DBUtils();

@@ -6,9 +6,6 @@ package com.crs.flipkart.business;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//import org.apache.log4j.Logger;
-
-//import com.crs.flipkart.restcontroller.CRSStudentMenu;
 import com.crs.flipkart.bean.Course;
 import com.crs.flipkart.bean.Grade;
 import com.crs.flipkart.bean.GradeCard;
@@ -21,6 +18,9 @@ import com.crs.flipkart.dao.UserDaoOperationInterface;
 import com.crs.flipkart.exception.CourseNotTaughtByProfessorException;
 import com.crs.flipkart.exception.StudentNotRegisteredForCourseException;
 import com.crs.flipkart.exception.UserDoesNotExistException;
+import com.crs.flipkart.validator.CourseValidator;
+import com.crs.flipkart.validator.StudentValidator;
+import com.crs.flipkart.validator.UserValidator;
 
 /**
  * @author Ashruth
@@ -28,10 +28,12 @@ import com.crs.flipkart.exception.UserDoesNotExistException;
  */
 public class GradeCardOperation implements GradeCardOperationInterface {
 	UserDaoOperationInterface userDaoOperation =new UserDaoOperation();
-	//private static Logger logger = Logger.getLogger(GradeCardOperation.class);
+	UserValidator userValidator = new UserValidator();
+	CourseValidator courseValidator = new CourseValidator();
+	StudentValidator studentValidator = new StudentValidator();
 	
 	public GradeCard viewGradeCard(int studentId) throws UserDoesNotExistException {
-		if (userDaoOperation.getUser(studentId)==null) {
+		if (!userValidator.checkIfExists(studentId)) {
 			throw new UserDoesNotExistException(studentId);
 			}
 		GradeCard gradeCard=generateGradeCard(studentId);
@@ -64,13 +66,11 @@ public class GradeCardOperation implements GradeCardOperationInterface {
 		Scanner sc=new Scanner(System.in);
 		boolean flag=false;
 		ArrayList<Course> professorCourses=courseDAOobj.getProfessorCourses(userId);
+		ArrayList<Integer> professorCourseIds = new ArrayList<Integer>();
 		for(Course course:professorCourses) {
-			if(course.getCourseID()==courseId) {
-				flag=true;
-				break;
-			}
+			professorCourseIds.add(course.getCourseID());
 		}
-		if(flag==false) {
+		if (!courseValidator.isPresentInList(professorCourseIds, courseId)) {
 			throw new CourseNotTaughtByProfessorException(courseId);
 		}
 		ArrayList <Integer> enrolledStudents= courseDAOobj.getEnrolledStudents(courseId);

@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-//import org.apache.log4j.Logger;
 
 import com.crs.flipkart.bean.User;
 import com.crs.flipkart.constants.SQLQueryConstant;
@@ -20,7 +19,6 @@ import com.crs.flipkart.utils.DBUtils;
  */
 public class NotificationDaoOperation implements NotificationDaoOperationInterface {
 	
-	//private static Logger logger = Logger.getLogger(NotificationDaoOperation.class);
 	public int geStatus(int userId) {
 		
 		DBUtils DBUtils = new DBUtils();
@@ -36,7 +34,6 @@ public class NotificationDaoOperation implements NotificationDaoOperationInterfa
 			}
 			return status;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 		    System.out.println("Exception raised: "+e.getMessage());
 		} finally {
 			DBUtils.connectionClose(conn);	
@@ -56,7 +53,6 @@ public class NotificationDaoOperation implements NotificationDaoOperationInterfa
 			 stmt.setInt(2,userId);  
 			 int i = stmt.executeUpdate();  	
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 		   System.out.println("Exception raised: "+e.getMessage());
 		} finally {
 			DBUtils.connectionClose(conn);	
@@ -76,7 +72,6 @@ public void insertStatus(int userId) {
 			 stmt.setInt(1,0);  
 			 int i = stmt.executeUpdate();  	
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 		    System.out.println("Exception raised: "+e.getMessage());
 		} finally {
 			DBUtils.connectionClose(conn);	

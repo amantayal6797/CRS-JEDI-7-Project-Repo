@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
-//import java.util.logging.Logger;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
@@ -98,8 +97,6 @@ public class ProfessorRestAPI {
 	}
 	
 	
-	
-	// Wrong userId & right course id case has to be handled.
 	@POST
 	@Path("/registerCourse")
 	@Consumes("application/json")

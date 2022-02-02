@@ -49,7 +49,6 @@ public class DBUtils {
 	            	logger.error(e.getMessage());
 	            }
 			    catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
 			    	logger.error(e.getMessage());
 				}
 			    logger.info("Database connection established.");

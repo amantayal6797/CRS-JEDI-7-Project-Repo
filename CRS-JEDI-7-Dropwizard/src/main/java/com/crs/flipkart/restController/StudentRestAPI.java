@@ -3,7 +3,6 @@
  */
 package com.crs.flipkart.restController;
 import java.util.*;
-//import java.util.logging.Logger;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;

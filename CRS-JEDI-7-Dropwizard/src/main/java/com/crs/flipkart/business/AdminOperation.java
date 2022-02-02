@@ -24,6 +24,8 @@ import com.crs.flipkart.exception.CourseIDAlreadyExistException;
 import com.crs.flipkart.exception.UserAlreadyExistsException;
 import com.crs.flipkart.exception.UserDoNotExistException;
 import com.crs.flipkart.exception.UserDoesNotExistException;
+import com.crs.flipkart.validator.CourseValidator;
+import com.crs.flipkart.validator.UserValidator;
 
 /**
  * @author aditya.gupta3
@@ -35,6 +37,8 @@ public class AdminOperation implements AdminOperationInterface {
 	AdminDaoOperationInterface adminDaoOperation = new AdminDaoOperation();
 	ProfessorDaoOperationInterface professorDaoOperation = new ProfessorDaoOperation();
 	CourseDaoOperationInterface courseDaoOperation = new CourseDaoOperation();
+	CourseValidator courseValidator = new CourseValidator();
+	UserValidator userValidator = new UserValidator();
 	
 	public boolean addCourse(int courseID,String courseName, int credits) throws CourseIDAlreadyExistException {
 		Course course = new Course();
@@ -42,7 +46,7 @@ public class AdminOperation implements AdminOperationInterface {
 		course.setCourseName(courseName);
 		course.setProfessorAllotted(0);
 		course.setCredits(credits);
-			if(courseDaoOperation.verifyCourse(course.getCourseID()))
+			if(courseValidator.isVerified(courseID))
 				throw new CourseIDAlreadyExistException();
 			
 		return adminDaoOperation.addCourse(course);
@@ -50,7 +54,7 @@ public class AdminOperation implements AdminOperationInterface {
 	}
 	
 	public boolean dropCourse(int courseID) throws CourseDoesNotExistException {
-		if(!courseDaoOperation.verifyCourse(courseID)) {
+		if(!courseValidator.isVerified(courseID)) {
 			throw new CourseDoesNotExistException(courseID);
 		}
 		return adminDaoOperation.dropCourse(courseID);
@@ -65,14 +69,14 @@ public class AdminOperation implements AdminOperationInterface {
 	}
 	
 	public boolean addProfessor(Professor professor) throws UserAlreadyExistsException {
-		if (userDaoOperation.getUser(professor.getUserId())!=null) 
+		if (userValidator.checkIfExists(professor.getUserId())) 
 			throw new UserAlreadyExistsException(professor.getUserId());
 		
 		return professorDaoOperation.addProfessor(professor);
 	}
 	
 	public boolean assignCourseToProfessor(int profId,ArrayList<Integer>CourseIdList,int ch) throws CourseDoesNotExistException,UserDoesNotExistException {
-		if (userDaoOperation.getUser(profId)==null) {
+		if (userValidator.checkIfExists(profId)) {
 			throw new UserDoesNotExistException(profId);
 		}
 		

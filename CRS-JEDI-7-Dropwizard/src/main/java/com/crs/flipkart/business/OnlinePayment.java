@@ -14,19 +14,11 @@ import com.crs.flipkart.exception.PaymentException;
  *
  */
 public class OnlinePayment extends PaymentOperation implements OnlinePaymentInterface{
-	//private static Logger logger = Logger.getLogger(CourseRegistrationOperation.class);
 	private int cardNumber, date;
-//	--------------------------------------------------------------------------------	
-	
 	public boolean payByCard(int userId, int cardNumber, int date) {
 		try {
 	    this.cardNumber=cardNumber;
 		this.date=date;
-
-		/*System.out.print("Enter amount: ");
-		int amount=sc.nextInt();
-		sc.nextLine();*/
-				
 		if(makePayment(userId, 250000,1)==false)
 			throw new PaymentException();
 		else {
@@ -39,9 +31,6 @@ public class OnlinePayment extends PaymentOperation implements OnlinePaymentInte
 	
 	public boolean authenticate(int cardNumber, int date) {
 		return false;
-		
-		//check card num & expiryDate from Bank DataBase, and return a boolean value correspond to that
-		
 	}
 		
 }

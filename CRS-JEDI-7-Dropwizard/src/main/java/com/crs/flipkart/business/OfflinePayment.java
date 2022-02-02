@@ -14,10 +14,7 @@ import com.crs.flipkart.exception.PaymentException;
  *
  */
 public class OfflinePayment extends PaymentOperation implements OfflinePaymentInterface {
-	//private static Logger logger = Logger.getLogger(CourseRegistrationOperation.class);
 	private int slipNumber;
-//	--------------------------------------------------------------------------------	
-
 	public boolean payByCash(int userId, int slipNumber) {
 		try {
 	    this.slipNumber = slipNumber;
@@ -38,10 +35,7 @@ public class OfflinePayment extends PaymentOperation implements OfflinePaymentIn
 	}
 	
 	public boolean authenticate(int slipNumber) {
-		return false;
-			
-		//check slipNumber from Bank DataBase, and return a boolean value correspond to that
-			
+		return false;	
 	}
 	
 }

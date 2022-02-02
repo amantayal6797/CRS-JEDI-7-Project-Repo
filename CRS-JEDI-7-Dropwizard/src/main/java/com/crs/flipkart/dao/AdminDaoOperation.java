@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-//import org.apache.log4j.Logger;
 
 import com.crs.flipkart.bean.Admin;
 import com.crs.flipkart.bean.Course;
@@ -26,13 +25,10 @@ import com.crs.flipkart.utils.DBUtils;
 public class AdminDaoOperation implements AdminDaoOperationInterface {
 	
 	CourseDaoOperation courseDaoOperation = new CourseDaoOperation();
-	//private static Logger logger = Logger.getLogger(AdminDaoOperation.class);
 	
 	public Admin getAdmin(int userID) {
 		DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-//		 String sql1 = "select * from user where userid = ?";
-//		 String sql2 = "select * from student where userid = ?";
 		 Admin admin=new Admin();
 		 try {
 			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.GET_USER_DETAIL);
@@ -59,7 +55,6 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 				admin.setContact(rs.getString("contact"));
 			 }
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
@@ -71,7 +66,6 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
 	    try {
-//	    	String sql = "insert into coursecatalog values (?,?,?,?,'NA')";
 		    PreparedStatement stmt = conn.prepareStatement(SQLQueryConstant.ADD_COURSE_QUERY);
 	    	stmt.setInt(1, course.getCourseID());
 		    stmt.setString(2, course.getCourseName());
@@ -79,13 +73,6 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 		    stmt.setInt(3, course.getCredits());
 		    int i=stmt.executeUpdate(); 
 		    
-		    /*
-			if(i==0) {
-				logger.error("Error in adding course in course catalog");
-			} else {
-				System.out.println("Course - "+course.getCourseID()+" added successfully");
-			}	
-		    */
 		    
 		    try {
 		    	if(i==0) 
@@ -99,7 +86,6 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 		    }
 		 
 	    }catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Exception raised: "+e.getMessage());
 		} return false;
 		
@@ -111,7 +97,6 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
 	    try {
-//	    	String sql = "delete from course where courseid = ?";
 	    	PreparedStatement stmt = conn.prepareStatement(SQLQueryConstant.DELETE_COURSE_QUERY);
 		    stmt.setInt(1, courseId);
 		    int i = stmt.executeUpdate();
@@ -128,7 +113,6 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 		    
 		    
 	    }catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Exception raised: "+e.getMessage());
 		} 
 			connectionSetup.connectionClose(conn);
