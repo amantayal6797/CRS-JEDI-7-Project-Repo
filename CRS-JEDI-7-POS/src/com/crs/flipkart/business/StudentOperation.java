@@ -9,6 +9,7 @@ import com.crs.flipkart.dao.StudentDaoOperationInterface;
 import com.crs.flipkart.dao.UserDaoOperation;
 import com.crs.flipkart.dao.UserDaoOperationInterface;
 import com.crs.flipkart.exception.UserAlreadyExistsException;
+import com.crs.flipkart.validator.UserValidator;
 
 /**
  * @author aditya.gupta3
@@ -18,10 +19,11 @@ public class StudentOperation implements StudentOperationInterface {
 
 	UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
 	StudentDaoOperationInterface studentDaoOperation = new StudentDaoOperation();
+	UserValidator userValidator = new UserValidator();
 	@Override
 	public void registerStudent(Student student) {
 		try {
-		if (userDaoOperation.getUser(student.getUserId())!=null) {
+		if (userValidator.checkIfExists(student.getUserId())) {
 			throw new UserAlreadyExistsException(student.getUserId());
 		}
 		

@@ -21,6 +21,9 @@ import com.crs.flipkart.dao.UserDaoOperationInterface;
 import com.crs.flipkart.exception.CourseNotTaughtByProfessorException;
 import com.crs.flipkart.exception.StudentNotRegisteredForCourseException;
 import com.crs.flipkart.exception.UserDoesNotExistException;
+import com.crs.flipkart.validator.CourseValidator;
+import com.crs.flipkart.validator.StudentValidator;
+import com.crs.flipkart.validator.UserValidator;
 
 /**
  * @author Ashruth
@@ -28,12 +31,13 @@ import com.crs.flipkart.exception.UserDoesNotExistException;
  */
 public class GradeCardOperation extends CRSStudentMenu implements GradeCardOperationInterface {
 	UserDaoOperationInterface userDaoOperation =new UserDaoOperation();
+	CourseValidator courseValidator = new CourseValidator();
+	UserValidator userValidator = new UserValidator();
+	StudentValidator studentValidator = new StudentValidator();
 	private static Logger logger = Logger.getLogger(GradeCardOperation.class);
 	public void viewGradeCard(int studentId) {
-		// Generate Grades 
-		// Display
 		try {
-		if (userDaoOperation.getUser(studentId)==null) {
+		if (!userValidator.checkIfExists(studentId)) {
 			throw new UserDoesNotExistException(studentId);
 			}
 		GradeCard gradeCard=generateGradeCard(studentId);
@@ -79,17 +83,15 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 		Scanner sc=new Scanner(System.in);
 		boolean flag=false;
 		ArrayList<Course> professorCourses=courseDAOobj.getProfessorCourses(userId);
+		ArrayList<Integer> professorCourseIds = new ArrayList<Integer>();
 		for(Course course:professorCourses) {
-			if(course.getCourseID()==courseId) {
-				flag=true;
-				break;
-			}
+			professorCourseIds.add(course.getCourseID());
 		}
-		if(flag==false) {
+		if (!courseValidator.isPresentInList(professorCourseIds, courseId)) {
 			throw new CourseNotTaughtByProfessorException(courseId);
 		}
 		ArrayList <Integer> enrolledStudents= courseDAOobj.getEnrolledStudents(courseId);
-		if(!enrolledStudents.contains(studentId)) {
+		if(!studentValidator.isPresentInList(enrolledStudents, studentId)) {
 			throw new StudentNotRegisteredForCourseException(courseId,studentId);
 		}
 		System.out.println("Grade Assigned Succesfully");

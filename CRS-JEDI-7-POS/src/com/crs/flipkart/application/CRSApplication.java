@@ -37,7 +37,6 @@ public class CRSApplication {
 		System.out.println("***********************************************************************");
 		System.out.println("***********************************************************************");
 		while(choice!=4) {
-			// Main menu
 			System.out.println("***********************************************************************");
 			System.out.printf("%38s\n","Menu");
 		System.out.println("***********************************************************************");
@@ -55,7 +54,6 @@ public class CRSApplication {
 		StudentOperationInterface studentOperation = new StudentOperation();
 	
 		switch(choice) {
-		// New Student Register Case
 		case 1:
 			System.out.println("Enter User ID: ");
 			int userId = sc.nextInt();
@@ -94,7 +92,6 @@ public class CRSApplication {
 			student.setPaymentStatus(false);
 			studentOperation.registerStudent(student);
 			break;
-		// Login Case
 		case 2:
 			System.out.println("Enter UserID");
 			int id=sc.nextInt();
@@ -103,17 +100,14 @@ public class CRSApplication {
 			String password = sc.nextLine();
 			String role = authOperation.Authorize(id,password);
 			switch(role) {
-			// Student Login
 			case "Student":
 				CRSStudentMenu studentPageObj = new CRSStudentMenu(); 
 				studentPageObj.StudentMenu(id);
 				break;
-			// Admin Login
 			case "Admin":
 				CRSAdminMenu adminPageObj=new CRSAdminMenu();
 				adminPageObj.AdminMenu(id);
 				break;
-			// Professor Login
 			case "Professor":
 				CRSProfessorMenu professorPageObj=new CRSProfessorMenu();
 				professorPageObj.ProfessorMenu(id);
@@ -126,20 +120,12 @@ public class CRSApplication {
 			System.out.println("Enter UserID");
 			int nUserId = sc.nextInt();
 			sc.nextLine();
-//			System.out.println("Enter Password");
-//			password = sc.nextLine();
-//			role=authOperation.Authorize(nUserId,password);
-//			if(role.equalsIgnoreCase("Invalid")) {
-//				System.out.println("Invalid Current UserId/Password");
-//				break;
-//			}
 			System.out.println("Enter new Password");
 			String nPassword = sc.next();
 			System.out.println("Confirm new Password");
 			String cNPassword = sc.next();
 			authOperation.updatePasswordCheck(nUserId, nPassword, cNPassword);
 			break;
-		// Logout Case
 		case 4:
 			System.out.println("Exiting");
 			break;

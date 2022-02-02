@@ -30,7 +30,6 @@ public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 	    Connection conn = connectionSetup.connectionEstablish();
 	    try {
 	    	userDaoOperation.registerUser(professor.getUserId(), professor.getPassword(), professor.getIsApproved());
-//	    	String sql = "insert into professor values (?,?,?,?,?,?,?,?)";
 	    	PreparedStatement stmt = conn.prepareStatement(SQLQueryConstant.ADD_PROFESSOR_DETAIL);
 		    stmt.setInt(1, professor.getUserId());
 		    stmt.setString(2, professor.getUserName());
@@ -59,7 +58,6 @@ public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 		     
 		  
 	    }catch (SQLException e) {
-			// TODO Auto-generated catch block
 			logger.debug("Exception raised: "+e.getMessage());
 		} finally {
 			connectionSetup.connectionClose(conn);	
@@ -70,8 +68,6 @@ public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 	public Professor getProfessor(int userId) {
 		DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-//		 String sql1 = "select * from user where userid = ?";
-//		 String sql2 = "select * from student where userid = ?";
 		 Professor professor=new Professor();
 		 try {
 			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.GET_USER_DETAIL);
@@ -98,7 +94,6 @@ public class ProfessorDaoOperation implements ProfessorDaoOperationInterface {
 				professor.setContact(rs.getString("contact"));
 			 }
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);

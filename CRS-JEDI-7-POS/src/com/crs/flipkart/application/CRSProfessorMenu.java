@@ -71,7 +71,6 @@ public class CRSProfessorMenu extends CRSApplication {
 			choice = sc.nextInt();
 			sc.nextLine();
 			switch (choice) {
-				// Professor Registers Course
 				case 1:
 					try {
 						 ArrayList<Course> courseList=new ArrayList<Course>();
@@ -100,15 +99,12 @@ public class CRSProfessorMenu extends CRSApplication {
 						System.out.println(e.getMessage());
 					}
 					
-				// View Course	of Professor
 				case 2: 
 					courseRegistrationObj.viewProfessorCourses(userId);
 					break;
-				// View Enrolled Students in a course
 				case 3:
 					courseRegistrationObj.viewEnrolledStudents(userId);
 					break;
-				// Assign Grade
 				case 4:
 					System.out.println("Enter CourseID");
 					int courseId=sc.nextInt();

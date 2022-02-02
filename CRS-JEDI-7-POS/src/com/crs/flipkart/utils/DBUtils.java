@@ -48,7 +48,6 @@ public class DBUtils {
 	                String url = prop.getProperty("url");
 	                String user = prop.getProperty("user");
 	                String password = prop.getProperty("password");
-//	                Class.forName(driver);
 	                connection = DriverManager.getConnection(url, user, password);
 	            } catch (SQLException e) {
 	              logger.error(e.getMessage());

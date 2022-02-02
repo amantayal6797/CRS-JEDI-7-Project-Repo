@@ -78,11 +78,9 @@ public class CRSAdminMenu extends CRSApplication {
 			AdminOperation adminOperation = new AdminOperation();
 			
 			switch(choice) {
-				// View Course case
 			case 1:
 				courseRegistrationObj.viewCourses();
 				break;
-				// Add Course case
 			case 2:
 				System.out.println("Enter Course ID to add: ");
 				int courseID = sc.nextInt();
@@ -92,28 +90,21 @@ public class CRSAdminMenu extends CRSApplication {
 				int credits = sc.nextInt();
 				adminOperation.addCourse(courseID,courseName,credits);
 				break;
-				// Drop Course case
 			case 3:
 				System.out.println("Enter Course ID to drop: ");
 				courseID = sc.nextInt();
 				sc.nextLine();
 				adminOperation.dropCourse(courseID);
 				break;
-				// Approve Course case
 			case 4:
 				ArrayList<Integer> unapprovedStudents=userDaoOperation.getUnapprovedStudents();
 				System.out.println("List of Unapproved Students");
 				unapprovedStudents.forEach(System.out::println);
 				
-				//for(int i:unapprovedStudents) {
-					//logger.info(i);
-				//}
-				
 				System.out.println("Enter User ID to approve: ");
 				int userIdToApprove = sc.nextInt();
 				adminOperation.approveUser(userIdToApprove);
 				break;
-			// Add Professor case
 			case 5:
 				System.out.println("Enter User ID: ");
 				int professorUserId = sc.nextInt();
@@ -149,7 +140,6 @@ public class CRSAdminMenu extends CRSApplication {
 				professor.setDepartment(dep);
 				adminOperation.addProfessor(professor);
 				break;
-			// Assign Course to Professor Case
 			case 6:
 				try {
 				ArrayList<Course> courseList=new ArrayList<Course>();
@@ -179,7 +169,6 @@ public class CRSAdminMenu extends CRSApplication {
 				}catch(Exception e) {
 					System.out.println(e.getMessage());
 				}
-			// View Grade Card Case
 			case 7:
 				System.out.println("Enter User ID of student: ");
 				int studId = sc.nextInt();

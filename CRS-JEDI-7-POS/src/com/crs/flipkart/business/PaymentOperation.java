@@ -17,12 +17,8 @@ import com.crs.flipkart.dao.StudentDaoOperation;
  */
 public class PaymentOperation implements PaymentOperationInterface {
 	private static Logger logger = Logger.getLogger(CourseRegistrationOperation.class);
-//--------------------------------------------------------------------------------	
 	private int transactionID;
 	int amount;
-//	------------------------------------------------------------------------------
-	
-	
 	public boolean makePayment(int userId, int amount, int modeofpayment) {
 	    StudentDaoOperation studentDaoOperation = new StudentDaoOperation();
     	boolean paymentSuccessful = studentDaoOperation.setPaymentStatus(userId);
@@ -33,8 +29,6 @@ public class PaymentOperation implements PaymentOperationInterface {
     	return paymentSuccessful;
 	}
 	
-	
-//	--------------------------------------------------------------------------------		
 	public void generateBill(int userId, int amount,int modeofpayment) {		// this function called from makePayment function
 		logger.info("Fees Paid - "+amount);
 		

@@ -18,6 +18,7 @@ import com.crs.flipkart.exception.CourseIDAlreadyExistException;
 import com.crs.flipkart.exception.ErrorInAddingCourseException;
 import com.crs.flipkart.exception.ErrorInDropingCourseException;
 import com.crs.flipkart.utils.DBUtils;
+import com.crs.flipkart.validator.CourseValidator;
 
 /**
  * @author aditya.gupta3
@@ -26,13 +27,12 @@ import com.crs.flipkart.utils.DBUtils;
 public class AdminDaoOperation implements AdminDaoOperationInterface {
 	
 	CourseDaoOperation courseDaoOperation = new CourseDaoOperation();
+	CourseValidator courseValidator = new CourseValidator();
 	private static Logger logger = Logger.getLogger(AdminDaoOperation.class);
 	
 	public Admin getAdmin(int userID) {
 		DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-//		 String sql1 = "select * from user where userid = ?";
-//		 String sql2 = "select * from student where userid = ?";
 		 Admin admin=new Admin();
 		 try {
 			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.GET_USER_DETAIL);
@@ -59,7 +59,6 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 				admin.setContact(rs.getString("contact"));
 			 }
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				logger.debug("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
@@ -68,8 +67,9 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 	
 	public void addCourse (Course course) {
 			try {
-				if(courseDaoOperation.verifyCourse(course.getCourseID()))
+				if (courseValidator.isVerified(course.getCourseID())) {
 					throw new CourseIDAlreadyExistException();
+				}
 			}
 			catch(CourseIDAlreadyExistException e){
 				System.out.println(e.getMessage());
@@ -79,22 +79,12 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
 	    try {
-//	    	String sql = "insert into coursecatalog values (?,?,?,?,'NA')";
 		    PreparedStatement stmt = conn.prepareStatement(SQLQueryConstant.ADD_COURSE_QUERY);
 	    	stmt.setInt(1, course.getCourseID());
 		    stmt.setString(2, course.getCourseName());
 		    stmt.setInt(4, course.getProfessorAllotted());
 		    stmt.setInt(3, course.getCredits());
-		    int i=stmt.executeUpdate(); 
-		    
-		    /*
-			if(i==0) {
-				logger.error("Error in adding course in course catalog");
-			} else {
-				System.out.println("Course - "+course.getCourseID()+" added successfully");
-			}	
-		    */
-		    
+		    int i=stmt.executeUpdate();  
 		    try {
 		    	if(i==0) 
 		    		throw new ErrorInAddingCourseException(1);
@@ -106,7 +96,6 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 		    }
 		 
 	    }catch (SQLException e) {
-			// TODO Auto-generated catch block
 			logger.debug("Exception raised: "+e.getMessage());
 		} finally {
 			connectionSetup.connectionClose(conn);	
@@ -114,7 +103,7 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 	}
 	
 	public void dropCourse(int courseId) {
-		if(!courseDaoOperation.verifyCourse(courseId)) {
+		if(!courseValidator.isVerified(courseId)) {
 			logger.error("Course ID does not exist");
 			return;
 		}
@@ -122,18 +111,9 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
 	    try {
-//	    	String sql = "delete from course where courseid = ?";
 	    	PreparedStatement stmt = conn.prepareStatement(SQLQueryConstant.DELETE_COURSE_QUERY);
 		    stmt.setInt(1, courseId);
 		    int i = stmt.executeUpdate();
-		    
-		    /*
-		    if(i==0) {
-				 logger.error("Error in dropping course - "+courseId);
-			} else {
-				logger.info("Course - "+courseId+" dropped successfully");
-			}
-		    */
 		    
 		    try {
 		    	if(i==0) 
@@ -147,7 +127,6 @@ public class AdminDaoOperation implements AdminDaoOperationInterface {
 		    
 		    
 	    }catch (SQLException e) {
-			// TODO Auto-generated catch block
 			logger.debug("Exception raised: "+e.getMessage());
 		} finally {
 			connectionSetup.connectionClose(conn);

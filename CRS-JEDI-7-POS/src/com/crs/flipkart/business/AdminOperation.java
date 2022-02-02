@@ -17,6 +17,7 @@ import com.crs.flipkart.dao.UserDaoOperation;
 import com.crs.flipkart.dao.UserDaoOperationInterface;
 import com.crs.flipkart.exception.UserAlreadyExistsException;
 import com.crs.flipkart.exception.UserDoesNotExistException;
+import com.crs.flipkart.validator.UserValidator;
 
 /**
  * @author aditya.gupta3
@@ -27,6 +28,7 @@ public class AdminOperation implements AdminOperationInterface {
 	UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
 	AdminDaoOperationInterface adminDaoOperation = new AdminDaoOperation();
 	ProfessorDaoOperationInterface professorDaoOperation = new ProfessorDaoOperation();
+	UserValidator userValidator = new UserValidator();
 
 	public void addCourse(int courseID,String courseName, int credits) {
 		Course course = new Course();
@@ -51,8 +53,9 @@ public class AdminOperation implements AdminOperationInterface {
 	
 	public void addProfessor(Professor professor) {
 		try {
-		if (userDaoOperation.getUser(professor.getUserId())!=null) 
-			throw new UserAlreadyExistsException(professor.getUserId());
+			if (userValidator.checkIfExists(professor.getUserId())) {
+				throw new UserAlreadyExistsException(professor.getUserId());
+			}
 		}
 		catch(UserAlreadyExistsException e) {
 			System.out.println(e.getMessage());
@@ -62,7 +65,7 @@ public class AdminOperation implements AdminOperationInterface {
 	
 	public void assignCourseToProfessor(int profId,ArrayList<Integer>CourseIdList,int ch) {
 		try {
-		if (userDaoOperation.getUser(profId)==null) {
+		if (!userValidator.checkIfExists(profId)) {
 			throw new UserDoesNotExistException(profId);
 		}
 		

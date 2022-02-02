@@ -68,7 +68,6 @@ public class CRSStudentMenu {
 			choice = sc.nextInt();
 			sc.nextLine();
 			switch (choice) {
-				// Course Registration 
 				case 1: if(!studDAOobj.isRegistered(userId)) {
 					ArrayList<Integer> choices=new ArrayList<Integer>();
 					
@@ -107,8 +106,7 @@ public class CRSStudentMenu {
 				}
 						else
 							System.out.println("Already Registered");
-						break;
-				// Add Course		
+						break;	
 				case 2: 
 					if(studDAOobj.isRegistered(userId)) {
 						System.out.println("Enter id of course to add");
@@ -119,7 +117,6 @@ public class CRSStudentMenu {
 						System.out.println("Complete Course Registration first");
 					}
 					break;
-				// Drop Course
 				case 3:
 					if(studDAOobj.isRegistered(userId)) {
 						System.out.println("Enter id of course to remove");
@@ -130,11 +127,9 @@ public class CRSStudentMenu {
 						System.out.println("Complete Course Registration first");
 					}
 					break;
-				// View All Courses
 				case 4:
 					courseRegistrationObj.viewCourses();
 						break;
-					// View Registered Courses
 				case 5:
 					if(studDAOobj.isRegistered(userId))
 						courseRegistrationObj.viewRegisteredCourse(userId);
@@ -142,15 +137,13 @@ public class CRSStudentMenu {
 						System.out.println("Complete Course Registration first");
 					}
 					break;
-				// View Grade Card
 				case 6:
 					if(studDAOobj.isRegistered(userId))
 						gradeCardObj.viewGradeCard(userId);
 					else {
 						System.out.println("Complete Course Registration first");
 					}
-					break;
-				// Make Payment		
+					break;	
 				case 7:
 					
 					if (!studDAOobj.isRegistered(userId)) {
@@ -177,7 +170,6 @@ public class CRSStudentMenu {
 						System.out.println("Fees already paid");
 					}
 					break;
-				// Logout
 				case 8: 
 						break;
 						

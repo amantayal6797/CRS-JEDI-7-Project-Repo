@@ -36,7 +36,6 @@ public class NotificationDaoOperation implements NotificationDaoOperationInterfa
 			}
 			return status;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 		    logger.debug("Exception raised: "+e.getMessage());
 		} finally {
 			DBUtils.connectionClose(conn);	
@@ -56,7 +55,6 @@ public class NotificationDaoOperation implements NotificationDaoOperationInterfa
 			 stmt.setInt(2,userId);  
 			 int i = stmt.executeUpdate();  	
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 		   logger.debug("Exception raised: "+e.getMessage());
 		} finally {
 			DBUtils.connectionClose(conn);	
@@ -76,7 +74,6 @@ public void insertStatus(int userId) {
 			 stmt.setInt(1,0);  
 			 int i = stmt.executeUpdate();  	
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 		    logger.debug("Exception raised: "+e.getMessage());
 		} finally {
 			DBUtils.connectionClose(conn);	
