@@ -18,12 +18,10 @@ import com.crs.flipkart.exception.ErrorInRegisteringCourseException;
 import com.crs.flipkart.utils.DBUtils;
 
 public class CourseDaoOperation implements CourseDaoOperationInterface {
-//	private static Logger logger = Logger.getLogger(CourseDaoOperation.class);
 	 public ArrayList <Integer>  getEnrolledStudents(int courseId){
 		ArrayList<Integer> studentList=new ArrayList<Integer>();
 		DBUtils connectObj=new DBUtils();
 		Connection conn = connectObj.connectionEstablish();
-//		String sql = "select * from registeredcourse";
 		try {
 			PreparedStatement stmt=conn.prepareStatement(SQLQueryConstant.GET_ALL_REGISTERED_COURSES);
 			ResultSet rs = stmt.executeQuery();
@@ -32,7 +30,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 					studentList.add(rs.getInt("userid"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Exception raised: "+e.getMessage());
 		}
 		connectObj.connectionClose(conn);
@@ -43,7 +40,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 		 Course course=new Course();
 		 DBUtils connectObj=new DBUtils();
 		 Connection conn1 = connectObj.connectionEstablish();
-//		 String sql = "select * from course";
 		 try {
 			 PreparedStatement stmt=conn1.prepareStatement(SQLQueryConstant.GET_ALL_COURSES);
 				ResultSet rs = stmt.executeQuery();
@@ -58,7 +54,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 					}
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn1);
@@ -69,7 +64,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 		 ArrayList<Course> catalog=new ArrayList<Course>();
 		 DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-//		 String sql = "select * from course";
 		 try {
 			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.GET_ALL_COURSES);
 				ResultSet rs = stmt.executeQuery();
@@ -83,7 +77,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 					catalog.add(course);
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
@@ -95,7 +88,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 		 ArrayList<RegisteredCourse> listOfRegisteredCourses= new ArrayList<RegisteredCourse>();
 		 DBUtils connectObj=new DBUtils();
 			Connection conn = connectObj.connectionEstablish();
-//			String sql = "select * from registeredcourse";
 			try {
 				PreparedStatement stmt=conn.prepareStatement(SQLQueryConstant.GET_ALL_REGISTERED_COURSES);
 				ResultSet rs = stmt.executeQuery();
@@ -109,7 +101,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 					}
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn);
@@ -119,7 +110,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 	 public boolean verifyCourse(int courseId) {
 		 DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-//		 String sql = "select * from course";
 		 try {
 			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.GET_ALL_COURSES);
 				ResultSet rs = stmt.executeQuery();
@@ -128,7 +118,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 						return true;
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
@@ -138,17 +127,12 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 	 public void addCourse(int studentId,int courseId) {
 		 DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-//		 String sql = "insert into registeredcourse values(?,?,'NA')";
 		 try {
 			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.ADD_REGISTERED_COURSE);
 			 stmt.setInt(2, courseId);
 			 stmt.setInt(1, studentId);
 			 
 			 int i=stmt.executeUpdate(); 
-			 /*
-			 if(i==0)
-				 System.out.println("Error in adding course");
-			 */
 			 
 			  try {
 			    	if(i==0) 
@@ -158,7 +142,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			    	System.out.println(e.getMessage());
 			    }
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
@@ -168,16 +151,11 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 		 
 		 DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-//		 String sql = "delete from registeredcourse where courseId=? and userId=?";
 		 try {
 			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.DELETE_REGISTERED_COURSE);
 			 stmt.setInt(1, courseId);
 			 stmt.setInt(2, studentId);
 			 int i=stmt.executeUpdate(); 
-			 /*
-			 if(i==0)
-				 System.out.println("Error in dropping course");
-			 */
 			  try {
 			    	if(i==0) 
 			    		throw new ErrorInDropingCourseException(2);
@@ -187,7 +165,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			    } 
 			 
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
@@ -198,7 +175,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 		 ArrayList<Course> catalog=new ArrayList<Course>();
 		 DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-//		 String sql = "select * from course where professoralloted=?";
 		 try {
 			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.GET_PROFESSOR_COURSES);
 			 stmt.setInt(1, userId);
@@ -213,7 +189,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 					catalog.add(course);
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
@@ -223,7 +198,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 		 ArrayList<Course> catalog=new ArrayList<Course>();
 		 DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-//		 String sql = "select * from course where professoralloted=0";
 		 try {
 			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.GET_UNALLOTED_COURSES);
 			 ResultSet rs = stmt.executeQuery();
@@ -237,7 +211,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 					catalog.add(course);
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
@@ -247,18 +220,12 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 		 
 		 DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-//		 String sql = "update course set professoralloted = ? where courseId=?";
 		 try {
 			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.ALLOT_COURSE);
 			 stmt.setInt(2, courseId);
 			 stmt.setInt(1, userID);
 			 
 			 int i=stmt.executeUpdate(); 
-			 
-			 /*
-			 if(i==0)
-				 System.out.println("Error in Registering course");
-			*/
 			 try{
 			  	if(i==0) 
 			    	throw new ErrorInRegisteringCourseException();
@@ -269,7 +236,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			  
 			
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
@@ -278,7 +244,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 	 public void setGrade(int studentId,int courseId,String grade) {
 		 DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-		 String sql = "update registeredcourse set grade = ? where courseid = ? and userid = ? ";
 		 try {
 			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.ASSIGN_GRADE);
 			 stmt.setString(1, grade);
@@ -286,10 +251,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			 stmt.setInt(3, studentId);
 			 
 			 int i=stmt.executeUpdate(); 
-			 /*
-			 if(i==0)
-				 System.out.println("Error in Assigning Grade");
-			*/
 			 try{
 				if(i==0) 
 				   	throw new ErrorInAssigningCourseException();
@@ -298,7 +259,6 @@ public class CourseDaoOperation implements CourseDaoOperationInterface {
 			    System.out.println(e.getMessage());
 			 }
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);

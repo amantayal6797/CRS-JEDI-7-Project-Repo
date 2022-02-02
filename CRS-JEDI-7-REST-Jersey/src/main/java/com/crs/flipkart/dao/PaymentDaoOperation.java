@@ -18,7 +18,6 @@ import com.crs.flipkart.utils.DBUtils;
  */
 public class PaymentDaoOperation implements PaymentDaoOperationInterface{
 	
-	//private static Logger logger = Logger.getLogger(PaymentDaoOperation.class);
 	public void savePayment(int userId, int amount, String trasactionId,int modeofpayment) {
 		
 		DBUtils DBUtils = new DBUtils();

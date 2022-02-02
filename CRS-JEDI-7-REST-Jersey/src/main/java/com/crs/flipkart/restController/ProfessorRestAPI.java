@@ -99,7 +99,6 @@ public class ProfessorRestAPI {
 	
 	
 	
-	// Wrong userId & right course id case has to be handled.
 	@POST
 	@Path("/registerCourse")
 	@Consumes("application/json")

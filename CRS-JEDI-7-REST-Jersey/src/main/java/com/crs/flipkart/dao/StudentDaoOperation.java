@@ -16,14 +16,12 @@ import com.crs.flipkart.utils.DBUtils;
 
 public class StudentDaoOperation implements StudentDaoOperationInterface {
 	UserDaoOperationInterface userDaoOperation = new UserDaoOperation();
-	//private static Logger logger = Logger.getLogger(StudentDaoOperation.class);
 	
 	public void registerStudent (Student student) {
 		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
 	    try {
 	    	userDaoOperation.registerUser(student.getUserId(), student.getPassword(), student.getIsApproved());
-//	    	String sql = "insert into student values (?,?,?,?,?,?,?,?,?,?)";
 	    	PreparedStatement stmt = conn.prepareStatement(SQLQueryConstant.ADD_STUDENT_QUERY);
 		    stmt.setInt(1, student.getUserId());
 		    stmt.setString(2, student.getUserName());
@@ -36,11 +34,6 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 		    stmt.setString(9, student.getBranch());
 		    stmt.setInt(10, (student.getPaymentStatus())? 1: 0);
 		    int i = stmt.executeUpdate();
-		    /*
-		    if(i==0) {
-				logger.error("Error in dropping student"); 
-			}
-			*/
 		    try{
 		    	if(i==0) 
 		    		throw new ErrorInRegisteringStudentException();
@@ -48,19 +41,9 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 		    	System.out.println(e.getMessage());
 		    }
 		    
-//		    sql="insert into role values(?,'Student')";
 		    stmt=conn.prepareStatement(SQLQueryConstant.ADD_STUDENT_ROLE);
 		    stmt.setInt(1, student.getUserId());
 		    i = stmt.executeUpdate();
-		    /*
-		    if(i==0) {
-				logger.error("Error in registering student"); 
-			} else {
-				logger.info("student - "+student.getUserId()+" registered successfully & your approval is pending by admin");
-				NotificationDaoOperationInterface notificationOper = new NotificationDaoOperation();
-				notificationOper.insertStatus(student.getUserId());
-			}
-			*/
 		    
 		    try{
 		    	if(i==0) 
@@ -74,7 +57,6 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 		    }
 		    
 	    }catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Exception raised: "+e.getMessage());
 		} finally {
 			connectionSetup.connectionClose(conn);	
@@ -86,7 +68,6 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 	public boolean getPaymentStatus (int studentId) {
 		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
-//		String sql = "select paymentstatus from student where userid = ?";
 		try {
 		    PreparedStatement stmt=conn.prepareStatement(SQLQueryConstant.GET_PAYMENT_STATUS);
 			stmt.setInt(1, studentId);
@@ -99,7 +80,6 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 			
 			return false;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 		    System.out.println("Exception raised: "+e.getMessage());
 		    return false;
 		} finally {
@@ -110,17 +90,10 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 	public boolean setPaymentStatus (int studentId) {
 		DBUtils connectionSetup = new DBUtils();
 	    Connection conn = connectionSetup.connectionEstablish();
-//		String sql = "update student set paymentstatus=1 where userid = ?";
 		try {
 		    PreparedStatement stmt=conn.prepareStatement(SQLQueryConstant.SET_PAYMENT_STATUS);
 			stmt.setInt(1, studentId);
-			int i=stmt.executeUpdate(); 
-			/*
-			if(i==0) {
-				logger.error("Error in setting payment status for student-"+studentId);
-				return false;
-			}
-			*/
+			int i=stmt.executeUpdate();
 			try {
 				if(i==0) 
 					throw new ErrorInSettingPaymentStatusException(studentId);
@@ -132,7 +105,6 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 			
 			return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 		    System.out.println("Exception raised: "+e.getMessage());
 		    return false;
 		} finally {
@@ -143,8 +115,6 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 	public Student showStudent(int studentId) {
 		DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-//		 String sql1 = "select * from user where userid = ?";
-//		 String sql2 = "select * from student where userid = ?";
 		 Student student=new Student();
 		 try {
 			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.GET_USER_DETAIL);
@@ -180,7 +150,6 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 						student.setPaymentStatus(false);
 			 }
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
@@ -190,15 +159,10 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 	public void setRegistration(int studentId) {
 		DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-//		 String sql = "update student set isregistered=1 where userid = ?";
 		 try {
 			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.SET_REGISTERED);
 			 stmt.setInt(1, studentId);
 			 int i=stmt.executeUpdate(); 
-			 /*
-			 if(i==0)
-				 System.out.println("Error in setting registration status");
-			*/
 			 
 			try {
 				if(i==0)
@@ -208,7 +172,6 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 			}
 			 
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
@@ -217,7 +180,6 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 	public boolean isRegistered(int studentId) {
 		DBUtils connectObj=new DBUtils();
 		 Connection conn2 = connectObj.connectionEstablish();
-//		 String sql = "select isregistered from student where userid = ?";
 		 try {
 			 PreparedStatement stmt=conn2.prepareStatement(SQLQueryConstant.IS_REGISTERED);
 			 stmt.setInt(1, studentId);
@@ -229,7 +191,6 @@ public class StudentDaoOperation implements StudentDaoOperationInterface {
 					return false;
 			 }
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 			System.out.println("Exception raised: "+e.getMessage());
 			}
 			connectObj.connectionClose(conn2);
