@@ -3,8 +3,9 @@
  */
 package com.crs.flipkart.restController;
 import java.util.*;
-import java.util.logging.Logger;
+//import java.util.logging.Logger;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -14,7 +15,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-//import org.apache.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import com.crs.flipkart.bean.Course;
 import com.crs.flipkart.bean.Grade;
@@ -57,7 +58,7 @@ public class StudentRestAPI {
 	 * Main Student Client which displays and manages all student related operations
 	 * 
 	 */
-	private static Logger logger = Logger.getLogger(StudentRestAPI.class);
+	private static final Logger logger = Logger.getLogger(StudentRestAPI.class);
 	
 	
 
@@ -120,7 +121,6 @@ public class StudentRestAPI {
 				else
 					logger.info("Already Registered");
 					return Response.status(400).entity("Already Registered").build();
-		return null;
 	}
 	
 	
@@ -150,21 +150,21 @@ public class StudentRestAPI {
 		
 				
 			boolean flag=courseRegistrationObj.addCourse(userId,courseId);
-			if(flag)
+			if(flag) {
 				logger.info("Course Succesfully Added\n");
 				return Response.status(400).entity("Course Succesfully Added").build();
-			
+			}
 		}else {
 			logger.error("Complete Course Registration first");
 			return Response.status(400).entity("Complete Course Registration first").build();
 			
 		}
+			return null;
 		}
 		catch(RegistrationCompletedException | CourseAlreadyRegisteredException | CourseDoesNotExistException e) {
 			logger.debug(e.getMessage());
 			return Response.status(400).entity(e.getMessage()).build();
 		}
-		return null;
 	}
 	
 	
@@ -340,6 +340,5 @@ public class StudentRestAPI {
 			logger.error("Fees already paid");
 			return Response.status(400).entity("Fees already paid").build();
 		}
-		return null;
 	}
 }

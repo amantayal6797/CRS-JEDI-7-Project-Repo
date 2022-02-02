@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Logger;
+//import java.util.logging.Logger;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
@@ -19,7 +19,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-//import org.apache.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import com.crs.flipkart.bean.Admin;
 import com.crs.flipkart.bean.Course;
@@ -67,7 +67,8 @@ public class AdminRestAPI  {
 	 * @param Professor
 	 * @return
 	 */
-	
+	private static final Logger logger = Logger.getLogger(AdminRestAPI.class);
+
 	@POST
 	@Path("/addProfessor")
 	@Consumes("application/json")
@@ -119,6 +120,7 @@ public class AdminRestAPI  {
 			logger.debug(e.getMessage());
 		return Response.status(400).entity(e.getMessage()).build();
 	}
+		return null;
 	}
 	
 	

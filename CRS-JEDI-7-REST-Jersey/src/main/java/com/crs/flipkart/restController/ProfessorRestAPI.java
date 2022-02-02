@@ -8,8 +8,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Logger;
+//import java.util.logging.Logger;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -19,7 +20,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-//import org.apache.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import com.crs.flipkart.bean.Course;
 import com.crs.flipkart.bean.Professor;
@@ -57,7 +58,7 @@ Manages the major roles of professor based on user inputs
 public class ProfessorRestAPI {
 	
 
-	private static Logger logger = Logger.getLogger(ProfessorRestAPI.class);
+	private static final Logger logger = Logger.getLogger(ProfessorRestAPI.class);
 
 	
 	@GET

@@ -6,6 +6,7 @@ package com.crs.flipkart.restController;
 
 import java.util.Scanner;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -14,6 +15,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.apache.log4j.Logger;
 
 import com.crs.flipkart.bean.Student;
 import com.crs.flipkart.business.AuthorizationOperation;
@@ -39,7 +42,7 @@ import com.crs.flipkart.exception.UserDoesNotExistException;
 @Path("/user")
 public class UserRestAPI {
 
-	
+	private static final Logger logger = Logger.getLogger(UserRestAPI.class);
 	/**
 	 *  Handles api request to register student
 	 * @param Student
@@ -165,12 +168,13 @@ public class UserRestAPI {
 		
 		boolean flag=authOperation.updatePasswordCheck(userId, nPassword, cNPassword);
 		if(flag)
-			logger.info("Password updated successfully");
+			{logger.info("Password updated successfully");
 			return Response.status(200).entity("Password updated successfully").build();
+			}
 		else
-			logger.error("Error");
+			{logger.error("Error");
 			return Response.status(400).entity("Error").build();
-			
+			}
 		}catch(UserDoesNotExistException | PasswordNotMatchingException e ) {
 			logger.debug(e.getMessage());
 			return Response.status(400).entity(e.getMessage()).build();
