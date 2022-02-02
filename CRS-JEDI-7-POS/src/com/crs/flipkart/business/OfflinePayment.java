@@ -35,10 +35,10 @@ public class OfflinePayment extends PaymentOperation implements OfflinePaymentIn
 			return;
 		
 		
-		if(makePayment(userId, 250000)==false)
+		if(makePayment(userId, 250000,2)==false)
 			throw new PaymentException();
 		else {
-			logger.info("Transaction completed :) ");
+			logger.info("Payment received in offline mode.\nFees Paid.");
 		}	
 		}catch (PaymentException e) {
 			logger.error(e.getMessage());

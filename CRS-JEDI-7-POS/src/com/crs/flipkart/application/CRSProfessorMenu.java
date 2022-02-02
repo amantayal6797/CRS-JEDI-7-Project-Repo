@@ -44,21 +44,20 @@ public class CRSProfessorMenu extends CRSApplication {
 		
 		Professor professor=profDaoObj.getProfessor(userId);
 		System.out.println("***********************************************************************");
-		System.out.printf("%100s\n","Welcome "+professor.getUserName());
+		System.out.println("Welcome "+professor.getUserName());
 
 		
 		LocalTime localTime = LocalTime.now();
 		System.out.print("Login Time:- " + localTime+"  ");
 		
 		LocalDate localDate = LocalDate.now();
-		System.out.println("Login Date:- "+ localDate.getDayOfMonth()+" "+localDate.getMonth()+", "+localDate.getYear());
-		System.out.println("***********************************************************************");
+		System.out.println("\t Login Date:- "+ localDate.getDayOfMonth()+" "+localDate.getMonth()+", "+localDate.getYear());
 		int choice=0;
 		Scanner sc = new Scanner(System.in);
 		while (choice!=5) 
 		{
 			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			System.out.println("%100s\n" + "Professor Menu");
+			System.out.printf("%38s \n","Professor Menu");
 			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			System.out.println("1. Register for Course");
 			System.out.println("2. View Registered Courses");
@@ -66,6 +65,7 @@ public class CRSProfessorMenu extends CRSApplication {
 			System.out.println("4. Grade Student");
 			System.out.println("5. Logout");
 			System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+			System.out.println("Enter your choice: ");
 			CourseRegistrationOperationInterface courseRegistrationObj=new CourseRegistrationOperation();
 			GradeCardOperationInterface gradeCardObj= new GradeCardOperation();
 			choice = sc.nextInt();

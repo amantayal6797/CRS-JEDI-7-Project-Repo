@@ -33,22 +33,24 @@ public class CRSApplication {
 		int choice = 0;
 		System.out.println("***********************************************************************");
 		System.out.println("***********************************************************************");
-		System.out.printf("%100s\n","WELCOME TO CRS APPLICATION");
+		System.out.printf("%50s\n","WELCOME TO CRS APPLICATION");
 		System.out.println("***********************************************************************");
 		System.out.println("***********************************************************************");
 		while(choice!=4) {
 			// Main menu
 			System.out.println("***********************************************************************");
-			System.out.printf("%100s\n","Menu");
+			System.out.printf("%38s\n","Menu");
 		System.out.println("***********************************************************************");
 		System.out.println("Enter 1 for register student");
 		System.out.println("Enter 2 for login");
 		System.out.println("Enter 3 to update password");
 		System.out.println("Enter 4 to exit");
-			System.out.println("***********************************************************************");
+		System.out.println("***********************************************************************");
+		System.out.println("Enter your choice: ");
 		Scanner sc=new Scanner(System.in);
 		choice=sc.nextInt();
 		sc.nextLine();
+
 		AuthorizationOperationInterface authOperation= new AuthorizationOperation();
 		StudentOperationInterface studentOperation = new StudentOperation();
 	

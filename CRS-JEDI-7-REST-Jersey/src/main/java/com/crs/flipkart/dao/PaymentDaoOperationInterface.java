@@ -18,6 +18,6 @@ store the payment details in DB like
 */
 
 
-	public void savePayment(int userId, int amount, String trasactionId);
+	public void savePayment(int userId, int amount, String trasactionId,int modeofpayment);
 
 }

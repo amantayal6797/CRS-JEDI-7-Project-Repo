@@ -136,10 +136,14 @@ public class UserRestAPI {
 			) {
 		AuthorizationOperationInterface authOperation= new AuthorizationOperation();
 		
-		
+		String msg = "";
 		String role = authOperation.Authorize(id,password);
+		if(role.equals("Admin") || role.equals("Student") || role.equals("Professor"))
+		msg = "Login Successful \nUser Role: " + role ;
+		else
+		msg = role;
 		
-	return role;	
+	return msg;	
 	}
 	
 	/**

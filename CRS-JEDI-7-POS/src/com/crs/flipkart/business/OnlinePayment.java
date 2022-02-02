@@ -37,10 +37,10 @@ public class OnlinePayment extends PaymentOperation implements OnlinePaymentInte
 		int amount=sc.nextInt();
 		sc.nextLine();*/
 				
-		if(makePayment(userId, 250000)==false)
+		if(makePayment(userId, 250000,1)==false)
 			throw new PaymentException();
 		else {
-			logger.info("Transaction completed :) ");
+			logger.info("Payment received in online mode.\nFees Paid.");
 		}	
 		}catch (PaymentException e) {
 			e.getMessage();		}

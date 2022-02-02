@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 /**
  * Manages the connection with MySQL server
  * 
@@ -24,7 +26,7 @@ import java.util.Properties;
 
 public class DBUtils {
 	
-		   
+	 private static Logger logger = Logger.getLogger(DBUtils.class); 
 		public Connection connectionEstablish()  {
 			/**
 			 * Fetches and establishes a connection with MySQL server
@@ -32,36 +34,25 @@ public class DBUtils {
 			 * 
 			 * @return Connection which is used to fire queries to the connected database
 			 */
+		
 			 Connection connection = null;
 			    try {
-//	            	Properties prop = new Properties();
-//	                InputStream inputStream = DBUtils.class.getClassLoader().getResourceAsStream("config.properties");
-//	                prop.load(inputStream);
-//	                String driver = prop.getProperty("driver");
-//	                String url = prop.getProperty("url");
-//	                String user = prop.getProperty("user");
-//	                String password = prop.getProperty("password");
-//	  
+  
 			    	String driver="com.mysql.cj.jdbc.Driver";
 			    	String url="jdbc:mysql://localhost:3306/crs_db";
 			    	String user="root";
-			    	String password="root";
+			    	String password="108062@Ma";
 			    	Class.forName(driver);
 	                connection = DriverManager.getConnection(url, user, password);
 	                return connection;
 	            } catch (SQLException e) {
-	                e.printStackTrace();
+	            	logger.error(e.getMessage());
 	            }
-//			    catch (FileNotFoundException e) {
-//	                e.printStackTrace();
-//	            }
-//			    catch (IOException e) {
-//	                e.printStackTrace();
-//	            } 
 			    catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+			    	logger.error(e.getMessage());
 				}
+			    logger.info("Database connection established.");
 	            return connection;
 	        }
 				   
@@ -70,23 +61,23 @@ public class DBUtils {
 			 * Terminates connection with the database if instance
 			 * of connection is not null
 			 */ 
-					public  void connectionClose(Connection conn) {
-						
-					try {
-						
-					    conn.close();
-					   }catch(SQLException se){
-					          se.printStackTrace();
-					   }catch(Exception e){
-					      e.printStackTrace();
-					   }finally{
-					      try{
-					         if(conn!=null)
-					            conn.close();
-					      }catch(SQLException se){
-					         se.printStackTrace();
-					      }
-					   }
-					
-					}
-		}
+		public  void connectionClose(Connection conn) {
+			try {
+				
+			    conn.close();
+			    logger.info("Database connection clossed.");
+			   }catch(SQLException se){
+				   logger.error(se.getMessage());
+			   }catch(Exception e){
+				   logger.error(e.getMessage());
+			   }finally{
+			      try{
+			         if(conn!=null)
+			            conn.close();
+			      }catch(SQLException se){
+			    	  logger.error(se.getMessage());
+			      }
+			   }
+			
+			}
+}

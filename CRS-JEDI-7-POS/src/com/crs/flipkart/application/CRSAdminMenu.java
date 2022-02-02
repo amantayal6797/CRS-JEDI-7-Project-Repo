@@ -49,17 +49,17 @@ public class CRSAdminMenu extends CRSApplication {
 		System.out.println("\nWelcome "+admin.getUserName());
 		
 		LocalTime localTime = LocalTime.now();
-		System.out.println("Login Time:- " + localTime);
+		System.out.print("Login Time:- " + localTime);
 		
 		LocalDate localDate = LocalDate.now();
-		System.out.println("Login Date:- "+ localDate.getDayOfMonth()+" "+localDate.getMonth()+", "+localDate.getYear());
+		System.out.println("\t Login Date:- "+ localDate.getDayOfMonth()+" "+localDate.getMonth()+", "+localDate.getYear());
 		
 		
 		int choice = 0;
 		Scanner sc = new Scanner(System.in);
 		while(choice!=8) {
 			System.out.println("+++++++++++++++++++++++++++++++++++");
-			System.out.printf("%100s\n", "Admin Menu");
+			System.out.printf("%20s\n", "Admin Menu");
 			System.out.println("++++++++++++++++++++++++++++++++++++");
 			System.out.println("1. View all courses");
 			System.out.println("2. Add Course to catalog");
@@ -70,6 +70,7 @@ public class CRSAdminMenu extends CRSApplication {
 			System.out.println("7. View Grade Card");
 			System.out.println("8. Logout");
 			System.out.println("++++++++++++++++++++++++++++++++++++");
+			System.out.println("Enter your choice: ");
 			
 			choice = sc.nextInt();
 			CourseRegistrationOperationInterface courseRegistrationObj=new CourseRegistrationOperation();

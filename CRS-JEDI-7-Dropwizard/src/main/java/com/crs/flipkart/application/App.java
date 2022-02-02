@@ -13,6 +13,11 @@ import com.crs.flipkart.restController.StudentRestAPI;
 import com.crs.flipkart.restController.UserRestAPI;
  
  
+
+/*
+App class extends Application<Configuration> & it register api classes.
+*/
+
 public class App extends Application<Configuration> {
 	private static final Logger logger = Logger.getLogger(App.class);
 

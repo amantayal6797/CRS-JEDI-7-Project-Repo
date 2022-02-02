@@ -26,7 +26,7 @@ public class OfflinePayment extends PaymentOperation implements OfflinePaymentIn
 	
 		
 		
-		if(makePayment(userId, 250000)==false)
+		if(makePayment(userId, 250000,2)==false)
 			throw new PaymentException();
 		else {
 			return true;

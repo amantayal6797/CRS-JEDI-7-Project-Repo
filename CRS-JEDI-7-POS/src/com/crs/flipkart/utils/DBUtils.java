@@ -13,6 +13,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
+import com.crs.flipkart.business.AuthorizationOperation;
+
 /**
  * Manages the connection with MySQL server
  * 
@@ -24,8 +28,11 @@ import java.util.Properties;
 
 public class DBUtils {
 	
+		private static Logger logger = Logger.getLogger(DBUtils.class);
+	
 		   
 		public Connection connectionEstablish() {
+		
 			/**
 			 * Fetches and establishes a connection with MySQL server
 			 * with the mentioned database and login credentials
@@ -44,12 +51,13 @@ public class DBUtils {
 //	                Class.forName(driver);
 	                connection = DriverManager.getConnection(url, user, password);
 	            } catch (SQLException e) {
-	                e.printStackTrace();
+	              logger.error(e.getMessage());
 	            } catch (FileNotFoundException e) {
-	                e.printStackTrace();
+	            	logger.error(e.getMessage());
 	            } catch (IOException e) {
-	                e.printStackTrace();
+	            	logger.error(e.getMessage());
 	            }
+			    logger.info("Database connection established.");
 	            return connection;
 	        }
 				   
@@ -63,16 +71,17 @@ public class DBUtils {
 					try {
 						
 					    conn.close();
+					    logger.info("Database connection clossed.");
 					   }catch(SQLException se){
-					          se.printStackTrace();
+						   logger.error(se.getMessage());
 					   }catch(Exception e){
-					      e.printStackTrace();
+						   logger.error(e.getMessage());
 					   }finally{
 					      try{
 					         if(conn!=null)
 					            conn.close();
 					      }catch(SQLException se){
-					         se.printStackTrace();
+					    	  logger.error(se.getMessage());
 					      }
 					   }
 					

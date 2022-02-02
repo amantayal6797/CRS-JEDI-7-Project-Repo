@@ -13,6 +13,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
+import com.crs.flipkart.business.AuthorizationOperation;
+
+import org.apache.log4j.Logger;
+
 /**
  * Manages the connection with MySQL server
  * 
@@ -24,8 +30,9 @@ import java.util.Properties;
 
 public class DBUtils {
 	
-		   
-		public Connection connectionEstablish()  {
+		private static Logger logger = Logger.getLogger(DBUtils.class);
+		public Connection connectionEstablish()   {
+				
 			/**
 			 * Fetches and establishes a connection with MySQL server
 			 * with the mentioned database and login credentials
@@ -34,52 +41,45 @@ public class DBUtils {
 			 */
 			 Connection connection = null;
 			    try {
-	            	Properties prop = new Properties();
+			    	Properties prop = new Properties();
 	                InputStream inputStream = DBUtils.class.getClassLoader().getResourceAsStream("./com/crs/flipkart/utils/config.properties");
 	                prop.load(inputStream);
 	                String driver = prop.getProperty("driver");
 	                String url = prop.getProperty("url");
 	                String user = prop.getProperty("user");
 	                String password = prop.getProperty("password");
-	  
-	                Class.forName(driver);
-	                connection = DriverManager.getConnection(url, user, password);
-	                return connection;
+	                
+                Class.forName(driver);
+	             connection = DriverManager.getConnection(url, user, password);
 	            } catch (SQLException e) {
-	                e.printStackTrace();
+	              logger.error(e.getMessage());
 	            } catch (FileNotFoundException e) {
-	                e.printStackTrace();
+	            	logger.error(e.getMessage());
 	            } catch (IOException e) {
-	                e.printStackTrace();
+	            	logger.error(e.getMessage());
 	            } catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+	            	logger.error(e.getMessage());
 				}
+			    logger.info("Database connection established.");
 	            return connection;
 	        }
 				   
-		
 				  /**
 			 * Terminates connection with the database if instance
 			 * of connection is not null
 			 */ 
 					public  void connectionClose(Connection conn) {
+						try {
+							 if(conn!=null)
+						            conn.close();
+			
+						    logger.info("Database connection clossed.");
+						   }catch(SQLException se){
+							   logger.error(se.getMessage());
+						   }catch(Exception e){
+							   logger.error(e.getMessage());
+						   }
 						
-					try {
-						
-					    conn.close();
-					   }catch(SQLException se){
-					          se.printStackTrace();
-					   }catch(Exception e){
-					      e.printStackTrace();
-					   }finally{
-					      try{
-					         if(conn!=null)
-					            conn.close();
-					      }catch(SQLException se){
-					         se.printStackTrace();
-					      }
-					   }
-					
-					}
-		}
+						}
+			}

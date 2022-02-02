@@ -23,11 +23,11 @@ public class PaymentOperation implements PaymentOperationInterface {
 //	------------------------------------------------------------------------------
 	
 	
-	public boolean makePayment(int userId, int amount) {
+	public boolean makePayment(int userId, int amount,int modeofpayment) {
 	    StudentDaoOperation studentDaoOperation = new StudentDaoOperation();
     	boolean paymentSuccessful = studentDaoOperation.setPaymentStatus(userId);
     	if (paymentSuccessful) {
-    		generateBill(userId,amount);	
+    		generateBill(userId,amount, modeofpayment);	
     	}
     	
     	return paymentSuccessful;
@@ -35,12 +35,12 @@ public class PaymentOperation implements PaymentOperationInterface {
 	
 	
 //	--------------------------------------------------------------------------------		
-	public void generateBill(int userId, int amount) {		// this function called from makePayment function
+	public void generateBill(int userId, int amount, int modeofpayment) {		// this function called from makePayment function
 		System.out.println("Fees Paid - "+amount);
 		
 		String transactionId = Integer.toString(userId) + Integer.toString((int) Math.random());
 		PaymentDaoOperationInterface paymentObj = new PaymentDaoOperation();
-		paymentObj.savePayment(userId, amount, transactionId);
+		paymentObj.savePayment(userId, amount, transactionId,modeofpayment);
 	}
 	
 }

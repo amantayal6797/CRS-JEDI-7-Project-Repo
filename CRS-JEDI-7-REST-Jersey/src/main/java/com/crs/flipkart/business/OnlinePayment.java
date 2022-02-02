@@ -27,7 +27,7 @@ public class OnlinePayment extends PaymentOperation implements OnlinePaymentInte
 		int amount=sc.nextInt();
 		sc.nextLine();*/
 				
-		if(makePayment(userId, 250000)==false)
+		if(makePayment(userId, 250000,1)==false)
 			throw new PaymentException();
 		else {
 			return true;

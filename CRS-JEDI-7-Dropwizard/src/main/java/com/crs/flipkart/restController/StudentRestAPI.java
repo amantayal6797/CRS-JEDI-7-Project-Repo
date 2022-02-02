@@ -311,10 +311,7 @@ public class StudentRestAPI {
 			) {
 		
 		StudentDaoOperation studDAOobj = new StudentDaoOperation();
-		CourseRegistrationOperationInterface courseRegistrationObj=new CourseRegistrationOperation();
-		GradeCardOperationInterface gradeCardObj=new GradeCardOperation();
-		CourseDaoOperationInterface courseDAOobj=new CourseDaoOperation();
-		
+
 		if (!studDAOobj.isRegistered(userId)) {
 			logger.error("Complete Course Registration first");
 			return Response.status(400).entity("Complete Course Registration first").build();
@@ -333,12 +330,20 @@ public class StudentRestAPI {
 				return Response.status(400).entity("Invalid payment mode selected").build();
 			}
 
-			if(flag)
-				logger.info("Transaction completed\nFees Paid ");
-				return Response.status(200).entity("Transaction completed\nFees Paid").build();
+			if(flag) {
+				if(modeChoice==1) {
+					logger.info("Payment received in online mode\nFees Paid ");
+					return Response.status(200).entity("Payment received in online mode.\nFees Paid").build();
+				}else {
+					logger.info("Payment received in offline mode. \nFees Paid ");
+					return Response.status(200).entity("Payment received in offline mode. \nFees Paid").build();
+				}
+			}
+	
 		} else {
 			logger.error("Fees already paid");
 			return Response.status(400).entity("Fees already paid").build();
 		}
+		return Response.status(400).entity("Error").build();
 	}
 }

@@ -225,8 +225,6 @@ public class AdminRestAPI  {
 			return null;
 		}
 		return unapprovedStudents;
-		
-		
 	}
 	
 	

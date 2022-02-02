@@ -178,6 +178,7 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 		 logger.info("Enrolled Students");
 		 ArrayList<Course> courseList=new ArrayList<Course>();
 		 courseList=courseDAOobj.getProfessorCourses(userId);
+		 /*
 		 for(Course course:courseList) {
 			 logger.info("Course ID:- "+ course.getCourseID()+"\tCourse Name:- "+course.getCourseName());
 			 ArrayList <Integer> enrolledStudents = courseDAOobj.getEnrolledStudents(course.getCourseID());
@@ -186,8 +187,23 @@ public class CourseRegistrationOperation implements CourseRegistrationOperationI
 				 logger.info("Student ID :- "+i);
 			 }
 		 }
+		 */
+		 logger.info("---------------------------------------------------------------------------------------------------\n");
+		 logger.info(String.format("|%-20s | %-20s | %-20s | \n","Course Id","Course Name","Student ID"));
+		 logger.info("---------------------------------------------------------------------------------------------------\n");
+		 for(Course course:courseList) {
+			 ArrayList <Integer> enrolledStudents = courseDAOobj.getEnrolledStudents(course.getCourseID());
+			 //logger.info(String.format("%-20d"));
+			 String temp = "";
+			 for(int i:enrolledStudents) {
+				 temp = temp + Integer.toString(i) + ","; 
+				 //logger.info("Student ID :- "+i);
+			 }
+			 
+			 temp = temp.length()!=0?temp.substring(0,temp.length()-1):temp;
+			 logger.info(String.format("|%-20d | %-20s | %-20s |",course.getCourseID(),course.getCourseName(),temp));
+			 logger.info("\n---------------------------------------------------------------------------------------------------\n");
+		 }
 		 
 	 }
-	
-
 }

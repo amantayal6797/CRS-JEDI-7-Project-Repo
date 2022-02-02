@@ -44,7 +44,7 @@ public class GradeCardOperation extends CRSStudentMenu implements GradeCardOpera
 		logger.info("---------------------------------------------------------------------------------------------------\n");
 
 		for(Grade grade:gradeCard.getListOfGrades()) {
-			logger.info(String.format("|%-20d | %-20d|\n",grade.getCourseID(),grade.getGrade()));
+			logger.info(String.format("|%-20d | %-20s|\n",grade.getCourseID(),grade.getGrade()));
 
 		}
 		}catch(UserDoesNotExistException e) {

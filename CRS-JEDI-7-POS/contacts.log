@@ -391,3 +391,412 @@
 10:28:18,992  INFO GradeCardOperation,main:75 - Enter CourseID
 10:28:27,775  INFO GradeCardOperation,main:89 - Enter Student ID
 10:28:31,114  INFO GradeCardOperation,main:96 - Enter Grade
+14:56:00,652  INFO CourseRegistrationOperation,main:56 - Displaying All Courses
+14:56:01,310  INFO CourseRegistrationOperation,main:59 - ---------------------------------------------------------------------------------------------------
+
+14:56:01,311  INFO CourseRegistrationOperation,main:60 - |Course Id            | Course Name          | Course Credits       | Course Prerequisites| Course Professor Id|
+
+14:56:01,312  INFO CourseRegistrationOperation,main:61 - ---------------------------------------------------------------------------------------------------
+
+14:56:01,313  INFO CourseRegistrationOperation,main:64 - |401                  | fsdf                 | 5                    | NA                  |                 203|
+
+14:56:01,313  INFO CourseRegistrationOperation,main:65 - ---------------------------------------------------------------------------------------------------
+14:56:01,314  INFO CourseRegistrationOperation,main:64 - |402                  | DS                   | 5                    | Programming Basic   |                 201|
+
+14:56:01,314  INFO CourseRegistrationOperation,main:65 - ---------------------------------------------------------------------------------------------------
+14:56:01,315  INFO CourseRegistrationOperation,main:64 - |403                  | Algo                 | 5                    | DS                  |                 201|
+
+14:56:01,315  INFO CourseRegistrationOperation,main:65 - ---------------------------------------------------------------------------------------------------
+14:56:01,315  INFO CourseRegistrationOperation,main:64 - |404                  | Digital Electronis   | 5                    | NA                  |                 202|
+
+14:56:01,315  INFO CourseRegistrationOperation,main:65 - ---------------------------------------------------------------------------------------------------
+14:56:01,316  INFO CourseRegistrationOperation,main:64 - |405                  | Signal and systems   | 5                    | NA                  |                 202|
+
+14:56:01,316  INFO CourseRegistrationOperation,main:65 - ---------------------------------------------------------------------------------------------------
+14:56:01,317  INFO CourseRegistrationOperation,main:64 - |406                  | Communication        | 5                    | NA                  |                 202|
+
+14:56:01,317  INFO CourseRegistrationOperation,main:65 - ---------------------------------------------------------------------------------------------------
+14:56:01,318  INFO CourseRegistrationOperation,main:64 - |407                  | DM                   | 5                    | Basic Maths         |                 201|
+
+14:56:01,318  INFO CourseRegistrationOperation,main:65 - ---------------------------------------------------------------------------------------------------
+14:56:01,318  INFO CourseRegistrationOperation,main:64 - |408                  | "XYZ"                | 5                    | NA                  |                 203|
+
+14:56:01,319  INFO CourseRegistrationOperation,main:65 - ---------------------------------------------------------------------------------------------------
+14:56:42,546  INFO GradeCardOperation,main:40 - Grade Card
+14:56:42,547  INFO GradeCardOperation,main:41 - User ID:-101
+14:56:42,549  INFO GradeCardOperation,main:42 - ---------------------------------------------------------------------------------------------------
+
+14:56:42,550  INFO GradeCardOperation,main:43 - |Course Id            | Grade               |
+
+14:56:42,550  INFO GradeCardOperation,main:44 - ---------------------------------------------------------------------------------------------------
+
+14:59:33,886  INFO GradeCardOperation,main:40 - Grade Card
+14:59:33,892  INFO GradeCardOperation,main:41 - User ID:-101
+14:59:33,893  INFO GradeCardOperation,main:42 - ---------------------------------------------------------------------------------------------------
+
+14:59:33,893  INFO GradeCardOperation,main:43 - |Course Id            | Grade               |
+
+14:59:33,894  INFO GradeCardOperation,main:44 - ---------------------------------------------------------------------------------------------------
+
+14:59:33,894  INFO GradeCardOperation,main:47 - |402                  | NA                  |
+
+14:59:33,894  INFO GradeCardOperation,main:47 - |403                  | NA                  |
+
+14:59:33,895  INFO GradeCardOperation,main:47 - |404                  | NA                  |
+
+14:59:33,895  INFO GradeCardOperation,main:47 - |408                  | NA                  |
+
+15:07:40,739  INFO CourseRegistrationOperation,main:163 - Registered Courses
+15:07:42,418  INFO CourseRegistrationOperation,main:166 - ---------------------------------------------------------------------------------------------------
+
+15:07:42,418  INFO CourseRegistrationOperation,main:167 - |Course Id            | Course Name          | Course Credits       | Course Prerequisites|
+
+15:07:42,419  INFO CourseRegistrationOperation,main:168 - ---------------------------------------------------------------------------------------------------
+
+15:07:42,420  INFO CourseRegistrationOperation,main:171 - |402                  | DS                   | 5                    | Programming Basic   |
+
+15:07:42,420  INFO CourseRegistrationOperation,main:172 - ---------------------------------------------------------------------------------------------------
+
+15:07:42,420  INFO CourseRegistrationOperation,main:171 - |403                  | Algo                 | 5                    | DS                  |
+
+15:07:42,421  INFO CourseRegistrationOperation,main:172 - ---------------------------------------------------------------------------------------------------
+
+15:07:42,421  INFO CourseRegistrationOperation,main:171 - |407                  | DM                   | 5                    | Basic Maths         |
+
+15:07:42,422  INFO CourseRegistrationOperation,main:172 - ---------------------------------------------------------------------------------------------------
+
+15:07:52,445  INFO CourseRegistrationOperation,main:178 - Enrolled Students
+15:07:52,573  INFO CourseRegistrationOperation,main:182 - Course ID:- 402	Course Name:- DS
+15:07:52,641  INFO CourseRegistrationOperation,main:184 - Students:-
+15:07:52,643  INFO CourseRegistrationOperation,main:186 - Student ID :- 101
+15:07:52,646  INFO CourseRegistrationOperation,main:186 - Student ID :- 110
+15:07:52,649  INFO CourseRegistrationOperation,main:182 - Course ID:- 403	Course Name:- Algo
+15:07:52,733  INFO CourseRegistrationOperation,main:184 - Students:-
+15:07:52,734  INFO CourseRegistrationOperation,main:186 - Student ID :- 101
+15:07:52,735  INFO CourseRegistrationOperation,main:186 - Student ID :- 102
+15:07:52,735  INFO CourseRegistrationOperation,main:186 - Student ID :- 110
+15:07:52,735  INFO CourseRegistrationOperation,main:182 - Course ID:- 407	Course Name:- DM
+15:07:52,832  INFO CourseRegistrationOperation,main:184 - Students:-
+15:16:12,095  INFO CourseRegistrationOperation,main:178 - Enrolled Students
+15:16:12,199  INFO CourseRegistrationOperation,main:191 - ---------------------------------------------------------------------------------------------------
+
+15:16:12,200  INFO CourseRegistrationOperation,main:192 - |Course Id            | Course Name          | Student ID           | 
+
+15:16:12,201  INFO CourseRegistrationOperation,main:193 - ---------------------------------------------------------------------------------------------------
+
+15:16:12,203  INFO CourseRegistrationOperation,main:195 - |402                  | DS                   |
+
+15:16:12,260  INFO CourseRegistrationOperation,main:197 - Students:-
+15:16:12,261  INFO CourseRegistrationOperation,main:199 - 101                 
+15:16:12,262  INFO CourseRegistrationOperation,main:201 - 
+---------------------------------------------------------------------------------------------------
+
+15:16:12,262  INFO CourseRegistrationOperation,main:199 - 110                 
+15:16:12,263  INFO CourseRegistrationOperation,main:201 - 
+---------------------------------------------------------------------------------------------------
+
+15:16:12,263  INFO CourseRegistrationOperation,main:195 - |403                  | Algo                 |
+
+15:16:12,307  INFO CourseRegistrationOperation,main:197 - Students:-
+15:16:12,308  INFO CourseRegistrationOperation,main:199 - 101                 
+15:16:12,309  INFO CourseRegistrationOperation,main:201 - 
+---------------------------------------------------------------------------------------------------
+
+15:16:12,309  INFO CourseRegistrationOperation,main:199 - 102                 
+15:16:12,310  INFO CourseRegistrationOperation,main:201 - 
+---------------------------------------------------------------------------------------------------
+
+15:16:12,310  INFO CourseRegistrationOperation,main:199 - 110                 
+15:16:12,310  INFO CourseRegistrationOperation,main:201 - 
+---------------------------------------------------------------------------------------------------
+
+15:16:12,310  INFO CourseRegistrationOperation,main:195 - |407                  | DM                   |
+
+15:16:12,363  INFO CourseRegistrationOperation,main:197 - Students:-
+15:16:54,346  INFO CourseRegistrationOperation,main:178 - Enrolled Students
+15:16:54,442  INFO CourseRegistrationOperation,main:191 - ---------------------------------------------------------------------------------------------------
+
+15:16:54,443  INFO CourseRegistrationOperation,main:192 - |Course Id            | Course Name          | Student ID           | 
+
+15:16:54,443  INFO CourseRegistrationOperation,main:193 - ---------------------------------------------------------------------------------------------------
+
+15:16:54,444  INFO CourseRegistrationOperation,main:195 - |402                  | DS                   |
+
+15:16:54,493  INFO CourseRegistrationOperation,main:198 - 101                 
+15:16:54,494  INFO CourseRegistrationOperation,main:200 - 
+---------------------------------------------------------------------------------------------------
+
+15:16:54,495  INFO CourseRegistrationOperation,main:198 - 110                 
+15:16:54,495  INFO CourseRegistrationOperation,main:200 - 
+---------------------------------------------------------------------------------------------------
+
+15:16:54,496  INFO CourseRegistrationOperation,main:195 - |403                  | Algo                 |
+
+15:16:54,538  INFO CourseRegistrationOperation,main:198 - 101                 
+15:16:54,538  INFO CourseRegistrationOperation,main:200 - 
+---------------------------------------------------------------------------------------------------
+
+15:16:54,539  INFO CourseRegistrationOperation,main:198 - 102                 
+15:16:54,539  INFO CourseRegistrationOperation,main:200 - 
+---------------------------------------------------------------------------------------------------
+
+15:16:54,539  INFO CourseRegistrationOperation,main:198 - 110                 
+15:16:54,541  INFO CourseRegistrationOperation,main:200 - 
+---------------------------------------------------------------------------------------------------
+
+15:16:54,542  INFO CourseRegistrationOperation,main:195 - |407                  | DM                   |
+
+15:17:51,852  INFO CourseRegistrationOperation,main:178 - Enrolled Students
+15:17:51,921  INFO CourseRegistrationOperation,main:191 - ---------------------------------------------------------------------------------------------------
+
+15:17:51,922  INFO CourseRegistrationOperation,main:192 - |Course Id            | Course Name          | Student ID           | 
+
+15:17:51,922  INFO CourseRegistrationOperation,main:193 - ---------------------------------------------------------------------------------------------------
+
+15:17:51,923  INFO CourseRegistrationOperation,main:195 - |402                  | DS                   |
+
+15:17:51,958  INFO CourseRegistrationOperation,main:198 - 101                 
+15:17:51,959  INFO CourseRegistrationOperation,main:198 - 110                 
+15:17:51,959  INFO CourseRegistrationOperation,main:201 - 
+---------------------------------------------------------------------------------------------------
+
+15:17:51,960  INFO CourseRegistrationOperation,main:195 - |403                  | Algo                 |
+
+15:17:51,995  INFO CourseRegistrationOperation,main:198 - 101                 
+15:17:51,996  INFO CourseRegistrationOperation,main:198 - 102                 
+15:17:51,996  INFO CourseRegistrationOperation,main:198 - 110                 
+15:17:51,996  INFO CourseRegistrationOperation,main:201 - 
+---------------------------------------------------------------------------------------------------
+
+15:17:51,997  INFO CourseRegistrationOperation,main:195 - |407                  | DM                   |
+
+15:17:52,034  INFO CourseRegistrationOperation,main:201 - 
+---------------------------------------------------------------------------------------------------
+
+15:19:03,622  INFO CourseRegistrationOperation,main:178 - Enrolled Students
+15:19:03,670  INFO CourseRegistrationOperation,main:191 - ---------------------------------------------------------------------------------------------------
+
+15:19:03,671  INFO CourseRegistrationOperation,main:192 - |Course Id            | Course Name          | Student ID           | 
+
+15:19:03,671  INFO CourseRegistrationOperation,main:193 - ---------------------------------------------------------------------------------------------------
+
+15:19:03,672  INFO CourseRegistrationOperation,main:195 - |402                  | DS                   |
+
+15:19:44,502  INFO CourseRegistrationOperation,main:178 - Enrolled Students
+15:19:44,569  INFO CourseRegistrationOperation,main:191 - ---------------------------------------------------------------------------------------------------
+
+15:19:44,571  INFO CourseRegistrationOperation,main:192 - |Course Id            | Course Name          | Student ID           | 
+
+15:19:44,571  INFO CourseRegistrationOperation,main:193 - ---------------------------------------------------------------------------------------------------
+
+15:19:44,572  INFO CourseRegistrationOperation,main:195 - |402                  | DS                   |
+
+15:19:44,603  INFO CourseRegistrationOperation,main:202 - 
+---------------------------------------------------------------------------------------------------
+
+15:19:44,604  INFO CourseRegistrationOperation,main:195 - |403                  | Algo                 |
+
+15:19:44,632  INFO CourseRegistrationOperation,main:202 - 
+---------------------------------------------------------------------------------------------------
+
+15:19:44,634  INFO CourseRegistrationOperation,main:195 - |407                  | DM                   |
+
+15:19:44,664  INFO CourseRegistrationOperation,main:202 - 
+---------------------------------------------------------------------------------------------------
+
+15:20:56,585  INFO CourseRegistrationOperation,main:178 - Enrolled Students
+15:20:56,656  INFO CourseRegistrationOperation,main:191 - ---------------------------------------------------------------------------------------------------
+
+15:20:56,657  INFO CourseRegistrationOperation,main:192 - |Course Id            | Course Name          | Student ID           | 
+
+15:20:56,657  INFO CourseRegistrationOperation,main:193 - ---------------------------------------------------------------------------------------------------
+
+15:20:56,658  INFO CourseRegistrationOperation,main:195 - |402                  | DS                   |
+
+15:20:56,707  INFO CourseRegistrationOperation,main:202 - 
+---------------------------------------------------------------------------------------------------
+
+15:20:56,707  INFO CourseRegistrationOperation,main:195 - |403                  | Algo                 |
+
+15:20:56,749  INFO CourseRegistrationOperation,main:202 - 
+---------------------------------------------------------------------------------------------------
+
+15:20:56,749  INFO CourseRegistrationOperation,main:195 - |407                  | DM                   |
+
+15:20:56,791  INFO CourseRegistrationOperation,main:202 - 
+---------------------------------------------------------------------------------------------------
+
+15:21:45,953  INFO CourseRegistrationOperation,main:178 - Enrolled Students
+15:21:46,021  INFO CourseRegistrationOperation,main:191 - ---------------------------------------------------------------------------------------------------
+
+15:21:46,022  INFO CourseRegistrationOperation,main:192 - |Course Id            | Course Name          | Student ID           | 
+
+15:21:46,023  INFO CourseRegistrationOperation,main:193 - ---------------------------------------------------------------------------------------------------
+
+15:21:46,023  INFO CourseRegistrationOperation,main:195 - |402                  | DS                   |
+
+15:21:46,058  INFO CourseRegistrationOperation,main:202 - 
+---------------------------------------------------------------------------------------------------
+
+15:21:46,059  INFO CourseRegistrationOperation,main:195 - |403                  | Algo                 |
+
+15:21:46,098  INFO CourseRegistrationOperation,main:202 - 
+---------------------------------------------------------------------------------------------------
+
+15:21:46,099  INFO CourseRegistrationOperation,main:195 - |407                  | DM                   |
+
+15:21:46,134  INFO CourseRegistrationOperation,main:202 - 
+---------------------------------------------------------------------------------------------------
+
+15:27:02,375  INFO CourseRegistrationOperation,main:25 - You are approved by Admin. Now you can enroll for courses
+15:33:21,410  INFO CourseRegistrationOperation,main:56 - Displaying All Courses
+15:33:21,688  INFO CourseRegistrationOperation,main:59 - ---------------------------------------------------------------------------------------------------
+
+15:33:21,688  INFO CourseRegistrationOperation,main:60 - |Course Id            | Course Name          | Course Credits       | Course Prerequisites| Course Professor Id|
+
+15:33:21,689  INFO CourseRegistrationOperation,main:61 - ---------------------------------------------------------------------------------------------------
+
+15:33:21,690  INFO CourseRegistrationOperation,main:64 - |401                  | fsdf                 | 5                    | NA                  |                 203|
+
+15:33:21,690  INFO CourseRegistrationOperation,main:65 - ---------------------------------------------------------------------------------------------------
+15:33:21,690  INFO CourseRegistrationOperation,main:64 - |402                  | DS                   | 5                    | Programming Basic   |                 201|
+
+15:33:21,690  INFO CourseRegistrationOperation,main:65 - ---------------------------------------------------------------------------------------------------
+15:33:21,691  INFO CourseRegistrationOperation,main:64 - |403                  | Algo                 | 5                    | DS                  |                 201|
+
+15:33:21,691  INFO CourseRegistrationOperation,main:65 - ---------------------------------------------------------------------------------------------------
+15:33:21,691  INFO CourseRegistrationOperation,main:64 - |404                  | Digital Electronis   | 5                    | NA                  |                 202|
+
+15:33:21,692  INFO CourseRegistrationOperation,main:65 - ---------------------------------------------------------------------------------------------------
+15:33:21,692  INFO CourseRegistrationOperation,main:64 - |405                  | Signal and systems   | 5                    | NA                  |                 202|
+
+15:33:21,693  INFO CourseRegistrationOperation,main:65 - ---------------------------------------------------------------------------------------------------
+15:33:21,693  INFO CourseRegistrationOperation,main:64 - |406                  | Communication        | 5                    | NA                  |                 202|
+
+15:33:21,694  INFO CourseRegistrationOperation,main:65 - ---------------------------------------------------------------------------------------------------
+15:33:21,694  INFO CourseRegistrationOperation,main:64 - |407                  | DM                   | 5                    | Basic Maths         |                 201|
+
+15:33:21,694  INFO CourseRegistrationOperation,main:65 - ---------------------------------------------------------------------------------------------------
+15:33:21,694  INFO CourseRegistrationOperation,main:64 - |408                  | "XYZ"                | 5                    | NA                  |                 203|
+
+15:33:21,695  INFO CourseRegistrationOperation,main:65 - ---------------------------------------------------------------------------------------------------
+15:33:31,588  INFO CourseRegistrationOperation,main:38 - Register Courses for User 101
+15:33:31,654  INFO CourseRegistrationOperation,main:47 - |                 402|                  DS|
+
+15:33:31,690  INFO CourseRegistrationOperation,main:47 - |                 403|                Algo|
+
+15:33:31,719  INFO CourseRegistrationOperation,main:47 - |                 404|  Digital Electronis|
+
+15:33:31,747  INFO CourseRegistrationOperation,main:47 - |                 408|               "XYZ"|
+
+15:33:31,748  INFO CourseRegistrationOperation,main:51 - -------------------------------------------------------------------------------------------
+15:33:38,988  INFO GradeCardOperation,main:40 - Grade Card
+15:33:38,988  INFO GradeCardOperation,main:41 - User ID:-101
+15:33:38,988  INFO GradeCardOperation,main:42 - ---------------------------------------------------------------------------------------------------
+
+15:33:38,989  INFO GradeCardOperation,main:43 - |Course Id            | Grade               |
+
+15:33:38,989  INFO GradeCardOperation,main:44 - ---------------------------------------------------------------------------------------------------
+
+15:33:38,989  INFO GradeCardOperation,main:47 - |402                  | NA                  |
+
+15:33:38,989  INFO GradeCardOperation,main:47 - |403                  | NA                  |
+
+15:33:38,989  INFO GradeCardOperation,main:47 - |404                  | NA                  |
+
+15:33:38,990  INFO GradeCardOperation,main:47 - |408                  | NA                  |
+
+16:37:23,272  INFO CourseRegistrationOperation,main:178 - Enrolled Students
+16:37:23,349  INFO CourseRegistrationOperation,main:191 - ---------------------------------------------------------------------------------------------------
+
+16:37:23,349  INFO CourseRegistrationOperation,main:192 - |Course Id            | Course Name          | Student ID           | 
+
+16:37:23,350  INFO CourseRegistrationOperation,main:193 - ---------------------------------------------------------------------------------------------------
+
+16:37:23,350  INFO CourseRegistrationOperation,main:195 - |402                  | DS                   |
+
+16:37:23,383  INFO CourseRegistrationOperation,main:202 - 
+---------------------------------------------------------------------------------------------------
+
+16:37:23,384  INFO CourseRegistrationOperation,main:195 - |403                  | Algo                 |
+
+16:37:23,417  INFO CourseRegistrationOperation,main:202 - 
+---------------------------------------------------------------------------------------------------
+
+16:37:23,418  INFO CourseRegistrationOperation,main:195 - |407                  | DM                   |
+
+16:37:23,444  INFO CourseRegistrationOperation,main:202 - 
+---------------------------------------------------------------------------------------------------
+
+16:39:37,585  INFO CourseRegistrationOperation,main:178 - Enrolled Students
+16:39:37,652  INFO CourseRegistrationOperation,main:191 - ---------------------------------------------------------------------------------------------------
+
+16:39:37,653  INFO CourseRegistrationOperation,main:192 - |Course Id            | Course Name          | Student ID           | 
+
+16:39:37,653  INFO CourseRegistrationOperation,main:193 - ---------------------------------------------------------------------------------------------------
+
+16:39:37,654  INFO CourseRegistrationOperation,main:195 - |402                  | DS                   |
+16:39:37,695  INFO CourseRegistrationOperation,main:202 - 
+---------------------------------------------------------------------------------------------------
+
+16:39:37,696  INFO CourseRegistrationOperation,main:195 - |403                  | Algo                 |
+16:39:37,738  INFO CourseRegistrationOperation,main:202 - 
+---------------------------------------------------------------------------------------------------
+
+16:39:37,739  INFO CourseRegistrationOperation,main:195 - |407                  | DM                   |
+16:39:37,788  INFO CourseRegistrationOperation,main:202 - 
+---------------------------------------------------------------------------------------------------
+
+16:42:10,913  INFO CourseRegistrationOperation,main:178 - Enrolled Students
+16:42:10,958  INFO CourseRegistrationOperation,main:191 - ---------------------------------------------------------------------------------------------------
+
+16:42:10,959  INFO CourseRegistrationOperation,main:192 - |Course Id            | Course Name          | Student ID           | 
+
+16:42:10,959  INFO CourseRegistrationOperation,main:193 - ---------------------------------------------------------------------------------------------------
+
+16:42:10,989  INFO CourseRegistrationOperation,main:202 - |402                  | DS                   | 101,110,             |
+16:42:10,989  INFO CourseRegistrationOperation,main:203 - 
+---------------------------------------------------------------------------------------------------
+
+16:42:11,019  INFO CourseRegistrationOperation,main:202 - |403                  | Algo                 | 101,102,110,         |
+16:42:11,020  INFO CourseRegistrationOperation,main:203 - 
+---------------------------------------------------------------------------------------------------
+
+16:42:11,057  INFO CourseRegistrationOperation,main:202 - |407                  | DM                   |                      |
+16:42:11,057  INFO CourseRegistrationOperation,main:203 - 
+---------------------------------------------------------------------------------------------------
+
+16:44:03,654  INFO CourseRegistrationOperation,main:178 - Enrolled Students
+16:44:03,707  INFO CourseRegistrationOperation,main:191 - ---------------------------------------------------------------------------------------------------
+
+16:44:03,709  INFO CourseRegistrationOperation,main:192 - |Course Id            | Course Name          | Student ID           | 
+
+16:44:03,709  INFO CourseRegistrationOperation,main:193 - ---------------------------------------------------------------------------------------------------
+
+16:44:03,740  INFO CourseRegistrationOperation,main:203 - |402                  | DS                   | 101,110              |
+16:44:03,741  INFO CourseRegistrationOperation,main:204 - 
+---------------------------------------------------------------------------------------------------
+
+16:44:03,775  INFO CourseRegistrationOperation,main:203 - |403                  | Algo                 | 101,102,110          |
+16:44:03,776  INFO CourseRegistrationOperation,main:204 - 
+---------------------------------------------------------------------------------------------------
+
+16:45:03,939  INFO CourseRegistrationOperation,main:178 - Enrolled Students
+16:45:03,979  INFO CourseRegistrationOperation,main:191 - ---------------------------------------------------------------------------------------------------
+
+16:45:03,979  INFO CourseRegistrationOperation,main:192 - |Course Id            | Course Name          | Student ID           | 
+
+16:45:03,979  INFO CourseRegistrationOperation,main:193 - ---------------------------------------------------------------------------------------------------
+
+16:45:04,018  INFO CourseRegistrationOperation,main:204 - |402                  | DS                   | 101,110              |
+16:45:04,019  INFO CourseRegistrationOperation,main:205 - 
+---------------------------------------------------------------------------------------------------
+
+16:45:04,054  INFO CourseRegistrationOperation,main:204 - |403                  | Algo                 | 101,102,110          |
+16:45:04,054  INFO CourseRegistrationOperation,main:205 - 
+---------------------------------------------------------------------------------------------------
+
+16:45:04,089  INFO CourseRegistrationOperation,main:204 - |407                  | DM                   |                      |
+16:45:04,089  INFO CourseRegistrationOperation,main:205 - 
+---------------------------------------------------------------------------------------------------
+

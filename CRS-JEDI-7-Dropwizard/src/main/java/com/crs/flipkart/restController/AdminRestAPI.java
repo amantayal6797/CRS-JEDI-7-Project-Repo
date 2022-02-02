@@ -23,7 +23,6 @@ import org.apache.log4j.Logger;
 
 import com.crs.flipkart.bean.Admin;
 import com.crs.flipkart.bean.Course;
-import com.crs.flipkart.bean.Customer;
 import com.crs.flipkart.bean.Grade;
 import com.crs.flipkart.bean.GradeCard;
 import com.crs.flipkart.bean.Professor;
