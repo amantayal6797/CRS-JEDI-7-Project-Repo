@@ -1,0 +1,748 @@
+{
+	"variables": [],
+	"info": {
+		"name": "CRS-JEDI-7-DROPWIZARD",
+		"_postman_id": "8d2d8a74-8a47-352b-022a-3e8fa491f390",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AddProfessor",
+			"request": {
+				"url": "http://localhost:8080/admin/addProfessor",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userId\":111,\n\t\"userName\":\"Nitish\",\n\t\"password\":\"Nitish\",\n\t\"email\":\"email\",\n\t\"address\":\"address\",\n\t\"age\":24,\n\t\"gender\":\"M\",\n\t\"contact\":\"798310565\",\n\t\"department\":\"CS\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ViewGradeCard",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/admin/viewGradeCard?studId=101",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"viewGradeCard"
+					],
+					"query": [
+						{
+							"key": "studId",
+							"value": "101",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ViewUnapprovedUsers",
+			"request": {
+				"url": "http://localhost:8080/admin/viewUnapprovedUsers",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ApproveUser",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/admin/ApproveUser?userIdToApprove=112",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"ApproveUser"
+					],
+					"query": [
+						{
+							"key": "userIdToApprove",
+							"value": "112",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DropCourse",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/admin/dropCourse?courseID=408",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"dropCourse"
+					],
+					"query": [
+						{
+							"key": "courseID",
+							"value": "408",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AddCourse",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/admin/addCourse?courseID=408&courseName=\"XYZ\"&credits=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"addCourse"
+					],
+					"query": [
+						{
+							"key": "courseID",
+							"value": "408",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseName",
+							"value": "\"XYZ\"",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "credits",
+							"value": "5",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ViewAllCourses",
+			"request": {
+				"url": "http://localhost:8080/admin/viewAllCourses",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AssignProfessorToCourse",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/admin/assignProfessorCourse?profId=202&courseId=408",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"assignProfessorCourse"
+					],
+					"query": [
+						{
+							"key": "profId",
+							"value": "202",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseId",
+							"value": "408",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "RegisterStudent",
+			"request": {
+				"url": "http://localhost:8080/user/registerStudent",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userId\":112,\n\t\"userName\":\"Nitish\",\n\t\"password\":\"Nitish\",\n\t\"email\":\"email\",\n\t\"address\":\"address\",\n\t\"age\":24,\n\t\"gender\":\"M\",\n\t\"contact\":\"798310565\",\n\t\"branch\":\"CS\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/user/login?id=101&password=pass",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"login"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "101",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "password",
+							"value": "pass",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ResetPassword",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/user/resetPassword?userId=101&nPassword=password&cNPassword=password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"resetPassword"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "101",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "nPassword",
+							"value": "password",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "cNPassword",
+							"value": "password",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ViewEnrolledStudents",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/professor/viewEnrolledStudents?courseId=402",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"professor",
+						"viewEnrolledStudents"
+					],
+					"query": [
+						{
+							"key": "courseId",
+							"value": "402",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ViewUnregisteredCourses",
+			"request": {
+				"url": "http://localhost:8080/professor/viewUnregisteredCourses",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "RegisterCourse",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/professor/registerCourse?courseId=407&userId=201",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"professor",
+						"registerCourse"
+					],
+					"query": [
+						{
+							"key": "courseId",
+							"value": "407",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "userId",
+							"value": "201",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ViewProfessorCourse",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/professor/viewProfessorCourse?userId=201",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"professor",
+						"viewProfessorCourse"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "201",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AssignGrade",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/professor/assignGrade?courseId=402&studentId=101&userId=201&grade=A",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"professor",
+						"assignGrade"
+					],
+					"query": [
+						{
+							"key": "courseId",
+							"value": "402",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "studentId",
+							"value": "101",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "userId",
+							"value": "201",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "grade",
+							"value": "A",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "CourseRegistration",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/student/courseRegistration?userId=112&courseId1=401&courseId2=402&courseId3=403&courseId4=404&courseId5=405&courseId6=406",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"courseRegistration"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "112",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseId1",
+							"value": "401",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseId2",
+							"value": "402",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseId3",
+							"value": "403",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseId4",
+							"value": "404",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseId5",
+							"value": "405",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseId6",
+							"value": "406",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AddCourse",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/student/addCourse?userId=102&courseId=408",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"addCourse"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "102",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseId",
+							"value": "408",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DropCourse",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/student/dropCourse?userId=112&courseId=402",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"dropCourse"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "112",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "courseId",
+							"value": "402",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "StudentViewCourses",
+			"request": {
+				"url": "http://localhost:8080/student/viewCourses",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ViewRegisteredCourses",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/student/viewRegisteredCourses?userId=112",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"viewRegisteredCourses"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "112",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "StudentviewGradeCard",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/student/viewGradeCard?userId=101",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"viewGradeCard"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "101",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "MakePayment",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/student/makePayment?userId=112&modeChoice=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"makePayment"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "112",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "modeChoice",
+							"value": "2",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
